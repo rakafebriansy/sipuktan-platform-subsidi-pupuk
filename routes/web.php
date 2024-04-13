@@ -20,7 +20,16 @@ Route::get('/', function () {
 Route::prefix('/petani')->group(function(){
     Route::get('/login', function () {
         return view('homepage.petani.login');
-});
+    });
+    Route::get('/register', function () {
+        return view('homepage.petani.register');
+    });
+    Route::get('/lupaSandi', function () {
+        return view('homepage.petani.lupa-sandi');
+    });
+    Route::get('/dashboard', function () {
+        return view('dashboard.petani.index');
+    });
 });
 Route::get('/bot/retreive',[TelegramBotController::class,'show']);
 Route::get('/bot/msg/',[TelegramBotController::class,'getMessages']);
