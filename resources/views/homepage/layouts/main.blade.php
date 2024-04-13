@@ -16,47 +16,17 @@
     <div id="dropdownPoktan" class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700">
       <ul class="h-48 py-2 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUsersButton">
         <li>
-          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+          <p href="#" data-value="1" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
             Jese Leos
-          </a>
+          </p>
         </li>
         <li>
-          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+          <p href="#" data-value="2" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
             Robert Gough
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            Bonnie Green
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            Leslie Livingston
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            Michael Gough
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            Joseph Mcfall
-          </a>
-        </li>
-              <li>
-          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            Roberta Casas
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            Neil Sims
-          </a>
+          </p>
         </li>
       </ul>
     </div>  
-    <script src="../dist/script.js"></script>
+    <script src="../dist/script-homepage.js"></script>
   </body>
 </html>

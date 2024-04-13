@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Petani;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class PetaniSeeder extends Seeder
 {
@@ -12,6 +14,32 @@ class PetaniSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Petani::create([
+            'id' => 1,
+            'nik' => '0025362728812549',
+            'nama' => 'Yennefer Vengenberg',
+            'kata_sandi' => Hash::make('yenefer@1'),
+            'foto_ktp' => 'ktp001.jpg',
+            'nomor_telepon' => '081263563732',
+            'id_kelompok_tani' => 1
+        ]);
+        Petani::create([
+            'id' => 2,
+            'nik' => '0025635728812549',
+            'nama' => 'Geralt Rivia',
+            'kata_sandi' => Hash::make('geralt@1'),
+            'foto_ktp' => 'ktp002.jpg',
+            'nomor_telepon' => '081232163732',
+            'id_kelompok_tani' => 1
+        ]);
+        Petani::create([
+            'id' => 3,
+            'nik' => '0025362728812549',
+            'nama' => 'Radovid',
+            'kata_sandi' => Hash::make('radovid@1'),
+            'foto_ktp' => 'ktp003.jpg',
+            'nomor_telepon' => '081263563981',
+            'id_kelompok_tani' => 2
+        ]);
     }
 }

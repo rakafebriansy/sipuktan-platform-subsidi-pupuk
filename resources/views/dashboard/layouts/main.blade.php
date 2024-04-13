@@ -66,6 +66,6 @@
         </div>
       </div>
   </div>
-    <script src="../dist/script.js"></script>
+    <script src="../dist/script-dashboard.js"></script>
   </body>
 </html>

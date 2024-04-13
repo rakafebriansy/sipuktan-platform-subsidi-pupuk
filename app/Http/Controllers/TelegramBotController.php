@@ -38,7 +38,7 @@ class TelegramBotController extends Controller
     {
         $response = $this->telegram->sendMessage([
             'chat_id' => '1980788561',
-            'text' => 'Sudah ngoding frontendnya?'
+            'text' => 'Halo Halo Halo'
         ]);
         
         $messageId = $response->getMessageId();

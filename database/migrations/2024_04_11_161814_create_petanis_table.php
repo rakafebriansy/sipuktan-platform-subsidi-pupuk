@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('petanis', function (Blueprint $table) {
             $table->id();
-            $table->string('nik',20)->nullable(false)->unique();
+            $table->char('nik',16)->nullable(false)->unique();
             $table->string('nama',60)->nullable(false);
             $table->string('kata_sandi',255)->nullable(false);
             $table->string('foto_ktp',255)->nullable(false);
