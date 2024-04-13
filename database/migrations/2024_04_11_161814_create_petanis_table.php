@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('kata_sandi',255)->nullable(false);
             $table->string('foto_ktp',255)->nullable(false);
             $table->string('nomor_telepon',20)->nullable(false);
-            $table->unsignedBigInteger('id_poktan')->nullable(false);
+            $table->unsignedBigInteger('id_kelompok_tani')->nullable(false);
             
-            $table->foreign('id_poktan')->on('kelompok_tanis')->references('id');
+            $table->foreign('id_kelompok_tani')->on('kelompok_tanis')->references('id');
         });
     }
 

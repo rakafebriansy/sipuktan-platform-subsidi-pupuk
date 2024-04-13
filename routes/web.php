@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TelegramBotController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('homepage.index');
 });
-Route::get('/login', function () {
-    return view('homepage.login.index');
+Route::prefix('/petani')->group(function(){
+    Route::get('/login', function () {
+        return view('homepage.petani.login');
 });
+});
+Route::get('/bot/retreive',[TelegramBotController::class,'show']);
+Route::get('/bot/msg/',[TelegramBotController::class,'getMessages']);
+Route::get('/bot/send/{id}',[TelegramBotController::class,'sendMessage']);

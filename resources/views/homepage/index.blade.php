@@ -1,5 +1,5 @@
 @extends('homepage.layouts.main')
 
-@section('container')
+@section('wrapper')
 <h1>Halaman Home</h1>
 @endsection
