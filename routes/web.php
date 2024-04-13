@@ -30,6 +30,9 @@ Route::prefix('/petani')->group(function(){
     Route::get('/dashboard', function () {
         return view('dashboard.petani.index');
     });
+    Route::get('/profil', function () {
+        return view('dashboard.petani.profil');
+    });
 });
 Route::get('/bot/retreive',[TelegramBotController::class,'show']);
 Route::get('/bot/msg/',[TelegramBotController::class,'getMessages']);
