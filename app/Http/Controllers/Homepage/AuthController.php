@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Homepage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KiosResmiRegisterRequest;
 use App\Http\Requests\PetaniRegisterRequest;
+use App\Models\KelompokTani;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,12 +12,10 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
-    protected $redirectTo = '/petani/dashboard';
     private AkunService $akun_service;
 
     public function __construct(AkunService $akun_service)
     {
-        $this->middleware('guest')->except('logout');
         $this->akun_service = $akun_service;
     }
     public function setPetaniLogin(): Response
@@ -59,8 +58,10 @@ class AuthController extends Controller
     }
     public function setPetaniRegister(): Response
     {
+        $kelompok_tanis = KelompokTani::all();
         return response()->view('homepage.pages.petani.register',[
-            'title' => 'Petani | Register'
+            'title' => 'Petani | Register',
+            'kelompok_tanis' => $kelompok_tanis
         ]);
     }
     public function petaniRegister(PetaniRegisterRequest $request): RedirectResponse
@@ -83,7 +84,6 @@ class AuthController extends Controller
     public function kiosResmiRegister(KiosResmiRegisterRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-        
         try {
             $this->akun_service->kiosResmiRegister($validated);
             return redirect('/petani/login')->with('success','Akun berhasil terdaftar!');

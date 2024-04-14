@@ -12,7 +12,7 @@
           </p>
         </div>
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
-        <form>
+        <form action="/pemerintah/login" method="post">
           <div class="grid">
             <div class="mb-5">
               <label for="nama_pengguna" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pengguna</label>

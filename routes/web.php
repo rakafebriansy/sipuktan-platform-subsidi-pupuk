@@ -26,10 +26,11 @@ Route::prefix('/petani')->group(function(){
     Route::post('/register', [AuthController::class,'petaniRegister']);
     Route::get('/lupa-sandi', [AuthController::class, 'setPetaniLupaSandi']);
     Route::post('/lupa-sandi', [AuthController::class, 'petaniLupaSandi']);
-    Route::group(['middleware'=>'petani'], function() {
-        Route::get('/dashboard', []);
-        Route::get('/alokasi', []);
+    Route::middleware('petani')->group(function() {
+            Route::get('/dashboard', []);
+            Route::get('/alokasi', []);
     });
+        
 });
 Route::prefix('/kios-resmi')->group(function(){
     Route::get('/login', [AuthController::class, 'setKiosResmiLogin']);
@@ -37,7 +38,7 @@ Route::prefix('/kios-resmi')->group(function(){
     Route::post('/register', [AuthController::class, 'kiosResmiRegister']);
     Route::get('/lupa-sandi', [AuthController::class, 'setKiosResmiLupaSandi']);
     Route::post('/lupa-sandi', [AuthController::class, 'kiosResmiLupaSandi']);
-    Route::group(['middleware'=>'kiosResmi'], function() {
+    Route::middleware('kiosResmi')->group(function() {
         Route::get('/dashboard', []);
         Route::get('/alokasi', []);
     });

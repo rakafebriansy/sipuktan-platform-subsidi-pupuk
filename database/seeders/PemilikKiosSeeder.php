@@ -16,24 +16,21 @@ class PemilikKiosSeeder extends Seeder
     {
         PemilikKios::create([
             'nama_pemilik' => 'Richard Nixon',
-            'nik' => 6534112376590876,
-            'kata_sandi' => Hash::make('nixon@1'),
+            'nik' => '6534112376590876',
             'foto_ktp' => 'ktp004.jpg',
             'nomor_telepon' => '085443678965'
         ]);
         PemilikKios::create([
             'nama_pemilik' => 'Dwight D Eisenhower',
-            'nik' => 9865112376590876,
-            'kata_sandi' => Hash::make('dwight@1'),
+            'nik' => '9865112376590876',
             'foto_ktp' => 'ktp005.jpg',
             'nomor_telepon' => '085973678965'
         ]);
         PemilikKios::create([
             'nama_pemilik' => 'Theodore Roosevelt',
-            'nik' => 6534112376590876,
-            'kata_sandi' => Hash::make('theodore@1'),
+            'nik' => '6534112376210876',
             'foto_ktp' => 'ktp006.jpg',
-            'nomor_telepon' => '085443678965'
+            'nomor_telepon' => '085442678965'
         ]);
     }
 }

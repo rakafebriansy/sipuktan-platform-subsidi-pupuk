@@ -15,6 +15,7 @@
     
         <div class="mt-5">
           <form action="/petani/lupa-sandi">
+            @csrf
             <div class="grid">
               <!-- Form Group -->
               <div>

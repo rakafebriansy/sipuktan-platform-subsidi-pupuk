@@ -16,6 +16,7 @@
         </div>
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
         <form action="kios-resmi" method="POST">
+          @csrf
           <div class="grid">
             <div class="mb-5">
               <label for="nib" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIB</label>

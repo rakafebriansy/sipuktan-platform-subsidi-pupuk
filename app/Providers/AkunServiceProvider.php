@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
+use App\Services\AkunService;
+use App\Services\Impl\AkunServiceImpl;
 use Illuminate\Support\ServiceProvider;
 
 class AkunServiceProvider extends ServiceProvider
 {
     public array $singletons =[
-        UserService::class => UserServiceImpl::class
+        AkunService::class => AkunServiceImpl::class
     ];
     /**
      * Register services.
@@ -23,5 +25,9 @@ class AkunServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+    }
+    public function provides():array
+    {
+        return [AkunService::class];
     }
 }

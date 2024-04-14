@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\Hash;
 
 class AkunServiceImpl implements AkunService
 {
-    public function petaniRregister(array $request): void
+    public function petaniRegister(array $request, ): void
     {
         $request['kata_sandi'] = Hash::make($request['kata_sandi']);
+        dd($request['foto_ktp']);
+        // $foto_ktp->storePubliclyAs('foto_ktps', $picture->getClientOriginalName(), 'public');
+        // $request['foto_ktp'] = $foto_ktp->getClientOriginalName(); 
         DB::transaction(function () use ($request) {
             Petani::create($request);
         });

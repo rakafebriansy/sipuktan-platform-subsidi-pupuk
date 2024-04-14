@@ -14,6 +14,7 @@
         </div>
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
         <form action="/petani/register" method="POST" class=" mx-auto md:grid md:grid-cols-2 md:gap-6">
+            @csrf
             <div class="">
                 <div class="mb-5">
                     <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
@@ -91,7 +92,9 @@
                         </div>
                     </div>
                     <input type="hidden" value="" name="id_kelompok_tani" id="idPoktan">
-                    <button id="dropdownUsersButton" data-dropdown-toggle="dropdownPoktan" data-dropdown-placement="bottom" class="py-2.5 px-5 mb-2 mt-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 text-center inline-flex items-center " type="button">Kelompok Tani<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <button id="dropdownUsersButton" data-dropdown-toggle="dropdownPoktan" data-dropdown-placement="bottom" class="min-w-[10rem] justify-between py-2.5 px-5 mb-2 mt-4 text-sm font-medium text-gray-900 text-center focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center " type="button">
+                        <span>Kelompok Tani</span>
+                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                         </svg>
                     </button>

@@ -15,6 +15,7 @@
   
       <div class="mt-5">
         <form action="/kios-resmi/lupa-sandi" method="POST">
+          @csrf
           <div class="grid">
             <div>
                 <div class="mb-5">
