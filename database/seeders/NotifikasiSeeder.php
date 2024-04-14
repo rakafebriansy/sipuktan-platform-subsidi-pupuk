@@ -13,12 +13,23 @@ class NotifikasiSeeder extends Seeder
      */
     public function run(): void
     {
-        // Notifikasi::create([
-        //     'id' => 1,
-        //     'isi' => fake()->sentence(),
-        //     'id_petani' => 1,
-        //     'id_kios_resmi',
-        //     'id_pemerintah'
-        // ]);
+        Notifikasi::create([
+            'id' => 1,
+            'isi' => fake()->sentence(),
+            'id_petani' => 1,
+            'id_pemerintah' => 1
+        ]);
+        Notifikasi::create([
+            'id' => 2,
+            'isi' => fake()->sentence(),
+            'id_petani' => 1,
+            'id_pemerintah' => 1
+        ]);
+        Notifikasi::create([
+            'id' => 3,
+            'isi' => fake()->sentence(),
+            'id_kios_resmi' => 2,
+            'id_pemerintah' => 1
+        ]);
     }
 }
