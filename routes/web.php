@@ -15,25 +15,55 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('homepage.index');
+    return view('homepage.pages.index');
 });
 Route::prefix('/petani')->group(function(){
     Route::get('/login', function () {
-        return view('homepage.petani.login');
+        return view('homepage.pages.petani.login');
     });
     Route::get('/register', function () {
-        return view('homepage.petani.register');
+        return view('homepage.pages.petani.register');
     });
-    Route::get('/lupaSandi', function () {
-        return view('homepage.petani.lupa-sandi');
+    Route::get('/lupa-sandi', function () {
+        return view('homepage.pages.petani.lupa-sandi');
     });
     Route::get('/dashboard', function () {
-        return view('dashboard.petani.index');
+        return view('dashboard.pages.petani.index');
     });
     Route::get('/profil', function () {
-        return view('dashboard.petani.profil');
+        return view('dashboard.pages.petani.profil');
     });
 });
-Route::get('/bot/retreive',[TelegramBotController::class,'show']);
-Route::get('/bot/msg/',[TelegramBotController::class,'getMessages']);
-Route::get('/bot/send/{id}',[TelegramBotController::class,'sendMessage']);
+Route::prefix('/kios-resmi')->group(function(){
+    Route::get('/login', function () {
+        return view('homepage.pages.kios-resmi.login');
+    });
+    Route::get('/register', function () {
+        return view('homepage.pages.kios-resmi.register');
+    });
+    Route::get('/lupa-sandi', function () {
+        return view('homepage.pages.kios-resmi.lupa-sandi');
+    });
+    Route::get('/dashboard', function () {
+        return view('dashboard.pages.kios-resmi.index');
+    });
+    Route::get('/profil', function () {
+        return view('dashboard.pages.kios-resmi.profil');
+    });
+});
+Route::get('/admin', function () {
+    return view('homepage.pages.pemerintah.login');
+});
+Route::prefix('/pemerintah')->group(function(){
+    Route::get('/dashboard', function () {
+        return view('dashboard.pages.pemerintah.index');
+    });
+    Route::get('/profil', function () {
+        return view('dashboard.pages.pemerintah.profil');
+    });
+});
+Route::prefix('/bot')->group(function(){
+    Route::get('/retreive',[TelegramBotController::class,'show']);
+    Route::get('/msg/',[TelegramBotController::class,'getMessages']);
+    Route::get('/send/{id}',[TelegramBotController::class,'sendMessage']);
+});
