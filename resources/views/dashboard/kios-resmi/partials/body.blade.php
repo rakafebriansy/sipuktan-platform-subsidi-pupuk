@@ -69,7 +69,7 @@
                     </tr>
                     <tr class="bg-white dark:bg-gray-800">
                         <th scope="row" class="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Kelompok Tani
+                            Nama Kios
                         </th>
                         <td class="px-2 py-3">
                             Makmur jaya
@@ -77,7 +77,7 @@
                     </tr>
                     <tr class="bg-white dark:bg-gray-800">
                         <th scope="row" class="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Kios Resmi
+                            Alamat Kios
                         </th>
                         <td class="px-2 py-3">
                             Jl. Mangga, no .15
