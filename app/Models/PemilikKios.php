@@ -15,8 +15,8 @@ class PemilikKios extends Model
     public $incrementing = true;
     public $timestamps = false;
     public $fillable = [
-        'nib',
-        'nama',
+        'nama_pemilik',
+        'nik',
         'kata_sandi',
         'foto_ktp',
         'nomor_telepon'

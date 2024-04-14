@@ -16,11 +16,12 @@ class KiosResmi extends Model
     public $incrementing = true;
     public $timestamps = false;
     public $fillable = [
-        'nama_pemilik',
-        'nik',
-        'kata_sandi',
-        'nomor_telepon',
-        'id_kecamatan'
+        'nib',
+        'nama',
+        'jalan',
+        'id_pemilik_kios',
+        'id_kecamatan',
+
     ];
     public function pemilik_kios(): BelongsTo
     {
