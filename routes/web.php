@@ -28,10 +28,10 @@ Route::prefix('/petani')->group(function(){
         return view('homepage.pages.petani.lupa-sandi');
     });
     Route::get('/dashboard', function () {
-        return view('dashboard.pages.petani.index');
+        return view('dashboard.petani.pages.index');
     });
-    Route::get('/profil', function () {
-        return view('dashboard.pages.petani.profil');
+    Route::get('/alokasi', function () {
+        return view('dashboard.petani.pages.alokasi');
     });
 });
 Route::prefix('/kios-resmi')->group(function(){
@@ -45,10 +45,10 @@ Route::prefix('/kios-resmi')->group(function(){
         return view('homepage.pages.kios-resmi.lupa-sandi');
     });
     Route::get('/dashboard', function () {
-        return view('dashboard.pages.kios-resmi.index');
+        return view('dashboard.kios-resmi.pages.index');
     });
-    Route::get('/profil', function () {
-        return view('dashboard.pages.kios-resmi.profil');
+    Route::get('/alokasi', function () {
+        return view('dashboard.kios-resmi.pages.alokasi');
     });
 });
 Route::get('/admin', function () {
@@ -56,10 +56,10 @@ Route::get('/admin', function () {
 });
 Route::prefix('/pemerintah')->group(function(){
     Route::get('/dashboard', function () {
-        return view('dashboard.pages.pemerintah.index');
+        return view('dashboard.pemerintah.pages.index');
     });
-    Route::get('/profil', function () {
-        return view('dashboard.pages.pemerintah.profil');
+    Route::get('/alokasi', function () {
+        return view('dashboard.pemerintah.pages.alokasi');
     });
 });
 Route::prefix('/bot')->group(function(){
