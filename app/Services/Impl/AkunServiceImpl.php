@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AkunServiceImpl implements AkunService
 {
-    public function petaniRregister(array $request): void
+    public function petaniRegister(array $request): void
     {
         $request['kata_sandi'] = Hash::make($request['kata_sandi']);
         DB::transaction(function () use ($request) {

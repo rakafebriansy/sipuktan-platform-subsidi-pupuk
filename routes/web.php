@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('homepage.pages.index');
+    return 'ok';
 });
 Route::post('/login',[AuthController::class, 'login']);
 

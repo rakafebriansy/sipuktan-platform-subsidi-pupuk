@@ -2,26 +2,38 @@
 
 namespace App\Providers;
 
+use App\Services\AkunService;
+use App\Services\Impl\AkunServiceImpl;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class AkunServiceProvider extends ServiceProvider
+class AkunServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public array $singletons =[
-        UserService::class => UserServiceImpl::class
+        AkunService::class => AkunServiceImpl::class
     ];
     /**
      * Register services.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         //
     }
 
     /**
      * Bootstrap services.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
         //
+    }
+
+    public function provides():array
+    {
+        return [AkunService::class];
     }
 }

@@ -11,16 +11,15 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
-    protected $redirectTo = '/petani/dashboard';
     private AkunService $akun_service;
 
     public function __construct(AkunService $akun_service)
     {
-        $this->middleware('guest')->except('logout');
         $this->akun_service = $akun_service;
     }
     public function setPetaniLogin(): Response
     {
+        dd('kontol');
         return response()->view('homepage.pages.petani.login',[
             'title' => 'Petani | Login'
         ]);
