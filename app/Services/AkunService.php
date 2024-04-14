@@ -5,6 +5,6 @@ use App\Http\Requests\PetaniRegisterRequest;
 
 interface AkunService
 {
-    function login(string $email, string $password): bool;
-    function register(array $request): void;
+    function petaniRegister(array $request): void;
+    function kiosResmiRegister(array $request): void;
 }

@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Model;
 
 class KiosResmi extends Model
 {
@@ -19,10 +19,18 @@ class KiosResmi extends Model
         'nib',
         'nama',
         'jalan',
+        'kata_sandi',
         'id_pemilik_kios',
         'id_kecamatan',
-
     ];
+    protected $guarded = ['id'];
+    protected $hidden = [
+     'kata_sandi', 'remember_token',
+    ];
+    public function getAuthPassword()
+    {
+     return $this->kata_sandi;
+    }
     public function pemilik_kios(): BelongsTo
     {
         return $this->belongsTo(PemilikKios::class,'id_pemilik_kios','id');

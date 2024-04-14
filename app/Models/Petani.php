@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Foundation\Auth\User as Model;
 
 class Petani extends Model
 {
@@ -24,6 +24,14 @@ class Petani extends Model
         'nomor_telepon',
         'id_kelompok_tani'
     ];
+    protected $guarded = ['id'];
+    protected $hidden = [
+     'kata_sandi', 'remember_token',
+    ];
+    public function getAuthPassword()
+    {
+     return $this->kata_sandi;
+    }
     public function kelompok_tani(): BelongsTo
     {
         return $this->belongsTo(KelompokTani::class,'id_kelompok_tani','id');

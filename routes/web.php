@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Homepage\AuthController;
 use App\Http\Controllers\TelegramBotController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,50 +18,34 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('homepage.pages.index');
 });
+Route::post('/login',[AuthController::class, 'login']);
+
 Route::prefix('/petani')->group(function(){
-    Route::get('/login', function () {
-        return view('homepage.pages.petani.login');
-    });
-    Route::get('/register', function () {
-        return view('homepage.pages.petani.register');
-    });
-    Route::get('/lupa-sandi', function () {
-        return view('homepage.pages.petani.lupa-sandi');
-    });
-    Route::get('/dashboard', function () {
-        return view('dashboard.petani.pages.index');
-    });
-    Route::get('/alokasi', function () {
-        return view('dashboard.petani.pages.alokasi');
+    Route::get('/login',[AuthController::class, 'setPetaniLogin']);
+    Route::get('/register', [AuthController::class,'setPetaniRegister']);
+    Route::post('/register', [AuthController::class,'petaniRegister']);
+    Route::get('/lupa-sandi', [AuthController::class, 'setPetaniLupaSandi']);
+    Route::post('/lupa-sandi', [AuthController::class, 'petaniLupaSandi']);
+    Route::group(['middleware'=>'petani'], function() {
+        Route::get('/dashboard', []);
+        Route::get('/alokasi', []);
     });
 });
 Route::prefix('/kios-resmi')->group(function(){
-    Route::get('/login', function () {
-        return view('homepage.pages.kios-resmi.login');
-    });
-    Route::get('/register', function () {
-        return view('homepage.pages.kios-resmi.register');
-    });
-    Route::get('/lupa-sandi', function () {
-        return view('homepage.pages.kios-resmi.lupa-sandi');
-    });
-    Route::get('/dashboard', function () {
-        return view('dashboard.kios-resmi.pages.index');
-    });
-    Route::get('/alokasi', function () {
-        return view('dashboard.kios-resmi.pages.alokasi');
+    Route::get('/login', [AuthController::class, 'setKiosResmiLogin']);
+    Route::get('/register', [AuthController::class, 'setKiosResmiRegister']);
+    Route::post('/register', [AuthController::class, 'kiosResmiRegister']);
+    Route::get('/lupa-sandi', [AuthController::class, 'setKiosResmiLupaSandi']);
+    Route::post('/lupa-sandi', [AuthController::class, 'kiosResmiLupaSandi']);
+    Route::group(['middleware'=>'kiosResmi'], function() {
+        Route::get('/dashboard', []);
+        Route::get('/alokasi', []);
     });
 });
-Route::get('/admin', function () {
-    return view('homepage.pages.pemerintah.login');
-});
+
+Route::get('/admin', [AuthController::class, 'setPemerintahLogin']);
 Route::prefix('/pemerintah')->group(function(){
-    Route::get('/dashboard', function () {
-        return view('dashboard.pemerintah.pages.index');
-    });
-    Route::get('/alokasi', function () {
-        return view('dashboard.pemerintah.pages.alokasi');
-    });
+    Route::get('/dashboard', [])->middleware('pemerintah');
 });
 Route::prefix('/bot')->group(function(){
     Route::get('/retreive',[TelegramBotController::class,'show']);

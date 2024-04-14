@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama_pemilik',100)->nullable(false);
             $table->string('nik',100)->nullable(false)->unique();
-            $table->string('kata_sandi',100)->nullable(false);
             $table->string('foto_ktp',100)->nullable(false);
             $table->string('nomor_telepon',20)->nullable(false)->unique();
         });

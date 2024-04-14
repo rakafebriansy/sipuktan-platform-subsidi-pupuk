@@ -17,10 +17,10 @@ class PemilikKios extends Model
     public $fillable = [
         'nama_pemilik',
         'nik',
-        'kata_sandi',
         'foto_ktp',
         'nomor_telepon'
     ];
+
     public function kios_resmi(): HasOne
     {
         return $this->hasOne(KiosResmi::class,'id_pemilik_kios','id');

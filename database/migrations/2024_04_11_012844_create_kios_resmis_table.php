@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('kios_resmis', function (Blueprint $table) {
             $table->id();
             $table->string('nib',20)->nullable(false)->unique();
-            $table->string('nama',100)->nullable(false);
+            $table->string('nama',60)->nullable(false);
             $table->string('jalan',255)->nullable(false);
+            $table->string('kata_sandi',100)->nullable(false);
             $table->unsignedBigInteger('id_pemilik_kios')->nullable(false);
             $table->string('id_kecamatan',60)->nullable(false);
+            $table->rememberToken();
 
             $table->foreign('id_pemilik_kios')->on('pemilik_kios')->references('id');
             $table->foreign('id_kecamatan')->on('kecamatans')->references('id');

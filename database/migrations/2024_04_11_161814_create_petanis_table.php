@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('foto_ktp',255)->nullable(false);
             $table->string('nomor_telepon',20)->nullable(false)->unique();
             $table->unsignedBigInteger('id_kelompok_tani')->nullable(false);
+            $table->rememberToken();
             
             $table->foreign('id_kelompok_tani')->on('kelompok_tanis')->references('id');
         });

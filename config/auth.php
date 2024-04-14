@@ -36,10 +36,21 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'petani' => [
+            'redirectTo' => 'dashboard.petani.pages.index',
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'petanis',
         ],
+        'kios_resmi' => [
+            'redirectTo' => 'dashboard.kios-resmi.pages.index',
+            'driver' => 'session',
+            'provider' => 'kios_resmis'
+        ],
+
+        // 'web' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
     ],
 
     /*
@@ -60,10 +71,19 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'petanis' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Petani::class,
         ],
+        'kios_resmis' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\KiosResmi::class,
+        ],
+
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
+        // ],
 
         // 'users' => [
         //     'driver' => 'database',
