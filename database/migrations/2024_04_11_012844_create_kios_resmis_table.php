@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kata_sandi',100)->nullable(false);
             $table->unsignedBigInteger('id_pemilik_kios')->nullable(false);
             $table->string('id_kecamatan',60)->nullable(false);
+            $table->boolean('verified')->nullable(false)->default(false);
             $table->rememberToken();
 
             $table->foreign('id_pemilik_kios')->on('pemilik_kios')->references('id');

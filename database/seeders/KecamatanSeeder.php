@@ -31,7 +31,7 @@ class KecamatanSeeder extends Seeder
         ]);
         Kecamatan::create([
             'id' => 'ajung',
-            'nama' => 'Kebonsari'
+            'nama' => 'Ajung'
         ]);
     }
 }

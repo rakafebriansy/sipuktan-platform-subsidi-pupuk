@@ -2,14 +2,22 @@
 namespace App\Http\Controllers\Homepage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\KiosResmiLoginRequest;
 use App\Http\Requests\KiosResmiRegisterRequest;
+use App\Http\Requests\PemerintahLoginRequest;
+use App\Http\Requests\PetaniLoginRequest;
 use App\Http\Requests\PetaniRegisterRequest;
+use App\Models\Kecamatan;
 use App\Models\KelompokTani;
+use App\Models\KiosResmi;
+use App\Models\Pemerintah;
+use App\Models\Petani;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     private AkunService $akun_service;
@@ -30,31 +38,58 @@ class AuthController extends Controller
             'title' => 'Kios Resmi | Login'
         ]);
     }
-    public function setPemerntahLogin(): Response
+    public function setPemerintahLogin(): Response
     {
         return response()->view('homepage.pages.pemerintah.login',[
             'title' => 'Pemerintah | Login'
         ]);
     }
-    public function login(Request $request): RedirectResponse
+    public function petaniLogin(PetaniLoginRequest $request): RedirectResponse
     {
-        if(Auth::guard('petani')->attempt([
-            'nik' => $request->nik,
-            'kata_sandi' => $request->nik
-        ])) {
-            return response()->redirectTo('/petani/dashboard');
-        } else if (Auth::guard('kiosResmi')->attempt([
-            'nib' => $request->nib,
-            'kata_sandi' => $request->kata_sandi
-        ])) {
-            return response()->redirectTo('/kios-resmi/dashboard');
-        } else if (Auth::guard('pemerintah')->attempt([
-            'nama_pengguna' => $request->nama_pengguna,
-            'kata_sandi' => $request->kata_sandi
-        ])) {
-            return response()->redirectTo('/pemerintah/dashboard');
+        // if(Auth::guard('petani')->attempt([
+        //     'nik' => $request->input('nik'),
+        //     'kata_sandi' => $request->input('kata_sandi')
+        // ])) {
+        //     return response()->redirectTo('/petani/dashboard');
+        // }
+        $petani = Petani::query()->where('nik',$request->nik)->first();
+        if (isset($petani)) {
+            if(Hash::check($request->kata_sandi,$petani->kata_sandi)) {
+                if($petani->is_active) {
+                    $request->session()->put('id',$petani->id);
+                    return response()->redirectTo('/petani/dashboard');
+                }
+                return redirect('/petani/login')->with('unverified','Akun anda belum diverifikasi');
+            }
         }
-        return response()->redirectTo('/');
+        return response()->redirectTo('/petani/login');
+    }
+    public function kiosResmiLogin(KiosResmiLoginRequest $request): RedirectResponse
+    {
+        $kios_resmi = KiosResmi::query()->where('nib',$request->nib)->first();
+        if (isset($kios_resmi))
+        {
+            if(Hash::check($request->kata_sandi,$kios_resmi->kata_sandi)) {
+                if($kios_resmi->is_active) {
+                    $request->session()->put('id',$kios_resmi->id);
+                    return response()->redirectTo('/kios-resmi/dashboard');
+                }
+                return redirect('/kios-resmi/login')->with('unverified','Akun anda belum diverifikasi');
+            }
+        }
+        return response()->redirectTo('/kios-resmi/login');
+    }
+    public function pemerintahLogin(PemerintahLoginRequest $request): RedirectResponse
+    {
+        $pemerintah = Pemerintah::query()->where('nama_pengguna',$request->nama_pengguna)->first();
+        if (isset($pemerintah))
+        {
+            if(Hash::check($request->kata_sandi,$pemerintah->kata_sandi)) {
+                $request->session()->put('id',$pemerintah->id);
+                return response()->redirectTo('/pemerintah/dashboard');
+            }
+        }
+        return response()->redirectTo('/admin');
     }
     public function setPetaniRegister(): Response
     {
@@ -67,28 +102,29 @@ class AuthController extends Controller
     public function petaniRegister(PetaniRegisterRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-        
         try {
-            $this->akun_service->petaniRegister($validated);
-            return redirect('/petani/login')->with('success','Akun berhasil terdaftar!');
+            $this->akun_service->petaniRegister($validated, $request->file('foto_ktp'));
+            return redirect('/petani/register')->with('success','Silahkan tunggu verifikasi dari akun anda!');
         } catch (\Exception $e) {
             return redirect('/petani/register')->withErrors('dbErr','Akun gagal dibuat!');
         }
     }
     public function setKiosResmiRegister(): Response
     {
+        $kecamatans = Kecamatan::all();
         return response()->view('homepage.pages.kios-resmi.register',[
-            'title' => 'Kios Resmi | Register'
+            'title' => 'Kios Resmi | Register',
+            'kecamatans' => $kecamatans
         ]);
     }
     public function kiosResmiRegister(KiosResmiRegisterRequest $request): RedirectResponse
     {
         $validated = $request->validated();
         try {
-            $this->akun_service->kiosResmiRegister($validated);
-            return redirect('/petani/login')->with('success','Akun berhasil terdaftar!');
+            $this->akun_service->kiosResmiRegister($validated, $request->file('foto_ktp'));
+            return redirect('/kios-resmi/register')->with('success','Silahkan tunggu verifikasi dari akun anda!');
         } catch (\Exception $e) {
-            return redirect('/petani/register')->withErrors('dbErr','Akun gagal dibuat!');
+            return redirect('/kios-resmi/register')->withErrors('dbErr','Akun gagal dibuat!');
         }
     }
     public function setPetaniLupaSandi(): Response

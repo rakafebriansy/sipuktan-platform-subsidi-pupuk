@@ -41,10 +41,15 @@ return [
             'driver' => 'session',
             'provider' => 'petanis',
         ],
-        'kios_resmi' => [
+        'kiosResmi' => [
             'redirectTo' => 'dashboard.kios-resmi.pages.index',
             'driver' => 'session',
-            'provider' => 'kios_resmis'
+            'provider' => 'kiosResmis'
+        ],
+        'pemerintah' => [
+            'redirectTo' => 'dashboard.pemerintah.pages.index',
+            'driver' => 'session',
+            'provider' => 'pemerintahs'
         ],
 
         // 'web' => [
@@ -75,9 +80,13 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Petani::class,
         ],
-        'kios_resmis' => [
+        'kiosResmis' => [
             'driver' => 'eloquent',
             'model' => App\Models\KiosResmi::class,
+        ],
+        'pemerintahs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pemerintah::class,
         ],
 
         // 'users' => [

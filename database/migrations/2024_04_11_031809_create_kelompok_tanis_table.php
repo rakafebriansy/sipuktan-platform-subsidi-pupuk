@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama',60)->nullable(false);
             $table->unsignedBigInteger('id_kios_resmi')->nullable(false);
-            $table->string('id_kecamatan',60)->nullable(false);
 
             $table->foreign('id_kios_resmi')->on('kios_resmis')->references('id');
-            $table->foreign('id_kecamatan')->on('kecamatans')->references('id');
         });
     }
 

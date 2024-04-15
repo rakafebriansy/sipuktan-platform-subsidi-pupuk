@@ -1,7 +1,16 @@
 @extends('homepage.layouts.main')
 
 @section('wrapper')
-<div class="flex justify-center flex-col gap-4 items-center h-full">
+<div class="flex justify-center flex-col gap-4 items-center h-full relative">
+    @if ($errors->any())
+    <div class="mt-2 bg-red-100 border border-red-200 text-sm absolute top-4 text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500" role="alert">
+        <span class="font-bold">Danger</span> {{ $errors->first() }}
+    </div>
+  @elseif (session('success'))
+    <div class="mt-2 bg-teal-100 border border-teal-200 text-sm absolute top-4 text-teal-800 rounded-lg p-4 dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500" role="alert">
+      <span class="font-bold">Success</span> {{ Session::get('success') }}
+    </div>
+    @endif
     <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700 p-5">
         <div class="text-center">
             <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Registrasi Petani</h1>
@@ -13,20 +22,20 @@
             </p>
         </div>
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
-        <form action="/petani/register" method="POST" class=" mx-auto md:grid md:grid-cols-2 md:gap-6">
+        <form action="/petani/register" method="POST" class=" mx-auto md:grid md:grid-cols-2 md:gap-6" enctype="multipart/form-data">
             @csrf
             <div class="">
                 <div class="mb-5">
                     <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
-                    <input type="text" name="nik" id="nik" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
+                    <input type="text" name="nik" id="nik" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"  />
                 </div>
                 <div class="mb-5">
                     <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
-                    <input type="text" name="nama" id="nama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
+                    <input type="text" name="nama" id="nama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"  />
                 </div>
                 <div class="mb-5">
                     <label for="nomor_telepon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Telepon</label>
-                    <input type="text" name="nomor_telepon" id="nomor_telepon" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
+                    <input type="text" name="nomor_telepon" id="nomor_telepon" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"  />
                 </div>
 
 
@@ -43,13 +52,13 @@
                             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">JPG or PNG (MAX. 5MB)</p>
                         </div>
-                        <input id="dropzone-file" type="file" class="hidden" />
+                        <input id="dropzone-file" type="file" class="hidden" name="foto_ktp" />
                     </label>
                 </div> 
                 <div class="flex items-center gap-4 justify-between">
                     <div class="mb-5 ">
                         <label for="kata_sandi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi</label>
-                        <input data-popover-target="popover-password" data-popover-placement="bottom" type="password" name="kata_sandi" id="kata_sandi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
+                        <input data-popover-target="popover-password" data-popover-placement="bottom" type="password" name="kata_sandi" id="kata_sandi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"  />
                         <div data-popover id="popover-password" role="tooltip"
                             class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
                             <div class="p-3 space-y-2">
@@ -92,7 +101,7 @@
                         </div>
                     </div>
                     <input type="hidden" value="" name="id_kelompok_tani" id="idPoktan">
-                    <button id="dropdownUsersButton" data-dropdown-toggle="dropdownPoktan" data-dropdown-placement="bottom" class="min-w-[10rem] justify-between py-2.5 px-5 mb-2 mt-4 text-sm font-medium text-gray-900 text-center focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center " type="button">
+                    <button id="dropdownUsersButton" data-dropdown-toggle="dropdownPoktan" data-dropdown-placement="bottom" class="min-w-[13rem] justify-between py-2.5 px-5 mb-2 mt-4 text-sm font-medium text-gray-900 text-center focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center " type="button">
                         <span>Kelompok Tani</span>
                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>

@@ -23,10 +23,19 @@ class KiosResmi extends Model
         'id_pemilik_kios',
         'id_kecamatan',
     ];
+
     protected $guarded = ['id'];
     protected $hidden = [
      'kata_sandi', 'remember_token',
     ];
+    public function getAuthIdentifierName()
+    {
+        return $this->id;
+    }
+    public function getAuthIdentifier()
+    {
+        return $this->nib;
+    }
     public function getAuthPassword()
     {
      return $this->kata_sandi;

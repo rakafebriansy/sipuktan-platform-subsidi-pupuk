@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class KiosResmiRegisterRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class KiosResmiRegisterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,12 +23,15 @@ class KiosResmiRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nib' => 'required|max:13|min:13|numeric|unique:kios_resmis,nib',
-            'nama' => 'required|max:60|min:3',
-            'jalan'=> 'required|min:5',
-            'kata_sandi' => 'required|regex:/^[\w-]*$/',
-            'id_pemilik_kios' => 'required',
+            'nib' => ['required','numeric','min:13'],
+            'kata_sandi' => ['required','min:6'],
+            'nama'=> 'required',
+            'jalan'=> 'required',
             'id_kecamatan' => 'required',
+            'foto_ktp' => 'required',
+            'nik' => 'required',
+            'nama_pemilik' => 'required',
+            'nomor_telepon' => 'required',
         ];
     }
 }

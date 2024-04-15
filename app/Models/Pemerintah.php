@@ -18,6 +18,22 @@ class Pemerintah extends Model
         'nama_pengguna',
         'kata_sandi'
     ];
+    protected $guarded = ['id'];
+    protected $hidden = [
+     'kata_sandi',
+    ];
+    public function getAuthIdentifierName()
+    {
+        return $this->id;
+    }
+    public function getAuthIdentifier()
+    {
+        return $this->nama_pengguna;
+    }
+    public function getAuthPassword()
+    {
+     return $this->kata_sandi;
+    }
     public function faqs(): HasMany
     {
         return $this->hasMany(Faq::class, 'id_pemerintah', 'id');

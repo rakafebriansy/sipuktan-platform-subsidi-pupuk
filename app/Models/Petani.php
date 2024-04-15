@@ -28,6 +28,14 @@ class Petani extends Model
     protected $hidden = [
      'kata_sandi', 'remember_token',
     ];
+    public function getAuthIdentifierName()
+    {
+        return $this->id;
+    }
+    public function getAuthIdentifier()
+    {
+        return $this->nik;
+    }
     public function getAuthPassword()
     {
      return $this->kata_sandi;
