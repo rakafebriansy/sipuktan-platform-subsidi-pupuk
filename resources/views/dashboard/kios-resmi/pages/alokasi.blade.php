@@ -45,48 +45,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($alokasis as $alokasi)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Muammar Khadafi
+                            {{ $alokasi->petani }}
                         </th>
                         <td class="px-6 py-4">
-                            60kg
+                            {{ $alokasi->jumlah_pupuk }}
                         </td>
                         <td class="px-6 py-4">
-                            Tani Jaya
+                            {{ $alokasi->poktan }}
                         </td>
                         <td class="py-4">
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
                         </td>
                     </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Mikhail Gorbachev
-                        </th>
-                        <td class="px-6 py-4">
-                            50kg
-                        </td>
-                        <td class="px-6 py-4">
-                            Harapan
-                        </td>
-                        <td class="py-4">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
-                        </td>
-                    </tr>
-                    <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Cornelis de Houtman
-                        </th>
-                        <td class="px-6 py-4">
-                            Black
-                        </td>
-                        <td class="px-6 py-4">
-                            Accessories
-                        </td>
-                        <td class="py-4">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

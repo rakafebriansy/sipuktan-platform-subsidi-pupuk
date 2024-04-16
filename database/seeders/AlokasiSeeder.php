@@ -18,7 +18,7 @@ class AlokasiSeeder extends Seeder
             'jumlah_pupuk' => 30,
             'musim_tanam' => 1,
             'tahun' => 2024,
-            'id_jenis_pupuk' => 1,
+            'id_jenis_pupuk' => 'urea',
             'id_kios_resmi' => 1,
             'id_petani' => 1
         ]);
@@ -27,7 +27,7 @@ class AlokasiSeeder extends Seeder
             'jumlah_pupuk' => 60,
             'musim_tanam' => 2,
             'tahun' => 2024,
-            'id_jenis_pupuk' => 1,
+            'id_jenis_pupuk' => 'sp36',
             'id_kios_resmi' => 1,
             'id_petani' => 1
         ]);
@@ -36,7 +36,7 @@ class AlokasiSeeder extends Seeder
             'jumlah_pupuk' => 60,
             'musim_tanam' => 3,
             'tahun' => 2024,
-            'id_jenis_pupuk' => 1,
+            'id_jenis_pupuk' => 'ponskha',
             'id_kios_resmi' => 1,
             'id_petani' => 1
         ]);
@@ -45,7 +45,7 @@ class AlokasiSeeder extends Seeder
             'jumlah_pupuk' => 60,
             'musim_tanam' => 1,
             'tahun' => 2024,
-            'id_jenis_pupuk' => 1,
+            'id_jenis_pupuk' => 'urea',
             'id_kios_resmi' => 1,
             'id_petani' => 2
         ]);
@@ -54,7 +54,7 @@ class AlokasiSeeder extends Seeder
             'jumlah_pupuk' => 60,
             'musim_tanam' => 1,
             'tahun' => 2024,
-            'id_jenis_pupuk' => 2,
+            'id_jenis_pupuk' => 'ponskha',
             'id_kios_resmi' => 1,
             'id_petani' => 2
         ]);

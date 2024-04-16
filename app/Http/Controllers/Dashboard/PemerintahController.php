@@ -10,6 +10,8 @@ use App\Models\KiosResmi;
 use App\Models\Pemerintah;
 use App\Models\Petani;
 use App\Services\AkunService;
+use App\Services\AlokasiService;
+use App\Services\DashboardService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,10 +20,12 @@ use Illuminate\View\View;
 
 class PemerintahController extends Controller
 {
-    private AkunService $akun_service;
-    public function __construct(AkunService $akun_service)
+    private DashboardService $dashboard_service;
+    private AlokasiService $alokasi_service;
+    public function __construct(DashboardService $dashboard_service, AlokasiService $alokasi_service)
     {
-        $this->akun_service = $akun_service;
+        $this->alokasi_service = $alokasi_service;
+        $this->dashboard_service = $dashboard_service;
     }
     public function setDashboard(): View
     {
@@ -32,18 +36,22 @@ class PemerintahController extends Controller
             'pemerintah' => $pemerintah
         ]);
     }
-    public function setAlokasi(): View
+    public function setAlokasi(string $tahun = '2024'): View
     {
         $id = Session::get('id',null);
-        $pemerintah = Pemerintah::find($id); 
-        // $alokasis = Alokasi::query()->w
+        ['kios_resmi' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
+        $alokasis = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahun);
         return view('dashboard.pemerintah.pages.alokasi', [
             'title' => 'Pemerintah | Alokasi',
-            'pemerintah' => $pemerintah
+            'pemerintah' => $pemerintah,
+            'alokasis' => $alokasis,
+            'initials' => $initials,
         ]);
     }
     public function setVerifikasiPengguna(): View
     {
+        $id = Session::get('id',null);
+        $pemerintah = Pemerintah::find($id); 
         try {
             $petanis = Petani::select('petanis.*','kelompok_tanis.nama as nama_poktan')
                 ->join('kelompok_tanis','petanis.id_kelompok_tani','kelompok_tanis.id','kelompok_tanis.id')
@@ -55,7 +63,8 @@ class PemerintahController extends Controller
             return view('dashboard.pemerintah.pages.verifikasi-pengguna', [
                 'title' => 'Pemerintah | Verifikasi Pengguna',
                 'petanis' => $petanis,
-                'kios_resmis' => $kios_resmis
+                'kios_resmis' => $kios_resmis,
+                'pemerintah' => $pemerintah,
             ]);
         } catch (\Exception $e) {
             throw $e;

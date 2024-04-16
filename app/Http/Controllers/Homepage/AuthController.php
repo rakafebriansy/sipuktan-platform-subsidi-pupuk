@@ -46,12 +46,6 @@ class AuthController extends Controller
     }
     public function petaniLogin(PetaniLoginRequest $request): RedirectResponse
     {
-        // if(Auth::guard('petani')->attempt([
-        //     'nik' => $request->input('nik'),
-        //     'kata_sandi' => $request->input('kata_sandi')
-        // ])) {
-        //     return response()->redirectTo('/petani/dashboard');
-        // }
         $petani = Petani::query()->where('nik',$request->nik)->first();
         if (isset($petani)) {
             if(Hash::check($request->kata_sandi,$petani->kata_sandi)) {

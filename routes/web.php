@@ -1,6 +1,7 @@
 <?php
 
 use App\Helper\Helper;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Dashboard\KiosResmiController;
 use App\Http\Controllers\Dashboard\PemerintahController;
 use App\Http\Controllers\Dashboard\PetaniController;
@@ -44,7 +45,7 @@ Route::prefix('/kios-resmi')->group(function(){
     Route::get('/lupa-sandi', [AuthController::class, 'setKiosResmiLupaSandi']);
     Route::post('/lupa-sandi', [AuthController::class, 'kiosResmiLupaSandi']);
     Route::get('/dashboard', [KiosResmiController::class, 'setDashboard']);
-    Route::get('/alokasi', [KiosResmiController::class, 'setAlokasi']);
+    Route::get('/alokasi/{tahun?}', [KiosResmiController::class, 'setAlokasi']);
     // Route::middleware('kiosResmi')->group(function() {
     // });
 });
@@ -56,6 +57,7 @@ Route::prefix('/pemerintah')->group(function(){
     Route::get('/verifikasi-pengguna', [PemerintahController::class, 'setVerifikasiPengguna']);
     Route::post('/verifikasi-pengguna/petani', [PemerintahController::class, 'verifikasiPenggunaPetani']);
     Route::post('/verifikasi-pengguna/kios-resmi', [PemerintahController::class, 'verifikasiPenggunaKiosResmi']);
+    Route::get('/alokasi/{tahun?}', [PemerintahController::class, 'setAlokasi']);
 });
 Route::prefix('/bot')->group(function(){
     Route::get('/retreive',[TelegramBotController::class,'show']);

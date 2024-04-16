@@ -6,6 +6,7 @@ use Illuminate\Http\UploadedFile;
 
 interface DashboardService
 {
-    function petaniSetDashboard(int $id): array;
-    function kiosResmiSetDashboard(int $id): array;
+    function petaniSetSidebar(int $id): array;
+    function kiosResmiSetSidebar(int $id): array;
+    function pemerintahSetSidebar(int $id): array;
 }
