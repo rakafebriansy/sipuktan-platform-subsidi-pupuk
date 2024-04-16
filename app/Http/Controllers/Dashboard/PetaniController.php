@@ -6,26 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PetaniRegisterRequest;
 use App\Models\Alokasi;
 use App\Models\Petani;
-use App\Services\AkunService;
+use App\Services\DashboardService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class PetaniController extends Controller
 {
-    private AkunService $akun_service;
-    public function __construct(AkunService $akun_service)
+    private DashboardService $dashboard_service;
+    public function __construct(DashboardService $dashboard_service)
     {
-        $this->akun_service = $akun_service;
+        $this->$dashboard_service = $dashboard_service;
     }
-    public function setDashboard()
+    public function setDashboard(): View
     {
         $id = Session::get('id',null);
-        $petani = Petani::find($id); 
+        ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetDashboard($id);
         return view('dashboard.petani.pages.index', [
             'title' => 'Petani | Dashboard',
-            'petani' => $petani
+            'petani' => $petani,
+            'initials' => $initials
         ]);
     }
     public function setAlokasi()
@@ -34,7 +36,7 @@ class PetaniController extends Controller
         $petani = Petani::find($id); 
         // $alokasis = Alokasi::query()->w
         return view('dashboard.petani.pages.alokasi', [
-            'title' => 'Petani | Dashboard',
+            'title' => 'Petani | Alokasi',
             'petani' => $petani
         ]);
     }

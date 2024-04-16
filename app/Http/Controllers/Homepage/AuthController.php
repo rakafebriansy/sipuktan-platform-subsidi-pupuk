@@ -55,7 +55,7 @@ class AuthController extends Controller
         $petani = Petani::query()->where('nik',$request->nik)->first();
         if (isset($petani)) {
             if(Hash::check($request->kata_sandi,$petani->kata_sandi)) {
-                if($petani->is_active) {
+                if($petani->aktif) {
                     $request->session()->put('id',$petani->id);
                     return response()->redirectTo('/petani/dashboard');
                 }
@@ -70,7 +70,7 @@ class AuthController extends Controller
         if (isset($kios_resmi))
         {
             if(Hash::check($request->kata_sandi,$kios_resmi->kata_sandi)) {
-                if($kios_resmi->is_active) {
+                if($kios_resmi->aktif) {
                     $request->session()->put('id',$kios_resmi->id);
                     return response()->redirectTo('/kios-resmi/dashboard');
                 }

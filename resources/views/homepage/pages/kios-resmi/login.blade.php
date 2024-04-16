@@ -28,7 +28,7 @@
           </p>
         </div>
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
-        <form action="kios-resmi" method="POST">
+        <form action="/kios-resmi/login" method="POST">
           @csrf
           <div class="grid">
             <div class="mb-5">

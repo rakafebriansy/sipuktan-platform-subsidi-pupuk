@@ -64,7 +64,7 @@
                             Nama Lengkap
                         </th>
                         <td class="px-2 py-3">
-                            Mohammad Faqih
+                            {{ $kios_resmi->pemilik }}
                         </td>
                     </tr>
                     <tr class="bg-white dark:bg-gray-800">
@@ -72,7 +72,7 @@
                             Nama Kios
                         </th>
                         <td class="px-2 py-3">
-                            Makmur jaya
+                            {{ $kios_resmi->nama }}
                         </td>
                     </tr>
                     <tr class="bg-white dark:bg-gray-800">
@@ -80,7 +80,7 @@
                             Alamat Kios
                         </th>
                         <td class="px-2 py-3">
-                            Jl. Mangga, no .15
+                            {{ $kios_resmi->jalan }}, {{ $kios_resmi->kecamatan }}
                         </td>
                     </tr>
                     <tr class="bg-white dark:bg-gray-800">
@@ -88,7 +88,7 @@
                             Nomor Telepon
                         </th>
                         <td class="px-2 py-3">
-                            081242526781
+                            {{ $kios_resmi->nomor_telepon }}
                         </td>
                     </tr>
                     <tr>
