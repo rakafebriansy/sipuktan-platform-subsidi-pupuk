@@ -9,6 +9,7 @@ interface AlokasiService
 {
     function petaniSetAlokasi(int $id): Collection;
     function kiosResmiSetAlokasiByTahun(int $id, string $tahun): Collection;
-    function pemerintahSetAlokasiByTahun(string $tahun): Collection;
-    function getAlokasiTahun(): Collection;
+    function pemerintahSetAlokasiByTahun(string $tahun): array;
+    function pemerintahAlokasi(array $alokasi): void;
+    public function getAlokasiTahun(): Collection;
 }

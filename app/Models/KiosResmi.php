@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Model;
 
 class KiosResmi extends Model
@@ -63,5 +64,14 @@ class KiosResmi extends Model
     public function kelompok_tanis(): HasMany
     {
         return $this->hasMany(KelompokTani::class, 'id_kios_resmi','id');
+    }
+    public function petanis(): HasManyThrough
+    {
+        return $this->hasManyThrough(Petani::class, KelompokTani::class,
+        'id_kios_resmi', 
+        'id_kelompok_tani', 
+        'id', 
+        'id'
+    );
     }
 }

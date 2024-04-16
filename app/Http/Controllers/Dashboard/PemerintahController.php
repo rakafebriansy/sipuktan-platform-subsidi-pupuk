@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PemerintahBuatAlokasiRequest;
 use App\Http\Requests\PetaniRegisterRequest;
 use App\Models\Alokasi;
 use App\Models\Kecamatan;
@@ -30,72 +31,111 @@ class PemerintahController extends Controller
     public function setDashboard(): View
     {
         $id = Session::get('id',null);
-        $pemerintah = Pemerintah::find($id); 
-        return view('dashboard.pemerintah.pages.index', [
-            'title' => 'Pemerintah | Dashboard',
-            'pemerintah' => $pemerintah
-        ]);
+        if(isset($id)) {
+            $pemerintah = Pemerintah::find($id); 
+            return view('dashboard.pemerintah.pages.index', [
+                'title' => 'Pemerintah | Dashboard',
+                'pemerintah' => $pemerintah
+            ]);
+        } else {
+            return abort(403);
+        }
     }
     public function setAlokasi(string $tahun = '2024'): View
     {
         $id = Session::get('id',null);
-        ['kios_resmi' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
-        $alokasis = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahun);
-        return view('dashboard.pemerintah.pages.alokasi', [
-            'title' => 'Pemerintah | Alokasi',
-            'pemerintah' => $pemerintah,
-            'alokasis' => $alokasis,
-            'initials' => $initials,
-        ]);
+        if(isset($id)){
+            ['kios_resmi' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
+            ['alokasis' => $alokasis, 'jenis_pupuks' => $jenis_pupuks] = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahun);
+            return view('dashboard.pemerintah.pages.alokasi', [
+                'title' => 'Pemerintah | Alokasi',
+                'pemerintah' => $pemerintah,
+                'alokasis' => $alokasis,
+                'jenis_pupuks' => $jenis_pupuks,
+                'initials' => $initials,
+            ]);
+        } else {
+            return abort(403);
+        }
+    }
+    public function alokasi(PemerintahBuatAlokasiRequest $request)
+    {
+        $id = Session::get('id',null);
+        if(isset($id)){
+            try {
+
+                $validated = $request->validated();
+                $this->alokasi_service->pemerintahAlokasi($validated);
+                return redirect('/pemerintah/alokasi')->with('success', 'Data alokasi berhasil ditambahkan');
+            } catch (\Exception $e) {
+                throw $e;
+            }
+        } else {
+            return abort(403);
+        }
     }
     public function setVerifikasiPengguna(): View
     {
         $id = Session::get('id',null);
-        $pemerintah = Pemerintah::find($id); 
-        try {
-            $petanis = Petani::select('petanis.*','kelompok_tanis.nama as nama_poktan')
-                ->join('kelompok_tanis','petanis.id_kelompok_tani','kelompok_tanis.id','kelompok_tanis.id')
-                ->where('aktif',false)->get();
-            $kios_resmis = KiosResmi::select('kios_resmis.*','pemilik_kios.*','kecamatans.nama as kecamatan')
-                ->join('pemilik_kios','kios_resmis.id_pemilik_kios','pemilik_kios.id')
-                ->join('kecamatans','kios_resmis.id_kecamatan','kecamatans.id')
-                ->where('aktif',false)->get();
-            return view('dashboard.pemerintah.pages.verifikasi-pengguna', [
-                'title' => 'Pemerintah | Verifikasi Pengguna',
-                'petanis' => $petanis,
-                'kios_resmis' => $kios_resmis,
-                'pemerintah' => $pemerintah,
-            ]);
-        } catch (\Exception $e) {
-            throw $e;
+        if(isset($id)) {
+            $pemerintah = Pemerintah::find($id); 
+            try {
+                $petanis = Petani::select('petanis.*','kelompok_tanis.nama as nama_poktan')
+                    ->join('kelompok_tanis','petanis.id_kelompok_tani','kelompok_tanis.id','kelompok_tanis.id')
+                    ->where('aktif',false)->get();
+                $kios_resmis = KiosResmi::select('kios_resmis.*','pemilik_kios.*','kecamatans.nama as kecamatan')
+                    ->join('pemilik_kios','kios_resmis.id_pemilik_kios','pemilik_kios.id')
+                    ->join('kecamatans','kios_resmis.id_kecamatan','kecamatans.id')
+                    ->where('aktif',false)->get();
+                return view('dashboard.pemerintah.pages.verifikasi-pengguna', [
+                    'title' => 'Pemerintah | Verifikasi Pengguna',
+                    'petanis' => $petanis,
+                    'kios_resmis' => $kios_resmis,
+                    'pemerintah' => $pemerintah,
+                ]);
+            } catch (\Exception $e) {
+                throw $e;
+            }
+        } else {
+            return abort(403);
         }
     }
     public function verifikasiPenggunaPetani(Request $request): RedirectResponse
     {
-        try {
-            $ids = $request->id_petanis;
-            $rows_affected = Petani::whereIn('id',$ids)->update(['aktif' => true]);
-            if($rows_affected) {
-                return redirect('/pemerintah/verifikasi-pengguna')->with('success','Berhasil memverifikasi akun petani.');
-            } else {
-                return redirect('/pemerintah/verifikasi-pengguna')->with('error','Gagal memverifikasi akun.');
+        $id = Session::get('id',null);
+        if(isset($id)){
+            try {
+                $ids = $request->id_petanis;
+                $rows_affected = Petani::whereIn('id',$ids)->update(['aktif' => true]);
+                if($rows_affected) {
+                    return redirect('/pemerintah/verifikasi-pengguna')->with('success','Berhasil memverifikasi akun petani.');
+                } else {
+                    return redirect('/pemerintah/verifikasi-pengguna')->with('error','Gagal memverifikasi akun.');
+                }
+            } catch (\Exception $e) {
+                throw $e;
             }
-        } catch (\Exception $e) {
-            throw $e;
+        } else {
+            return abort(403);
         }
     }
     public function verifikasiPenggunaKiosResmi(Request $request): RedirectResponse
     {
-        try {
-            $ids = $request->id_kios_resmis;
-            $rows_affected = KiosResmi::whereIn('id',$ids)->update(['aktif' => true]);
-            if($rows_affected) {
-                return redirect('/pemerintah/verifikasi-pengguna')->with('success','Berhasil memverifikasi akun petani.');
-            } else {
-                return redirect('/pemerintah/verifikasi-pengguna')->with('error','Gagal memverifikasi akun.');
+        $id = Session::get('id',null);
+        if(isset($id)){
+            try {
+                $ids = $request->id_kios_resmis;
+                $rows_affected = KiosResmi::whereIn('id',$ids)->update(['aktif' => true]);
+                if($rows_affected) {
+                    return redirect('/pemerintah/verifikasi-pengguna')->with('success','Berhasil memverifikasi akun petani.');
+                } else {
+                    return redirect('/pemerintah/verifikasi-pengguna')->with('error','Gagal memverifikasi akun.');
+                }
+            } catch (\Exception $e) {
+                throw $e;
             }
-        } catch (\Exception $e) {
-            throw $e;
+        } else {
+            return abort(403);
         }
     }
 }

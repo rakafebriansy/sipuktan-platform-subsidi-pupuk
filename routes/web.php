@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('homepage.pages.index');
+    return view('homepage.pages.index', ['title' => 'Homepage']);
 });
 
 Route::prefix('/petani')->group(function(){
@@ -58,6 +58,7 @@ Route::prefix('/pemerintah')->group(function(){
     Route::get('/verifikasi-pengguna', [PemerintahController::class, 'setVerifikasiPengguna']);
     Route::post('/verifikasi-pengguna/petani', [PemerintahController::class, 'verifikasiPenggunaPetani']);
     Route::post('/verifikasi-pengguna/kios-resmi', [PemerintahController::class, 'verifikasiPenggunaKiosResmi']);
+    Route::post('/alokasi', [PemerintahController::class, 'alokasi']);
     Route::get('/alokasi/{tahun?}', [PemerintahController::class, 'setAlokasi']);
 });
 Route::prefix('/bot')->group(function(){

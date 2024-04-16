@@ -2,6 +2,19 @@
 @section('wrapper')
 <div class="p-4 sm:ml-64">
     <div class="p-4">
+        @if ($errors->any())
+        <div class="flex justify-center min-h-[5%]">
+            <div class="mt-2  bg-red-100 border border-red-200 text-sm top-4 text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500" role="alert">
+                <span class="font-bold">Danger</span> {{ $errors->first() }}
+            </div>
+        </div>
+        @elseif (session('success'))
+        <div class="flex justify-center min-h-[5%]">
+            <div class="mt-2 bg-teal-100 border border-teal-200 text-sm top-4 text-teal-800 rounded-lg p-4 dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500" role="alert">
+                <span class="font-bold">Success</span> {{ Session::get('success') }}
+            </div>
+        </div>
+        @endif
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <caption class="px-5 pt-5 pb-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
