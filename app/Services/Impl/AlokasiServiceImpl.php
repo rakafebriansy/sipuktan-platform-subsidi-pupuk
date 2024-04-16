@@ -37,7 +37,11 @@ class AlokasiServiceImpl implements AlokasiService
         ->join('petanis','petanis.id','alokasis.id_petani')
         ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
         ->where('alokasis.tahun',$tahun)->get();
-        
         return $alokasis;
+    }
+    public function getAlokasiTahun(): Collection
+    {
+        $tahuns = Alokasi::distinct()->orderBy('tahun','desc')->get(['tahun']);
+        return $tahuns;
     }
 }

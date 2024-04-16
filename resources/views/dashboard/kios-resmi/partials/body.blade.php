@@ -6,13 +6,19 @@
 </div>
 <div id="dropdownTahun" class="z-50 hidden bg-white rounded-lg shadow w-24 dark:bg-gray-700">
     <ul class="py-2 max-h-36 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUsersButton">
-
+      @foreach ($tahuns as $tahun)
+      <li>
+        <p href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer alokasi-tahun">
+          {{ $tahun->tahun }}
+        </p>
+      </li>
+      @endforeach
     </ul>
 </div> 
 <div id="dropdownMT" class="z-50 hidden bg-white rounded-lg shadow w-24 dark:bg-gray-700">
     <ul class="h-36 py-2 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUsersButton">
       <li>
-        <p href="#" data-value="1" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
+        <p href="#" data-value="1" class="flex items-center px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
           MT1
         </p>
       </li>
@@ -85,4 +91,15 @@
     </div>
   </div>
 </div>
+@if (isset($tahuns))
+    <script>
+      const dropdownBtns = document.querySelectorAll('.alokasi-tahun');
+      dropdownBtns.forEach(btn => {
+        btn.addEventListener('click', function(){
+          let tahun = btn.innerText
+          window.location.href = '/kios-resmi/alokasi/' + tahun;
+        });
+      });
+    </script>
+@endif
 @endsection

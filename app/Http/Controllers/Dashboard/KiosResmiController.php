@@ -28,17 +28,21 @@ class KiosResmiController extends Controller
             'initials' => $initials
         ]);
     }
-    public function setAlokasi(string $tahun = '2024')
+    public function setAlokasi(string $tahun = null)
     {
         $id = Session::get('id',null);
+        if(is_null($tahun)) $tahun = date('Y');
         ['kios_resmi' => $kios_resmi,'initials' => $initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
         $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id, $tahun);
+        $tahuns = $this->alokasi_service->getAlokasiTahun();
 
         return view('dashboard.kios-resmi.pages.alokasi', [
             'title' => 'Kios Resmi | Alokasi',
             'kios_resmi' => $kios_resmi,
             'initials' => $initials,
-            'alokasis' => $alokasis
+            'alokasis' => $alokasis,
+            'tahuns' => $tahuns,
+            'tahun' => $tahuns[0]->tahun,
         ]);
     }
 }

@@ -28,7 +28,7 @@ class DashboardServiceImpl implements DashboardService
         $initials = "";
 
         foreach ($nama as $key => $w) {
-            if($key > 1) break;
+            if($initials > 1) break;
             $initials .= mb_substr($w, 0, 1);
         }
         return ['petani' => $petani,'initials' =>$initials];
@@ -39,11 +39,11 @@ class DashboardServiceImpl implements DashboardService
         ->join('pemilik_kios','kios_resmis.id_pemilik_kios','pemilik_kios.id')
         ->join('kecamatans','kecamatans.id','kios_resmis.id_kecamatan')
         ->where('kios_resmis.id',$id)->first();
-        $nama = explode(" ", $kios_resmi->nama);
+        $nama = explode(" ", $kios_resmi->pemilik);
         $initials = "";
 
         foreach ($nama as $key => $w) {
-            if($key > 1) break;
+            if($initials > 1) break;
             $initials .= mb_substr($w, 0, 1);
         } 
         return ['kios_resmi' => $kios_resmi,'initials' =>$initials];
@@ -55,7 +55,7 @@ class DashboardServiceImpl implements DashboardService
         $initials = "";
 
         foreach ($nama as $key => $w) {
-            if($key > 1) break;
+            if($initials > 1) break;
             $initials .= mb_substr($w, 0, 1);
         } 
         return ['kios_resmi' => $pemerintah,'initials' =>$initials];

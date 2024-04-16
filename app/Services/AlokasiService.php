@@ -10,4 +10,5 @@ interface AlokasiService
     function petaniSetAlokasi(int $id): Collection;
     function kiosResmiSetAlokasiByTahun(int $id, string $tahun): Collection;
     function pemerintahSetAlokasiByTahun(string $tahun): Collection;
+    function getAlokasiTahun(): Collection;
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Helper\Helper;
+use App\Http\Controllers\Ajax\AlokasiController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Dashboard\KiosResmiController;
 use App\Http\Controllers\Dashboard\PemerintahController;
