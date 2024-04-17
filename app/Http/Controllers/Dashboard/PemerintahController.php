@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PemerintahBuatAlokasiRequest;
+use App\Http\Requests\PemerintahEditAlokasiRequest;
 use App\Http\Requests\PetaniRegisterRequest;
 use App\Models\Alokasi;
 use App\Models\Kecamatan;
@@ -92,12 +93,22 @@ class PemerintahController extends Controller
         if(isset($id)){
             try {
                 $this->alokasi_service->pemerintahHapusAlokasi($request->id);
-                return redirect('/pemerintah/alokasi')->with('success','Data berhasil dihapus');
+                return redirect('/pemerintah/alokasi')->with('success','Data alokasi berhasil dihapus');
             } catch (\Exception $e) {
                 throw $e;
             }
         } else {
             return abort(403);
+        }
+    }
+    public function editAlokasi(PemerintahEditAlokasiRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+        try {
+            $this->alokasi_service->pemerintahEditAlokasi($validated);
+            return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with('success','Data alokasi berhasil diperbarui');
+        } catch (\Exception $e) {
+            throw $e;
         }
     }
     public function setVerifikasiPengguna(): View

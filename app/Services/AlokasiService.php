@@ -13,5 +13,6 @@ interface AlokasiService
     function pemerintahSetAlokasi(): array;
     function pemerintahGetAlokasiByTahun(string $tahun, string $musim_tanam): Collection;
     function pemerintahTambahAlokasi(array $alokasi): void;
-    public function pemerintahHapusAlokasi(int $id): void;
+    function pemerintahHapusAlokasi(int $id): void;
+    function pemerintahEditAlokasi(array $alokasi): void;
 }

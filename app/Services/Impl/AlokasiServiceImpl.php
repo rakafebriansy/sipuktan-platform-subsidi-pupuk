@@ -79,5 +79,19 @@ class AlokasiServiceImpl implements AlokasiService
             Alokasi::query()->where('id',$id)->delete();
         });
     }
+    public function pemerintahEditAlokasi(array $alokasi): void
+    {
+        $petani = Petani::query()->where('nik',$alokasi['nik'])->first();
+        $kelompok_tani = $petani->kelompok_tani;
+        $kios_resmi = $kelompok_tani->kios_resmi;
+        Alokasi::query()->where('id',$alokasi['id'])->update([
+            'id_petani' => $petani->id,
+            'jumlah_pupuk' => $alokasi['jumlah_pupuk'],
+            'tahun' => $alokasi['tahun'],
+            'id_jenis_pupuk' => $alokasi['id_jenis_pupuk'],
+            'musim_tanam' => $alokasi['musim_tanam'],
+            'id_kios_resmi' => $kios_resmi->id
+        ]);
+    }
     
 }
