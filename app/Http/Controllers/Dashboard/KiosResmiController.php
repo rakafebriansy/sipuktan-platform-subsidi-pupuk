@@ -33,16 +33,13 @@ class KiosResmiController extends Controller
         $id = Session::get('id',null);
         if(is_null($tahun)) $tahun = date('Y');
         ['kios_resmi' => $kios_resmi,'initials' => $initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
-        $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id, $tahun);
-        $tahuns = $this->alokasi_service->getAlokasiTahun();
+        $tahuns = $this->alokasi_service->kiosResmiSetAlokasi();
 
         return view('dashboard.kios-resmi.pages.alokasi', [
             'title' => 'Kios Resmi | Alokasi',
             'kios_resmi' => $kios_resmi,
             'initials' => $initials,
-            'alokasis' => $alokasis,
             'tahuns' => $tahuns,
-            'tahun' => $tahuns[0]->tahun,
         ]);
     }
 }

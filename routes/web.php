@@ -46,7 +46,7 @@ Route::prefix('/kios-resmi')->group(function(){
     Route::get('/lupa-sandi', [AuthController::class, 'setKiosResmiLupaSandi']);
     Route::post('/lupa-sandi', [AuthController::class, 'kiosResmiLupaSandi']);
     Route::get('/dashboard', [KiosResmiController::class, 'setDashboard']);
-    Route::get('/alokasi/{tahun?}', [KiosResmiController::class, 'setAlokasi']);
+    Route::get('/alokasi', [KiosResmiController::class, 'setAlokasi']);
     // Route::middleware('kiosResmi')->group(function() {
     // });
 });
@@ -58,12 +58,13 @@ Route::prefix('/pemerintah')->group(function(){
     Route::get('/verifikasi-pengguna', [PemerintahController::class, 'setVerifikasiPengguna']);
     Route::post('/verifikasi-pengguna/petani', [PemerintahController::class, 'verifikasiPenggunaPetani']);
     Route::post('/verifikasi-pengguna/kios-resmi', [PemerintahController::class, 'verifikasiPenggunaKiosResmi']);
-    Route::post('/alokasi', [PemerintahController::class, 'alokasi']);
-    Route::get('/alokasi/{tahun?}', [PemerintahController::class, 'setAlokasi']);
+    Route::get('/alokasi', [PemerintahController::class, 'setAlokasi']);
+    Route::post('/alokasi', [PemerintahController::class, 'tambahAlokasi']);
+    Route::put('/alokasi/hapus', [PemerintahController::class, 'hapusAlokasi']);
 });
 Route::prefix('/bot')->group(function(){
     Route::get('/retreive',[TelegramBotController::class,'show']);
-    Route::get('/msg/',[TelegramBotController::class,'getMessages']);
+    Route::get('/msg',[TelegramBotController::class,'getMessages']);
     Route::get('/send/{id}',[TelegramBotController::class,'sendMessage']);
 });
 Route::get('/logout', function(){

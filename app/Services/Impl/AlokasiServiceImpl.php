@@ -10,6 +10,7 @@ use App\Models\PemilikKios;
 use App\Models\Petani;
 use App\Services\AlokasiService;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class AlokasiServiceImpl implements AlokasiService
 {    
@@ -23,42 +24,60 @@ class AlokasiServiceImpl implements AlokasiService
         return $alokasis;
         
     }
-    public function kiosResmiSetAlokasiByTahun(int $id, string $tahun): Collection
+    public function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): Collection
     {
         $alokasis = Alokasi::select('alokasis.*', 'petanis.nama as petani', 'kelompok_tanis.nama')
         ->join('petanis','petanis.id','alokasis.id_petani')
         ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
-        ->where('alokasis.id_kios_resmi',$id)->where('alokasis.tahun',$tahun)->get();
+        ->where('alokasis.id_kios_resmi',$id)->where('alokasis.tahun',$tahun)->where('alokasis.musim_tanam',$musim_tanam)->get();
+        $tahuns = Alokasi::distinct()->orderBy('tahun','desc')->get(['tahun']);
         
         return $alokasis;
     }
-    public function pemerintahSetAlokasiByTahun(string $tahun): array
+    public function kiosResmiSetAlokasi(): Collection
     {
-        $alokasis = Alokasi::select('alokasis.*', 'petanis.nama as petani', 'kelompok_tanis.nama')
-        ->join('petanis','petanis.id','alokasis.id_petani')
-        ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
-        ->where('alokasis.tahun',$tahun)->get();
-        $jenis_pupuks = JenisPupuk::all();
-        return ['alokasis' => $alokasis, 'jenis_pupuks' => $jenis_pupuks];
+        $tahuns = Alokasi::distinct()->orderBy('tahun','desc')->get(['tahun']);
+        
+        return $tahuns;
     }
-    public function pemerintahAlokasi(array $alokasi): void
+    public function pemerintahSetAlokasi(): array
+    {
+        $jenis_pupuks = JenisPupuk::all();
+        $tahuns = Alokasi::distinct()->orderBy('tahun','desc')->get(['tahun']);
+        return ['jenis_pupuks' => $jenis_pupuks, 'tahuns' => $tahuns];
+    }
+    public function pemerintahGetAlokasiByTahun(string $tahun, string $musim_tanam): Collection
+    {
+        $alokasis = Alokasi::select('alokasis.*', 'alokasis.id as id_alokasi', 'petanis.*','kelompok_tanis.nama as poktan', 'kios_resmis.nama as kios_resmi', 'jenis_pupuks.*')
+        ->join('petanis','petanis.id','alokasis.id_petani')
+        ->join('jenis_pupuks','jenis_pupuks.id','alokasis.id_jenis_pupuk')
+        ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
+        ->join('kios_resmis','alokasis.id_kios_resmi','kios_resmis.id')
+        ->where('alokasis.tahun',$tahun)->where('alokasis.musim_tanam',$musim_tanam)->get();
+
+        return $alokasis;
+    }
+    public function pemerintahTambahAlokasi(array $alokasi): void
     {
         $petani = Petani::query()->where('nik',$alokasi['nik'])->first();
         $kelompok_tani = KelompokTani::find($petani->id_kelompok_tani);
         $kios_resmi = $kelompok_tani->kios_resmi;
-        Alokasi::create([
-            'jumlah_pupuk' => $alokasi['jumlah_pupuk'],
-            'tahun' => $alokasi['tahun'],
-            'musim_tanam' => $alokasi['musim_tanam'],
-            'id_jenis_pupuk' => $alokasi['id_jenis_pupuk'],
-            'id_petani' => $petani->id,
-            'id_kios_resmi' => $kios_resmi->id,
-        ]);
+        DB::transaction(function() use ($alokasi, $petani, $kios_resmi){
+            Alokasi::create([
+                'jumlah_pupuk' => $alokasi['jumlah_pupuk'],
+                'tahun' => $alokasi['tahun'],
+                'musim_tanam' => $alokasi['musim_tanam'],
+                'id_jenis_pupuk' => $alokasi['id_jenis_pupuk'],
+                'id_petani' => $petani->id,
+                'id_kios_resmi' => $kios_resmi->id,
+            ]);
+        });
     }
-    public function getAlokasiTahun(): Collection
+    public function pemerintahHapusAlokasi(int $id): void
     {
-        $tahuns = Alokasi::distinct()->orderBy('tahun','desc')->get(['tahun']);
-        return $tahuns;
+        DB::transaction(function () use ($id) {
+            Alokasi::query()->where('id',$id)->delete();
+        });
     }
     
 }

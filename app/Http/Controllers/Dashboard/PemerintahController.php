@@ -41,32 +41,58 @@ class PemerintahController extends Controller
             return abort(403);
         }
     }
-    public function setAlokasi(string $tahun = '2024'): View
+    public function setAlokasi(Request $request): View
     {
         $id = Session::get('id',null);
+        $tahun = null;
+        $mt = null;
         if(isset($id)){
             ['kios_resmi' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
-            ['alokasis' => $alokasis, 'jenis_pupuks' => $jenis_pupuks] = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahun);
+            ['tahuns' => $tahuns, 'jenis_pupuks' => $jenis_pupuks] = $this->alokasi_service->pemerintahSetAlokasi();
+            if(isset($request->tahun) && isset($request->musim_tanam)){
+                $tahun = $request->tahun;
+                $mt = $request->musim_tanam;
+                $alokasis = $this->alokasi_service->pemerintahGetAlokasiByTahun($tahun,$request->musim_tanam);
+            } else {
+                $alokasis = $this->alokasi_service->pemerintahGetAlokasiByTahun($tahuns[0]->tahun,'MT1');
+            }
             return view('dashboard.pemerintah.pages.alokasi', [
                 'title' => 'Pemerintah | Alokasi',
                 'pemerintah' => $pemerintah,
-                'alokasis' => $alokasis,
                 'jenis_pupuks' => $jenis_pupuks,
                 'initials' => $initials,
+                'tahuns' => $tahuns,
+                'alokasis' => $alokasis,
+                'tahun' => $tahun,
+                'mt' => $mt
             ]);
         } else {
             return abort(403);
         }
     }
-    public function alokasi(PemerintahBuatAlokasiRequest $request)
+    public function tambahAlokasi(PemerintahBuatAlokasiRequest $request)
     {
         $id = Session::get('id',null);
         if(isset($id)){
             try {
 
                 $validated = $request->validated();
-                $this->alokasi_service->pemerintahAlokasi($validated);
+                $this->alokasi_service->pemerintahTambahAlokasi($validated);
                 return redirect('/pemerintah/alokasi')->with('success', 'Data alokasi berhasil ditambahkan');
+            } catch (\Exception $e) {
+                throw $e;
+            }
+        } else {
+            return abort(403);
+        }
+    }
+    public function hapusAlokasi(Request $request): RedirectResponse
+    {
+        $id = Session::get('id',null);
+        if(isset($id)){
+            try {
+                $this->alokasi_service->pemerintahHapusAlokasi($request->id);
+                return redirect('/pemerintah/alokasi')->with('success','Data berhasil dihapus');
             } catch (\Exception $e) {
                 throw $e;
             }
