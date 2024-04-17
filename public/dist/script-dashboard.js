@@ -23,13 +23,13 @@ function deletePassId(btn){
     document.querySelector('#deleteAlokasiTahun').value = document.querySelector('#dropdownTahunButton').innerText;
     document.querySelector('#deleteAlokasiId').value = btn.dataset.id;
 }
-function getAlokasiFromMt(li) {
+function getAlokasiFromMt(li, mode) {
     document.querySelector('#dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
-    location.replace('/pemerintah/alokasi?tahun=' + document.querySelector('#dropdownTahunButton').innerText  + '&&musim_tanam=' + li.querySelector('p').innerText );
+    location.replace('/' + mode + '/alokasi?tahun=' + document.querySelector('#dropdownTahunButton').innerText  + '&&musim_tanam=' + li.querySelector('p').innerText );
 }
-function getAlokasiFromTh(li) {
+function getAlokasiFromTh(li, mode) {
     document.querySelector('#dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
-    location.replace('/pemerintah/alokasi?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
+    location.replace('/' + mode + '/alokasi?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
 }
 
 (function(){

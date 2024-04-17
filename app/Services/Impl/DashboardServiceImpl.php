@@ -28,7 +28,7 @@ class DashboardServiceImpl implements DashboardService
         $initials = "";
 
         foreach ($nama as $key => $w) {
-            if($initials > 1) break;
+            if($key > 1) break;
             $initials .= mb_substr($w, 0, 1);
         }
         return ['petani' => $petani,'initials' =>$initials];
@@ -43,7 +43,7 @@ class DashboardServiceImpl implements DashboardService
         $initials = "";
 
         foreach ($nama as $key => $w) {
-            if($initials > 1) break;
+            if($key > 1) break;
             $initials .= mb_substr($w, 0, 1);
         } 
         return ['kios_resmi' => $kios_resmi,'initials' =>$initials];
@@ -55,9 +55,9 @@ class DashboardServiceImpl implements DashboardService
         $initials = "";
 
         foreach ($nama as $key => $w) {
-            if($initials > 1) break;
+            if($key > 1) break;
             $initials .= mb_substr($w, 0, 1);
         } 
-        return ['kios_resmi' => $pemerintah,'initials' =>$initials];
+        return ['pemerintah' => $pemerintah,'initials' =>$initials];
     }
 }

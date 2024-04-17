@@ -60,7 +60,7 @@ class AuthController extends Controller
                 return redirect('/petani/login')->with('unverified','Akun anda belum diverifikasi');
             }
         }
-        return response()->redirectTo('/petani/login');
+        return response()->redirectTo('/petani/login')->withErrors(['failed' => 'Kredensial salah']);
     }
     public function kiosResmiLogin(KiosResmiLoginRequest $request): RedirectResponse
     {
@@ -73,9 +73,9 @@ class AuthController extends Controller
                     return response()->redirectTo('/kios-resmi/dashboard');
                 }
                 return redirect('/kios-resmi/login')->with('unverified','Akun anda belum diverifikasi');
-            }
+            } 
         }
-        return response()->redirectTo('/kios-resmi/login');
+        return response()->redirectTo('/kios-resmi/login')->withErrors(['failed' => 'Kredensial salah']);
     }
     public function pemerintahLogin(PemerintahLoginRequest $request): RedirectResponse
     {
@@ -87,7 +87,7 @@ class AuthController extends Controller
                 return response()->redirectTo('/pemerintah/dashboard');
             }
         }
-        return response()->redirectTo('/admin');
+        return response()->redirectTo('/admin')->withErrors(['failed' => 'Kredensial salah']);
     }
     public function setPetaniRegister(): Response
     {
