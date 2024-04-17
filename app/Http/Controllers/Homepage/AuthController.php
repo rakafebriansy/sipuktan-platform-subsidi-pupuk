@@ -2,9 +2,11 @@
 namespace App\Http\Controllers\Homepage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\KiosResmiGantiSandiRequest;
 use App\Http\Requests\KiosResmiLoginRequest;
 use App\Http\Requests\KiosResmiRegisterRequest;
 use App\Http\Requests\PemerintahLoginRequest;
+use App\Http\Requests\PetaniGantiSandiRequest;
 use App\Http\Requests\PetaniLoginRequest;
 use App\Http\Requests\PetaniRegisterRequest;
 use App\Models\Kecamatan;
@@ -18,6 +20,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 class AuthController extends Controller
 {
     private AkunService $akun_service;
@@ -132,6 +136,73 @@ class AuthController extends Controller
         return response()->view('homepage.pages.kios-resmi.lupa-sandi',[
             'title' => 'Kios Resmi | Lupa Sandi'
         ]);
+    }
+    public function setPetaniGantiSandi()
+    {
+        $id = Session::get('id',null);
+        if(isset($id)){
+            return response()->view('dashboard.petani.pages.ganti-sandi', [
+                'title' => 'Petani | Ganti Kata Sandi'
+            ]);
+        } else {
+            return abort(403);
+        }
+    }
+    public function setKiosResmiGantiSandi()
+    {
+        $id = Session::get('id',null);
+        if(isset($id)){
+            return response()->view('dashboard.kios-resmi.pages.ganti-sandi', [
+                'title' => 'Kios Resmi | Ganti Kata Sandi'
+            ]);
+        } else {
+            return abort(403);
+        }
+    }
+    public function petaniGantiSandi(PetaniGantiSandiRequest $request): RedirectResponse
+    {
+        $id = Session::get('id',null);
+        if(isset($id)){
+            try {
+                $validated = $request->validated();
+                if($validated['sandi_baru'] == $validated['sandi_ulang']) {
+                    if($this->akun_service->petaniGantiSandi($id,$validated)) {
+                        return redirect('/petani/dashboard')->with('success','Kata sandi berhasil diperbarui');
+                    } else {
+                        return redirect('/petani/ganti-sandi')->withErrors(['failed' => 'Kata sandi baru tidak boleh sama']);
+                    }
+                } else {
+                    return redirect('/petani/ganti-sandi')->withErrors(['failed' => 'Kata sandi tidak sama']);
+                }
+            } catch (\Exception $e) {
+                throw $e;
+
+            }
+        } else {
+            return abort(403);
+        }
+    }
+    public function kiosResmiGantiSandi(KiosResmiGantiSandiRequest $request): RedirectResponse
+    {
+        $id = Session::get('id',null);
+        if(isset($id)){
+            try {
+                $validated = $request->validated();
+                if($validated['sandi_baru'] == $validated['sandi_ulang']) {
+                    if($this->akun_service->kiosResmiGantiSandi($id,$validated)) {
+                        return redirect('/kios-resmi/dashboard')->with('success','Kata sandi berhasil diperbarui');
+                    } else {
+                        return redirect('/kios-resmi/ganti-sandi')->withErrors(['failed' => 'Kata sandi baru tidak boleh sama']);
+                    }
+                } else {
+                    return redirect('/kios-resmi/ganti-sandi')->withErrors(['failed' => 'Kata sandi tidak sama']);
+                }
+            } catch (\Exception $e) {
+                throw $e;
+            }
+        } else {
+            return abort(403);
+        }
     }
     public function logout(Request $request)
     {

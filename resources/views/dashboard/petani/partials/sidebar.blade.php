@@ -11,7 +11,7 @@
      <ul class="space-y-2 font-normal">
         <li>
          <div class="flex justify-between">
-            <button id="dropdownProfilPetaniButton" data-dropdown-toggle="dropdownProfilPetani" data-dropdown-placement="right-end"  class="flex px-2 items-center gap-4 cursor-pointer text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <button id="dropdownProfilPetaniButton" data-dropdown-toggle="dropdownProfilPetani" data-dropdown-placement="right-end"  class="flex w-full px-2 items-center gap-4 cursor-pointer text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
               <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                 <span class="font-medium text-gray-600 dark:text-gray-300">{{ $initials }}</span>
               </div>

@@ -22,17 +22,6 @@ class AlokasiServiceImpl implements AlokasiService
         ->where('id_petani', $id)->get();
         
         return $alokasis;
-        
-    }
-    public function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): Collection
-    {
-        $alokasis = Alokasi::select('alokasis.*', 'petanis.nama as petani', 'kelompok_tanis.nama')
-        ->join('petanis','petanis.id','alokasis.id_petani')
-        ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
-        ->where('alokasis.id_kios_resmi',$id)->where('alokasis.tahun',$tahun)->where('alokasis.musim_tanam',$musim_tanam)->get();
-        $tahuns = Alokasi::distinct()->orderBy('tahun','desc')->get(['tahun']);
-        
-        return $alokasis;
     }
     public function kiosResmiSetAlokasi(): Collection
     {
@@ -40,13 +29,22 @@ class AlokasiServiceImpl implements AlokasiService
         
         return $tahuns;
     }
+    public function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): Collection
+    {
+        $alokasis = Alokasi::select('alokasis.*', 'petanis.nama as petani', 'kelompok_tanis.nama')
+        ->join('petanis','petanis.id','alokasis.id_petani')
+        ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
+        ->where('alokasis.id_kios_resmi',$id)->where('alokasis.tahun',$tahun)->where('alokasis.musim_tanam',$musim_tanam)->get();
+        
+        return $alokasis;
+    }
     public function pemerintahSetAlokasi(): array
     {
         $jenis_pupuks = JenisPupuk::all();
         $tahuns = Alokasi::distinct()->orderBy('tahun','desc')->get(['tahun']);
         return ['jenis_pupuks' => $jenis_pupuks, 'tahuns' => $tahuns];
     }
-    public function pemerintahGetAlokasiByTahun(string $tahun, string $musim_tanam): Collection
+    public function pemerintahSetAlokasiByTahun(string $tahun, string $musim_tanam): Collection
     {
         $alokasis = Alokasi::select('alokasis.*', 'alokasis.id as id_alokasi', 'petanis.*','kelompok_tanis.nama as poktan', 'kios_resmis.nama as kios_resmi', 'jenis_pupuks.*')
         ->join('petanis','petanis.id','alokasis.id_petani')

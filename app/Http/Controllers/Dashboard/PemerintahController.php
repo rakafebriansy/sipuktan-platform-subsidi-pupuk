@@ -48,14 +48,14 @@ class PemerintahController extends Controller
         $tahun = null;
         $mt = null;
         if(isset($id)){
-            ['kios_resmi' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
+            ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
             ['tahuns' => $tahuns, 'jenis_pupuks' => $jenis_pupuks] = $this->alokasi_service->pemerintahSetAlokasi();
             if(isset($request->tahun) && isset($request->musim_tanam)){
                 $tahun = $request->tahun;
                 $mt = $request->musim_tanam;
-                $alokasis = $this->alokasi_service->pemerintahGetAlokasiByTahun($tahun,$request->musim_tanam);
+                $alokasis = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahun,$request->musim_tanam);
             } else {
-                $alokasis = $this->alokasi_service->pemerintahGetAlokasiByTahun($tahuns[0]->tahun,'MT1');
+                $alokasis = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahuns[0]->tahun,'MT1');
             }
             return view('dashboard.pemerintah.pages.alokasi', [
                 'title' => 'Pemerintah | Alokasi',

@@ -8,4 +8,6 @@ interface AkunService
 {
     function petaniRegister(array $data_petani, array|UploadedFile $foto_ktp): void;
     function kiosResmiRegister(array $data_kios, array|UploadedFile $foto_ktp): void;
+    function petaniGantiSandi(int $id, array $sandi_petani): bool;
+    function kiosResmiGantiSandi(int $id, array $sandi_kios): bool;
 }

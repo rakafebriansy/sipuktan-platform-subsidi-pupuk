@@ -32,6 +32,8 @@ Route::prefix('/petani')->group(function(){
     Route::post('/register', [AuthController::class,'petaniRegister']);
     Route::get('/lupa-sandi', [AuthController::class, 'setPetaniLupaSandi']);
     Route::post('/lupa-sandi', [AuthController::class, 'petaniLupaSandi']);
+    Route::get('/ganti-sandi', [AuthController::class, 'setPetaniGantiSandi']);
+    Route::patch('/ganti-sandi', [AuthController::class, 'petaniGantiSandi']);
     Route::get('/dashboard', [PetaniController::class, 'setDashboard']);
     Route::get('/alokasi', [PetaniController::class, 'setAlokasi']);
     // Route::middleware('petani')->group(function() {
@@ -45,6 +47,8 @@ Route::prefix('/kios-resmi')->group(function(){
     Route::post('/register', [AuthController::class, 'kiosResmiRegister']);
     Route::get('/lupa-sandi', [AuthController::class, 'setKiosResmiLupaSandi']);
     Route::post('/lupa-sandi', [AuthController::class, 'kiosResmiLupaSandi']);
+    Route::get('/ganti-sandi', [AuthController::class, 'setKiosResmiGantiSandi']);
+    Route::patch('/ganti-sandi', [AuthController::class, 'kiosResmiGantiSandi']);
     Route::get('/dashboard', [KiosResmiController::class, 'setDashboard']);
     Route::get('/alokasi', [KiosResmiController::class, 'setAlokasi']);
     // Route::middleware('kiosResmi')->group(function() {

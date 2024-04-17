@@ -82,7 +82,7 @@
                     </tr>
                     <tr>
                       <th>
-                        <a href="#" class="inline-flex px-2 pt-3 pb-2 font-medium whitespace-nowrap items-center text-blue-600 hover:underline">
+                        <a href="/pemerintah/ganti-sandi" class="inline-flex px-2 pt-3 pb-2 font-medium whitespace-nowrap items-center text-blue-600 hover:underline">
                           Ganti kata sandi
                         </a>
                       </th>

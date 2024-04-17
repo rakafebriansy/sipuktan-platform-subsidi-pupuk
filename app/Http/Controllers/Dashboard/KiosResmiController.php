@@ -28,18 +28,32 @@ class KiosResmiController extends Controller
             'initials' => $initials
         ]);
     }
-    public function setAlokasi(string $tahun = null)
+    public function setAlokasi(Request $request)
     {
         $id = Session::get('id',null);
-        if(is_null($tahun)) $tahun = date('Y');
-        ['kios_resmi' => $kios_resmi,'initials' => $initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
-        $tahuns = $this->alokasi_service->kiosResmiSetAlokasi();
-
-        return view('dashboard.kios-resmi.pages.alokasi', [
-            'title' => 'Kios Resmi | Alokasi',
-            'kios_resmi' => $kios_resmi,
-            'initials' => $initials,
-            'tahuns' => $tahuns,
-        ]);
+        $tahun = null;
+        $mt = null;
+        if(isset($id)){
+            ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
+            $tahuns = $this->alokasi_service->kiosResmiSetAlokasi();
+            if(isset($request->tahun) && isset($request->musim_tanam)){
+                $tahun = $request->tahun;
+                $mt = $request->musim_tanam;
+                $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,$request->musim_tanam);
+            } else {
+                $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahuns[0]->tahun,'MT1');
+            }
+            return view('dashboard.kios-resmi.pages.alokasi', [
+                'title' => 'Kios Resmi | Alokasi',
+                'kios_resmi' => $kios_resmi,
+                'initials' => $initials,
+                'tahuns' => $tahuns,
+                'alokasis' => $alokasis,
+                'tahun' => $tahun,
+                'mt' => $mt
+            ]);
+        } else {
+            return abort(403);
+        }
     }
 }

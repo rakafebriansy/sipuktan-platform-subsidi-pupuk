@@ -46,9 +46,26 @@ class AkunServiceImpl implements AkunService
             ]);
         }); 
     }
-    public function petaniDashboard()
+    public function petaniGantiSandi(int $id, array $sandi_petani): bool
     {
-        
+        $petani = Petani::find($id);
+        if($petani->kata_sandi == $sandi_petani['sandi_lama']) {
+            return false;
+        } else {
+            $sandi_baru = Hash::make($sandi_petani['sandi_baru']);
+            Petani::query()->where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+            return true;
+        }
     }
-
+    public function kiosResmiGantiSandi(int $id, array $sandi_kios): bool
+    {
+        $kios_resmi = KiosResmi::find($id);
+        if($kios_resmi->kata_sandi == $sandi_kios['sandi_lama']) {
+            return false;
+        } else {
+            $sandi_baru = Hash::make($sandi_kios['sandi_baru']);
+            KiosResmi::query()->where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+            return true;
+        }
+    }
 }
