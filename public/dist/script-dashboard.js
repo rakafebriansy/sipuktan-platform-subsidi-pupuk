@@ -19,6 +19,8 @@ function editPassId(btn){
     }
 }
 function deletePassId(btn){
+    document.querySelector('#deleteAlokasiMT').value = document.querySelector('#dropdownMTButton').innerText;
+    document.querySelector('#deleteAlokasiTahun').value = document.querySelector('#dropdownTahunButton').innerText;
     document.querySelector('#deleteAlokasiId').value = btn.dataset.id;
 }
 function getAlokasiFromMt(li) {

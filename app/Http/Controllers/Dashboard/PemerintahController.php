@@ -79,7 +79,7 @@ class PemerintahController extends Controller
 
                 $validated = $request->validated();
                 $this->alokasi_service->pemerintahTambahAlokasi($validated);
-                return redirect('/pemerintah/alokasi')->with('success', 'Data alokasi berhasil ditambahkan');
+                return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with('success', 'Data alokasi berhasil ditambahkan');
             } catch (\Exception $e) {
                 throw $e;
             }
@@ -93,7 +93,7 @@ class PemerintahController extends Controller
         if(isset($id)){
             try {
                 $this->alokasi_service->pemerintahHapusAlokasi($request->id);
-                return redirect('/pemerintah/alokasi')->with('success','Data alokasi berhasil dihapus');
+                return redirect('/pemerintah/alokasi?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with('success','Data alokasi berhasil dihapus');
             } catch (\Exception $e) {
                 throw $e;
             }
