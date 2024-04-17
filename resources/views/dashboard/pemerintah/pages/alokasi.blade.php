@@ -93,8 +93,8 @@
                         </td>
                         <td class="py-4 flex flex-row ">
                             <a href="#" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Detail</a>
-                            <button data-id="{{ $alokasi->id_alokasi }}" data-modal-target="editAlokasiModal" data-modal-toggle="editAlokasiModal" class="edit-alokasi bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Edit</button>
-                            <button data-id="{{ $alokasi->id_alokasi }}" data-modal-target="deleteAlokasiModal" data-modal-toggle="deleteAlokasiModal" class="delete-alokasi bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Hapus</button>
+                            <button data-id="{{ $alokasi->id_alokasi }}" data-modal-target="editAlokasiModal" data-modal-toggle="editAlokasiModal" onclick="editPassId(this)" class="edit-alokasi bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Edit</button>
+                            <button data-id="{{ $alokasi->id_alokasi }}" data-modal-target="deleteAlokasiModal" data-modal-toggle="deleteAlokasiModal" onclick="deletePassId(this)" class="delete-alokasi bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Hapus</button>
                         </td>
                     </tr>
                     @endforeach
@@ -104,7 +104,7 @@
                 <div class="flex justify-center">
                     <thead>
                         <th class="text-center">
-                            <h1>Belum ada data.</h1>
+                            <h1 class="p-5">Belum ada data.</h1>
                         </th>
                     </thead>
                     <tbody>

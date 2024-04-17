@@ -60,7 +60,8 @@ Route::prefix('/pemerintah')->group(function(){
     Route::post('/verifikasi-pengguna/kios-resmi', [PemerintahController::class, 'verifikasiPenggunaKiosResmi']);
     Route::get('/alokasi', [PemerintahController::class, 'setAlokasi']);
     Route::post('/alokasi', [PemerintahController::class, 'tambahAlokasi']);
-    Route::put('/alokasi/hapus', [PemerintahController::class, 'hapusAlokasi']);
+    Route::put('/alokasi', [PemerintahController::class, 'hapusAlokasi']);
+    Route::patch('/alokasi', [PemerintahController::class, 'editAlokasi']);
 });
 Route::prefix('/bot')->group(function(){
     Route::get('/retreive',[TelegramBotController::class,'show']);

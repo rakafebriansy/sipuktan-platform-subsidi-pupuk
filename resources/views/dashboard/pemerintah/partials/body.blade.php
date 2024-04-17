@@ -8,7 +8,8 @@
 <div id="dropdownTahun" class="z-50 hidden bg-white rounded-lg shadow w-24 dark:bg-gray-700">
     <ul class="py-2 h-36 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUsersButton">
       @foreach ($tahuns as $tahun)
-      <li>
+      <li onclick="getAlokasiFromTh(this)">
+        
         <p href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer alokasi-tahun">
           {{ $tahun->tahun }}
         </p>
@@ -18,17 +19,17 @@
 </div> 
 <div id="dropdownMT" class="z-50 cursor-pointer hidden bg-white rounded-lg shadow w-24 dark:bg-gray-700">
     <ul class="h-36 py-2 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUsersButton">
-      <li>
+      <li onclick="getAlokasiFromMt(this)">
         <p href="#" data-value="1" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
           MT1
         </p>
       </li>
-      <li>
+      <li onclick="getAlokasiFromMt(this)">
         <p href="#" data-value="2" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
           MT2
         </p>
       </li>
-      <li>
+      <li onclick="getAlokasiFromMt(this)">
         <p href="#" data-value="2" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
           MT3
         </p>
@@ -153,6 +154,7 @@
       </div>
   </div>
 </div> 
+@if (count($alokasis))
 <div id="editAlokasiModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
   <div class="relative p-4 w-full max-w-md max-h-full">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -170,52 +172,51 @@
           
           <form  action="/pemerintah/alokasi" method="post" class="p-4 md:p-5">
             @csrf
-            <input type="hidden" name="" id="editAlokasiId">
-              <div class="grid gap-4 mb-4 grid-cols-2">
-                  <div class="col-span-2">
-                      <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
-                      <input type="text" name="nik" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
-                  </div>
-                  <div class="col-span-2 sm:col-span-1">
-                      <label for="jumlah_pupuk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah</label>
-                      <input type="number" name="jumlah_pupuk"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
-                  </div>
-                  <div class="col-span-2 sm:col-span-1">
-                      <label for="tahun" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tahun</label>
-                      <input type="number" name="tahun"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
-                  </div>
-                  <div class="col-span-2 sm:col-span-1">
-                      <label for="id_jenis_pupuk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Pupuk</label>
-                      <select name="id_jenis_pupuk"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                          <option selected="">Pilih Jenis</option>
-                          @if (isset($jenis_pupuks))
-                            @foreach ($jenis_pupuks as $jenis_pupuk)
-                              <option value="{{ $jenis_pupuk->id }}">{{ $jenis_pupuk->jenis }}</option>
-                            @endforeach
-                          @endif
-                      </select>
-                  </div>
+            @method('patch')
+            <input type="hidden" name="id" id="editAlokasiId">
+            <div class="grid gap-4 mb-4 grid-cols-2">
+                <div class="col-span-2">
+                    <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
+                    <input type="text" name="nik" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="jumlah_pupuk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah</label>
+                    <input type="number" name="jumlah_pupuk"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="tahun" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tahun</label>
+                    <input type="number" name="tahun"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="id_jenis_pupuk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Pupuk</label>
+                    <select name="id_jenis_pupuk"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <option selected="">Pilih Jenis</option>
+                        @if (isset($jenis_pupuks))
+                        @foreach ($jenis_pupuks as $jenis_pupuk)
+                            <option value="{{ $jenis_pupuk->id }}">{{ $jenis_pupuk->jenis }}</option>
+                        @endforeach
+                        @endif
+                    </select>
+                </div>
 
-                  <div class="col-span-2 sm:col-span-1">
-                      <label for="musim_tanam" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Musim Tanam</label>
-                      <select name="musim_tanam"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                          <option selected="">Pilih Musim Tanam</option>
-                          <option value="MT1">MT 1</option>
-                          <option value="MT2">MT 2</option>
-                          <option value="MT3">MT 3</option>
-                      </select>
-                  </div>
- 
-              </div>
-              <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Ubah data
-              </button>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="musim_tanam" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Musim Tanam</label>
+                    <select name="musim_tanam"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <option selected="">Pilih Musim Tanam</option>
+                        <option value="MT1">MT1</option>
+                        <option value="MT2">MT2</option>
+                        <option value="MT3">MT3</option>
+                    </select>
+                </div>
+
+            </div>
+            <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Ubah data
+            </button>
           </form>
       </div>
   </div>
 </div> 
-
-  
 <div id="deleteAlokasiModal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -225,7 +226,7 @@
                 </svg>
                 <span class="sr-only">Close modal</span>
             </button>
-            <form method="post" action="/pemerintah/alokasi/hapus" class="p-4 md:p-5 text-center">
+            <form method="post" action="/pemerintah/alokasi" class="p-4 md:p-5 text-center">
               @csrf
               @method('put')
               <input type="hidden" name="id" value="" id="deleteAlokasiId">
@@ -241,6 +242,7 @@
         </div>
     </div>
 </div>
+@endif
 
 
 @endsection
