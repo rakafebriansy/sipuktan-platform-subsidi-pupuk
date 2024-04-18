@@ -49,10 +49,12 @@
                             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                             </svg>
-                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">JPG or PNG (MAX. 5MB)</p>
+                            <div class="flex justify-center flex-col items-center">
+                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Klik untuk mengunggah</span> atau drag and drop</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">JPG or PNG (MAX. 5MB)</p>
+                            </div>
                         </div>
-                        <input id="dropzone-file" type="file" class="hidden" name="foto_ktp" />
+                        <input id="dropzone-file" type="file" onchange="fileAnnounce(this)" class="hidden" name="foto_ktp" />
                     </label>
                 </div> 
                 <div class="flex items-center gap-4 justify-between">
@@ -60,10 +62,10 @@
                         <label for="kata_sandi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi</label>
                         <input data-popover-target="popover-password" data-popover-placement="bottom" type="password" name="kata_sandi" id="kata_sandi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"  />
                         <div data-popover id="popover-password" role="tooltip"
-                            class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+                            class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
                             <div class="p-3 space-y-2">
                                 <h3 class="font-semibold text-gray-900 dark:text-white">Must have at least 6 characters</h3>
-                                <div class="grid grid-cols-4 gap-2">
+                                {{-- <div class="grid grid-cols-4 gap-2">
                                     <div class="h-1 bg-orange-300 dark:bg-orange-400"></div>
                                     <div class="h-1 bg-orange-300 dark:bg-orange-400"></div>
                                     <div class="h-1 bg-gray-200 dark:bg-gray-600"></div>
@@ -95,7 +97,7 @@
                                         </svg>
                                         A longer password (min. 12 chars.)
                                     </li>
-                                </ul>
+                                </ul> --}}
                             </div>
                             <div data-popper-arrow></div>
                         </div>
