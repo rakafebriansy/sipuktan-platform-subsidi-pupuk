@@ -28,7 +28,7 @@ class KiosResmiRegisterRequest extends FormRequest
             'nama'=> 'required',
             'jalan'=> 'required',
             'id_kecamatan' => 'required',
-            'foto_ktp' => 'required',
+            'foto_ktp' => 'required|mimes:png,jpg',
             'nik' => 'required',
             'nama_pemilik' => 'required',
             'nomor_telepon' => 'required',

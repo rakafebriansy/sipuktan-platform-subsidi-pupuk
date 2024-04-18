@@ -26,7 +26,7 @@ class PetaniRegisterRequest extends FormRequest
             'nik' => ['required','min:16','numeric','unique:petanis,nik','min:16'],
             'nama' => ['required','max:60','min:3'],
             'kata_sandi' => ['required','min:6'],
-            'foto_ktp' => ['required','max:5140'],
+            'foto_ktp' => ['required','mimes:png,jpg','max:5140'],
             'nomor_telepon' => ['required','numeric'],
             'id_kelompok_tani' => 'required'
         ];
