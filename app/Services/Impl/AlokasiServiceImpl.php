@@ -45,10 +45,11 @@ class AlokasiServiceImpl implements AlokasiService
     }
     public function pemerintahSetAlokasiByTahun(string $tahun, string $musim_tanam): Collection
     {
-        $alokasis = Alokasi::select('alokasis.*', 'alokasis.id as id_alokasi', 'petanis.*','kelompok_tanis.nama as poktan', 'jenis_pupuks.*')
+        $alokasis = Alokasi::select('alokasis.*', 'alokasis.id as id_alokasi', 'petanis.*','kelompok_tanis.nama as poktan', 'jenis_pupuks.*', 'kios_resmis.id as id_kios_resmi', 'kios_resmis.nama as kios_resmi')
         ->join('petanis','petanis.id','alokasis.id_petani')
         ->join('jenis_pupuks','jenis_pupuks.id','alokasis.id_jenis_pupuk')
         ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
+        ->join('kios_resmis','kios_resmis.id','kelompok_tanis.id_kios_resmi')
         ->where('alokasis.tahun',$tahun)->where('alokasis.musim_tanam',$musim_tanam)->orderBy('petanis.nama')->get();
 
         return $alokasis;
