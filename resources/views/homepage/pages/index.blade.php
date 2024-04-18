@@ -1,6 +1,6 @@
 @extends('homepage.layouts.main')
 @section('wrapper')
-<div class="relative overflow-hidden top-0 start-1/2 bg-[url('/images/farmer.png')] bg-no-repeat bg-top size-full z-5 transform -translate-x-1/2 dark:bg-[url('/images/farmer.png')]">
+<div class="relative overflow-hidden top-0 start-1/2 bg-no-repeat bg-top size-full z-5 transform -translate-x-1/2 dark:bg-[url('/images/farmer.png')]">
   <img src="{{ asset('/images/farmer.png') }}" class="w-full absolute z-20" alt="">
   <div class="bg-gradient-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,0.6)] w-full h-full absolute z-30"></div>
   <div class="w-full h-full justify-center items-center flex z-40 relative">
@@ -26,7 +26,7 @@
       </div>
   
       <div class="mt-8 gap-3 flex justify-center">
-        <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+        <button type="button" id="dropdownDaftarButton" data-dropdown-toggle="dropdownDaftar" data-dropdown-placement="bottom" data-dropdown-offset-distance="15" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
           Daftar sekarang!
         </button>
       </div>
