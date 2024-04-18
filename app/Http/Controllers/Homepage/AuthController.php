@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\KiosResmiGantiSandiRequest;
 use App\Http\Requests\KiosResmiLoginRequest;
 use App\Http\Requests\KiosResmiRegisterRequest;
+use App\Http\Requests\pemerintahGantiSandiRequest;
 use App\Http\Requests\PemerintahLoginRequest;
 use App\Http\Requests\PetaniGantiSandiRequest;
 use App\Http\Requests\PetaniLoginRequest;
@@ -148,6 +149,17 @@ class AuthController extends Controller
             return abort(403);
         }
     }
+    public function setPemerintahGantiSandi()
+    {
+        $id = Session::get('id',null);
+        if(isset($id)){
+            return response()->view('dashboard.pemerintah.pages.ganti-sandi', [
+                'title' => 'Pemerintah | Ganti Kata Sandi'
+            ]);
+        } else {
+            return abort(403);
+        }
+    }
     public function setKiosResmiGantiSandi()
     {
         $id = Session::get('id',null);
@@ -166,13 +178,14 @@ class AuthController extends Controller
             try {
                 $validated = $request->validated();
                 if($validated['sandi_baru'] == $validated['sandi_ulang']) {
+                    dd($validated);
                     if($this->akun_service->petaniGantiSandi($id,$validated)) {
                         return redirect('/petani/dashboard')->with('success','Kata sandi berhasil diperbarui');
                     } else {
-                        return redirect('/petani/ganti-sandi')->withErrors(['failed' => 'Kata sandi baru tidak boleh sama']);
+                        return redirect('/petani/ganti-sandi')->withErrors(['failed' => 'Kata sandi lama salah']);
                     }
                 } else {
-                    return redirect('/petani/ganti-sandi')->withErrors(['failed' => 'Kata sandi tidak sama']);
+                    return redirect('/petani/ganti-sandi')->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
                 }
             } catch (\Exception $e) {
                 throw $e;
@@ -192,10 +205,32 @@ class AuthController extends Controller
                     if($this->akun_service->kiosResmiGantiSandi($id,$validated)) {
                         return redirect('/kios-resmi/dashboard')->with('success','Kata sandi berhasil diperbarui');
                     } else {
-                        return redirect('/kios-resmi/ganti-sandi')->withErrors(['failed' => 'Kata sandi baru tidak boleh sama']);
+                        return redirect('/kios-resmi/ganti-sandi')->withErrors(['failed' => 'Kata lama salah']);
                     }
                 } else {
-                    return redirect('/kios-resmi/ganti-sandi')->withErrors(['failed' => 'Kata sandi tidak sama']);
+                    return redirect('/kios-resmi/ganti-sandi')->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
+                }
+            } catch (\Exception $e) {
+                throw $e;
+            }
+        } else {
+            return abort(403);
+        }
+    }
+    public function pemerintahGantiSandi(pemerintahGantiSandiRequest $request): RedirectResponse
+    {
+        $id = Session::get('id',null);
+        if(isset($id)){
+            try {
+                $validated = $request->validated();
+                if($validated['sandi_baru'] == $validated['sandi_ulang']) {
+                    if($this->akun_service->pemerintahGantiSandi($id,$validated)) {
+                        return redirect('/pemerintah/dashboard')->with('success','Kata sandi berhasil diperbarui');
+                    } else {
+                        return redirect('/pemerintah/ganti-sandi')->withErrors(['failed' => 'Kata sandi lama salah']);
+                    }
+                } else {
+                    return redirect('/pemerintah/ganti-sandi')->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
                 }
             } catch (\Exception $e) {
                 throw $e;

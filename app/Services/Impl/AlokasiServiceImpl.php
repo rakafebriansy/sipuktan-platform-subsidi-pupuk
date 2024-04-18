@@ -19,8 +19,7 @@ class AlokasiServiceImpl implements AlokasiService
         $alokasis = Alokasi::query()->select('alokasis.*','jenis_pupuks.*','kios_resmis.nama as kios_resmi')
         ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
         ->join('kios_resmis','alokasis.id_kios_resmi','kios_resmis.id')
-        ->where('id_petani', $id)->get();
-        
+        ->where('id_petani', $id)->orderBy('jenis_pupuks.jenis')->get();
         return $alokasis;
     }
     public function kiosResmiSetAlokasi(): Collection
@@ -34,7 +33,7 @@ class AlokasiServiceImpl implements AlokasiService
         $alokasis = Alokasi::select('alokasis.*', 'petanis.nama as petani', 'kelompok_tanis.nama as poktan')
         ->join('petanis','petanis.id','alokasis.id_petani')
         ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
-        ->where('alokasis.id_kios_resmi',$id)->where('alokasis.tahun',$tahun)->where('alokasis.musim_tanam',$musim_tanam)->get();
+        ->where('alokasis.id_kios_resmi',$id)->where('alokasis.tahun',$tahun)->where('alokasis.musim_tanam',$musim_tanam)->orderBy('petanis.nama')->get();
         
         return $alokasis;
     }
@@ -46,12 +45,11 @@ class AlokasiServiceImpl implements AlokasiService
     }
     public function pemerintahSetAlokasiByTahun(string $tahun, string $musim_tanam): Collection
     {
-        $alokasis = Alokasi::select('alokasis.*', 'alokasis.id as id_alokasi', 'petanis.*','kelompok_tanis.nama as poktan', 'kios_resmis.nama as kios_resmi', 'jenis_pupuks.*')
+        $alokasis = Alokasi::select('alokasis.*', 'alokasis.id as id_alokasi', 'petanis.*','kelompok_tanis.nama as poktan', 'jenis_pupuks.*')
         ->join('petanis','petanis.id','alokasis.id_petani')
         ->join('jenis_pupuks','jenis_pupuks.id','alokasis.id_jenis_pupuk')
         ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
-        ->join('kios_resmis','alokasis.id_kios_resmi','kios_resmis.id')
-        ->where('alokasis.tahun',$tahun)->where('alokasis.musim_tanam',$musim_tanam)->get();
+        ->where('alokasis.tahun',$tahun)->where('alokasis.musim_tanam',$musim_tanam)->orderBy('petanis.nama')->get();
 
         return $alokasis;
     }

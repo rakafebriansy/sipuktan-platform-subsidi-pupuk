@@ -6,7 +6,7 @@
 </div>
 @if(isset($tahuns))
 <div id="dropdownTahun" class="z-50 hidden bg-white rounded-lg shadow w-24 dark:bg-gray-700">
-    <ul class="py-2 h-36 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUsersButton">
+    <ul class="py-2 max-h-36 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUsersButton">
       @foreach ($tahuns as $tahun)
       <li onclick="getAlokasiFromTh(this,'pemerintah')">
         
@@ -53,31 +53,7 @@
                             Nama Lengkap
                         </th>
                         <td class="px-2 py-3">
-                            Mohammad Faqih
-                        </td>
-                    </tr>
-                    <tr class="bg-white dark:bg-gray-800">
-                        <th scope="row" class="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Kelompok Tani
-                        </th>
-                        <td class="px-2 py-3">
-                            Makmur jaya
-                        </td>
-                    </tr>
-                    <tr class="bg-white dark:bg-gray-800">
-                        <th scope="row" class="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Kios Resmi
-                        </th>
-                        <td class="px-2 py-3">
-                            Jl. Mangga, no .15
-                        </td>
-                    </tr>
-                    <tr class="bg-white dark:bg-gray-800">
-                        <th scope="row" class="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Nomor Telepon
-                        </th>
-                        <td class="px-2 py-3">
-                            081242526781
+                            {{ $pemerintah->nama_pengguna }}
                         </td>
                     </tr>
                     <tr>

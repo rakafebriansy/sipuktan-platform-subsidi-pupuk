@@ -22,21 +22,24 @@ use Illuminate\View\View;
 
 class PemerintahController extends Controller
 {
+    private AkunService $akun_service;
     private DashboardService $dashboard_service;
     private AlokasiService $alokasi_service;
-    public function __construct(DashboardService $dashboard_service, AlokasiService $alokasi_service)
+    public function __construct(AkunService $akun_service, DashboardService $dashboard_service, AlokasiService $alokasi_service)
     {
         $this->alokasi_service = $alokasi_service;
         $this->dashboard_service = $dashboard_service;
+        $this->akun_service = $akun_service;
     }
     public function setDashboard(): View
     {
         $id = Session::get('id',null);
         if(isset($id)) {
-            $pemerintah = Pemerintah::find($id); 
+            ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
             return view('dashboard.pemerintah.pages.index', [
                 'title' => 'Pemerintah | Dashboard',
-                'pemerintah' => $pemerintah
+                'pemerintah' => $pemerintah,
+                'initials' => $initials
             ]);
         } else {
             return abort(403);
@@ -115,20 +118,15 @@ class PemerintahController extends Controller
     {
         $id = Session::get('id',null);
         if(isset($id)) {
-            $pemerintah = Pemerintah::find($id); 
+            ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
             try {
-                $petanis = Petani::select('petanis.*','kelompok_tanis.nama as nama_poktan')
-                    ->join('kelompok_tanis','petanis.id_kelompok_tani','kelompok_tanis.id','kelompok_tanis.id')
-                    ->where('aktif',false)->get();
-                $kios_resmis = KiosResmi::select('kios_resmis.*','pemilik_kios.*','kecamatans.nama as kecamatan')
-                    ->join('pemilik_kios','kios_resmis.id_pemilik_kios','pemilik_kios.id')
-                    ->join('kecamatans','kios_resmis.id_kecamatan','kecamatans.id')
-                    ->where('aktif',false)->get();
+                ['petanis' => $petanis, 'kios_resmis' => $kios_resmis] = $this->akun_service->pemerintahSetVerifikasiPengguna();
                 return view('dashboard.pemerintah.pages.verifikasi-pengguna', [
                     'title' => 'Pemerintah | Verifikasi Pengguna',
                     'petanis' => $petanis,
                     'kios_resmis' => $kios_resmis,
                     'pemerintah' => $pemerintah,
+                    'initials' => $initials,
                 ]);
             } catch (\Exception $e) {
                 throw $e;
@@ -142,9 +140,7 @@ class PemerintahController extends Controller
         $id = Session::get('id',null);
         if(isset($id)){
             try {
-                $ids = $request->id_petanis;
-                $rows_affected = Petani::whereIn('id',$ids)->update(['aktif' => true]);
-                if($rows_affected) {
+                if($this->akun_service->pemerintahVerifikasiPetani($request->id_petanis)) {
                     return redirect('/pemerintah/verifikasi-pengguna')->with('success','Berhasil memverifikasi akun petani.');
                 } else {
                     return redirect('/pemerintah/verifikasi-pengguna')->with('error','Gagal memverifikasi akun.');
@@ -161,10 +157,8 @@ class PemerintahController extends Controller
         $id = Session::get('id',null);
         if(isset($id)){
             try {
-                $ids = $request->id_kios_resmis;
-                $rows_affected = KiosResmi::whereIn('id',$ids)->update(['aktif' => true]);
-                if($rows_affected) {
-                    return redirect('/pemerintah/verifikasi-pengguna')->with('success','Berhasil memverifikasi akun petani.');
+                if($this->akun_service->pemerintahVerifikasiKiosResmi($request->id_kios_resmis)) {
+                    return redirect('/pemerintah/verifikasi-pengguna')->with('success','Berhasil memverifikasi akun kios resmi.');
                 } else {
                     return redirect('/pemerintah/verifikasi-pengguna')->with('error','Gagal memverifikasi akun.');
                 }

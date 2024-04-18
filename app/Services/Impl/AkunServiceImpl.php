@@ -4,6 +4,7 @@ namespace App\Services\Impl;
 
 use App\Models\KelompokTani;
 use App\Models\KiosResmi;
+use App\Models\Pemerintah;
 use App\Models\PemilikKios;
 use App\Models\Petani;
 use App\Services\AkunService;
@@ -49,23 +50,55 @@ class AkunServiceImpl implements AkunService
     public function petaniGantiSandi(int $id, array $sandi_petani): bool
     {
         $petani = Petani::find($id);
-        if($petani->kata_sandi == $sandi_petani['sandi_lama']) {
-            return false;
-        } else {
+        if(Hash::check($sandi_petani['sandi_lama'],$petani->kata_sandi)) {
             $sandi_baru = Hash::make($sandi_petani['sandi_baru']);
             Petani::query()->where('id',$id)->update(['kata_sandi' => $sandi_baru]);
             return true;
+        } else {
+            return false;
         }
     }
     public function kiosResmiGantiSandi(int $id, array $sandi_kios): bool
     {
         $kios_resmi = KiosResmi::find($id);
-        if($kios_resmi->kata_sandi == $sandi_kios['sandi_lama']) {
-            return false;
-        } else {
+        if(Hash::check($sandi_kios['sandi_lama'],$kios_resmi->kata_sandi)) {
             $sandi_baru = Hash::make($sandi_kios['sandi_baru']);
             KiosResmi::query()->where('id',$id)->update(['kata_sandi' => $sandi_baru]);
             return true;
+        } else {
+            return false;
         }
+    }
+    public function pemerintahGantiSandi(int $id, array $sandi_pemerintah): bool
+    {
+        $pemerintah = Pemerintah::find($id);
+        if(Hash::check($sandi_pemerintah['sandi_lama'],$pemerintah->kata_sandi)) {
+            $sandi_baru = Hash::make($sandi_pemerintah['sandi_baru']);
+            Pemerintah::query()->where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function pemerintahSetVerifikasiPengguna(): array
+    {
+        $petanis = Petani::select('petanis.*','kelompok_tanis.nama as nama_poktan')
+        ->join('kelompok_tanis','petanis.id_kelompok_tani','kelompok_tanis.id','kelompok_tanis.id')
+        ->where('aktif',false)->get();
+        $kios_resmis = KiosResmi::select('kios_resmis.*','pemilik_kios.*','kecamatans.nama as kecamatan')
+            ->join('pemilik_kios','kios_resmis.id_pemilik_kios','pemilik_kios.id')
+            ->join('kecamatans','kios_resmis.id_kecamatan','kecamatans.id')
+            ->where('aktif',false)->get();
+        return ['petanis' => $petanis, 'kios_resmis' => $kios_resmis];
+    }
+    public function pemerintahVerifikasiPetani($ids): bool
+    {
+        $rows_affected = Petani::whereIn('id',$ids)->update(['aktif' => true]);
+        return $rows_affected;
+    }
+    public function pemerintahVerifikasiKiosResmi($ids): bool
+    {
+        $rows_affected = KiosResmi::whereIn('id',$ids)->update(['aktif' => true]);
+        return $rows_affected;
     }
 }

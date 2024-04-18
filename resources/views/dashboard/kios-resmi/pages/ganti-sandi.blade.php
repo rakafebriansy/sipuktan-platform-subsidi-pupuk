@@ -14,7 +14,7 @@
       </div>
   </div>
   @endif
-  <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+  <div class="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
     <div class="p-4 sm:p-7 w-[24rem]">
       <div class="text-center">
         <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Ganti kata sandi</h1>

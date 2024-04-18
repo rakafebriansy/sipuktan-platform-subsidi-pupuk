@@ -58,6 +58,8 @@ Route::prefix('/kios-resmi')->group(function(){
 Route::get('/admin', [AuthController::class, 'setPemerintahLogin']);
 Route::prefix('/pemerintah')->group(function(){
     Route::post('/login',[AuthController::class, 'pemerintahLogin']);
+    Route::get('/ganti-sandi', [AuthController::class, 'setPemerintahGantiSandi']);
+    Route::patch('/ganti-sandi', [AuthController::class, 'pemerintahGantiSandi']);
     Route::get('/dashboard', [PemerintahController::class, 'setDashboard']);
     Route::get('/verifikasi-pengguna', [PemerintahController::class, 'setVerifikasiPengguna']);
     Route::post('/verifikasi-pengguna/petani', [PemerintahController::class, 'verifikasiPenggunaPetani']);
