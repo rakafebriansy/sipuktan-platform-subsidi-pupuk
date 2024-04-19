@@ -77,13 +77,7 @@ Route::prefix('/bot')->group(function(){
     Route::get('/msg',[TelegramBotController::class,'getMessages']);
     Route::get('/send/{id}',[TelegramBotController::class,'sendMessage']);
 });
-Route::get('/logout', function(){
-    Session::forget('id');
-    if(!Session::has('id'))
-    {
-        return redirect('/');
-    }
-});
+Route::get('/logout', [AuthController::class,'logout']);
 Route::get('/download/{folder_name}/{file_name}', function(string $folder_name, string $file_name){
     return Storage::disk('public')->download('/' . $folder_name . '/' . $file_name);
 });

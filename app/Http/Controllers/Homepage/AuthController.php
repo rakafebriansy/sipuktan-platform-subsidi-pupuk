@@ -244,8 +244,7 @@ class AuthController extends Controller
     }
     public function logout(Request $request): RedirectResponse
     {
-        $role = $request->session()->get('role');
         $request->session()->invalidate();
-        return response()->redirectTo("/$role/login");
+        return response()->redirectTo("/");
     }
 }
