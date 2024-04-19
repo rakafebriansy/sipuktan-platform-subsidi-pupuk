@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-    <a href="/petani/login" class="text-sm">< <span class="hover:underline">Kembali ke Log in</span></a>
+    <a href="/petani/login" class="text-sm text-white">< <span class="hover:underline">Kembali ke Log in</span></a>
   </div>
 </div>
 

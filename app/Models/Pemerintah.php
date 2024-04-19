@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Pemerintah extends Model
 {
     use HasFactory;
+    protected $guard = 'pemerintah';
     protected $table = 'pemerintahs';
     protected $primaryKey = 'id';
     protected $keyType = 'string';

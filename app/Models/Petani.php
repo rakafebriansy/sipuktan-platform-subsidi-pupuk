@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Model;
 class Petani extends Model
 {
     use HasFactory;
+    protected $guard = 'petani';
     protected $table = 'petanis';
     protected $primaryKey = 'id';
     protected $keyType = 'int';

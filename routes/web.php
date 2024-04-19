@@ -55,8 +55,11 @@ Route::prefix('/kios-resmi')->group(function(){
     // });
 });
 
-Route::get('/admin', [AuthController::class, 'setPemerintahLogin']);
+Route::get('/admin', function() {
+    return redirect('/pemerintah/login');
+});
 Route::prefix('/pemerintah')->group(function(){
+    Route::get('/login',[AuthController::class, 'setPemerintahLogin']);
     Route::post('/login',[AuthController::class, 'pemerintahLogin']);
     Route::get('/ganti-sandi', [AuthController::class, 'setPemerintahGantiSandi']);
     Route::patch('/ganti-sandi', [AuthController::class, 'pemerintahGantiSandi']);

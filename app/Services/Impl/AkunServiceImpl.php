@@ -16,6 +16,36 @@ use Illuminate\Support\Facades\Session;
 
 class AkunServiceImpl implements AkunService
 {    
+    public function petaniLogin(string $nik, string $kata_sandi): object|null
+    {
+        $petani = Petani::query()->where('nik',$nik)->first();
+        if(isset($petani)) {
+            if(Hash::check($kata_sandi,$petani->kata_sandi)){
+                return $petani;
+            }
+        }
+        return null;
+    }
+    public function kiosResmiLogin(string $nib, string $kata_sandi): object|null
+    {
+        $kios_resmi = KiosResmi::query()->where('nib',$nib)->first();
+        if(isset($kios_resmi)) {
+            if(Hash::check($kata_sandi,$kios_resmi->kata_sandi)){
+                return $kios_resmi;
+            }
+        }
+        return null;
+    }
+    public function pemerintahLogin(string $nama_pengguna, string $kata_sandi): object|null
+    {
+        $pemerintah = Pemerintah::query()->where('nama_pengguna',$nama_pengguna)->first();
+        if(isset($pemerintah)) {
+            if(Hash::check($kata_sandi,$pemerintah->kata_sandi)){
+                return $pemerintah;
+            }
+        }
+        return null;
+    }
     public function petaniRegister(array $data_petani, array|UploadedFile $foto_ktp): void
     {
         $foto_ktp->storePubliclyAs('foto_ktps', $foto_ktp->getClientOriginalName(), 'public');

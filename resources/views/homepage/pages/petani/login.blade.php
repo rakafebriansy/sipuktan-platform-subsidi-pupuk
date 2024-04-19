@@ -59,7 +59,7 @@
         </div>
       </div>
     </div>
-    <a href="/" class="text-sm">< <span class="hover:underline">Kembali ke Homepage</span></a>
+    <a href="/" class="text-sm text-white">< <span class="hover:underline">Kembali ke Homepage</span></a>
   </div>
 </div>
 
