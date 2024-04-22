@@ -22,9 +22,6 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         //mine
-        // 'petani' => \App\Http\Middleware\RedirectIfNotPetani::class,
-        // 'kiosResmi' => \App\Http\Middleware\RedirectIfNotKiosResmi::class,
-        // 'pemerintah' => \App\Http\Middleware\RedirectIfNotPemerintah::class,
     ];
 
     /**
@@ -68,5 +65,6 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'hasRole' => \App\Http\Middleware\HasRole::class,
     ];
 }

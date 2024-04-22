@@ -29,6 +29,9 @@
                             <p class="inline-block">Jumlah</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            <p class="inline-block">Jenis Pupuk</p>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             <p class="inline-block">Kelompok Tani</p>
                         </th>
                         <th scope="col" class="py-3">
@@ -44,6 +47,9 @@
                         </th>
                         <td class="px-6 py-4">
                             {{ $alokasi->jumlah_pupuk }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $alokasi->jenis_pupuk->jenis }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $alokasi->poktan }}

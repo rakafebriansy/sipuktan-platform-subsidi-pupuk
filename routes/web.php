@@ -34,11 +34,10 @@ Route::prefix('/petani')->group(function(){
     Route::post('/lupa-sandi', [AuthController::class, 'petaniLupaSandi']);
     Route::get('/ganti-sandi', [AuthController::class, 'setPetaniGantiSandi']);
     Route::patch('/ganti-sandi', [AuthController::class, 'petaniGantiSandi']);
-    Route::get('/dashboard', [PetaniController::class, 'setDashboard']);
-    Route::get('/alokasi', [PetaniController::class, 'setAlokasi']);
-    // Route::middleware('petani')->group(function() {
-    // });
-        
+    Route::middleware('hasRole:petani')->group(function(){
+        Route::get('/dashboard', [PetaniController::class, 'setDashboard']);
+        Route::get('/alokasi', [PetaniController::class, 'setAlokasi']);
+    });
 });
 Route::prefix('/kios-resmi')->group(function(){
     Route::get('/login', [AuthController::class, 'setKiosResmiLogin']);
@@ -49,10 +48,10 @@ Route::prefix('/kios-resmi')->group(function(){
     Route::post('/lupa-sandi', [AuthController::class, 'kiosResmiLupaSandi']);
     Route::get('/ganti-sandi', [AuthController::class, 'setKiosResmiGantiSandi']);
     Route::patch('/ganti-sandi', [AuthController::class, 'kiosResmiGantiSandi']);
-    Route::get('/dashboard', [KiosResmiController::class, 'setDashboard']);
-    Route::get('/alokasi', [KiosResmiController::class, 'setAlokasi']);
-    // Route::middleware('kiosResmi')->group(function() {
-    // });
+    Route::middleware('hasRole:kios-resmi')->group(function(){
+        Route::get('/dashboard', [KiosResmiController::class, 'setDashboard']);
+        Route::get('/alokasi', [KiosResmiController::class, 'setAlokasi']);
+    });
 });
 
 Route::get('/admin', function() {
@@ -63,14 +62,16 @@ Route::prefix('/pemerintah')->group(function(){
     Route::post('/login',[AuthController::class, 'pemerintahLogin']);
     Route::get('/ganti-sandi', [AuthController::class, 'setPemerintahGantiSandi']);
     Route::patch('/ganti-sandi', [AuthController::class, 'pemerintahGantiSandi']);
-    Route::get('/dashboard', [PemerintahController::class, 'setDashboard']);
-    Route::get('/verifikasi-pengguna', [PemerintahController::class, 'setVerifikasiPengguna']);
-    Route::post('/verifikasi-pengguna/petani', [PemerintahController::class, 'verifikasiPenggunaPetani']);
-    Route::post('/verifikasi-pengguna/kios-resmi', [PemerintahController::class, 'verifikasiPenggunaKiosResmi']);
-    Route::get('/alokasi', [PemerintahController::class, 'setAlokasi']);
-    Route::post('/alokasi', [PemerintahController::class, 'tambahAlokasi']);
-    Route::put('/alokasi', [PemerintahController::class, 'hapusAlokasi']);
-    Route::patch('/alokasi', [PemerintahController::class, 'editAlokasi']);
+    Route::middleware('hasRole:pemerintah')->group(function(){
+        Route::get('/dashboard', [PemerintahController::class, 'setDashboard']);
+        Route::get('/verifikasi-pengguna', [PemerintahController::class, 'setVerifikasiPengguna']);
+        Route::post('/verifikasi-pengguna/petani', [PemerintahController::class, 'verifikasiPenggunaPetani']);
+        Route::post('/verifikasi-pengguna/kios-resmi', [PemerintahController::class, 'verifikasiPenggunaKiosResmi']);
+        Route::get('/alokasi', [PemerintahController::class, 'setAlokasi']);
+        Route::post('/alokasi', [PemerintahController::class, 'tambahAlokasi']);
+        Route::put('/alokasi', [PemerintahController::class, 'hapusAlokasi']);
+        Route::patch('/alokasi', [PemerintahController::class, 'editAlokasi']);
+    });
 });
 Route::prefix('/bot')->group(function(){
     Route::get('/retreive',[TelegramBotController::class,'show']);
