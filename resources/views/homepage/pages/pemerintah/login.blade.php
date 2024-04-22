@@ -5,19 +5,6 @@
   <img src="{{ asset('/../images/farmer.png') }}" class="w-full absolute z-20" alt="">
   <div class="bg-gradient-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,0.6)] w-full h-full absolute z-30"></div>
   <div class="flex justify-center h-full items-center z-40 relative">
-    @if ($errors->any())
-    <div class="mt-2 bg-red-100 border border-red-200 text-sm absolute top-4 text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500" role="alert">
-        <span class="font-bold">Danger</span> {{ $errors->first() }}
-    </div>
-  @elseif (session('success'))
-    <div class="mt-2 bg-teal-100 border border-teal-200 text-sm absolute top-4 text-teal-800 rounded-lg p-4 dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500" role="alert">
-      <span class="font-bold">Success</span> {{ Session::get('success') }}
-    </div>
-    @elseif (session('unverified'))
-    <div class="mt-2 bg-blue-100 border border-blue-200 text-sm text-blue-800 rounded-lg p-4 dark:bg-blue-800/10 dark:border-blue-900 dark:text-blue-500" role="alert">
-      <span class="font-bold">Info</span> {{ Session::get('unverified') }}
-    </div>
-    @endif
     <div class="w-[25rem]">
       <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
         <div class="p-4 sm:p-7">
