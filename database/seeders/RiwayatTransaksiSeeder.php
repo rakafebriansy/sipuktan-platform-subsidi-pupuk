@@ -17,7 +17,6 @@ class RiwayatTransaksiSeeder extends Seeder
             'id' => 1,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Non-Tunai',
-            'status_pembayaran' => 'Dibayar',
             'id_alokasi' => 1,
             'id_bank' => 'bri'
         ]);
@@ -25,7 +24,6 @@ class RiwayatTransaksiSeeder extends Seeder
             'id' => 2,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Non-Tunai',
-            'status_pembayaran' => 'Dibayar',
             'id_alokasi' => 2,
             'id_bank' => 'bri'
         ]);
@@ -33,21 +31,18 @@ class RiwayatTransaksiSeeder extends Seeder
             'id' => 3,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Tunai',
-            'status_pembayaran' => 'Dibayar',
             'id_alokasi' => 3,
         ]);
         RiwayatTransaksi::create([
             'id' => 4,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Tunai',
-            'status_pembayaran' => 'Menunggu Pembayaran',
             'id_alokasi' => 4,
         ]);
         RiwayatTransaksi::create([
             'id' => 5,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Tunai',
-            'status_pembayaran' => 'Menunggu Pembayaran',
             'id_alokasi' => 5,
         ]);
     }

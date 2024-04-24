@@ -14,20 +14,12 @@ class PemerintahSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(MusimTanamSeeder::class);
         Pemerintah::create([
             'id' => 1,
             'nama_pengguna' => 'admin1',
-            'kata_sandi' => Hash::make('pemerintah@1')
-        ]);
-        Pemerintah::create([
-            'id' => 2,
-            'nama_pengguna' => 'admin2',
-            'kata_sandi' => Hash::make('pemerintah@2')
-        ]);
-        Pemerintah::create([
-            'id' => 3,
-            'nama_pengguna' => 'admin3',
-            'kata_sandi' => Hash::make('pemerintah@3')
+            'kata_sandi' => Hash::make('pemerintah@1'),
+            'id_musim_tanam' => 1
         ]);
     }
 }

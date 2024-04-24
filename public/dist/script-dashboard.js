@@ -28,6 +28,8 @@ function detailPassId(btn){
     detailBody.querySelector('img').setAttribute('src','/storage/foto_ktps/' + btnParent.dataset.ktp);
     detailBody.querySelector('td.detailNik').innerText = btnParent.dataset.nik
     detailBody.querySelector('td.detailNomor').innerText = btnParent.dataset.nomor
+    detailBody.querySelector('td.detailPoktan').innerText = btnParent.dataset.poktan
+    detailBody.querySelector('td.detailKios').innerText = btnParent.dataset.kios
 }
 function getAlokasiFromMt(li, mode) {
     document.querySelector('#dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;

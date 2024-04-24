@@ -170,7 +170,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\AkunServiceProvider::class,
         App\Providers\DashboardServiceProvider::class,
-        App\Providers\AlokasiServiceProvider::class
+        App\Providers\AlokasiServiceProvider::class,
+        App\Providers\TransaksiServiceProvider::class,
     ])->toArray(),
 
     /*

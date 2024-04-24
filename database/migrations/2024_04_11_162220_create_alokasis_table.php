@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('musim_tanam',['MT1','MT2','MT3'])->nullable(false);
             $table->string('tahun',4)->nullable(false);
             $table->string('id_jenis_pupuk',30)->nullable(false);
+            $table->enum('status',['Belum Tersedia','Menunggu Pembayaran','Dibayar','Dibatalkan'])->nullable(false);
             $table->unsignedBigInteger('id_kios_resmi')->nullable(false);
             $table->unsignedBigInteger('id_petani')->nullable(false);
 

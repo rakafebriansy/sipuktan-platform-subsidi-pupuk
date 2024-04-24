@@ -36,12 +36,8 @@
                             <p class="inline-block">Jenis Pupuk</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <p class="inline-block">Kelompok Tani</p>
+                            <p class="inline-block">Status</p>
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            <p class="inline-block">Kios Resmi</p>
-                        </th>
-                        
                         <th scope="col" class="py-3 md:w-[40%] lg:w-[25%]">
                             <span class="inline-block">Action</span>
                         </th>
@@ -60,12 +56,9 @@
                             {{ $alokasi->jenis }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $alokasi->poktan }}
+                            {{ $alokasi->status }}
                         </td>
-                        <td class="px-6 py-4">
-                            {{ $alokasi->kios_resmi }}
-                        </td>
-                        <td data-id="{{ $alokasi->id_alokasi }}" data-nik="{{ $alokasi->nik }}" data-ktp="{{ $alokasi->foto_ktp }}" data-nomor="{{ $alokasi->nomor_telepon }}" class="py-4 flex flex-row ">
+                        <td data-id="{{ $alokasi->id_alokasi }}" data-poktan="{{ $alokasi->poktan }}" data-kios="{{ $alokasi->kios_resmi }}" data-nik="{{ $alokasi->nik }}" data-ktp="{{ $alokasi->foto_ktp }}" data-nomor="{{ $alokasi->nomor_telepon }}" class="py-4 flex flex-row ">
                             <button  data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" onclick="detailPassId(this)" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Detail</button>
                             <button data-modal-target="editAlokasiModal" data-modal-toggle="editAlokasiModal" onclick="editPassId(this)" class=" bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Edit</button>
                             <button data-modal-target="deleteAlokasiModal" data-modal-toggle="deleteAlokasiModal" onclick="deletePassId(this)" class=" bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Hapus</button>

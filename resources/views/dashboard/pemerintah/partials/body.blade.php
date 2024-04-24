@@ -248,7 +248,7 @@
     </div>
 </div>
 <div id="detailAlokasiModal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-xs max-h-full">
+    <div class="relative p-4 w-full max-w-sm max-h-full">
         <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="flex flex-col items-center py-4 relative">
                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="detailAlokasiModal">
@@ -257,7 +257,7 @@
                     </svg>
                     <span class="sr-only">Close modal</span>
                 </button>
-                <div id="detailAlokasiBody" class="flex flex-col justify-center items-center w-[70%]">
+                <div id="detailAlokasiBody" class="flex flex-col justify-center items-center w-[90%]">
                     <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="" alt="Foto KTP"/>
                     <table class=" text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 w-full">
                         <tbody>
@@ -274,6 +274,22 @@
                                     No. telp
                                 </th>
                                 <td class="detailNomor pe-2 ps-4 py-1">
+                                    -
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="px-2 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Kelompok Tani
+                                </th>
+                                <td class="detailPoktan pe-2 ps-4 py-1">
+                                    -
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="px-2 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Kios Resmi
+                                </th>
+                                <td class="detailKios pe-2 ps-4 py-1">
                                     -
                                 </td>
                             </tr>

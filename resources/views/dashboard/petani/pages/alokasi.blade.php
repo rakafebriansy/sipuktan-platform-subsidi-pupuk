@@ -20,7 +20,10 @@
                             <p class="inline-block">Jumlah</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <p class="inline-block">Kelompok Tani</p>
+                            <p class="inline-block">Status</p>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <p class="inline-block">Musim Tanam</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <p class="inline-block">Tahun</p>
@@ -38,6 +41,9 @@
                         </th>
                         <td class="px-6 py-4">
                             {{ $alokasi->jumlah_pupuk }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $alokasi->status }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $alokasi->musim_tanam }}
