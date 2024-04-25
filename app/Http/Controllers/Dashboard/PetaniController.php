@@ -71,8 +71,17 @@ class PetaniController extends Controller
             'petani' => $petani,
             'initials' => $initials,
             'alokasis' => $alokasis,
+            'id_alokasis' => $all_request['id_alokasis'],
             'snap_token' => $snap_token,
             'total_harga' => $all_request['total_harga']
         ]);
+    }
+    public function checkout(Request $request)
+    {
+        $success = $this->transaksi_service->petaniCheckout($request->all()['id_alokasis']);
+        if ($success) {
+            return redirect('/petani/transaksi')->with('success','Pembayaran Berhasil!');
+        }
+        return redirect('/petani/transaksi')->withErrors(['db' => 'Pembayaran Gagal!']);
     }
 }

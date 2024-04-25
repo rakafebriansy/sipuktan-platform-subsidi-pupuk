@@ -9,5 +9,5 @@ interface TransaksiService
 {
     function petaniSetTransaksi(int $id): Collection;
     function petaniSetCheckout(int $total_harga, string $nama, array $id_alokasis): array;
-    function petaniCheckout(array $alokasis): void;
+    function petaniCheckout(array $alokasis): bool;
 }

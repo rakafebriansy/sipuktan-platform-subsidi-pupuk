@@ -35,7 +35,6 @@ class TransaksiServiceImpl implements TransaksiService
         ->whereIn('alokasis.id',$id_alokasis)->get();
 
         //MIDTRANS API START
-
         \Midtrans\Config::$serverKey = config('midtrans.serverKey');
         \Midtrans\Config::$isProduction = false;
         \Midtrans\Config::$isSanitized = true;
@@ -52,21 +51,16 @@ class TransaksiServiceImpl implements TransaksiService
         );
 
         $snap_token = \Midtrans\Snap::getSnapToken($params);
-
         //MIDTRANS API END
 
         return ['snap_token' => $snap_token, 'alokasis' => $alokasis];
     }
-    public function petaniCheckout(array $id_alokasis): void
+    public function petaniCheckout(array $id_alokasis): bool
     {
         DB::transaction(function () use ($id_alokasis) {
             $riwayat_transaksis = [];
-
-            $tanggal_transaksi = date('H:i:s d-m-Y');
-
             foreach($id_alokasis as $id_alokasi) {
                 $riwayat_transaksis[] = [
-                    'tanggal-transaksi' => $tanggal_transaksi,
                     'metode_pembayaran' => 'Non-Tunai',
                     'id_alokasi' => $id_alokasi
                 ];
@@ -76,5 +70,6 @@ class TransaksiServiceImpl implements TransaksiService
             $rows_affected = Alokasi::whereIn('id',$id_alokasis)->update(['status' => 'Dibayar']);
             return $rows_affected;
         });
+        return false;
     }
 }

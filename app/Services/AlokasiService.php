@@ -12,7 +12,7 @@ interface AlokasiService
     function kiosResmiSetAlokasi(): Collection;
     function pemerintahSetAlokasi(): array;
     function pemerintahSetAlokasiByTahun(string $tahun, string $musim_tanam): Collection;
-    function pemerintahTambahAlokasi(array $alokasi): void;
-    function pemerintahHapusAlokasi(int $id): void;
-    function pemerintahEditAlokasi(array $alokasi): void;
+    function pemerintahTambahAlokasi(array $alokasi): bool;
+    function pemerintahHapusAlokasi(int $id): bool;
+    function pemerintahEditAlokasi(array $alokasi): bool;
 }

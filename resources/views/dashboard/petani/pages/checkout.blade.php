@@ -1,7 +1,7 @@
 @extends('dashboard.petani.partials.body')
 @section('wrapper')
 <div class="p-4 sm:ml-64">
-    <form action="/petani/transaksi" method="post">
+    <form id="checkout-form" action="/petani/checkout" method="post">
     <div class="p-4">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 @csrf
@@ -32,6 +32,7 @@
                     <tbody>
                         @foreach ($alokasis as $alokasi)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <input type="hidden" name="id_alokasis[]" value="{{ $alokasi->id }}" id="">
                             <td scope="row" class="px-6 py-4">
                                 {{ $alokasi->jenis }}
                             </td>
@@ -39,13 +40,13 @@
                                 {{ $alokasi->jumlah_pupuk }}kg
                             </td>
                             <td class="px-6 py-4">
-                                {{ $alokasi->total_harga }}
+                                Rp{{ $alokasi->total_harga }}
                             </td>
                         </tr>
                         @endforeach
                         <tr>
                             <td colspan="2" scope="col" class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">Total:</td>
-                            <td scope="col" class="px-6 py-3 text-gray-900">{{ $total_harga }}</td>
+                            <td scope="col" class="px-6 font-medium py-3 text-gray-900">Rp{{ $total_harga }}</td>
                         </tr>
                     </tbody>
                     @else
@@ -61,15 +62,12 @@
                         </tbody>
                     </div>
                     @endif
-                </table>
-                
+                </table>    
             </div>
         </div>
         <div class="flex justify-center">
             <button type="button" id="pay-button" class="text-white inline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Bayar</button>
         </div>
     </form>
-
-  
 </div>
 @endsection

@@ -3,7 +3,7 @@
 <div class="p-4 sm:ml-64">
     <div class="p-4">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <form action="/petani/transaksi" method="post">
+            <form action="/petani/checkout" method="get">
                 @csrf
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <caption class=" w-full  px-5 pt-5 pb-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">

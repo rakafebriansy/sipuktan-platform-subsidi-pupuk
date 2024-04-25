@@ -54,7 +54,7 @@ class AlokasiServiceImpl implements AlokasiService
 
         return $alokasis;
     }
-    public function pemerintahTambahAlokasi(array $alokasi): void
+    public function pemerintahTambahAlokasi(array $alokasi): bool
     {
         $petani = Petani::query()->where('nik',$alokasi['nik'])->first();
         $kelompok_tani = KelompokTani::find($petani->id_kelompok_tani);
@@ -69,14 +69,17 @@ class AlokasiServiceImpl implements AlokasiService
                 'id_kios_resmi' => $kios_resmi->id,
             ]);
         });
+        return true;
     }
-    public function pemerintahHapusAlokasi(int $id): void
+    public function pemerintahHapusAlokasi(int $id): bool
     {
         DB::transaction(function () use ($id) {
             Alokasi::query()->where('id',$id)->delete();
         });
+        return true;
+
     }
-    public function pemerintahEditAlokasi(array $alokasi): void
+    public function pemerintahEditAlokasi(array $alokasi): bool
     {
         $petani = Petani::query()->where('nik',$alokasi['nik'])->first();
         $kelompok_tani = $petani->kelompok_tani;
@@ -89,6 +92,8 @@ class AlokasiServiceImpl implements AlokasiService
             'musim_tanam' => $alokasi['musim_tanam'],
             'id_kios_resmi' => $kios_resmi->id
         ]);
+        return true;
+
     }
     
 }

@@ -2,18 +2,19 @@ function editPassId(btn){
     const hiddenId = document.querySelector('#editAlokasiId');
     let tds = btn.parentElement.parentElement.children;
     let inputs = hiddenId.nextElementSibling.querySelectorAll('input, option')
+    let musim_tanam = document.getElementById('dropdownMTButton').innerText;
     hiddenId.value = btn.parentElement.dataset.id;
     inputs[0].value = btn.parentElement.dataset.nik;
     inputs[1].value = tds[1].innerText;
     inputs[2].value = document.querySelector('#dropdownTahunButton').innerText;
     for(let i = 3; i < inputs.length; i++) {
         let guess = inputs[i];
-        if(guess.innerText == tds[3].innerText) {
+        if(guess.innerText == tds[2].innerText) {
             guess.setAttribute('selected','');
-            guess.value = tds[3].dataset.value;
-        } else if (guess.innerText == tds[4].innerText) {
+            guess.value = tds[2].dataset.value;
+        } else if (guess.innerText == musim_tanam) {
             guess.setAttribute('selected','');
-            guess.value = tds[4].innerText;
+            guess.value = musim_tanam;
         }
     }
 }

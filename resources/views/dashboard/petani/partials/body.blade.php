@@ -16,7 +16,7 @@
        </button>
    </div>
     @elseif (session('success'))
-    <div id="alert-1" class="flex absolute z-50 left-1/2 transform -translate-x-1/2 items-center p-4 mb-4 text-blue-800 rounded-lg border  bg-blue-50 border-blue-300  dark:border-blue-800 dark:bg-gray-800 dark:text-blue-400" role="alert">
+    <div id="alert-1" class="flex top-4 absolute z-50 left-1/2 transform -translate-x-1/2 items-center p-4 mb-4 text-blue-800 rounded-lg border  bg-blue-50 border-blue-300  dark:border-blue-800 dark:bg-gray-800 dark:text-blue-400" role="alert">
        <span class="sr-only">Sukses</span>
        <div class="text-sm font-medium">
          {{ Session::get('success') }}
