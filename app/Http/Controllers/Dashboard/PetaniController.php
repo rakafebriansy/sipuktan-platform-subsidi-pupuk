@@ -36,7 +36,7 @@ class PetaniController extends Controller
             'initials' => $initials
         ]);
     }
-    public function setAlokasi()
+    public function setAlokasi(): View
     {
         $id = Session::get('id',null);
         ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
@@ -48,7 +48,7 @@ class PetaniController extends Controller
             'alokasis' => $alokasis
         ]);
     }
-    public function setTransaksi()
+    public function setTransaksi(): View
     {
         $id = Session::get('id',null);
         ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
@@ -58,6 +58,21 @@ class PetaniController extends Controller
             'petani' => $petani,
             'initials' => $initials,
             'alokasis' => $alokasis
+        ]);
+    }
+    public function setCheckout(Request $request): View
+    {
+        $petani = Petani::find(Session::get('id'));
+        $all_request = $request->all();
+        ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($petani->id);
+        ['snap_token' => $snap_token, 'alokasis' => $alokasis] = $this->transaksi_service->petaniSetCheckout($all_request['total_harga'], $petani->nama, $all_request['id_alokasis']);
+        return view('dashboard.petani.pages.checkout', [
+            'title' => 'Petani | Checkout',
+            'petani' => $petani,
+            'initials' => $initials,
+            'alokasis' => $alokasis,
+            'snap_token' => $snap_token,
+            'total_harga' => $all_request['total_harga']
         ]);
     }
 }

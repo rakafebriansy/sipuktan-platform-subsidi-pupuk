@@ -123,12 +123,18 @@ class AkunServiceImpl implements AkunService
     }
     public function pemerintahVerifikasiPetani($ids): bool
     {
-        $rows_affected = Petani::whereIn('id',$ids)->update(['aktif' => true]);
-        return $rows_affected;
+        DB::transaction(function() use ($ids) {
+            $rows_affected = Petani::whereIn('id',$ids)->update(['aktif' => true]);
+            return $rows_affected;
+        });
+        return false;
     }
     public function pemerintahVerifikasiKiosResmi($ids): bool
     {
-        $rows_affected = KiosResmi::whereIn('id',$ids)->update(['aktif' => true]);
-        return $rows_affected;
+        DB::transaction(function() use ($ids) {
+            $rows_affected = KiosResmi::whereIn('id',$ids)->update(['aktif' => true]);
+            return $rows_affected;
+        });
+        return false;
     }
 }

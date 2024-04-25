@@ -20,12 +20,7 @@ class RiwayatTransaksi extends Model
         'metode_pembayaran',
         'status_pembayaran',
         'id_alokasi',
-        'id_bank'
     ];
-    public function bank(): BelongsTo
-    {
-        return $this->belongsTo(Bank::class, 'id_bank');
-    }
     public function alokasi(): BelongsTo
     {
         return $this->belongsTo(Alokasi::class, 'id_alokasi');

@@ -18,14 +18,12 @@ class RiwayatTransaksiSeeder extends Seeder
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Non-Tunai',
             'id_alokasi' => 1,
-            'id_bank' => 'bri'
         ]);
         RiwayatTransaksi::create([
             'id' => 2,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Non-Tunai',
             'id_alokasi' => 2,
-            'id_bank' => 'bri'
         ]);
         RiwayatTransaksi::create([
             'id' => 3,

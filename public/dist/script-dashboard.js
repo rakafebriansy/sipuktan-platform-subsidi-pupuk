@@ -39,6 +39,14 @@ function getAlokasiFromTh(li, mode) {
     document.querySelector('#dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/alokasi?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
 }
+function sumTotalCheck() {
+    let total = 0;
+    document.querySelectorAll('.transaksi-check:checked').forEach(e => {
+        total += parseInt(e.dataset.harga);
+    });
+    document.querySelector('#tampilan-total > span').innerText = total;
+    document.getElementById('total-harga').value = total;
+}
 
 (function(){
 

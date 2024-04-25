@@ -38,6 +38,7 @@ Route::prefix('/petani')->group(function(){
         Route::get('/dashboard', [PetaniController::class, 'setDashboard']);
         Route::get('/alokasi', [PetaniController::class, 'setAlokasi']);
         Route::get('/transaksi', [PetaniController::class, 'setTransaksi']);
+        Route::post('/transaksi', [PetaniController::class, 'setCheckout']);
     });
 });
 Route::prefix('/kios-resmi')->group(function(){
