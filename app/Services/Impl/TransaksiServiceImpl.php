@@ -67,9 +67,8 @@ class TransaksiServiceImpl implements TransaksiService
             }
 
             RiwayatTransaksi::insert($riwayat_transaksis);
-            $rows_affected = Alokasi::whereIn('id',$id_alokasis)->update(['status' => 'Dibayar']);
-            return $rows_affected;
+            Alokasi::whereIn('id',$id_alokasis)->update(['status' => 'Dibayar']);
         });
-        return false;
+        return true;
     }
 }

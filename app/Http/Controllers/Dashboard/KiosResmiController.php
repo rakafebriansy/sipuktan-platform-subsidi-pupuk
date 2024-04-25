@@ -33,27 +33,23 @@ class KiosResmiController extends Controller
         $id = Session::get('id',null);
         $tahun = null;
         $mt = null;
-        if(isset($id)){
-            ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
-            $tahuns = $this->alokasi_service->kiosResmiSetAlokasi();
-            if(isset($request->tahun) && isset($request->musim_tanam)){
-                $tahun = $request->tahun;
-                $mt = $request->musim_tanam;
-                $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,$request->musim_tanam);
-            } else {
-                $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahuns[0]->tahun,'MT1');
-            }
-            return view('dashboard.kios-resmi.pages.alokasi', [
-                'title' => 'Kios Resmi | Alokasi',
-                'kios_resmi' => $kios_resmi,
-                'initials' => $initials,
-                'tahuns' => $tahuns,
-                'alokasis' => $alokasis,
-                'tahun' => $tahun,
-                'mt' => $mt
-            ]);
+        ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
+        $tahuns = $this->alokasi_service->kiosResmiSetAlokasi();
+        if(isset($request->tahun) && isset($request->musim_tanam)){
+            $tahun = $request->tahun;
+            $mt = $request->musim_tanam;
+            $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,$request->musim_tanam);
         } else {
-            return abort(403);
+            $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahuns[0]->tahun,'MT1');
         }
+        return view('dashboard.kios-resmi.pages.alokasi', [
+            'title' => 'Kios Resmi | Alokasi',
+            'kios_resmi' => $kios_resmi,
+            'initials' => $initials,
+            'tahuns' => $tahuns,
+            'alokasis' => $alokasis,
+            'tahun' => $tahun,
+            'mt' => $mt
+        ]);
     }
 }

@@ -78,8 +78,8 @@ class PetaniController extends Controller
     }
     public function checkout(Request $request)
     {
-        $success = $this->transaksi_service->petaniCheckout($request->all()['id_alokasis']);
-        if ($success) {
+        $id_alokasis = $request->all()['id_alokasis'];
+        if ($this->transaksi_service->petaniCheckout($id_alokasis)) {
             return redirect('/petani/transaksi')->with('success','Pembayaran Berhasil!');
         }
         return redirect('/petani/transaksi')->withErrors(['db' => 'Pembayaran Gagal!']);
