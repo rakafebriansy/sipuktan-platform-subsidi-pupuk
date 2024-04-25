@@ -11,7 +11,6 @@ use Illuminate\Foundation\Auth\User as Model;
 class KiosResmi extends Model
 {
     use HasFactory;
-    protected $guard = 'kiosResmi';
     protected $table = 'kios_resmis';
     protected $primaryKey = 'id';
     protected $keyType = 'int';
@@ -30,18 +29,6 @@ class KiosResmi extends Model
     protected $hidden = [
      'kata_sandi', 'remember_token',
     ];
-    public function getAuthIdentifierName()
-    {
-        return $this->id;
-    }
-    public function getAuthIdentifier()
-    {
-        return $this->nib;
-    }
-    public function getAuthPassword()
-    {
-     return $this->kata_sandi;
-    }
     public function pemilik_kios(): BelongsTo
     {
         return $this->belongsTo(PemilikKios::class,'id_pemilik_kios','id');

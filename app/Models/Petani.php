@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Model;
 
 class Petani extends Model
 {
     use HasFactory;
-    protected $guard = 'petani';
     protected $table = 'petanis';
     protected $primaryKey = 'id';
     protected $keyType = 'int';
@@ -29,25 +29,13 @@ class Petani extends Model
     protected $hidden = [
      'kata_sandi', 'remember_token',
     ];
-    public function getAuthIdentifierName()
-    {
-        return $this->id;
-    }
-    public function getAuthIdentifier()
-    {
-        return $this->nik;
-    }
-    public function getAuthPassword()
-    {
-     return $this->kata_sandi;
-    }
     public function kelompok_tani(): BelongsTo
     {
         return $this->belongsTo(KelompokTani::class,'id_kelompok_tani','id');
     }
-    public function alokasi(): HasOne
+    public function alokasis(): HasMany
     {
-        return $this->hasOne(Alokasi::class,'id_petani','id');
+        return $this->hasMany(Alokasi::class,'id_petani','id');
     }
     public function keluhans(): HasMany
     {
@@ -56,6 +44,15 @@ class Petani extends Model
     public function notifikasis(): HasMany
     {
         return $this->hasMany(Notifikasi::class,'id_petani','id');
+    }
+    public function riwayat_transaksis(): HasManyThrough
+    {
+        return $this->hasManyThrough(RiwayatTransaksi::class, Alokasi::class,
+        'id_petani',
+        'id_alokasi',
+        'id',
+        'id'
+    );
     }
     
 }

@@ -172,6 +172,7 @@ return [
         App\Providers\DashboardServiceProvider::class,
         App\Providers\AlokasiServiceProvider::class,
         App\Providers\TransaksiServiceProvider::class,
+        App\Providers\RiwayatTransaksiProvider::class,
     ])->toArray(),
 
     /*

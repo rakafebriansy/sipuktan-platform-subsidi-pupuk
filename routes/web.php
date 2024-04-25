@@ -39,7 +39,8 @@ Route::prefix('/petani')->group(function(){
         Route::get('/alokasi', [PetaniController::class, 'setAlokasi']);
         Route::get('/transaksi', [PetaniController::class, 'setTransaksi']);
         Route::get('/checkout', [PetaniController::class, 'setCheckout']);
-        Route::post('/checkout', [PetaniController::class, 'checkout'])->name('suksesBayar');
+        Route::post('/checkout', [PetaniController::class, 'checkout']);
+        Route::get('/riwayat-transaksi', [PetaniController::class, 'setRiwayatTransaksi']);
     });
 });
 Route::prefix('/kios-resmi')->group(function(){

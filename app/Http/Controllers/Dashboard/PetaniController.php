@@ -8,6 +8,7 @@ use App\Models\Alokasi;
 use App\Models\Petani;
 use App\Services\AlokasiService;
 use App\Services\DashboardService;
+use App\Services\RiwayatTransaksiService;
 use App\Services\TransaksiService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,11 +21,13 @@ class PetaniController extends Controller
     private DashboardService $dashboard_service;
     private AlokasiService $alokasi_service;
     private TransaksiService $transaksi_service;
-    public function __construct(DashboardService $dashboard_service, AlokasiService $alokasi_service, TransaksiService $transaksi_service)
+    private RiwayatTransaksiService $riwayat_transaksi_service;
+    public function __construct(DashboardService $dashboard_service, AlokasiService $alokasi_service, TransaksiService $transaksi_service, RiwayatTransaksiService $riwayat_transaksi_service)
     {
         $this->dashboard_service = $dashboard_service;
         $this->alokasi_service = $alokasi_service;
         $this->transaksi_service = $transaksi_service;
+        $this->riwayat_transaksi_service = $riwayat_transaksi_service;
     }
     public function setDashboard(): View
     {
@@ -76,12 +79,34 @@ class PetaniController extends Controller
             'total_harga' => $all_request['total_harga']
         ]);
     }
-    public function checkout(Request $request)
+    public function checkout(Request $request): RedirectResponse
     {
         $id_alokasis = $request->all()['id_alokasis'];
         if ($this->transaksi_service->petaniCheckout($id_alokasis)) {
             return redirect('/petani/transaksi')->with('success','Pembayaran Berhasil!');
         }
         return redirect('/petani/transaksi')->withErrors(['db' => 'Pembayaran Gagal!']);
+    }
+    public function setRiwayatTransaksi(Request $request): View
+    {
+        $id = Session::get('id');
+        $tahun = null;
+        $mt = null;
+        ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
+        $tahuns = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksi($id);
+        if(isset($request->tahun) && isset($request->musim_tanam)) {
+            $tahun = $request->tahun;
+            $mt = $request->musim_tanam;
+            $riwayat_transaksis = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksiByTahun($id, $tahun);
+        } else {
+            $riwayat_transaksis = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksiByTahun($id, $tahuns[0]->tahun);
+        }
+        return view('dashboard.petani.pages.riwayat-transaksi', [
+            'title' => 'Petani | Riwayat Transaksi',
+            'petani' => $petani,
+            'initials' => $initials,
+            'riwayat_transaksis' => $riwayat_transaksis,
+            'tahuns' => $tahuns,
+        ]);
     }
 }
