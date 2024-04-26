@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </caption>
-                @if (isset($riwayat_transaksis))
+                @if (count($riwayat_transaksis))
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -89,11 +89,11 @@
 {{-- DROPDOWN --}}
 
 <div id="dropdownTahun" class="z-50 hidden bg-white rounded-lg shadow w-24 dark:bg-gray-700">
-    <ul class="py-2 max-h-36 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUsersButton">
+    <ul class="py-2 max-h-36 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUsersButton" class="cursor-pointer">
       @foreach ($tahuns as $tahun)
-      <li onclick="getRiwayatFromTh(this,'pemerintah')">
+      <li onclick="getRiwayatFromTh(this,'petani')">
         
-        <p class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">
+        <p class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
           {{ $tahun->tahun }}
         </p>
       </li>

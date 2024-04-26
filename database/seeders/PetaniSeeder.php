@@ -30,6 +30,7 @@ class PetaniSeeder extends Seeder
             'nama' => 'Geralt Rivia',
             'kata_sandi' => Hash::make('geralt@1'),
             'foto_ktp' => 'ktp002.jpg',
+            'aktif' => 1,
             'nomor_telepon' => '081232163732',
             'id_kelompok_tani' => 1
         ]);

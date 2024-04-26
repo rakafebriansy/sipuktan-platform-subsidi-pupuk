@@ -95,7 +95,6 @@ class PetaniController extends Controller
     {
         $id = Session::get('id');
         $tahun = null;
-        $mt = null;
         ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
         $tahuns = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksi($id);
         if(isset($request->tahun) && isset($request->musim_tanam)) {

@@ -48,6 +48,14 @@ function sumTotalCheck() {
     document.querySelector('#tampilan-total > span').innerText = total;
     document.getElementById('total-harga').value = total;
 }
+function getRiwayatFromMt(li, mode) {
+    document.querySelector('#dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
+    location.replace('/' + mode + '/riwayat-transaksi?tahun=' + document.querySelector('#dropdownTahunButton').innerText  + '&&musim_tanam=' + li.querySelector('p').innerText );
+}
+function getRiwayatFromTh() {
+    document.querySelector('#dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
+    location.replace('/' + mode + '/riwayat-transaksi?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
+}
 
 (function(){
 

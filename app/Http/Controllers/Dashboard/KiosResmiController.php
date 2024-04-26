@@ -88,14 +88,15 @@ class KiosResmiController extends Controller
     {
         $id = Session::get('id');
         $tahun = null;
+        $musim_tanam = null;
         ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
         $tahuns = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksi($id);
         if(isset($request->tahun) && isset($request->musim_tanam)) {
             $tahun = $request->tahun;
-            $mt = $request->musim_tanam;
-            $riwayat_transaksis = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahun);
+            $musim_tanam = $request->musim_tanam;
+            $riwayat_transaksis = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahun, $musim_tanam);
         } else {
-            $riwayat_transaksis = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahuns[0]->tahun);
+            $riwayat_transaksis = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahuns[0]->tahun, 'MT1');
         }
         return view('dashboard.kios-resmi.pages.riwayat-transaksi', [
             'title' => 'Kios Resmi | Riwayat Transaksi',
@@ -103,6 +104,8 @@ class KiosResmiController extends Controller
             'initials' => $initials,
             'riwayat_transaksis' => $riwayat_transaksis,
             'tahuns' => $tahuns,
+            'tahun' => $tahuns[0]->tahun,
+            'mt' => $musim_tanam
         ]);
     }
 }

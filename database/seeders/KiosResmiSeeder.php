@@ -21,6 +21,7 @@ class KiosResmiSeeder extends Seeder
             'jalan'=> 'Jl. Mangga',
             'kata_sandi' => Hash::make('nixon@1'),
             'id_pemilik_kios' => 1,
+            'aktif' => 1,
             'id_kecamatan' => 'sumbersari'
         ]);
         KiosResmi::create([
