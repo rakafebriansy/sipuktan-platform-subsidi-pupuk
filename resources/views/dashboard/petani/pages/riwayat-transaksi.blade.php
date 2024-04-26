@@ -38,6 +38,9 @@
                         <th scope="col" class="px-6 py-3">
                             <p class="inline-block">Nominal</p>
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            <p class="inline-block">Musim Tanam</p>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +60,9 @@
                         </td>
                         <td class="px-6 py-4">
                             Rp{{ $riwayat_transaksi->total_harga }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $riwayat_transaksi->musim_tanam }}
                         </td>
                     </tr>
                     @endforeach
