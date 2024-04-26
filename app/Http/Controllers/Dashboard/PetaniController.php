@@ -63,21 +63,25 @@ class PetaniController extends Controller
             'alokasis' => $alokasis
         ]);
     }
-    public function setCheckoutNonTunai(Request $request): View
+    public function setCheckoutNonTunai(Request $request): View|RedirectResponse
     {
         $petani = Petani::find(Session::get('id'));
-        $all_request = $request->all();
-        ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($petani->id);
-        ['snap_token' => $snap_token, 'alokasis' => $alokasis] = $this->transaksi_service->petaniSetCheckoutNonTunai($all_request['total_harga'], $petani->nama, $all_request['id_alokasis']);
-        return view('dashboard.petani.pages.checkout', [
-            'title' => 'Petani | Checkout',
-            'petani' => $petani,
-            'initials' => $initials,
-            'alokasis' => $alokasis,
-            'id_alokasis' => $all_request['id_alokasis'],
-            'snap_token' => $snap_token,
-            'total_harga' => $all_request['total_harga']
-        ]);
+        if(isset($request->all()['id_alokasis'])) {
+            $all_request = $request->all();
+            ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($petani->id);
+            ['snap_token' => $snap_token, 'alokasis' => $alokasis] = $this->transaksi_service->petaniSetCheckoutNonTunai($all_request['total_harga'], $petani->nama, $all_request['id_alokasis']);
+            return view('dashboard.petani.pages.checkout', [
+                'title' => 'Petani | Checkout',
+                'petani' => $petani,
+                'initials' => $initials,
+                'alokasis' => $alokasis,
+                'id_alokasis' => $all_request['id_alokasis'],
+                'snap_token' => $snap_token,
+                'total_harga' => $all_request['total_harga']
+            ]);
+        }
+        return redirect('/petani/transaksi')->withErrors(['db' => 'Pilih Pembayaran Yang Tersedia!']);
+
     }
     public function checkoutNonTunai(Request $request): RedirectResponse
     {

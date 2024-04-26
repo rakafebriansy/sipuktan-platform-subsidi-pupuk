@@ -26,4 +26,22 @@ class RiwayatTransaksiServiceImpl implements RiwayatTransaksiService
         ->orderBy('riwayat_transaksis.tanggal_transaksi')->get();
         return $riwayat_transaksis;
     }
+    public function kiosResmiSetRiwayatTransaksi(int $id_kios_resmi): Collection
+    {
+        $tahuns = Alokasi::distinct()->where('id_kios_resmi',$id_kios_resmi)->orderBy('tahun','desc')->get(['tahun']);
+        return $tahuns;
+    }
+    public function kiosResmiSetRiwayatTransaksiByTahun(int $id_kios_resmi, int $tahun): Collection
+    {
+        $riwayat_transaksis = Alokasi::select('alokasis.*','riwayat_transaksis.*','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
+        ->selectRaw('alokasis.jumlah_pupuk * jenis_pupuks.harga as total_harga')
+        ->join('riwayat_transaksis','alokasis.id','riwayat_transaksis.id_alokasi')
+        ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
+        ->join('petanis','alokasis.id_petani','petanis.id')
+        ->where('id_kios_resmi', $id_kios_resmi)
+        ->where('alokasis.status','Dibayar')
+        ->where('alokasis.tahun',$tahun)
+        ->orderBy('riwayat_transaksis.tanggal_transaksi')->get();
+        return $riwayat_transaksis;
+    }
 }

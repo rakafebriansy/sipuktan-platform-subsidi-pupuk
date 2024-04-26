@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\KiosResmi;
+use App\Models\RiwayatTransaksi;
 use App\Services\AlokasiService;
 use App\Services\DashboardService;
+use App\Services\RiwayatTransaksiService;
 use App\Services\TransaksiService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
@@ -16,11 +19,13 @@ class KiosResmiController extends Controller
     private DashboardService $dashboard_service;
     private AlokasiService $alokasi_service;
     private TransaksiService $transaksi_service;
-    public function __construct(DashboardService $dashboard_service, AlokasiService $alokasi_service, TransaksiService $transaksi_service)
+    private RiwayatTransaksiService $riwayat_transaksi_service;
+    public function __construct(DashboardService $dashboard_service, AlokasiService $alokasi_service, TransaksiService $transaksi_service, RiwayatTransaksiService $riwayat_transaksi_service)
     {
         $this->dashboard_service = $dashboard_service;
         $this->alokasi_service = $alokasi_service;
         $this->transaksi_service = $transaksi_service;
+        $this->riwayat_transaksi_service = $riwayat_transaksi_service;
     }
     public function setDashboard(): View
     {
@@ -66,6 +71,38 @@ class KiosResmiController extends Controller
             'kios_resmi' => $kios_resmi,
             'initials' => $initials,
             'alokasis' => $alokasis
+        ]);
+    }
+    public function transaksi(Request $request): RedirectResponse
+    {
+        $kios_resmi = KiosResmi::find(Session::get('id'));
+        if(isset($request->all()['id_alokasis'])) {
+            $id_alokasis = $request->all()['id_alokasis'];
+            if ($this->transaksi_service->kiosResmiTransaksi($id_alokasis)) {
+                return redirect('/kios-resmi/transaksi')->with('success','Pupuk Berhasil Lunas!');
+            }
+        }
+        return redirect('/kios-resmi/transaksi')->withErrors(['db' => 'Pilih Pembayaran Yang Tersedia!']);
+    }
+    public function setRiwayatTransaksi(Request $request): View
+    {
+        $id = Session::get('id');
+        $tahun = null;
+        ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
+        $tahuns = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksi($id);
+        if(isset($request->tahun) && isset($request->musim_tanam)) {
+            $tahun = $request->tahun;
+            $mt = $request->musim_tanam;
+            $riwayat_transaksis = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahun);
+        } else {
+            $riwayat_transaksis = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahuns[0]->tahun);
+        }
+        return view('dashboard.kios-resmi.pages.riwayat-transaksi', [
+            'title' => 'Kios Resmi | Riwayat Transaksi',
+            'kios_resmi' => $kios_resmi,
+            'initials' => $initials,
+            'riwayat_transaksis' => $riwayat_transaksis,
+            'tahuns' => $tahuns,
         ]);
     }
 }

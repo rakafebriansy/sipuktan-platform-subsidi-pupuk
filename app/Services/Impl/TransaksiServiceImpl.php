@@ -16,13 +16,22 @@ use Illuminate\Support\Facades\DB;
 
 class TransaksiServiceImpl implements TransaksiService
 {
-    public function petaniSetTransaksi(int $id): Collection
+    public function petaniSetTransaksi(int $id_petani): Collection
     {
         $alokasis = Alokasi::query()->select('alokasis.*','jenis_pupuks.jenis as jenis','kios_resmis.nama as kios_resmi')
         ->selectRaw('alokasis.jumlah_pupuk * jenis_pupuks.harga as total_harga')
         ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
         ->join('kios_resmis','alokasis.id_kios_resmi','kios_resmis.id')
-        ->where('id_petani', $id)->where('alokasis.status','Menunggu Pembayaran')->orderBy('jenis_pupuks.jenis')->get();
+        ->where('id_petani', $id_petani)->where('alokasis.status','Menunggu Pembayaran')->orderBy('jenis_pupuks.jenis')->get();
+        return $alokasis;
+    }
+    public function kiosResmiSetTransaksi(int $id_kios_resmi): Collection
+    {
+        $alokasis = Alokasi::query()->select('alokasis.*','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
+        ->selectRaw('alokasis.jumlah_pupuk * jenis_pupuks.harga as total_harga')
+        ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
+        ->join('petanis','alokasis.id_petani','petanis.id')
+        ->where('id_kios_resmi', $id_kios_resmi)->where('alokasis.status','Menunggu Pembayaran')->orderBy('petanis.nama')->get();
         return $alokasis;
     }
     public function petaniSetCheckoutNonTunai(int $total_harga, string $nama, array $id_alokasis): array
@@ -54,6 +63,21 @@ class TransaksiServiceImpl implements TransaksiService
         //MIDTRANS API END
 
         return ['snap_token' => $snap_token, 'alokasis' => $alokasis];
+    }
+    public function kiosResmiTransaksi(array $id_alokasis): bool
+    {
+        DB::transaction(function () use ($id_alokasis) {
+            $riwayat_transaksis = [];
+            foreach($id_alokasis as $id_alokasi) {
+                $riwayat_transaksis[] = [
+                    'metode_pembayaran' => 'Tunai',
+                    'id_alokasi' => $id_alokasi
+                ];
+            }
+            RiwayatTransaksi::insert($riwayat_transaksis);
+            Alokasi::whereIn('id',$id_alokasis)->update(['status' => 'Dibayar']);
+        });
+        return true;
     }
     public function petaniCheckoutNonTunai(array $id_alokasis): bool
     {

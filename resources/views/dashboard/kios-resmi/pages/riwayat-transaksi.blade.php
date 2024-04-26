@@ -1,4 +1,4 @@
-@extends('dashboard.petani.partials.body')
+@extends('dashboard.kios-resmi.partials.body')
 @section('wrapper')
 <div class="p-4 sm:ml-64">
     <div class="p-4">
@@ -27,10 +27,13 @@
                             <p class="inline-block">Waktu Transaksi</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            <p class="inline-block">Nama Petani</p>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             <p class="inline-block">Jenis Pupuk</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <p class="inline-block">Metode Pembayaran</p>
+                            <p class="inline-block">Metode</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <p class="inline-block">Jumlah</p>
@@ -45,6 +48,9 @@
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4">
                             {{ date('H:i d-m-Y',strtotime($riwayat_transaksi->tanggal_transaksi))}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $riwayat_transaksi->nama_petani }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $riwayat_transaksi->jenis_pupuk->jenis }}

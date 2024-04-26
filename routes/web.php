@@ -38,8 +38,8 @@ Route::prefix('/petani')->group(function(){
         Route::get('/dashboard', [PetaniController::class, 'setDashboard']);
         Route::get('/alokasi', [PetaniController::class, 'setAlokasi']);
         Route::get('/transaksi', [PetaniController::class, 'setTransaksi']);
-        Route::get('/checkout', [PetaniController::class, 'setCheckout']);
-        Route::post('/checkout', [PetaniController::class, 'checkout']);
+        Route::get('/checkout', [PetaniController::class, 'setCheckoutNonTunai']);
+        Route::post('/checkout', [PetaniController::class, 'checkoutNonTunai']);
         Route::get('/riwayat-transaksi', [PetaniController::class, 'setRiwayatTransaksi']);
     });
 });
@@ -56,6 +56,8 @@ Route::prefix('/kios-resmi')->group(function(){
         Route::get('/dashboard', [KiosResmiController::class, 'setDashboard']);
         Route::get('/alokasi', [KiosResmiController::class, 'setAlokasi']);
         Route::get('/transaksi', [KiosResmiController::class, 'setTransaksi']);
+        Route::post('/transaksi', [KiosResmiController::class, 'transaksi']);
+        Route::get('/riwayat-transaksi', [KiosResmiController::class, 'setRiwayatTransaksi']);
     });
 });
 
