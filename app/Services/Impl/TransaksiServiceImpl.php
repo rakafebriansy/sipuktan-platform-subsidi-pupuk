@@ -25,7 +25,7 @@ class TransaksiServiceImpl implements TransaksiService
         ->where('id_petani', $id)->where('alokasis.status','Menunggu Pembayaran')->orderBy('jenis_pupuks.jenis')->get();
         return $alokasis;
     }
-    public function petaniSetCheckout(int $total_harga, string $nama, array $id_alokasis): array
+    public function petaniSetCheckoutNonTunai(int $total_harga, string $nama, array $id_alokasis): array
     {
         $nama_awal = explode(' ', $nama)[0];
 
@@ -55,7 +55,7 @@ class TransaksiServiceImpl implements TransaksiService
 
         return ['snap_token' => $snap_token, 'alokasis' => $alokasis];
     }
-    public function petaniCheckout(array $id_alokasis): bool
+    public function petaniCheckoutNonTunai(array $id_alokasis): bool
     {
         DB::transaction(function () use ($id_alokasis) {
             $riwayat_transaksis = [];

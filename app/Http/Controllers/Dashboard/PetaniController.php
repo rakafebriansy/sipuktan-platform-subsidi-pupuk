@@ -63,12 +63,12 @@ class PetaniController extends Controller
             'alokasis' => $alokasis
         ]);
     }
-    public function setCheckout(Request $request): View
+    public function setCheckoutNonTunai(Request $request): View
     {
         $petani = Petani::find(Session::get('id'));
         $all_request = $request->all();
         ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($petani->id);
-        ['snap_token' => $snap_token, 'alokasis' => $alokasis] = $this->transaksi_service->petaniSetCheckout($all_request['total_harga'], $petani->nama, $all_request['id_alokasis']);
+        ['snap_token' => $snap_token, 'alokasis' => $alokasis] = $this->transaksi_service->petaniSetCheckoutNonTunai($all_request['total_harga'], $petani->nama, $all_request['id_alokasis']);
         return view('dashboard.petani.pages.checkout', [
             'title' => 'Petani | Checkout',
             'petani' => $petani,
@@ -79,10 +79,10 @@ class PetaniController extends Controller
             'total_harga' => $all_request['total_harga']
         ]);
     }
-    public function checkout(Request $request): RedirectResponse
+    public function checkoutNonTunai(Request $request): RedirectResponse
     {
         $id_alokasis = $request->all()['id_alokasis'];
-        if ($this->transaksi_service->petaniCheckout($id_alokasis)) {
+        if ($this->transaksi_service->petaniCheckoutNonTunai($id_alokasis)) {
             return redirect('/petani/transaksi')->with('success','Pembayaran Berhasil!');
         }
         return redirect('/petani/transaksi')->withErrors(['db' => 'Pembayaran Gagal!']);

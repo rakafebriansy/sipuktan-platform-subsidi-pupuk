@@ -6,19 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\KiosResmi;
 use App\Services\AlokasiService;
 use App\Services\DashboardService;
+use App\Services\TransaksiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class KiosResmiController extends Controller
 {
     private DashboardService $dashboard_service;
     private AlokasiService $alokasi_service;
-    public function __construct(DashboardService $dashboard_service, AlokasiService $alokasi_service)
+    private TransaksiService $transaksi_service;
+    public function __construct(DashboardService $dashboard_service, AlokasiService $alokasi_service, TransaksiService $transaksi_service)
     {
         $this->dashboard_service = $dashboard_service;
         $this->alokasi_service = $alokasi_service;
+        $this->transaksi_service = $transaksi_service;
     }
-    public function setDashboard()
+    public function setDashboard(): View
     {
         $id = Session::get('id',null);
         ['kios_resmi' => $kios_resmi,'initials' => $initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
@@ -28,7 +32,7 @@ class KiosResmiController extends Controller
             'initials' => $initials
         ]);
     }
-    public function setAlokasi(Request $request)
+    public function setAlokasi(Request $request): View
     {
         $id = Session::get('id',null);
         $tahun = null;
@@ -50,6 +54,18 @@ class KiosResmiController extends Controller
             'alokasis' => $alokasis,
             'tahun' => $tahun,
             'mt' => $mt
+        ]);
+    }
+    public function setTransaksi(): View
+    {
+        $id = Session::get('id',null);
+        ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
+        $alokasis = $this->transaksi_service->kiosResmiSetTransaksi($id);
+        return view('dashboard.kios-resmi.pages.transaksi', [
+            'title' => 'Kios Resmi | Transaksi',
+            'kios_resmi' => $kios_resmi,
+            'initials' => $initials,
+            'alokasis' => $alokasis
         ]);
     }
 }
