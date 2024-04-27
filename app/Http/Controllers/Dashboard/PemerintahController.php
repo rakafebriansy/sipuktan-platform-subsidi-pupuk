@@ -44,7 +44,7 @@ class PemerintahController extends Controller
     public function setAlokasi(Request $request): View
     {
         $id = Session::get('id',null);
-        $tahun = null;
+        $tahun = intval(date('Y'));
         $musim_tanam = null;
         ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         ['tahuns' => $tahuns, 'jenis_pupuks' => $jenis_pupuks] = $this->alokasi_service->pemerintahSetAlokasi();
@@ -53,7 +53,7 @@ class PemerintahController extends Controller
             $musim_tanam = $request->musim_tanam;
             $alokasis = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahun,$request->musim_tanam);
         } else {
-            $alokasis = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahuns[0]->tahun,'MT1');
+            $alokasis = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahun,'MT1');
         }
         return view('dashboard.pemerintah.pages.alokasi', [
             'title' => 'Pemerintah | Alokasi',
