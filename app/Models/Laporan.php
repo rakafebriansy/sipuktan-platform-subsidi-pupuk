@@ -18,8 +18,8 @@ class Laporan extends Model
         'tanggal_pengambilan',
         'foto_bukti_pengambilan',
         'foto_ktp',
-        'surat_kuasa',
-        'tanda_tangan',
+        'foto_surat_kuasa',
+        'foto_tanda_tangan',
         'status_verifikasi',
         'id_riwayat_transaksi'
     ];

@@ -94,7 +94,7 @@ class PetaniController extends Controller
     public function setRiwayatTransaksi(Request $request): View
     {
         $id = Session::get('id');
-        $tahun = null;
+        $tahun = intval(date('Y'));
         ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
         $tahuns = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksi($id);
         if(isset($request->tahun) && isset($request->musim_tanam)) {
@@ -102,7 +102,7 @@ class PetaniController extends Controller
             $mt = $request->musim_tanam;
             $riwayat_transaksis = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksiByTahun($id, $tahun);
         } else {
-            $riwayat_transaksis = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksiByTahun($id, $tahuns[0]->tahun);
+            $riwayat_transaksis = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksiByTahun($id, $tahun);
         }
         return view('dashboard.petani.pages.riwayat-transaksi', [
             'title' => 'Petani | Riwayat Transaksi',

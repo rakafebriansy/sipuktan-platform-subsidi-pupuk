@@ -19,9 +19,10 @@ class DashboardServiceImpl implements DashboardService
 {    
     public function petaniSetSidebar(int $id): array
     {
-        $petani = Petani::select('petanis.*','kelompok_tanis.nama as poktan','kios_resmis.nama as kios_resmi','kios_resmis.jalan as jalan','kecamatans.nama as kecamatan')
+        $petani = Petani::select('petanis.*','kelompok_tanis.nama as poktan','kios_resmis.nama as kios_resmi','kios_resmis.jalan as jalan','kecamatans.nama as kecamatan','pemilik_kios.nomor_telepon as notelp_kios')
         ->join('kelompok_tanis','petanis.id_kelompok_tani','kelompok_tanis.id')
         ->join('kios_resmis','kelompok_tanis.id_kios_resmi','kios_resmis.id')
+        ->join('pemilik_kios','kios_resmis.id_pemilik_kios','pemilik_kios.id')
         ->join('kecamatans','kecamatans.id','kios_resmis.id_kecamatan')
         ->where('petanis.id',$id)->first();
         $nama = explode(" ", $petani->nama);

@@ -43,7 +43,7 @@ class KiosResmiController extends Controller
     public function setAlokasi(Request $request): View
     {
         $id = Session::get('id',null);
-        $tahun = null;
+        $tahun = intval(date('Y'));
         $mt = null;
         ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
         $tahuns = $this->alokasi_service->kiosResmiSetAlokasi();
@@ -52,7 +52,7 @@ class KiosResmiController extends Controller
             $mt = $request->musim_tanam;
             $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,$request->musim_tanam);
         } else {
-            $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahuns[0]->tahun,'MT1');
+            $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,'MT1');
         }
         return view('dashboard.kios-resmi.pages.alokasi', [
             'title' => 'Kios Resmi | Alokasi',
@@ -90,7 +90,7 @@ class KiosResmiController extends Controller
     public function setRiwayatTransaksi(Request $request): View
     {
         $id = Session::get('id');
-        $tahun = null;
+        $tahun = intval(date('Y'));
         $musim_tanam = null;
         ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
         $tahuns = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksi($id);
@@ -99,7 +99,7 @@ class KiosResmiController extends Controller
             $musim_tanam = $request->musim_tanam;
             $riwayat_transaksis = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahun, $musim_tanam);
         } else {
-            $riwayat_transaksis = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahuns[0]->tahun, 'MT1');
+            $riwayat_transaksis = $this->riwayat_transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahun, 'MT1');
         }
         return view('dashboard.kios-resmi.pages.riwayat-transaksi', [
             'title' => 'Kios Resmi | Riwayat Transaksi',
@@ -107,14 +107,14 @@ class KiosResmiController extends Controller
             'initials' => $initials,
             'riwayat_transaksis' => $riwayat_transaksis,
             'tahuns' => $tahuns,
-            'tahun' => $tahuns[0]->tahun,
+            'tahun' => $tahun,
             'mt' => $musim_tanam
         ]);
     }
     public function setLaporan(Request $request): View
     {
         $id = Session::get('id');
-        $tahun = null;
+        $tahun = intval(date('Y'));
         $musim_tanam = null;
         ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
         $tahuns = $this->laporan_service->kiosResmiSetLaporan($id);
@@ -123,7 +123,7 @@ class KiosResmiController extends Controller
             $musim_tanam = $request->musim_tanam;
             $riwayat_transaksis = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahun, $musim_tanam);
         } else {
-            $riwayat_transaksis = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahuns[0]->tahun, 'MT1');
+            $riwayat_transaksis = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahun, 'MT1');
         }
         return view('dashboard.kios-resmi.pages.laporan', [
             'title' => 'Kios Resmi | Laporan',
@@ -131,7 +131,7 @@ class KiosResmiController extends Controller
             'initials' => $initials,
             'riwayat_transaksis' => $riwayat_transaksis,
             'tahuns' => $tahuns,
-            'tahun' => $tahuns[0]->tahun,
+            'tahun' => $tahun,
             'mt' => $musim_tanam
         ]);
     }

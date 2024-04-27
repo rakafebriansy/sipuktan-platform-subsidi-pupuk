@@ -37,7 +37,6 @@ class AuthController extends Controller
     }
     public function setPetaniLogin(): Response
     {
-        dd('kontol');
         return response()->view('homepage.pages.petani.login',[
             'title' => 'Petani | Login'
         ]);
@@ -182,7 +181,6 @@ class AuthController extends Controller
             try {
                 $validated = $request->validated();
                 if($validated['sandi_baru'] == $validated['sandi_ulang']) {
-                    dd($validated);
                     if($this->akun_service->petaniGantiSandi($id,$validated)) {
                         return redirect('/petani/dashboard')->with('success','Kata sandi berhasil diperbarui');
                     } else {
