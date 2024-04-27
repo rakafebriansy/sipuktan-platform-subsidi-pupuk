@@ -6,7 +6,7 @@ use App\Services\Impl\TransaksiServiceImpl;
 use App\Services\TransaksiService;
 use Illuminate\Support\ServiceProvider;
 
-class TransaksiServiceProvider extends ServiceProvider
+class TransaksiServiceProvider extends ServiceProvider 
 {
     public array $singletons =[
         TransaksiService::class => TransaksiServiceImpl::class

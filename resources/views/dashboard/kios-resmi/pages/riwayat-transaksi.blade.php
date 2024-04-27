@@ -57,7 +57,7 @@
                             {{ $riwayat_transaksi->nama_petani }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $riwayat_transaksi->jenis_pupuk->jenis }}
+                            {{ $riwayat_transaksi->jenis }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $riwayat_transaksi->metode_pembayaran }}

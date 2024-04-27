@@ -2,15 +2,15 @@
 
 namespace App\Providers;
 
-use App\Services\AlokasiService;
-use App\Services\Impl\AlokasiServiceImpl;
+use App\Services\Impl\LaporanServiceImpl;
+use App\Services\LaporanService;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class AlokasiServiceProvider extends ServiceProvider implements DeferrableProvider
+class LaporanServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public array $singletons =[
-        AlokasiService::class => AlokasiServiceImpl::class
+        LaporanService::class => LaporanServiceImpl::class
     ];
     /**
      * Register services.
@@ -29,6 +29,6 @@ class AlokasiServiceProvider extends ServiceProvider implements DeferrableProvid
     }
     public function provides():array
     {
-        return [AlokasiService::class];
+        return [LaporanService::class];
     }
 }

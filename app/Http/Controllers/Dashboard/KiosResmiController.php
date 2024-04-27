@@ -7,6 +7,7 @@ use App\Models\KiosResmi;
 use App\Models\RiwayatTransaksi;
 use App\Services\AlokasiService;
 use App\Services\DashboardService;
+use App\Services\LaporanService;
 use App\Services\RiwayatTransaksiService;
 use App\Services\TransaksiService;
 use Illuminate\Http\RedirectResponse;
@@ -20,12 +21,14 @@ class KiosResmiController extends Controller
     private AlokasiService $alokasi_service;
     private TransaksiService $transaksi_service;
     private RiwayatTransaksiService $riwayat_transaksi_service;
-    public function __construct(DashboardService $dashboard_service, AlokasiService $alokasi_service, TransaksiService $transaksi_service, RiwayatTransaksiService $riwayat_transaksi_service)
+    private LaporanService $laporan_service;
+    public function __construct(DashboardService $dashboard_service, AlokasiService $alokasi_service, TransaksiService $transaksi_service, RiwayatTransaksiService $riwayat_transaksi_service, LaporanService $laporan_service)
     {
         $this->dashboard_service = $dashboard_service;
         $this->alokasi_service = $alokasi_service;
         $this->transaksi_service = $transaksi_service;
         $this->riwayat_transaksi_service = $riwayat_transaksi_service;
+        $this->laporan_service = $laporan_service;
     }
     public function setDashboard(): View
     {
@@ -103,6 +106,30 @@ class KiosResmiController extends Controller
             'kios_resmi' => $kios_resmi,
             'initials' => $initials,
             'riwayat_transaksis' => $riwayat_transaksis,
+            'tahuns' => $tahuns,
+            'tahun' => $tahuns[0]->tahun,
+            'mt' => $musim_tanam
+        ]);
+    }
+    public function setLaporan(Request $request): View
+    {
+        $id = Session::get('id');
+        $tahun = null;
+        $musim_tanam = null;
+        ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
+        $tahuns = $this->laporan_service->kiosResmiSetLaporan($id);
+        if(isset($request->tahun) && isset($request->musim_tanam)) {
+            $tahun = $request->tahun;
+            $musim_tanam = $request->musim_tanam;
+            $laporans = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahun, $musim_tanam);
+        } else {
+            $laporans = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahuns[0]->tahun, 'MT1');
+        }
+        return view('dashboard.kios-resmi.pages.laporan', [
+            'title' => 'Kios Resmi | Laporan',
+            'kios_resmi' => $kios_resmi,
+            'initials' => $initials,
+            'laporans' => $laporans,
             'tahuns' => $tahuns,
             'tahun' => $tahuns[0]->tahun,
             'mt' => $musim_tanam
