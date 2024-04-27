@@ -58,6 +58,7 @@ Route::prefix('/kios-resmi')->group(function(){
         Route::get('/transaksi', [KiosResmiController::class, 'setTransaksi']);
         Route::post('/transaksi', [KiosResmiController::class, 'transaksi']);
         Route::get('/riwayat-transaksi', [KiosResmiController::class, 'setRiwayatTransaksi']);
+        Route::get('/laporan', [KiosResmiController::class, 'setLaporan']);
     });
 });
 

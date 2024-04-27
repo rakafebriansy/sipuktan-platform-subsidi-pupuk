@@ -61,6 +61,14 @@ function getDetailAlokasiPetani(btn) {
     table_rows.querySelector('tr td:nth-child(2)').innerText = btn.dataset.telp;
     table_rows.querySelector('tr:nth-child(2) td:nth-child(2)').innerText = btn.dataset.poktan;
 }
+function getRiwayatLaporFromMt(li, mode) {
+    document.querySelector('#dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
+    location.replace('/' + mode + '/laporan?tahun=' + document.querySelector('#dropdownTahunButton').innerText  + '&&musim_tanam=' + li.querySelector('p').innerText );
+}
+function getRiwayatLaporFromTh() {
+    document.querySelector('#dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
+    location.replace('/' + mode + '/laporan?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
+}
 
 (function(){
 
