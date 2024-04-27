@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\KiosResmiLaporanRequest;
 use App\Models\KiosResmi;
 use App\Models\RiwayatTransaksi;
 use App\Services\AlokasiService;
@@ -78,7 +79,6 @@ class KiosResmiController extends Controller
     }
     public function transaksi(Request $request): RedirectResponse
     {
-        $kios_resmi = KiosResmi::find(Session::get('id'));
         if(isset($request->all()['id_alokasis'])) {
             $id_alokasis = $request->all()['id_alokasis'];
             if ($this->transaksi_service->kiosResmiTransaksi($id_alokasis)) {
@@ -134,5 +134,13 @@ class KiosResmiController extends Controller
             'tahun' => $tahun,
             'mt' => $musim_tanam
         ]);
+    }
+    public function laporan(KiosResmiLaporanRequest $request)
+    {
+        $validated = $request->validated();
+        if($this->laporan_service->kiosResmiLaporan($validated)) {
+            return redirect('/kios-resmi/laporan?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with('success', 'Data laporan berhasil ditambahkan');
+        }
+        return redirect('/kios-resmi/laporan?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with(['error' => 'Data laporan gagal ditambahkan']);
     }
 }

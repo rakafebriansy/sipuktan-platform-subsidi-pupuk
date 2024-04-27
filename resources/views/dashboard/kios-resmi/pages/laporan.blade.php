@@ -72,7 +72,7 @@
                             Rp{{ $riwayat_transaksi->total_harga }}
                         </td>
                         <td class="py-4 flex flex-row px-6">
-                            <button data-modal-target="laporModal" data-modal-toggle="laporModal" type="button" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Lapor</button>
+                            <button data-id="{{ $riwayat_transaksi->id }}" onclick="setRiwayatIdLaporan(this)" data-modal-target="laporModal" data-modal-toggle="laporModal" type="button" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Lapor</button>
                         </td>
                     </tr>
                     @endforeach
@@ -145,30 +145,30 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
-            <form class="p-4 md:p-5">
+            <form action="/kios-resmi/laporan" method="post" enctype="multipart/form-data" class="p-4 md:p-5">
+                @csrf
+                <input type="hidden" name="id_riwayat_transaksi" id="idRiwayatTransaksi">
+                <input type="hidden" name="tahun" id="tahunSaatIni">
+                <input type="hidden" name="musim_tanam" id="musimTanamSaatIni">
                 <div class="grid gap-4 mb-4 grid-cols-2">
-                    <div class="col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                        <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
-                    </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bukti Pengambilan</label>
-                        <input class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
+                        <input name="foto_bukti_pengambilan" class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">PNG or JPG (MAX. 5MB)</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto KTP</label>
-                        <input class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
+                        <input name="foto_ktp" class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">PNG or JPG (MAX. 5MB)</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tada Tangan</label>
-                        <input class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
+                        <input name="foto_surat_kuasa" class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">PNG or JPG (MAX. 5MB)</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Surat Kuasa (opsional)</label>
-                        <input class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
+                        <input name="foto_tanda_tangan" class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">PNG or JPG (MAX. 5MB)</p>
                     </div>
                 </div>

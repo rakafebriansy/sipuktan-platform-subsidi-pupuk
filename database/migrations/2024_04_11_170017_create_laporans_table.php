@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal_pengambilan')->nullable(false);
+            $table->timestamp('tanggal_pengambilan')->nullable(false)->useCurrent();
             $table->string('foto_bukti_pengambilan',255)->nullable(false);
             $table->string('foto_ktp',255)->nullable(false);
             $table->string('foto_surat_kuasa',255)->nullable(false);
             $table->string('foto_tanda_tangan',255)->nullable(false);
-            $table->enum('status_verifikasi',['Terverifikasi','Belum Diverifikasi','Ditolak'])->nullable(false);
+            $table->enum('status_verifikasi',['Terverifikasi','Belum Diverifikasi','Ditolak'])->nullable(false)->default('Belum Diverifikasi');
             $table->unsignedBigInteger('id_riwayat_transaksi')->nullable(false);
 
             $table->foreign('id_riwayat_transaksi')->on('riwayat_transaksis')->references('id');

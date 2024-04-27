@@ -72,8 +72,7 @@ class PemerintahController extends Controller
         if($this->alokasi_service->pemerintahTambahAlokasi($validated)) {
             return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with('success', 'Data alokasi berhasil ditambahkan');
         }
-        return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with(['error' => 'Data alokasi berhasil ditambahkan']);
-        
+        return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with(['error' => 'Data alokasi gagal ditambahkan']);
     }
     public function hapusAlokasi(Request $request): RedirectResponse
     {
@@ -88,7 +87,7 @@ class PemerintahController extends Controller
         if($this->alokasi_service->pemerintahEditAlokasi($validated)) {
             return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with('success','Data alokasi berhasil diperbarui');
         }
-        return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->withErrors(['error','Data alokasi berhasil dihapus']);
+        return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->withErrors(['error','Data alokasi gagal diperbarui']);
     }
     public function setVerifikasiPengguna(): View
     {

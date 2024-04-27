@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PemerintahEditAlokasiRequest extends FormRequest
+class KiosResmiLaporanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,11 @@ class PemerintahEditAlokasiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required',
-            'nik' => ['required','min:16','numeric','min:16'],
-            'jumlah_pupuk' => 'required',
-            'tahun' => 'required',
-            'musim_tanam' => 'required',
-            'id_jenis_pupuk' => 'required',
+            'id_riwayat_transaksi' => 'required',
+            'foto_bukti_pengambilan' => 'required|mimes:png,jpg|max:5120',
+            'foto_ktp' => 'required|mimes:png,jpg|max:5120',
+            'foto_surat_kuasa' => 'required|mimes:png,jpg|max:5120',
+            'foto_tanda_tangan' => 'required|mimes:png,jpg|max:5120',
         ];
     }
 }

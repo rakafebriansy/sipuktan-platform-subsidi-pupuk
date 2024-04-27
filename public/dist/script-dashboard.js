@@ -1,12 +1,12 @@
 function editPassId(btn){
-    const hiddenId = document.querySelector('#editAlokasiId');
+    const hiddenId = document.getElementById('editAlokasiId');
     let tds = btn.parentElement.parentElement.children;
     let inputs = hiddenId.nextElementSibling.querySelectorAll('input, option')
     let musim_tanam = document.getElementById('dropdownMTButton').innerText;
     hiddenId.value = btn.parentElement.dataset.id;
     inputs[0].value = btn.parentElement.dataset.nik;
     inputs[1].value = tds[1].innerText;
-    inputs[2].value = document.querySelector('#dropdownTahunButton').innerText;
+    inputs[2].value = document.getElementById('dropdownTahunButton').innerText;
     for(let i = 3; i < inputs.length; i++) {
         let guess = inputs[i];
         if(guess.innerText == tds[2].innerText) {
@@ -19,9 +19,9 @@ function editPassId(btn){
     }
 }
 function deletePassId(btn){
-    document.querySelector('#deleteAlokasiMT').value = document.querySelector('#dropdownMTButton').innerText;
-    document.querySelector('#deleteAlokasiTahun').value = document.querySelector('#dropdownTahunButton').innerText;
-    document.querySelector('#deleteAlokasiId').value = btn.parentElement.dataset.id;
+    document.getElementById('deleteAlokasiMT').value = document.getElementById('dropdownMTButton').innerText;
+    document.getElementById('deleteAlokasiTahun').value = document.getElementById('dropdownTahunButton').innerText;
+    document.getElementById('deleteAlokasiId').value = btn.parentElement.dataset.id;
 }
 function detailPassId(btn){
     const detailBody = document.querySelector('#detailAlokasiBody');
@@ -33,11 +33,11 @@ function detailPassId(btn){
     detailBody.querySelector('td.detailKios').innerText = btnParent.dataset.kios
 }
 function getAlokasiFromMt(li, mode) {
-    document.querySelector('#dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
+    document.getElementById('dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/alokasi?tahun=' + document.querySelector('#dropdownTahunButton').innerText  + '&&musim_tanam=' + li.querySelector('p').innerText );
 }
 function getAlokasiFromTh(li, mode) {
-    document.querySelector('#dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
+    document.getElementById('dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/alokasi?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
 }
 function sumTotalCheck() {
@@ -49,11 +49,11 @@ function sumTotalCheck() {
     document.getElementById('total-harga').value = total;
 }
 function getRiwayatFromMt(li, mode) {
-    document.querySelector('#dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
+    document.getElementById('dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/riwayat-transaksi?tahun=' + document.querySelector('#dropdownTahunButton').innerText  + '&&musim_tanam=' + li.querySelector('p').innerText );
 }
-function getRiwayatFromTh() {
-    document.querySelector('#dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
+function getRiwayatFromTh(li,mode) {
+    document.getElementById('dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/riwayat-transaksi?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
 }
 function getDetailAlokasiPetani(btn) {
@@ -62,12 +62,17 @@ function getDetailAlokasiPetani(btn) {
     table_rows.querySelector('tr:nth-child(2) td:nth-child(2)').innerText = btn.dataset.poktan;
 }
 function getRiwayatLaporFromMt(li, mode) {
-    document.querySelector('#dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
+    document.getElementById('dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/laporan?tahun=' + document.querySelector('#dropdownTahunButton').innerText  + '&&musim_tanam=' + li.querySelector('p').innerText );
 }
-function getRiwayatLaporFromTh() {
-    document.querySelector('#dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
+function getRiwayatLaporFromTh(li, mode) {
+    document.getElementById('dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/laporan?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
+}
+function setRiwayatIdLaporan(btn) {
+    document.getElementById('musimTanamSaatIni').value = document.getElementById('dropdownMTButton').querySelector('p').innerText;
+    document.getElementById('tahunSaatIni').value = document.getElementById('dropdownTahunButton').querySelector('p').innerText;
+    document.getElementById('idRiwayatTransaksi').value = btn.dataset.id;
 }
 
 (function(){

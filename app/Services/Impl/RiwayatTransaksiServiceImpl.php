@@ -15,7 +15,7 @@ class RiwayatTransaksiServiceImpl implements RiwayatTransaksiService
         $tahuns = Alokasi::distinct()->where('id_petani',$id_petani)->where('status','Dibayar')->orderBy('tahun','desc')->get(['tahun']);
         return $tahuns;
     }
-    public function petaniSetRiwayatTransaksiByTahun(int $id_petani, int $tahun): Collection
+    public function petaniSetRiwayatTransaksiByTahun(int $id_petani, string $tahun): Collection
     {
         $riwayat_transaksis = RiwayatTransaksi::select('riwayat_transaksis.*', 'alokasis.*','jenis_pupuks.jenis as jenis')
         ->selectRaw('alokasis.jumlah_pupuk * jenis_pupuks.harga as total_harga')
@@ -31,7 +31,7 @@ class RiwayatTransaksiServiceImpl implements RiwayatTransaksiService
         $tahuns = Alokasi::distinct()->where('id_kios_resmi',$id_kios_resmi)->where('status','Dibayar')->orderBy('tahun','desc')->get(['tahun']);
         return $tahuns;
     }
-    public function kiosResmiSetRiwayatTransaksiByTahun(int $id_kios_resmi, int $tahun, string $musim_tanam): Collection
+    public function kiosResmiSetRiwayatTransaksiByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection
     {
         $riwayat_transaksis = RiwayatTransaksi::select('riwayat_transaksis.*','alokasis.*','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
         ->selectRaw('alokasis.jumlah_pupuk * jenis_pupuks.harga as total_harga')
