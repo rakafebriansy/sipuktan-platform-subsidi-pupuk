@@ -32,7 +32,7 @@
                             <p class="inline-block">Jenis Pupuk</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <p class="inline-block">Kelompok Tani</p>
+                            <p class="inline-block">Status</p>
                         </th>
                         <th scope="col" class="py-3">
                             <span class="inline-block">Action</span>
@@ -52,10 +52,10 @@
                             {{ $alokasi->jenis_pupuk->jenis }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $alokasi->poktan }}
+                            {{ $alokasi->status }}
                         </td>
                         <td class="py-4">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
+                            <button onclick="getDetailAlokasiPetani(this)" data-poktan="{{ $alokasi->poktan }}" data-telp="{{ $alokasi->nomor_telepon }}" data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" type="button" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</button>
                         </td>
                     </tr>
                     @endforeach
@@ -111,5 +111,50 @@
       <li>
     </ul>
 </div> 
+
+<div id="detailAlokasiModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-sm max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                    Detail Petani
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="detailAlokasiModal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <div class="p-4 md:p-5 space-y-4">
+
+
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <tbody>
+                            <tr class="bg-white dark:bg-gray-800">
+                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Nomor Telepon
+                                </td>
+                                <td class="px-6 py-4">
+                                    -
+                                </td>
+                            </tr>
+                            <tr class="bg-white dark:bg-gray-800">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Kelompok Tani
+                                </th>
+                                <td class="px-6 py-4">
+                                    -
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection

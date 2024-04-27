@@ -56,6 +56,11 @@ function getRiwayatFromTh() {
     document.querySelector('#dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/riwayat-transaksi?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
 }
+function getDetailAlokasiPetani(btn) {
+    const table_rows = document.querySelector('#detailAlokasiModal table tbody');
+    table_rows.querySelector('tr td:nth-child(2)').innerText = btn.dataset.telp;
+    table_rows.querySelector('tr:nth-child(2) td:nth-child(2)').innerText = btn.dataset.poktan;
+}
 
 (function(){
 
