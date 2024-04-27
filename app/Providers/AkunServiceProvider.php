@@ -14,16 +14,20 @@ class AkunServiceProvider extends ServiceProvider implements DeferrableProvider
     ];
     /**
      * Register services.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         //
     }
 
     /**
      * Bootstrap services.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
         //
     }

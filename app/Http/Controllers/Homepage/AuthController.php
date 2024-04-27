@@ -37,6 +37,7 @@ class AuthController extends Controller
     }
     public function setPetaniLogin(): Response
     {
+        dd('kontol');
         return response()->view('homepage.pages.petani.login',[
             'title' => 'Petani | Login'
         ]);
