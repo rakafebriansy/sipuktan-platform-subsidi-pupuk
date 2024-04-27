@@ -59,7 +59,7 @@
                             {{ $alokasi->status }}
                         </td>
                         <td data-id="{{ $alokasi->id_alokasi }}" data-poktan="{{ $alokasi->poktan }}" data-kios="{{ $alokasi->kios_resmi }}" data-nik="{{ $alokasi->nik }}" data-ktp="{{ $alokasi->foto_ktp }}" data-nomor="{{ $alokasi->nomor_telepon }}" class="py-4 flex flex-row ">
-                            <button  data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" onclick="detailPassId(this)" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Detail</button>
+                            <button  data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" onclick="detailPassId(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
                             <button data-modal-target="editAlokasiModal" data-modal-toggle="editAlokasiModal" onclick="editPassId(this)" class=" bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Edit</button>
                             <button data-modal-target="deleteAlokasiModal" data-modal-toggle="deleteAlokasiModal" onclick="deletePassId(this)" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Hapus</button>
                         </td>

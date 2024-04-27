@@ -55,7 +55,7 @@
                             {{ $alokasi->status }}
                         </td>
                         <td class="py-4">
-                            <button onclick="getDetailAlokasiPetani(this)" data-poktan="{{ $alokasi->poktan }}" data-telp="{{ $alokasi->nomor_telepon }}" data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" type="button" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</button>
+                            <button onclick="getDetailAlokasiPetani(this)" data-poktan="{{ $alokasi->poktan }}" data-telp="{{ $alokasi->nomor_telepon }}" data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" type="button"  class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
                         </td>
                     </tr>
                     @endforeach
