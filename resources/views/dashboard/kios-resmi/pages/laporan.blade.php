@@ -72,7 +72,7 @@
                             Rp{{ $riwayat_transaksi->total_harga }}
                         </td>
                         <td class="py-4 flex flex-row px-6">
-                            <button data-modal-target="laporModal" data-modal-toggle="laporModal" type="button" class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Lapor</button>
+                            <button data-modal-target="laporModal" data-modal-toggle="laporModal" type="button" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Lapor</button>
                         </td>
                     </tr>
                     @endforeach
