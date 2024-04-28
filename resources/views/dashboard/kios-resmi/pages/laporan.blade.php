@@ -219,7 +219,7 @@
                                     Bukti Pengambilan
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="" class="underline">-</a>
+                                    <a href="" class="underline"></a>
                                 </td>
                             </tr>
                             <tr class="bg-white dark:bg-gray-800">
@@ -227,7 +227,7 @@
                                     Foto KTP
                                 </th>
                                 <td class="px-6 py-4">
-                                    <a href="" class="underline">-</a>
+                                    <a href="" class="underline"></a>
                                 </td>
                             </tr>
                             <tr class="bg-white dark:bg-gray-800">
@@ -235,7 +235,7 @@
                                     Surat Kuasa
                                 </th>
                                 <td class="px-6 py-4">
-                                    <a href="" class="italic">-</a>
+                                    <a href="" class="italic"></a>
                                 </td>
                             </tr>
                             <tr class="bg-white dark:bg-gray-800">
@@ -243,7 +243,7 @@
                                     Tanda Tangan
                                 </th>
                                 <td class="px-6 py-4">
-                                    <a href="" class="underline">-</a>
+                                    <a href="" class="underline"></a>
                                 </td>
                             </tr>
                         </tbody>

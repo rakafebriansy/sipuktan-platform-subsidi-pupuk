@@ -52,7 +52,7 @@ class LaporanServiceImpl implements LaporanService
     }
     public function pemerintahSetLaporan(string $tahun, string $musim_tanam): Collection
     {
-        $laporans = Laporan::select('laporans.id','laporans.tanggal_pengambilan','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani', 'kios_resmis.nama as nama_kios')
+        $laporans = Laporan::select('laporans.id','laporans.status_verifikasi','laporans.tanggal_pengambilan','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani', 'kios_resmis.nama as nama_kios')
         ->join('riwayat_transaksis','riwayat_transaksis.id','laporans.id_riwayat_transaksi')
         ->join('alokasis','riwayat_transaksis.id_alokasi','alokasis.id')
         ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
@@ -62,6 +62,13 @@ class LaporanServiceImpl implements LaporanService
         ->where('alokasis.tahun',$tahun)
         ->orderBy('laporans.tanggal_pengambilan', 'desc')->get();
         return $laporans;
+    }
+    public function pemerintahLaporan(int $id, string $status_verifikasi): bool
+    {
+        DB::transaction(function () use ($id, $status_verifikasi) {
+            Laporan::where('id',$id)->update(['status_verifikasi' => $status_verifikasi]);
+        });
+        return true;
     }
 
     public function ajaxGetPetaniFromRiwayat(string $letters): Collection

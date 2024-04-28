@@ -157,10 +157,10 @@ function searchRiwayat(input) {
     }
 }
 function getDetailLaporanFiles(btn,token) {
-    fetchDetailLaporanFiles(btn.dataset.id,token);
+    fetchDetailLaporanFiles(btn.parentElement.dataset.id,token);
 }
 function getPetaniFromAlokasi(btn,token) {
-    fetchPetaniFromAlokasi(btn.dataset.id,token);
+    fetchPetaniFromAlokasi(btn.parentElement.dataset.id,token);
 }
 
 (function(){

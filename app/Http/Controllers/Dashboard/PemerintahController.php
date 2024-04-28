@@ -150,4 +150,18 @@ class PemerintahController extends Controller
             'musim_tanam' => $musim_tanam,
         ]);
     }
+    public function laporan(Request $request): RedirectResponse
+    {
+        $status_verifikasi = $request->status_verifikasi;
+        if($status_verifikasi == 'Terverifikasi'){
+            if($this->laporan_service->pemerintahLaporan($request->id, $status_verifikasi)) {
+                return redirect('/pemerintah/laporan')->with('success','Berhasil menyetujui laporan kios resmi.');
+            } 
+        } else if($status_verifikasi == 'Ditolak') {
+            if($this->laporan_service->pemerintahLaporan($request->id, $status_verifikasi)) {
+                return redirect('/pemerintah/laporan')->with('success','Berhasil menolak laporan kios resmi.');
+            } 
+        }
+        return redirect('/pemerintah/laporan')->withErrors(['error' => 'Gagal mengubah laporan akun.']);
+    }
 }
