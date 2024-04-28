@@ -61,6 +61,7 @@
                         </td>
                         <td class="py-4 flex flex-row px-6">
                             <button data-modal-target="detailLaporanModal" data-modal-toggle="detailLaporanModal" data-id="{{ $laporan->id }}" type="button" onclick="getDetailLaporanFiles(this,'{{ csrf_token() }}')" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                            <button data-modal-target="verifikasiLaporanModal" data-modal-toggle="verifikasiLaporanModal" data-id="{{ $laporan->id }}" type="button" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Setujui</button>
                         </td>
                     </tr>
                     @endforeach
