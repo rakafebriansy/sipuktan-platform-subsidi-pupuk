@@ -20,7 +20,17 @@ function fetchDetailLaporanFiles(id,token) {
     }).then(res => res.json())
       .then(res => viewDetailLaporanFiles(res))
       .catch(e => console.error('Error'+e));
-    ;
+}
+function fetchPetaniFromAlokasi(id,token) {
+    fetch('/kios-resmi/ajax/petani-alokasi', {
+        headers: {
+            "X-CSRF-Token": token
+          },    
+        method: 'POST',
+        body: new URLSearchParams('id='+id)
+    }).then(res => res.json())
+      .then(res => viewPetaniFromAlokasi(JSON.parse(res)))
+      .catch(e => console.error('Error'+e));
 }
 
 //UTILS
@@ -51,6 +61,11 @@ function viewDetailLaporanFiles(data) {
     
     table_rows.querySelector('tr:nth-child(4) td:nth-child(2) > a').innerText = data['foto_tanda_tangan'];
     table_rows.querySelector('tr:nth-child(4) td:nth-child(2) > a').setAttribute('href','/download/foto_tanda_tangans/'+data['foto_tanda_tangan']);    
+}
+function viewPetaniFromAlokasi(data) {
+    const table_rows = document.querySelector('#detailAlokasiModal table tbody');
+    table_rows.querySelector('tr td:nth-child(2)').innerText = data['nomor_telepon'];
+    table_rows.querySelector('tr:nth-child(2) td:nth-child(2)').innerText = data['poktan'];
 }
 
 //EVENTS
@@ -143,6 +158,9 @@ function searchRiwayat(input) {
 }
 function getDetailLaporanFiles(btn,token) {
     fetchDetailLaporanFiles(btn.dataset.id,token);
+}
+function getPetaniFromAlokasi(btn,token) {
+    fetchPetaniFromAlokasi(btn.dataset.id,token);
 }
 
 (function(){

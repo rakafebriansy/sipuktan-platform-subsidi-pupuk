@@ -93,7 +93,15 @@ class AlokasiServiceImpl implements AlokasiService
             'id_kios_resmi' => $kios_resmi->id
         ]);
         return true;
-
+    }
+    public function ajaxDetailAlokasiPetani(int $id): string
+    {
+        $detail_petani = Alokasi::select('petanis.nomor_telepon', 'kelompok_tanis.nama as poktan')
+        ->join('petanis','alokasis.id_petani','petanis.id')
+        ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
+        ->where('alokasis.id',$id)
+        ->first();
+        return $detail_petani;
     }
     
 }

@@ -62,6 +62,7 @@ Route::prefix('/kios-resmi')->group(function(){
         Route::post('/laporan', [KiosResmiController::class, 'laporan']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/petani-riwayat',[AjaxController::class,'getPetaniFromRiwayat']);
+            Route::post('/petani-alokasi',[AjaxController::class,'getPetaniFromAlokasi']);
         });
     });
 });

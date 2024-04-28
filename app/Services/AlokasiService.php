@@ -15,4 +15,5 @@ interface AlokasiService
     function pemerintahTambahAlokasi(array $alokasi): bool;
     function pemerintahHapusAlokasi(int $id): bool;
     function pemerintahEditAlokasi(array $alokasi): bool;
+    function ajaxDetailAlokasiPetani(int $id): string;
 }
