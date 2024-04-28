@@ -23,7 +23,7 @@ class AjaxController extends Controller
     {
         if(isset($request->id)) {
             $filenames = $this->laporan_service->ajaxGetLaporanFilenames($request->id);
-            return json_encode($filenames);
+            return $filenames;
         }
         return '';
     }

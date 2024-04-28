@@ -35,7 +35,7 @@ class LaporanServiceImpl implements LaporanService
     {
         $laporan['foto_bukti_pengambilan']->storePubliclyAs('foto_bukti_pengambilans', $laporan['foto_bukti_pengambilan']->getClientOriginalName(), 'public');
         $laporan['foto_bukti_pengambilan'] = $laporan['foto_bukti_pengambilan']->getClientOriginalName();
-        $laporan['foto_ktp']->storePubliclyAs('foto_ktps', $laporan['foto_ktp']->getClientOriginalName(), 'public');
+        $laporan['foto_ktp']->storePubliclyAs('foto_ktp_laporans', $laporan['foto_ktp']->getClientOriginalName(), 'public');
         $laporan['foto_ktp'] = $laporan['foto_ktp']->getClientOriginalName();
         $laporan['foto_tanda_tangan']->storePubliclyAs('foto_tanda_tangans', $laporan['foto_tanda_tangan']->getClientOriginalName(), 'public');
         $laporan['foto_tanda_tangan'] = $laporan['foto_tanda_tangan']->getClientOriginalName();
@@ -63,9 +63,9 @@ class LaporanServiceImpl implements LaporanService
         ->limit(5)->get();
         return $riwayat_transaksis;
     }
-    public function ajaxGetLaporanFilenames(string $id): Collection
+    public function ajaxGetLaporanFilenames(string $id): string
     {
-        $laporan_filenames = Laporan::where('id',$id)->get();
+        $laporan_filenames = Laporan::find($id)->toJson(JSON_PRETTY_PRINT);
         return $laporan_filenames;
     }
 }
