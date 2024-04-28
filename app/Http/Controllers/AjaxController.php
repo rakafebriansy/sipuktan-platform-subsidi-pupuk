@@ -11,11 +11,19 @@ class AjaxController extends Controller
     public function __construct(LaporanService $laporan_service) {
         $this->laporan_service = $laporan_service;
     }
-    public function petaniFromRiwayat(Request $request)
+    public function getPetaniFromRiwayat(Request $request)
     {
         if(isset($request->letters)) {
-            $petanis = $this->laporan_service->ajaxPetaniFromRiwayat($request->letters);
+            $petanis = $this->laporan_service->ajaxGetPetaniFromRiwayat($request->letters);
             return json_encode($petanis);
+        }
+        return '';
+    }
+    public function getLaporanFilenames(Request $request)
+    {
+        if(isset($request->id)) {
+            $filenames = $this->laporan_service->ajaxGetLaporanFilenames($request->id);
+            return json_encode($filenames);
         }
         return '';
     }

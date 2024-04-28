@@ -69,7 +69,7 @@
                             Rp{{ $laporan->total_harga }}
                         </td>
                         <td class="py-4 flex flex-row px-6">
-                            <button type="button" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                            <button data-id="{{ $laporan->id }}" type="button" onclick="getDetailLaporanFiles(this,'{{ csrf_token() }}','kios-resmi')" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
                         </td>
                     </tr>
                     @endforeach

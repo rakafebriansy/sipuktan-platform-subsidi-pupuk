@@ -51,7 +51,7 @@ class LaporanServiceImpl implements LaporanService
         return true;
     }
 
-    public function ajaxPetaniFromRiwayat(string $letters)
+    public function ajaxGetPetaniFromRiwayat(string $letters): Collection
     {   
         $riwayat_transaksis = RiwayatTransaksi::select('riwayat_transaksis.*','alokasis.tahun as tahun', 'alokasis.musim_tanam as musim_tanam','jenis_pupuks.jenis as jenis','petanis.nama as nama')
         ->leftJoin('laporans','laporans.id_riwayat_transaksi','riwayat_transaksis.id')
@@ -62,6 +62,11 @@ class LaporanServiceImpl implements LaporanService
         ->whereNull('laporans.id')
         ->limit(5)->get();
         return $riwayat_transaksis;
+    }
+    public function ajaxGetLaporanFilenames(string $id): Collection
+    {
+        $laporan_filenames = Laporan::where('id',$id)->get();
+        return $laporan_filenames;
     }
 }
 

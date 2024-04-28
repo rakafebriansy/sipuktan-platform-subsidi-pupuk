@@ -9,7 +9,19 @@ function fetchRiwayatSearchBox(letters,token,list) {
     }).then(res => res.json())
       .then(res => viewRiwayatSearchBox(res,list))
       .catch(e => console.error('Error'+e));
-} 
+}
+function fetchDetailLaporanFiles(id,token,mode) {
+    fetch('/'+mode+'/ajax/laporan-filenames', {
+        headers: {
+            "X-CSRF-Token": token
+          },    
+        method: 'POST',
+        body: new URLSearchParams('id='+id)
+    }).then(res => res.json())
+      .then(res => console.log(res))
+      .catch(e => console.error('Error'+e));
+    ;
+}
 
 //UTILS
 function viewRiwayatSearchBox(data,list) {
@@ -22,6 +34,9 @@ function viewRiwayatSearchBox(data,list) {
         a.classList.add('search-li');
         list.appendChild(a);
     }
+}
+function viewDetailLaporanFiles() {
+
 }
 
 //EVENTS
@@ -111,6 +126,9 @@ function searchRiwayat(input) {
     } else {
         list.innerHTML = '';
     }
+}
+function getDetailLaporanFiles(btn,token,mode) {
+    fetchDetailLaporanFiles(btn.dataset.id,token,mode);
 }
 
 (function(){

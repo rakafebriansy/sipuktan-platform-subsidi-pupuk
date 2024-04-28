@@ -61,7 +61,8 @@ Route::prefix('/kios-resmi')->group(function(){
         Route::get('/laporan', [KiosResmiController::class, 'setLaporan']);
         Route::post('/laporan', [KiosResmiController::class, 'laporan']);
         Route::prefix('/ajax')->group(function(){
-            Route::post('/petani-riwayat',[AjaxController::class,'petaniFromRiwayat']);
+            Route::post('/petani-riwayat',[AjaxController::class,'getPetaniFromRiwayat']);
+            Route::post('/laporan-filenames',[AjaxController::class,'getLaporanFilenames']);
         });
     });
 });
