@@ -84,6 +84,7 @@ Route::prefix('/pemerintah')->group(function(){
         Route::post('/alokasi', [PemerintahController::class, 'tambahAlokasi']);
         Route::put('/alokasi', [PemerintahController::class, 'hapusAlokasi']);
         Route::patch('/alokasi', [PemerintahController::class, 'editAlokasi']);
+        Route::get('/laporan',[PemerintahController::class,'setLaporan']);
     });
 });
 Route::prefix('/bot')->group(function(){

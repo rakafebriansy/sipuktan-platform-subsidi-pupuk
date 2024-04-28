@@ -23,7 +23,7 @@ class RiwayatTransaksiServiceImpl implements RiwayatTransaksiService
         ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
         ->where('id_petani', $id_petani)
         ->where('alokasis.tahun',$tahun)
-        ->orderBy('riwayat_transaksis.tanggal_transaksi')->get();
+        ->orderBy('riwayat_transaksis.tanggal_transaksi', 'desc')->get();
         return $riwayat_transaksis;
     }
     public function kiosResmiSetRiwayatTransaksi(int $id_kios_resmi): Collection
@@ -41,7 +41,7 @@ class RiwayatTransaksiServiceImpl implements RiwayatTransaksiService
         ->where('id_kios_resmi', $id_kios_resmi)
         ->where('alokasis.musim_tanam',$musim_tanam)
         ->where('alokasis.tahun',$tahun)
-        ->orderBy('riwayat_transaksis.tanggal_transaksi')->get();
+        ->orderBy('riwayat_transaksis.tanggal_transaksi', 'desc')->get();
         return $riwayat_transaksis;
     }
 }

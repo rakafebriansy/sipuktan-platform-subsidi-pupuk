@@ -28,7 +28,7 @@ class LaporanServiceImpl implements LaporanService
         ->where('id_kios_resmi', $id_kios_resmi)
         ->where('alokasis.musim_tanam',$musim_tanam)
         ->where('alokasis.tahun',$tahun)
-        ->orderBy('laporans.tanggal_pengambilan')->get();
+        ->orderBy('laporans.tanggal_pengambilan', 'desc')->get();
         return $laporans;
     }
     public function kiosResmiLaporan($laporan): bool
@@ -49,6 +49,19 @@ class LaporanServiceImpl implements LaporanService
             Laporan::insert($laporan);
         });
         return true;
+    }
+    public function pemerintahSetLaporan(int $tahun, int $musim_tanam): Collection
+    {
+        $laporans = Laporan::select('laporans.id','laporans.tanggal_pengambilan','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
+        ->join('riwayat_transaksis','riwayat_transaksis.id','laporans.id_riwayat_transaksi')
+        ->join('alokasis','riwayat_transaksis.id_alokasi','alokasis.id')
+        ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
+        ->join('petanis','alokasis.id_petani','petanis.id')
+        ->selectRaw('alokasis.jumlah_pupuk * jenis_pupuks.harga as total_harga')
+        ->where('alokasis.musim_tanam',$musim_tanam)
+        ->where('alokasis.tahun',$tahun)
+        ->orderBy('laporans.tanggal_pengambilan', 'desc')->get();
+        return $laporans;
     }
 
     public function ajaxGetPetaniFromRiwayat(string $letters): Collection

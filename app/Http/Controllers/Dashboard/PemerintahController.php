@@ -123,4 +123,16 @@ class PemerintahController extends Controller
         }
         return redirect('/pemerintah/verifikasi-pengguna')->withErrors(['error' => 'Gagal memverifikasi akun.']);
     }
+    public function setLaporan(Request $request): View
+    {
+        $id = Session::get('id');
+        ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
+        $laporans = $this->akun_service->pemerintahSetLaporan();
+        return view('dashboard.pemerintah.pages.laporan', [
+            'title' => 'Pemerintah | Laporan',
+            'laporans' => $laporans,
+            'pemerintah' => $pemerintah,
+            'initials' => $initials,
+        ]);
+    }
 }
