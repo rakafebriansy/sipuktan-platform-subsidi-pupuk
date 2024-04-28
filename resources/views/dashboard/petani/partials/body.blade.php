@@ -3,7 +3,7 @@
 @include('dashboard.petani.partials.sidebar') <?php //memanggil keseluruhan kode program dari file lain?>
 <div class="wrapper">
     @if ($errors->any())
-    <div id="alert-2" class="flex absolute z-50 left-1/2 transform -translate-x-1/2 border border-red-300 dark:border-red-800 min-h-[5%] items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <div id="alert-2" class="flex absolute z-50 top-4 left-1/2 transform -translate-x-1/2 border border-red-300 dark:border-red-800 min-h-[5%] items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
        <span class="sr-only">Peringatan</span>
        <div class="text-sm font-medium">
          {{ $errors->first() }}

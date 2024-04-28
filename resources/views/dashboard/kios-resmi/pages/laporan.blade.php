@@ -95,6 +95,7 @@
 
 {{-- DROPDOWN --}}
 
+    
 <div id="dropdownTahun" class="z-50 hidden bg-white rounded-lg shadow w-24 dark:bg-gray-700">
     <ul class="py-2 max-h-36 overflow-y-auto text-gray-700 dark:text-gray-200 cursor-pointer" aria-labelledby="dropdownUsersButton">
       @foreach ($tahuns as $tahun)
@@ -194,6 +195,7 @@
     </div>
 </div> 
 
+@if(count($laporans))
 <div id="detailLaporanModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-sm max-h-full">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -253,5 +255,5 @@
         </div>
     </div>
 </div>
-  
+@endif
 @endsection
