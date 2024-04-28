@@ -66,7 +66,7 @@ class PetaniController extends Controller
     public function setCheckoutNonTunai(Request $request): View|RedirectResponse
     {
         $petani = Petani::find(Session::get('id'));
-        if(isset($request->all()['id_alokasis'])) {
+        if(isset($request->all()['id_alokasis']) && isset($request->all()['total_harga'])) {
             $all_request = $request->all();
             ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($petani->id);
             ['snap_token' => $snap_token, 'alokasis' => $alokasis] = $this->transaksi_service->petaniSetCheckoutNonTunai($all_request['total_harga'], $petani->nama, $all_request['id_alokasis']);
