@@ -10,7 +10,7 @@ interface LaporanService
     function kiosResmiSetLaporan(int $id_kios_resmi): Collection;
     function kiosResmiSetLaporanByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection;
     function kiosResmiLaporan($validated): bool;
-    function pemerintahSetLaporan(int $tahun, int $musim_tanam): Collection;
+    function pemerintahSetLaporan(string $tahun, string $musim_tanam): Collection;
     function ajaxGetPetaniFromRiwayat(string $letters): Collection;
     function ajaxGetLaporanFilenames(string $id): string;
 }

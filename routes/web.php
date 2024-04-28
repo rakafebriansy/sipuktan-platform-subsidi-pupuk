@@ -62,7 +62,6 @@ Route::prefix('/kios-resmi')->group(function(){
         Route::post('/laporan', [KiosResmiController::class, 'laporan']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/petani-riwayat',[AjaxController::class,'getPetaniFromRiwayat']);
-            Route::post('/laporan-filenames',[AjaxController::class,'getLaporanFilenames']);
         });
     });
 });
@@ -86,6 +85,9 @@ Route::prefix('/pemerintah')->group(function(){
         Route::patch('/alokasi', [PemerintahController::class, 'editAlokasi']);
         Route::get('/laporan',[PemerintahController::class,'setLaporan']);
     });
+});
+Route::prefix('/ajax')->group(function(){
+    Route::post('/laporan-filenames',[AjaxController::class,'getLaporanFilenames']);
 });
 Route::prefix('/bot')->group(function(){
     Route::get('/retreive',[TelegramBotController::class,'show']);

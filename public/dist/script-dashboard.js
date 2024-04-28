@@ -10,8 +10,8 @@ function fetchRiwayatSearchBox(letters,token,list) {
       .then(res => viewRiwayatSearchBox(res,list))
       .catch(e => console.error('Error'+e));
 }
-function fetchDetailLaporanFiles(id,token,mode) {
-    fetch('/'+mode+'/ajax/laporan-filenames', {
+function fetchDetailLaporanFiles(id,token) {
+    fetch('/ajax/laporan-filenames', {
         headers: {
             "X-CSRF-Token": token
           },    
@@ -141,8 +141,8 @@ function searchRiwayat(input) {
         list.innerHTML = '';
     }
 }
-function getDetailLaporanFiles(btn,token,mode) {
-    fetchDetailLaporanFiles(btn.dataset.id,token,mode);
+function getDetailLaporanFiles(btn,token) {
+    fetchDetailLaporanFiles(btn.dataset.id,token);
 }
 
 (function(){

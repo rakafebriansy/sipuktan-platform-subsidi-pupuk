@@ -50,14 +50,14 @@ class LaporanServiceImpl implements LaporanService
         });
         return true;
     }
-    public function pemerintahSetLaporan(int $tahun, int $musim_tanam): Collection
+    public function pemerintahSetLaporan(string $tahun, string $musim_tanam): Collection
     {
-        $laporans = Laporan::select('laporans.id','laporans.tanggal_pengambilan','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
+        $laporans = Laporan::select('laporans.id','laporans.tanggal_pengambilan','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani', 'kios_resmis.nama as nama_kios')
         ->join('riwayat_transaksis','riwayat_transaksis.id','laporans.id_riwayat_transaksi')
         ->join('alokasis','riwayat_transaksis.id_alokasi','alokasis.id')
         ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
+        ->join('kios_resmis','alokasis.id_kios_resmi','kios_resmis.id')
         ->join('petanis','alokasis.id_petani','petanis.id')
-        ->selectRaw('alokasis.jumlah_pupuk * jenis_pupuks.harga as total_harga')
         ->where('alokasis.musim_tanam',$musim_tanam)
         ->where('alokasis.tahun',$tahun)
         ->orderBy('laporans.tanggal_pengambilan', 'desc')->get();

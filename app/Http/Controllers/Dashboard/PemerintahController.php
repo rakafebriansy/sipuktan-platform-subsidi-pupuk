@@ -14,6 +14,7 @@ use App\Models\Petani;
 use App\Services\AkunService;
 use App\Services\AlokasiService;
 use App\Services\DashboardService;
+use App\Services\LaporanService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -25,11 +26,13 @@ class PemerintahController extends Controller
     private AkunService $akun_service;
     private DashboardService $dashboard_service;
     private AlokasiService $alokasi_service;
-    public function __construct(AkunService $akun_service, DashboardService $dashboard_service, AlokasiService $alokasi_service)
+    private LaporanService $laporan_service;
+    public function __construct(AkunService $akun_service, DashboardService $dashboard_service, AlokasiService $alokasi_service, LaporanService $laporan_service)
     {
         $this->alokasi_service = $alokasi_service;
         $this->dashboard_service = $dashboard_service;
         $this->akun_service = $akun_service;
+        $this->laporan_service = $laporan_service;
     }
     public function setDashboard(): View
     {
@@ -44,7 +47,7 @@ class PemerintahController extends Controller
     public function setAlokasi(Request $request): View
     {
         $id = Session::get('id',null);
-        $tahun = intval(date('Y'));
+        $tahun = date('Y');
         $musim_tanam = null;
         ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         ['tahuns' => $tahuns, 'jenis_pupuks' => $jenis_pupuks] = $this->alokasi_service->pemerintahSetAlokasi();
@@ -63,7 +66,7 @@ class PemerintahController extends Controller
             'tahuns' => $tahuns,
             'alokasis' => $alokasis,
             'tahun' => $tahun,
-            'mt' => $musim_tanam
+            'musim_tanam' => $musim_tanam
         ]);
     }
     public function tambahAlokasi(PemerintahBuatAlokasiRequest $request)
@@ -126,13 +129,25 @@ class PemerintahController extends Controller
     public function setLaporan(Request $request): View
     {
         $id = Session::get('id');
-        ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
-        $laporans = $this->akun_service->pemerintahSetLaporan();
+        $tahun = date('Y');
+        $musim_tanam = null;
+        ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id);
+        $tahuns = $this->laporan_service->kiosResmiSetLaporan($id);
+        if(isset($request->tahun) && isset($request->musim_tanam)){
+            $tahun = $request->tahun;
+            $musim_tanam = $request->musim_tanam;
+            $laporans = $this->laporan_service->pemerintahSetLaporan($tahun, $musim_tanam);
+        } else {
+            $laporans = $this->laporan_service->pemerintahSetLaporan($tahun, 'MT1');
+        }
         return view('dashboard.pemerintah.pages.laporan', [
             'title' => 'Pemerintah | Laporan',
             'laporans' => $laporans,
             'pemerintah' => $pemerintah,
             'initials' => $initials,
+            'tahuns' => $tahuns,
+            'tahun' => $tahun,
+            'musim_tanam' => $musim_tanam,
         ]);
     }
 }
