@@ -1,3 +1,30 @@
+//FETCH
+function fetchRiwayatSearchBox(letters,token,list) {
+    fetch('/kios-resmi/ajax/petani-riwayat', {
+        headers: {
+            "X-CSRF-Token": token
+          },    
+        method: 'POST',
+        body: new URLSearchParams('letters='+letters)
+    }).then(res => res.json())
+      .then(res => viewRiwayatSearchBox(res,list))
+      .catch(e => console.error('Error'+e));
+} 
+
+//UTILS
+function viewRiwayatSearchBox(data,list) {
+    list.innerHTML = '';
+    for(let i = 0; i < data.length; i++) {
+        const a = document.createElement('a');
+        a.innerHTML = `${data[i]['nama']} | ${data[i]['jenis']} | ${data[i]['musim_tanam']} | ${data[i]['tahun']}`;
+        a.dataset.id = data[i]['id'];
+        a.setAttribute('onclick','setRiwayatIdLaporan(this)');
+        a.classList.add('search-li');
+        list.appendChild(a);
+    }
+}
+
+//EVENTS
 function editPassId(btn){
     const hiddenId = document.getElementById('editAlokasiId');
     let tds = btn.parentElement.parentElement.children;
@@ -73,6 +100,17 @@ function setRiwayatIdLaporan(btn) {
     document.getElementById('musimTanamSaatIni').value = document.getElementById('dropdownMTButton').querySelector('p').innerText;
     document.getElementById('tahunSaatIni').value = document.getElementById('dropdownTahunButton').querySelector('p').innerText;
     document.getElementById('idRiwayatTransaksi').value = btn.dataset.id;
+    document.getElementById('riwayatSearch').value = btn.innerText;
+    document.getElementById('riwayatSearchBox').innerHTML = '';
+    btn.value = '';
+}
+function searchRiwayat(input) {
+    const list = document.getElementById('riwayatSearchBox');
+    if(input.value.length > 1) {
+        fetchRiwayatSearchBox(input.value,input.dataset.token,list)
+    } else {
+        list.innerHTML = '';
+    }
 }
 
 (function(){

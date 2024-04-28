@@ -19,16 +19,17 @@ class LaporanServiceImpl implements LaporanService
     }
     public function kiosResmiSetLaporanByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection
     {
-        $riwayat_transaksis = RiwayatTransaksi::select('riwayat_transaksis.*','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
-        ->selectRaw('alokasis.jumlah_pupuk * jenis_pupuks.harga as total_harga')
+        $laporans = Laporan::select('laporans.id','laporans.tanggal_pengambilan','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
+        ->join('riwayat_transaksis','riwayat_transaksis.id','laporans.id_riwayat_transaksi')
         ->join('alokasis','riwayat_transaksis.id_alokasi','alokasis.id')
         ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
         ->join('petanis','alokasis.id_petani','petanis.id')
+        ->selectRaw('alokasis.jumlah_pupuk * jenis_pupuks.harga as total_harga')
         ->where('id_kios_resmi', $id_kios_resmi)
         ->where('alokasis.musim_tanam',$musim_tanam)
         ->where('alokasis.tahun',$tahun)
-        ->orderBy('riwayat_transaksis.tanggal_transaksi')->get();
-        return $riwayat_transaksis;
+        ->orderBy('laporans.tanggal_pengambilan')->get();
+        return $laporans;
     }
     public function kiosResmiLaporan($laporan): bool
     {
@@ -36,15 +37,31 @@ class LaporanServiceImpl implements LaporanService
         $laporan['foto_bukti_pengambilan'] = $laporan['foto_bukti_pengambilan']->getClientOriginalName();
         $laporan['foto_ktp']->storePubliclyAs('foto_ktps', $laporan['foto_ktp']->getClientOriginalName(), 'public');
         $laporan['foto_ktp'] = $laporan['foto_ktp']->getClientOriginalName();
-        $laporan['foto_surat_kuasa']->storePubliclyAs('foto_surat_kuasas', $laporan['foto_surat_kuasa']->getClientOriginalName(), 'public');
-        $laporan['foto_surat_kuasa'] = $laporan['foto_surat_kuasa']->getClientOriginalName();
         $laporan['foto_tanda_tangan']->storePubliclyAs('foto_tanda_tangans', $laporan['foto_tanda_tangan']->getClientOriginalName(), 'public');
         $laporan['foto_tanda_tangan'] = $laporan['foto_tanda_tangan']->getClientOriginalName();
+        
+        if(isset($laporan['foto_surat_kuasa'])) {
+            $laporan['foto_surat_kuasa']->storePubliclyAs('foto_surat_kuasas', $laporan['foto_surat_kuasa']->getClientOriginalName(), 'public');
+            $laporan['foto_surat_kuasa'] = $laporan['foto_surat_kuasa']->getClientOriginalName();
+        }
         
         DB::transaction(function () use ($laporan) {
             Laporan::insert($laporan);
         });
         return true;
+    }
+
+    public function ajaxPetaniFromRiwayat(string $letters)
+    {   
+        $riwayat_transaksis = RiwayatTransaksi::select('riwayat_transaksis.*','alokasis.tahun as tahun', 'alokasis.musim_tanam as musim_tanam','jenis_pupuks.jenis as jenis','petanis.nama as nama')
+        ->leftJoin('laporans','laporans.id_riwayat_transaksi','riwayat_transaksis.id')
+        ->join('alokasis','alokasis.id','riwayat_transaksis.id_alokasi')
+        ->join('petanis','petanis.id','alokasis.id_petani')
+        ->join('jenis_pupuks','jenis_pupuks.id','alokasis.id_jenis_pupuk')
+        ->where('petanis.nama','like',"%$letters%")
+        ->whereNull('laporans.id')
+        ->limit(5)->get();
+        return $riwayat_transaksis;
     }
 }
 

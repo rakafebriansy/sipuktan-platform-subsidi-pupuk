@@ -25,7 +25,7 @@ class KiosResmiLaporanRequest extends FormRequest
             'id_riwayat_transaksi' => 'required',
             'foto_bukti_pengambilan' => 'required|mimes:png,jpg|max:5120',
             'foto_ktp' => 'required|mimes:png,jpg|max:5120',
-            'foto_surat_kuasa' => 'required|mimes:png,jpg|max:5120',
+            'foto_surat_kuasa' => 'mimes:png,jpg|max:5120',
             'foto_tanda_tangan' => 'required|mimes:png,jpg|max:5120',
         ];
     }

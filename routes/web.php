@@ -60,6 +60,9 @@ Route::prefix('/kios-resmi')->group(function(){
         Route::get('/riwayat-transaksi', [KiosResmiController::class, 'setRiwayatTransaksi']);
         Route::get('/laporan', [KiosResmiController::class, 'setLaporan']);
         Route::post('/laporan', [KiosResmiController::class, 'laporan']);
+        Route::prefix('/ajax')->group(function(){
+            Route::post('/petani-riwayat',[AjaxController::class,'petaniFromRiwayat']);
+        });
     });
 });
 

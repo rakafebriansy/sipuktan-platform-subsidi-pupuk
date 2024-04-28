@@ -121,15 +121,15 @@ class KiosResmiController extends Controller
         if(isset($request->tahun) && isset($request->musim_tanam)) {
             $tahun = $request->tahun;
             $musim_tanam = $request->musim_tanam;
-            $riwayat_transaksis = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahun, $musim_tanam);
+            $laporans = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahun, $musim_tanam);
         } else {
-            $riwayat_transaksis = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahun, 'MT1');
+            $laporans = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahun, 'MT1');
         }
         return view('dashboard.kios-resmi.pages.laporan', [
             'title' => 'Kios Resmi | Laporan',
             'kios_resmi' => $kios_resmi,
             'initials' => $initials,
-            'riwayat_transaksis' => $riwayat_transaksis,
+            'laporans' => $laporans,
             'tahuns' => $tahuns,
             'tahun' => $tahun,
             'mt' => $musim_tanam
