@@ -28,6 +28,15 @@ class AlokasiServiceImpl implements AlokasiService
         
         return $tahuns;
     }
+    public function kiosResmiAlokasi(string $tahun, string $musim_tanam): bool
+    {
+        DB::transaction(function () use ($tahun, $musim_tanam) {
+            Alokasi::where('tahun',$tahun)->where('musim_tanam',$musim_tanam)->where('status','Belum Tersedia')->update([
+                'status' => 'Menunggu Pembayaran'
+            ]);
+        });
+        return true;
+    }
     public function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): Collection
     {
         $alokasis = Alokasi::select('alokasis.*', 'petanis.nama as petani', 'petanis.nomor_telepon as nomor_telepon', 'kelompok_tanis.nama as poktan')

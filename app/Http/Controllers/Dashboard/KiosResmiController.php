@@ -45,12 +45,12 @@ class KiosResmiController extends Controller
     {
         $id = Session::get('id',null);
         $tahun = date('Y');
-        $mt = null;
+        $musim_tanam = null;
         ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
         $tahuns = $this->alokasi_service->kiosResmiSetAlokasi();
         if(isset($request->tahun) && isset($request->musim_tanam)){
             $tahun = $request->tahun;
-            $mt = $request->musim_tanam;
+            $musim_tanam = $request->musim_tanam;
             $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,$request->musim_tanam);
         } else {
             $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,'MT1');
@@ -62,8 +62,15 @@ class KiosResmiController extends Controller
             'tahuns' => $tahuns,
             'alokasis' => $alokasis,
             'tahun' => $tahun,
-            'mt' => $mt
+            'musim_tanam' => $musim_tanam
         ]);
+    }
+    public function alokasi(Request $request): RedirectResponse
+    {
+        if ($this->alokasi_service->kiosResmiAlokasi($request->tahun, $request->musim_tanam)) {
+            return redirect('/kios-resmi/alokasi?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with('success','Kedatangan pupuk berhasil dikonfirmasi.');
+        }
+        return redirect('/kios-resmi/alokasi?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->withErrors(['db' => 'Kedatangan pupuk sudah dikonfirmasi sebelumnya.']);
     }
     public function setTransaksi(): View
     {
@@ -79,13 +86,13 @@ class KiosResmiController extends Controller
     }
     public function transaksi(Request $request): RedirectResponse
     {
-        if(isset($request->all()['id_alokasis'])) {
+        if(isset($request->id_alokasis)) {
             $id_alokasis = $request->all()['id_alokasis'];
             if ($this->transaksi_service->kiosResmiTransaksi($id_alokasis)) {
-                return redirect('/kios-resmi/transaksi')->with('success','Pupuk Berhasil Lunas!');
+                return redirect('/kios-resmi/transaksi')->with('success','Pupuk Berhasil Lunas.');
             }
         }
-        return redirect('/kios-resmi/transaksi')->withErrors(['db' => 'Pilih Pembayaran Yang Tersedia!']);
+        return redirect('/kios-resmi/transaksi')->withErrors(['db' => 'Pilih Pembayaran Yang Tersedia.']);
     }
     public function setRiwayatTransaksi(Request $request): View
     {

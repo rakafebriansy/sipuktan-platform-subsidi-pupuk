@@ -162,7 +162,10 @@ function getDetailLaporanFiles(btn,token) {
 function getPetaniFromAlokasi(btn,token) {
     fetchPetaniFromAlokasi(btn.parentElement.dataset.id,token);
 }
-
+function editStatusAlokasiPassId() {
+    document.getElementById('alokasiTahun').value = document.getElementById('dropdownTahunButton').innerText;
+    document.getElementById('alokasiMusimTanam').value = document.getElementById('dropdownMTButton').innerText;
+}
 (function(){
 
 })();

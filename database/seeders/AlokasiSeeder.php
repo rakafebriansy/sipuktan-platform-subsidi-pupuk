@@ -19,7 +19,7 @@ class AlokasiSeeder extends Seeder
             'jumlah_pupuk' => 30,
             'musim_tanam' => 1,
             'tahun' => 2024,
-            'status' => 'Menunggu Pembayaran',
+            'status' => 'Belum Tersedia',
             'id_jenis_pupuk' => 'urea',
             'id_kios_resmi' => 1,
             'id_petani' => 1
@@ -27,9 +27,9 @@ class AlokasiSeeder extends Seeder
         Alokasi::create([
             'id' => 2,
             'jumlah_pupuk' => 60,
-            'musim_tanam' => 2,
+            'musim_tanam' => 1,
             'tahun' => 2024,
-            'status' => 'Menunggu Pembayaran',
+            'status' => 'Belum Tersedia',
             'id_jenis_pupuk' => 'sp36',
             'id_kios_resmi' => 1,
             'id_petani' => 1
@@ -37,9 +37,9 @@ class AlokasiSeeder extends Seeder
         Alokasi::create([
             'id' => 3,
             'jumlah_pupuk' => 60,
-            'musim_tanam' => 3,
+            'musim_tanam' => 1,
             'tahun' => 2024,
-            'status' => 'Menunggu Pembayaran',
+            'status' => 'Belum Tersedia',
             'id_jenis_pupuk' => 'ponskha',
             'id_kios_resmi' => 1,
             'id_petani' => 1
@@ -49,7 +49,7 @@ class AlokasiSeeder extends Seeder
             'jumlah_pupuk' => 60,
             'musim_tanam' => 1,
             'tahun' => 2024,
-            'status' => 'Menunggu Pembayaran',
+            'status' => 'Belum Tersedia',
             'id_jenis_pupuk' => 'urea',
             'id_kios_resmi' => 1,
             'id_petani' => 2
@@ -59,7 +59,7 @@ class AlokasiSeeder extends Seeder
             'jumlah_pupuk' => 60,
             'musim_tanam' => 1,
             'tahun' => 2024,
-            'status' => 'Menunggu Pembayaran',
+            'status' => 'Belum Tersedia',
             'id_jenis_pupuk' => 'ponskha',
             'id_kios_resmi' => 1,
             'id_petani' => 2

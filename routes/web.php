@@ -55,6 +55,7 @@ Route::prefix('/kios-resmi')->group(function(){
     Route::middleware('hasRole:kios-resmi')->group(function(){
         Route::get('/dashboard', [KiosResmiController::class, 'setDashboard']);
         Route::get('/alokasi', [KiosResmiController::class, 'setAlokasi']);
+        Route::patch('/alokasi', [KiosResmiController::class, 'alokasi']);
         Route::get('/transaksi', [KiosResmiController::class, 'setTransaksi']);
         Route::post('/transaksi', [KiosResmiController::class, 'transaksi']);
         Route::get('/riwayat-transaksi', [KiosResmiController::class, 'setRiwayatTransaksi']);
