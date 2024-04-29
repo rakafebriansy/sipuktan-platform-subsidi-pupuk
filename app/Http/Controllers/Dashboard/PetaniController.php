@@ -99,7 +99,6 @@ class PetaniController extends Controller
         $tahuns = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksi($id);
         if(isset($request->tahun) && isset($request->musim_tanam)) {
             $tahun = $request->tahun;
-            $mt = $request->musim_tanam;
             $riwayat_transaksis = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksiByTahun($id, $tahun);
         } else {
             $riwayat_transaksis = $this->riwayat_transaksi_service->petaniSetRiwayatTransaksiByTahun($id, $tahun);
@@ -110,6 +109,7 @@ class PetaniController extends Controller
             'initials' => $initials,
             'riwayat_transaksis' => $riwayat_transaksis,
             'tahuns' => $tahuns,
+            'tahun' => $tahun,
         ]);
     }
 }

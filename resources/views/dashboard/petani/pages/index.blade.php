@@ -1,105 +1,55 @@
 @extends('dashboard.petani.partials.body')
 @section('wrapper')
 <div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-
-       <div class="grid grid-cols-3 gap-4 mb-4">
-          <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-          <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-          <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-       </div>
-       <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-          <p class="text-2xl text-gray-400 dark:text-gray-500">
-             <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-             </svg>
-          </p>
-       </div>
-       <div class="grid grid-cols-2 gap-4 mb-4">
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-       </div>
-       <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-          <p class="text-2xl text-gray-400 dark:text-gray-500">
-             <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-             </svg>
-          </p>
-       </div>
-       <div class="grid grid-cols-2 gap-4">
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
-       </div>
-    </div>
-  </div>
+   <div class="p-4 rounded-lg">
+      <h1 class="text-3xl font-bold">Selamat datang di SIPUKTAN</h1>
+      <div class="w-full mt-4 p-3 box-border rounded-md shadow-md">
+         <p>SIPUKTAN Solusi terdepan untuk meningkatkan kesejahteraan petani dan mendukung pertanian yang berkelanjutan! Dengan sistem ini, petani dapat dengan mudah mengakses subsidi pupuk yang dibutuhkan, memastikan produksi yang lebih baik dan keberlanjutan lingkungan dengan dukungan pemerintah yang efektif.</p>
+      </div>
+      <div class="w-full mt-4 grid grid-cols-4 gap-4 text-sm">
+         <div class="col-span-1 h-full">
+            <div class="p-3 box-border rounded-md shadow-md mb-4">
+               <h2 class="mb-3 text-lg font-bold">Pupuk Urea</h2>
+               <p>Pupuk urea biasanya diterapkan secara langsung ke tanah atau dicampur dengan air untuk disemprotkan ke tanaman sebagai larutan pupuk. Ini memberikan akses yang cepat dan efisien bagi tanaman untuk menyerap nutrisi.</p>
+            </div>
+            <div class="p-3 box-border rounded-md shadow-md mb-4">
+               <h2 class="mb-3 text-lg font-bold">Pupuk Ponshka</h2>
+               <p>Pupuk Phonska dapat membantu meningkatkan kesuburan tanah, memperbaiki struktur tanah, dan memberikan nutrisi penting bagi pertumbuhan tanaman.</p>
+            </div>
+            <div class="p-3 box-border rounded-md shadow-md">
+               <h2 class="mb-3 text-lg font-bold">Pupuk SP-36</h2>
+               <p>Pupuk SP-36 membantu dalam pembentukan akar yang kuat, perkembangan bunga dan buah, serta proses metabolisme energi dalam tanaman. pupuk SP-36 sangat berguna untuk meningkatkan kesuburan tanah dan meningkatkan produksi tanaman.</p>
+            </div>
+         </div>
+         <div class="col-span-3 h-full box-border flex flex-col gap-4">
+            <div class="grid-cols-2 grid gap-4 h-[40%]">
+               <div class="p-3 box-border rounded-md shadow-md">
+                  <div class="h-[10%] w-full">
+                     <h2 class="mb-2 text-center text-md font-bold">Langkah-Langkah Pembayaran Non-Tunai</h2>
+                  </div>
+                  <div class="h-[90%] w-full flex items-center">
+                     <img src="../images/Langkah non Tunai.png" alt="">
+                  </div>
+               </div>
+               <div class="p-3 box-border rounded-md shadow-md">
+                  <div class="h-[10%] w-full">
+                     <h2 class="mb-2 text-center text-md font-bold">Langkah-Langkah Pembayaran Tunai</h2>
+                  </div>
+                  <div class="h-[90%] w-full flex justify-center items-center">
+                     <img class="" src="../images/Langkah Tunai.png" alt="">
+                  </div>
+               </div>
+            </div>
+            <div class="p-3 box-border rounded-md shadow-md h-[60%]">
+               <div class="mb-4 w-full">
+                  <h2 class="mb-2 text-center text-md font-bold">Penyaluran Pupuk Subsidi Per 10 Tahun</h2>
+               </div>
+               <div class="w-full flex justify-center items-center">
+                  <img class="w-[70%]" src="../images/Subsidi 10 Tahun.png" alt="">
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
 @endsection
