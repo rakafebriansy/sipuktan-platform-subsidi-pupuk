@@ -15,8 +15,9 @@ class LaporanController extends Controller
 {
     private DashboardService $dashboard_service;
     private LaporanService $laporan_service;
-    public function __construct(LaporanService $laporan_service) {
+    public function __construct(LaporanService $laporan_service, DashboardService $dashboard_service) {
         $this->laporan_service = $laporan_service;
+        $this->dashboard_service = $dashboard_service;
     }
     public function setLaporan(Request $request): View
     {
