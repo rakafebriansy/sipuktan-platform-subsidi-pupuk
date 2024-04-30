@@ -12,4 +12,8 @@ interface TransaksiService
     function petaniSetCheckoutNonTunai(int $total_harga, string $nama, array $id_alokasis): array;
     function kiosResmiTransaksi(array $id_alokasis): bool;
     function petaniCheckoutNonTunai(array $alokasis): bool;
+    function petaniSetRiwayatTransaksi(int $id_petani): Collection;
+    function petaniSetRiwayatTransaksiByTahun(int $id_kios_resmi, string $tahun): Collection;
+    function kiosResmiSetRiwayatTransaksi(int $id_kios_resmi): Collection;
+    function kiosResmiSetRiwayatTransaksiByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection;
 }

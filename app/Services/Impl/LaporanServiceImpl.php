@@ -3,11 +3,9 @@
 namespace App\Services\Impl;
 use App\Models\Alokasi;
 use App\Models\Laporan;
-use App\Models\Petani;
 use App\Models\RiwayatTransaksi;
 use App\Services\LaporanService;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 
 class LaporanServiceImpl implements LaporanService

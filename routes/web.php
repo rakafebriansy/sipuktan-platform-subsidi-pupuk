@@ -1,12 +1,6 @@
 <?php
 
-use App\Helper\Helper;
-use App\Http\Controllers\Ajax\AlokasiController;
 use App\Http\Controllers\AjaxController;
-use App\Http\Controllers\Dashboard\KiosResmiController;
-use App\Http\Controllers\Dashboard\PemerintahController;
-use App\Http\Controllers\Dashboard\PetaniController;
-use App\Http\Controllers\Homepage\AuthController;
 use App\Http\Controllers\TelegramBotController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,41 +20,41 @@ Route::get('/', function () {
 });
 
 Route::prefix('/petani')->group(function(){
-    Route::get('/login',[AuthController::class, 'setPetaniLogin']);
-    Route::post('/login',[AuthController::class, 'petaniLogin']);
-    Route::get('/register', [AuthController::class,'setPetaniRegister']);
-    Route::post('/register', [AuthController::class,'petaniRegister']);
-    Route::get('/lupa-sandi', [AuthController::class, 'setPetaniLupaSandi']);
-    Route::post('/lupa-sandi', [AuthController::class, 'petaniLupaSandi']);
-    Route::get('/ganti-sandi', [AuthController::class, 'setPetaniGantiSandi']);
-    Route::patch('/ganti-sandi', [AuthController::class, 'petaniGantiSandi']);
+    Route::get('/login',[App\Http\Controllers\Homepage\Petani\AkunController::class, 'setLogin']);
+    Route::post('/login',[App\Http\Controllers\Homepage\Petani\AkunController::class, 'login']);
+    Route::get('/register', [App\Http\Controllers\Homepage\Petani\AkunController::class,'setRegister']);
+    Route::post('/register', [App\Http\Controllers\Homepage\Petani\AkunController::class,'register']);
+    Route::get('/lupa-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'setLupaSandi']);
+    Route::post('/lupa-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'LupaSandi']);
     Route::middleware('hasRole:petani')->group(function(){
-        Route::get('/dashboard', [PetaniController::class, 'setDashboard']);
-        Route::get('/alokasi', [PetaniController::class, 'setAlokasi']);
-        Route::get('/transaksi', [PetaniController::class, 'setTransaksi']);
-        Route::get('/checkout', [PetaniController::class, 'setCheckoutNonTunai']);
-        Route::post('/checkout', [PetaniController::class, 'checkoutNonTunai']);
-        Route::get('/riwayat-transaksi', [PetaniController::class, 'setRiwayatTransaksi']);
+        Route::get('/dashboard', [App\Http\Controllers\Dashboard\Petani\DashboardController::class, 'setDashboard']);
+        Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'setGantiSandi']);
+        Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'gantiSandi']);
+        Route::get('/alokasi', [App\Http\Controllers\Dashboard\Petani\AlokasiController::class, 'setAlokasi']);
+        Route::get('/transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setTransaksi']);
+        Route::get('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setCheckoutNonTunai']);
+        Route::post('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'checkoutNonTunai']);
+        Route::get('/riwayat-transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setRiwayatTransaksi']);
     });
 });
 Route::prefix('/kios-resmi')->group(function(){
-    Route::get('/login', [AuthController::class, 'setKiosResmiLogin']);
-    Route::post('/login',[AuthController::class, 'kiosResmiLogin']);
-    Route::get('/register', [AuthController::class, 'setKiosResmiRegister']);
-    Route::post('/register', [AuthController::class, 'kiosResmiRegister']);
-    Route::get('/lupa-sandi', [AuthController::class, 'setKiosResmiLupaSandi']);
-    Route::post('/lupa-sandi', [AuthController::class, 'kiosResmiLupaSandi']);
-    Route::get('/ganti-sandi', [AuthController::class, 'setKiosResmiGantiSandi']);
-    Route::patch('/ganti-sandi', [AuthController::class, 'kiosResmiGantiSandi']);
+    Route::get('/login', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'setLogin']);
+    Route::post('/login',[App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'login']);
+    Route::get('/register', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'setRegister']);
+    Route::post('/register', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'register']);
+    Route::get('/lupa-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'lupaSandi']);
+    Route::post('/lupa-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'lupaSandi']);
     Route::middleware('hasRole:kios-resmi')->group(function(){
-        Route::get('/dashboard', [KiosResmiController::class, 'setDashboard']);
-        Route::get('/alokasi', [KiosResmiController::class, 'setAlokasi']);
-        Route::patch('/alokasi', [KiosResmiController::class, 'alokasi']);
-        Route::get('/transaksi', [KiosResmiController::class, 'setTransaksi']);
-        Route::post('/transaksi', [KiosResmiController::class, 'transaksi']);
-        Route::get('/riwayat-transaksi', [KiosResmiController::class, 'setRiwayatTransaksi']);
-        Route::get('/laporan', [KiosResmiController::class, 'setLaporan']);
-        Route::post('/laporan', [KiosResmiController::class, 'laporan']);
+        Route::get('/dashboard', [App\Http\Controllers\Dashboard\KiosResmi\DashboardController::class, 'setDashboard']);
+        Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'setGantiSandi']);
+        Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'gantiSandi']);
+        Route::get('/alokasi', [App\Http\Controllers\Dashboard\KiosResmi\AlokasiController::class, 'setAlokasi']);
+        Route::patch('/alokasi', [App\Http\Controllers\Dashboard\KiosResmi\AlokasiController::class, 'alokasi']);
+        Route::get('/transaksi', [App\Http\Controllers\Dashboard\KiosResmi\TransaksiController::class, 'setTransaksi']);
+        Route::post('/transaksi', [App\Http\Controllers\Dashboard\KiosResmi\TransaksiController::class, 'transaksi']);
+        Route::get('/riwayat-transaksi', [App\Http\Controllers\Dashboard\KiosResmi\TransaksiController::class, 'setRiwayatTransaksi']);
+        Route::get('/laporan', [App\Http\Controllers\Dashboard\KiosResmi\LaporanController::class, 'setLaporan']);
+        Route::post('/laporan', [App\Http\Controllers\Dashboard\KiosResmi\LaporanController::class, 'laporan']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/petani-riwayat',[AjaxController::class,'getPetaniFromRiwayat']);
             Route::post('/petani-alokasi',[AjaxController::class,'getPetaniFromAlokasi']);
@@ -72,21 +66,21 @@ Route::get('/admin', function() {
     return redirect('/pemerintah/login');
 });
 Route::prefix('/pemerintah')->group(function(){
-    Route::get('/login',[AuthController::class, 'setPemerintahLogin']);
-    Route::post('/login',[AuthController::class, 'pemerintahLogin']);
-    Route::get('/ganti-sandi', [AuthController::class, 'setPemerintahGantiSandi']);
-    Route::patch('/ganti-sandi', [AuthController::class, 'pemerintahGantiSandi']);
+    Route::get('/login',[App\Http\Controllers\Homepage\Pemerintah\AkunController::class, 'setLogin']);
+    Route::post('/login',[App\Http\Controllers\Homepage\Pemerintah\AkunController::class, 'login']);
     Route::middleware('hasRole:pemerintah')->group(function(){
-        Route::get('/dashboard', [PemerintahController::class, 'setDashboard']);
-        Route::get('/verifikasi-pengguna', [PemerintahController::class, 'setVerifikasiPengguna']);
-        Route::post('/verifikasi-pengguna/petani', [PemerintahController::class, 'verifikasiPenggunaPetani']);
-        Route::post('/verifikasi-pengguna/kios-resmi', [PemerintahController::class, 'verifikasiPenggunaKiosResmi']);
-        Route::get('/alokasi', [PemerintahController::class, 'setAlokasi']);
-        Route::post('/alokasi', [PemerintahController::class, 'tambahAlokasi']);
-        Route::put('/alokasi', [PemerintahController::class, 'hapusAlokasi']);
-        Route::patch('/alokasi', [PemerintahController::class, 'editAlokasi']);
-        Route::get('/laporan',[PemerintahController::class,'setLaporan']);
-        Route::patch('/laporan',[PemerintahController::class,'laporan']);
+        Route::get('/dashboard', [App\Http\Controllers\Dashboard\Pemerintah\DashboardController::class, 'setDashboard']);
+        Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\Pemerintah\AkunController::class, 'setGantiSandi']);
+        Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\Pemerintah\AkunController::class, 'gantiSandi']);
+        Route::get('/verifikasi-pengguna', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'setVerifikasi']);
+        Route::post('/verifikasi-pengguna/petani', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'verifikasiPetani']);
+        Route::post('/verifikasi-/kios-resmi', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'verifikasiKiosResmi']);
+        Route::get('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'setAlokasi']);
+        Route::post('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'tambahAlokasi']);
+        Route::put('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'hapusAlokasi']);
+        Route::patch('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'editAlokasi']);
+        Route::get('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'setLaporan']);
+        Route::patch('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'laporan']);
     });
 });
 Route::prefix('/ajax')->group(function(){
@@ -97,7 +91,12 @@ Route::prefix('/bot')->group(function(){
     Route::get('/msg',[TelegramBotController::class,'getMessages']);
     Route::get('/send/{id}',[TelegramBotController::class,'sendMessage']);
 });
-Route::get('/logout', [AuthController::class,'logout']);
+
+
+Route::get('/logout', function(){
+    Session::invalidate();
+    return redirect("/");
+});
 Route::get('/download/{folder_name}/{file_name}', function(string $folder_name, string $file_name){
     return Storage::disk('public')->download('/' . $folder_name . '/' . $file_name);
 });

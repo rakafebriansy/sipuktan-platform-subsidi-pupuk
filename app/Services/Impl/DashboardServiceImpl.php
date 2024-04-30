@@ -2,18 +2,10 @@
 
 namespace App\Services\Impl;
 
-use App\Models\KelompokTani;
 use App\Models\KiosResmi;
 use App\Models\Pemerintah;
-use App\Models\PemilikKios;
 use App\Models\Petani;
-use App\Services\AkunService;
 use App\Services\DashboardService;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class DashboardServiceImpl implements DashboardService
 {    

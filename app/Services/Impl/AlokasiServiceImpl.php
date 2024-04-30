@@ -5,8 +5,6 @@ namespace App\Services\Impl;
 use App\Models\Alokasi;
 use App\Models\JenisPupuk;
 use App\Models\KelompokTani;
-use App\Models\KiosResmi;
-use App\Models\PemilikKios;
 use App\Models\Petani;
 use App\Services\AlokasiService;
 use Illuminate\Database\Eloquent\Collection;

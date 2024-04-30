@@ -2,17 +2,14 @@
 
 namespace App\Services\Impl;
 
-use App\Models\KelompokTani;
 use App\Models\KiosResmi;
 use App\Models\Pemerintah;
 use App\Models\PemilikKios;
 use App\Models\Petani;
 use App\Services\AkunService;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class AkunServiceImpl implements AkunService
 {    
@@ -109,30 +106,5 @@ class AkunServiceImpl implements AkunService
         } else {
             return false;
         }
-    }
-    public function pemerintahSetVerifikasiPengguna(): array
-    {
-        $petanis = Petani::select('petanis.*','kelompok_tanis.nama as nama_poktan')
-        ->join('kelompok_tanis','petanis.id_kelompok_tani','kelompok_tanis.id','kelompok_tanis.id')
-        ->where('aktif',false)->get();
-        $kios_resmis = KiosResmi::select('kios_resmis.*','pemilik_kios.*','kecamatans.nama as kecamatan')
-            ->join('pemilik_kios','kios_resmis.id_pemilik_kios','pemilik_kios.id')
-            ->join('kecamatans','kios_resmis.id_kecamatan','kecamatans.id')
-            ->where('aktif',false)->get();
-        return ['petanis' => $petanis, 'kios_resmis' => $kios_resmis];
-    }
-    public function pemerintahVerifikasiPetani($ids): bool
-    {
-        DB::transaction(function() use ($ids) {
-            Petani::whereIn('id',$ids)->update(['aktif' => true]);
-        });
-        return true;
-    }
-    public function pemerintahVerifikasiKiosResmi($ids): bool
-    {
-        DB::transaction(function() use ($ids) {
-            KiosResmi::whereIn('id',$ids)->update(['aktif' => true]);
-        });
-        return true;
     }
 }

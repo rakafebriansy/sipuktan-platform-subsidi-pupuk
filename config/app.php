@@ -170,9 +170,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\AkunServiceProvider::class,
         App\Providers\DashboardServiceProvider::class,
+        App\Providers\VerifikasiServiceProvider::class,
         App\Providers\AlokasiServiceProvider::class,
         App\Providers\TransaksiServiceProvider::class,
-        App\Providers\RiwayatTransaksiProvider::class,
         App\Providers\LaporanServiceProvider::class,
     ])->toArray(),
 
