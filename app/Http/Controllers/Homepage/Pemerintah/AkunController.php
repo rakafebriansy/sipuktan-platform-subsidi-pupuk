@@ -15,7 +15,13 @@ class AkunController extends Controller
     {
         $this->akun_service = $akun_service;
     }
-    public function setLogin(PemerintahLoginRequest $request): RedirectResponse
+    public function setLogin(): View
+    {
+        return view('homepage.pages.pemerintah.login',[
+            'title' => 'Pemerintah | Login'
+        ]);
+    }
+    public function login(PemerintahLoginRequest $request): RedirectResponse
     {
         $pemerintah = $this->akun_service->pemerintahLogin($request->nama_pengguna,$request->kata_sandi);
         if(isset($pemerintah)) {
@@ -26,10 +32,5 @@ class AkunController extends Controller
         } 
         return redirect('/pemerintah/login')->withErrors(['failed' => 'Kredensial salah']);
     }
-    public function login(): View
-    {
-        return view('homepage.pages.pemerintah.login',[
-            'title' => 'Pemerintah | Login'
-        ]);
-    }
+
 }
