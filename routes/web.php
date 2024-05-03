@@ -26,15 +26,15 @@ Route::prefix('/petani')->group(function(){
     Route::post('/register', [App\Http\Controllers\Homepage\Petani\AkunController::class,'register']);
     Route::get('/lupa-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'setLupaSandi']);
     Route::post('/lupa-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'LupaSandi']);
+    Route::get('/alokasi', [App\Http\Controllers\Dashboard\Petani\AlokasiController::class, 'setAlokasi']);
+    Route::get('/dashboard', [App\Http\Controllers\Dashboard\Petani\DashboardController::class, 'setDashboard']);
+    Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'setGantiSandi']);
+    Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'gantiSandi']);
+    Route::get('/transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setTransaksi']);
+    Route::get('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setCheckoutNonTunai']);
+    Route::post('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'checkoutNonTunai']);
+    Route::get('/riwayat-transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setRiwayatTransaksi']);
     Route::middleware('hasRole:petani')->group(function(){
-        Route::get('/dashboard', [App\Http\Controllers\Dashboard\Petani\DashboardController::class, 'setDashboard']);
-        Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'setGantiSandi']);
-        Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'gantiSandi']);
-        Route::get('/alokasi', [App\Http\Controllers\Dashboard\Petani\AlokasiController::class, 'setAlokasi']);
-        Route::get('/transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setTransaksi']);
-        Route::get('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setCheckoutNonTunai']);
-        Route::post('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'checkoutNonTunai']);
-        Route::get('/riwayat-transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setRiwayatTransaksi']);
     });
 });
 Route::prefix('/kios-resmi')->group(function(){

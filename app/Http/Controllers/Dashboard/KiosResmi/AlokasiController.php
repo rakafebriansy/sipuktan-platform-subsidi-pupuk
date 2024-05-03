@@ -48,7 +48,7 @@ class AlokasiController extends Controller
     public function alokasi(Request $request): RedirectResponse
     {
         if ($this->alokasi_service->kiosResmiAlokasi($request->tahun, $request->musim_tanam)) {
-            $message = ['message' => 'Pupuk telah datang.'];
+            $message = 'Pupuk telah datang.';
             event(new AlokasiStatusChanged($message));
             return redirect('/kios-resmi/alokasi?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with('success','Kedatangan pupuk berhasil dikonfirmasi.');
         }

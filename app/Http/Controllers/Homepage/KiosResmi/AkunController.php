@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Homepage\KiosResmi;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KiosResmiLoginRequest;
+use App\Http\Requests\KiosResmiRegisterRequest;
+use App\Models\Kecamatan;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,6 +17,24 @@ class AkunController extends Controller
     public function __construct(AkunService $akun_service)
     {
         $this->akun_service = $akun_service;
+    }
+    public function setRegister(): View
+    {
+        $kecamatans = Kecamatan::all();
+        return view('homepage.pages.kios-resmi.register',[
+            'title' => 'Kios Resmi | Register',
+            'kecamatans' => $kecamatans
+        ]);
+    }
+    public function register(KiosResmiRegisterRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+        try {
+            $this->akun_service->kiosResmiRegister($validated, $request->file('foto_ktp'));
+            return redirect()->intended('/kios-resmi/register')->with('success','Silahkan tunggu verifikasi dari akun anda!');
+        } catch (\Exception $e) {
+            return redirect()->intended('/kios-resmi/register')->withErrors('dbErr','Akun gagal dibuat!');
+        }
     }
     public function setLogin(): View
     {

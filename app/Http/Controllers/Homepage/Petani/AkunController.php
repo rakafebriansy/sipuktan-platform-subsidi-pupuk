@@ -41,7 +41,7 @@ class AkunController extends Controller
     public function setRegister(): View
     {
         $kelompok_tanis = KelompokTani::all();
-        return response()->view('homepage.pages.petani.register',[
+        return view('homepage.pages.petani.register',[
             'title' => 'Petani | Register',
             'kelompok_tanis' => $kelompok_tanis
         ]);

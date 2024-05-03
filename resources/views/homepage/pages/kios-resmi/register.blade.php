@@ -31,23 +31,25 @@
                         <label for="jalan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
                         <input type="text" name="jalan" id="jalan" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
                     </div>
-                    <div class="flex items-center gap-4 justify-between">
-                        <div class="mb-2 ">
+                    <div class="grid grid-cols-2 gap-4 mb-2">
+                        <div class="flex flex-col justify-between">
                             <label for="kata_sandi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi</label>
                             <input data-popover-target="popover-password" data-popover-placement="bottom" type="password" name="kata_sandi" id="kata_sandi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
-                            <div data-popover id="popover-password" role="tooltip"
+                            {{-- <div data-popover id="popover-password" role="tooltip"
                                 class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
                                 <div class="p-3 space-y-2">
                                     <h3 class="font-semibold text-gray-900 dark:text-white">Must have at least 6 characters</h3>
                                 </div>
                                 <div data-popper-arrow></div>
-                            </div>
+                            </div> --}}
                         </div>
-                        <input type="hidden" value="" name="id_kecamatan" id="idPoktan">
-                        <button id="dropdownRegisterButton" data-dropdown-toggle="dropdownRegister" data-dropdown-placement="bottom" class="min-w-[13rem] justify-between inline-flex py-2.5 px-5 mb-2 mt-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 text-center items-center " type="button">Kecamatan<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                            </svg>
-                        </button>
+                        <div class="flex flex-col justify-end h-full">
+                            <input type="hidden" value="" name="id_kecamatan" id="idPoktan">
+                            <button id="dropdownRegisterButton" data-dropdown-toggle="dropdownRegister" data-dropdown-placement="bottom" class="min-w-[10rem] justify-between inline-flex py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 text-center items-center " type="button">Kecamatan<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
     
                     <button type="submit" class="text-white mb-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none w-[40%] mt-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Daftar</button>

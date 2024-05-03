@@ -13,11 +13,11 @@ use Illuminate\Queue\SerializesModels;
 class AlokasiStatusChanged implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public array $data;
+    public string $data;
     /**
      * Create a new event instance.
      */
-    public function __construct(array $data)
+    public function __construct( $data)
     {
         $this->data = $data;
     }

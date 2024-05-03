@@ -6,6 +6,22 @@
     @isset($total_harga)
     @endisset
     <title>{{ $title }}</title>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+      Pusher.logToConsole = true;
+
+      var pusher = new Pusher('86f26363800bace9e231', {
+        cluster: 'ap1'
+      });
+
+      var channel = pusher.subscribe('my-channel');
+      channel.bind('alokasi-changed', function(data) {
+        const alertNotif = document.getElementById('alert-notification');
+        alert(JSON.stringify(data['data']));
+        alertNotif.querySelector('#text-notification').innerText = JSON.stringify(data['data']);
+        alertNotif.classList.replace('hidden','flex');
+      });
+    </script>
     @vite(['resources/css/app.css','resources/js/app.js'])
   </head>
   <body>
