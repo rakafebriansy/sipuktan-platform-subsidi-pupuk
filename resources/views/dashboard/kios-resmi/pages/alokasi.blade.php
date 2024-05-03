@@ -14,7 +14,7 @@
                                 @if ($alokasis[0]->status == 'Belum Tersedia')
                                     <button onclick="editStatusAlokasiPassId()" data-modal-target="konfirmasiKedatanganModal" data-modal-toggle="konfirmasiKedatanganModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Konfirmasi Kedatangan</button>
                                 @else
-                                    <button type="button" disabled class="text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600">Konfirmasi Kedatangan</button>
+                                    <button type="button" disabled class="text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600 me-2 mb-2">Konfirmasi Kedatangan</button>
                                 @endif
                             @else
                                 <button type="button" disabled class="text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600">Konfirmasi Kedatangan</button>

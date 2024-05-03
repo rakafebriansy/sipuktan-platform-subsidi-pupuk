@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard\KiosResmi;
 
+use App\Events\AlokasiStatusChanged;
 use App\Http\Controllers\Controller;
 use App\Services\AlokasiService;
 use App\Services\DashboardService;
@@ -47,6 +48,8 @@ class AlokasiController extends Controller
     public function alokasi(Request $request): RedirectResponse
     {
         if ($this->alokasi_service->kiosResmiAlokasi($request->tahun, $request->musim_tanam)) {
+            $message = ['message' => 'Pupuk telah datang.'];
+            event(new AlokasiStatusChanged($message));
             return redirect('/kios-resmi/alokasi?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with('success','Kedatangan pupuk berhasil dikonfirmasi.');
         }
         return redirect('/kios-resmi/alokasi?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->withErrors(['db' => 'Kedatangan pupuk sudah dikonfirmasi sebelumnya.']);

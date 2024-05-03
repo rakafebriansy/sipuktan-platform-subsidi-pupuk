@@ -100,3 +100,6 @@ Route::get('/logout', function(){
 Route::get('/download/{folder_name}/{file_name}', function(string $folder_name, string $file_name){
     return Storage::disk('public')->download('/' . $folder_name . '/' . $file_name);
 });
+Route::get('/test/pusher', function(){
+    return view('tests.pusher');
+});
