@@ -18,12 +18,13 @@ class AlokasiController extends Controller
     }
     public function setAlokasi(): View
     {
-        $id = Session::get('id',null);
-        ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
+        $id = Session::get('id_petani',null);
+        ['petani' => $petani, 'notifikasis' => $notifikasis, 'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
         $alokasis = $this->alokasi_service->petaniSetAlokasi($id);
         return view('dashboard.petani.pages.alokasi', [
             'title' => 'Petani | Alokasi',
             'petani' => $petani,
+            'notifikasis' => $notifikasis,
             'initials' => $initials,
             'alokasis' => $alokasis
         ]);

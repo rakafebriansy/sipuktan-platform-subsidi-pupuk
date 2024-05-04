@@ -22,7 +22,7 @@ class AkunController extends Controller
     }
     public function gantiSandi(PemerintahGantiSandiRequest $request): RedirectResponse
     {
-        $id = Session::get('id',null);
+        $id = Session::get('id_pemerintah',null);
         $validated = $request->validated();
         if($validated['sandi_baru'] == $validated['sandi_ulang']) {
             if($this->akun_service->pemerintahGantiSandi($id,$validated)) {

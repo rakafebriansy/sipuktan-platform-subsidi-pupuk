@@ -30,7 +30,7 @@ class AkunController extends Controller
         if(isset($petani)) {
             if($petani->aktif) {
                 $request->session()->regenerate();
-                $request->session()->put('id',$petani->id);
+                $request->session()->put('id_petani',$petani->id);
                 $request->session()->put('role','petani');
                 return redirect('/petani/dashboard');
             }

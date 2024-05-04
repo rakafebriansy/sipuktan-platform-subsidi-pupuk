@@ -34,6 +34,9 @@ Route::prefix('/petani')->group(function(){
     Route::get('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setCheckoutNonTunai']);
     Route::post('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'checkoutNonTunai']);
     Route::get('/riwayat-transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setRiwayatTransaksi']);
+    Route::prefix('/ajax')->group(function(){
+        Route::post('/delete-notifikasi',[AjaxController::class,'deleteNotifikasi']);
+    });
     Route::middleware('hasRole:petani')->group(function(){
     });
 });

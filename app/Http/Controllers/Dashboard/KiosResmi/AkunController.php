@@ -16,14 +16,14 @@ class AkunController extends Controller
     }
     public function setGantiSandi()
     {
-        $id = Session::get('id',null);
+        $id = Session::get('id_kios_resmi',null);
         return response()->view('dashboard.kios-resmi.pages.ganti-sandi', [
             'title' => 'Kios Resmi | Ganti Kata Sandi'
         ]);
     }
     public function kiosResmiGantiSandi(KiosResmiLoginRequest $request): RedirectResponse
     {
-        $id = Session::get('id',null);
+        $id = Session::get('id_kios_resmi',null);
         $validated = $request->validated();
         if($validated['sandi_baru'] == $validated['sandi_ulang']) {
             if($this->akun_service->kiosResmiGantiSandi($id,$validated)) {

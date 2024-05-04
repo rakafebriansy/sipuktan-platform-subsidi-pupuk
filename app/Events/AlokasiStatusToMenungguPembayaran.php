@@ -10,14 +10,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AlokasiStatusChanged implements ShouldBroadcast
+class AlokasiStatusToMenungguPembayaran implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public string $data;
+    public array $data;
+
     /**
      * Create a new event instance.
      */
-    public function __construct( $data)
+    public function __construct($data)
     {
         $this->data = $data;
     }
@@ -33,6 +34,6 @@ class AlokasiStatusChanged implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return 'alokasi-changed';
+        return 'alokasi-status-to-menunggu-pembayaran';
     }
 }

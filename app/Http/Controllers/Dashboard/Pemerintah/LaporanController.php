@@ -20,7 +20,7 @@ class LaporanController extends Controller
     }
     public function setLaporan(Request $request): View
     {
-        $id = Session::get('id');
+        $id = Session::get('id_pemerintah');
         $tahun = date('Y');
         $musim_tanam = null;
         ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id);

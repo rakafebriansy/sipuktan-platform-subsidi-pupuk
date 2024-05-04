@@ -44,9 +44,9 @@ class AlokasiServiceImpl implements AlokasiService
         
         return $alokasis;
     }
-    public function kiosResmiGetDistinctIdPetaniByTahunMusimTanam(string $tahun, string $musim_tanam): Collection
+    public function kiosResmiGetDistinctIdPetaniByTahunMusimTanam(string $tahun, string $musim_tanam): array
     {
-        $id_petanis = Alokasi::where('tahun',$tahun)->where('musim_tanam',$musim_tanam)->distinct()->get(['id_petani']);
+        $id_petanis = Alokasi::where('tahun',$tahun)->where('musim_tanam',$musim_tanam)->distinct()->pluck('id_petani')->toArray();
         return $id_petanis;
     }
     public function pemerintahSetAlokasi(): array

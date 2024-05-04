@@ -32,6 +32,17 @@ function fetchPetaniFromAlokasi(id,token) {
       .then(res => viewPetaniFromAlokasi(JSON.parse(res)))
       .catch(e => console.error('Error'+e));
 }
+function fetchDeleteNotifikasi(id,token) {
+    fetch('/petani/ajax/delete-notifikasi', {
+        headers: {
+            "X-CSRF-Token": token
+          },    
+        method: 'POST',
+        body: new URLSearchParams('id='+id)
+    }).then(res => res.json())
+      .then(res => console.log(res))
+      .catch(e => console.error('Error'+e));
+}
 
 //UTILS
 function viewRiwayatSearchBox(data,list) {
@@ -67,6 +78,33 @@ function viewPetaniFromAlokasi(data) {
     table_rows.querySelector('tr td:nth-child(2)').innerText = data['nomor_telepon'];
     table_rows.querySelector('tr:nth-child(2) td:nth-child(2)').innerText = data['poktan'];
 }
+function viewAlertNotifikasi(message, id) {
+    let xmlString =
+    `
+    <div id="alert-1" class="flex items-center p-4 text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+    </svg>
+    <span class="sr-only">Info</span>
+    <div class="ms-3 text-sm font-medium">
+        ${message}
+    </div>
+    <button data-id="${id}" type="button" onclick="deleteNotifikasi(this, 'petani')" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
+        <span class="sr-only">Close</span>
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+        </svg>
+    </button>
+    </div>
+    `;
+    target = document.querySelector('#dropdownNotifikasiPetani ul');
+    if (target.firstElementChild.id == 'no-notification') target.innerHTML = '';
+    const li = document.createElement('li');
+    li.innerHTML = xmlString;
+    target.appendChild(li);
+}
+
+
 
 //EVENTS
 function editPassId(btn){
@@ -169,14 +207,25 @@ function editStatusAlokasiPassId() {
 function dismissingDropdown(id){
     document.getElementById(id).click()
 }
+function deleteNotifikasi(btn,mode) {
+    let token;
+    switch (mode){
+        case 'petani':
+            token = document.getElementById('dropdownNotifikasiPetani').dataset.token;
+    }
+    fetchDeleteNotifikasi(btn.dataset.id,token)
+}
+
 (function(){
     if(document.URL.includes('/petani/')){
-        console.log(document.getElementById('dropdownNotifikasiPetaniButton').dataset)
-
-        if(window.screen.width > 640) document.getElementById('dropdownProfilPetaniButton').dataset.dropdownPlacement = 'right-end';
-        if(window.screen.width > 640) document.getElementById('dropdownProfilPetaniButton').dataset.dropdownOffsetDistance = '35';
-        if(window.screen.width > 640) document.getElementById('dropdownNotifikasiPetaniButton').dataset.dropdownOffsetDistance = '20';
-        if(window.screen.width > 640) document.getElementById('dropdownNotifikasiPetaniButton').dataset.dropdownPlacement = 'right-end';
-        if(window.screen.width > 640) document.getElementById('dropdownNotifikasiPetaniButton').dataset.dropdownOffsetSkidding = 0;
+        if(window.screen.width > 640) {
+            const profilPetani = document.getElementById('dropdownProfilPetaniButton');
+            const notifikasiPetani = document.getElementById('dropdownNotifikasiPetaniButton');
+            profilPetani.dataset.dropdownPlacement = 'right-end';
+            profilPetani.dataset.dropdownOffsetDistance = '35';
+            notifikasiPetani.dataset.dropdownOffsetDistance = '20';
+            notifikasiPetani.dataset.dropdownPlacement = 'right-end';
+            notifikasiPetani.dataset.dropdownOffsetSkidding = 0;
+        } 
     }
 })();

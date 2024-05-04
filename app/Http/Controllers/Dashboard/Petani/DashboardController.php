@@ -15,11 +15,12 @@ class DashboardController extends Controller
     }
     public function setDashboard(): View
     {
-        $id = Session::get('id',null);
-        ['petani' => $petani,'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
+        $id = Session::get('id_petani',null);
+        ['petani' => $petani, 'notifikasis' => $notifikasis, 'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
         return view('dashboard.petani.pages.index', [
             'title' => 'Petani | Dashboard',
             'petani' => $petani,
+            'notifikasis' => $notifikasis,
             'initials' => $initials
         ]);
     }

@@ -23,7 +23,7 @@ class AlokasiController extends Controller
     }
     public function setAlokasi(Request $request): View
     {
-        $id = Session::get('id',null);
+        $id = Session::get('id_pemerintah',null);
         $tahun = date('Y');
         $musim_tanam = null;
         ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 

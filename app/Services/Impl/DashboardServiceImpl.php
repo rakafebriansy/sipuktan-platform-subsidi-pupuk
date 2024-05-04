@@ -3,6 +3,7 @@
 namespace App\Services\Impl;
 
 use App\Models\KiosResmi;
+use App\Models\Notifikasi;
 use App\Models\Pemerintah;
 use App\Models\Petani;
 use App\Services\DashboardService;
@@ -17,6 +18,9 @@ class DashboardServiceImpl implements DashboardService
         ->join('pemilik_kios','kios_resmis.id_pemilik_kios','pemilik_kios.id')
         ->join('kecamatans','kecamatans.id','kios_resmis.id_kecamatan')
         ->where('petanis.id',$id)->first();
+
+        $notifikasis = Notifikasi::where('id_petani',$id)->get();
+
         $nama = explode(" ", $petani->nama);
         $initials = "";
 
@@ -24,7 +28,7 @@ class DashboardServiceImpl implements DashboardService
             if($key > 1) break;
             $initials .= mb_substr($w, 0, 1);
         }
-        return ['petani' => $petani,'initials' =>$initials];
+        return ['petani' => $petani, 'notifikasis' => $notifikasis, 'initials' =>$initials];
     }
     public function kiosResmiSetSidebar(int $id): array
     {

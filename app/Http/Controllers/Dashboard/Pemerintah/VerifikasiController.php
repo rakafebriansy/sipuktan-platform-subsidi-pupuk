@@ -21,7 +21,7 @@ class VerifikasiController extends Controller
     }
     public function setVerifikasi(): View
     {
-        $id = Session::get('id');
+        $id = Session::get('id_pemerintah');
         ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         ['petanis' => $petanis, 'kios_resmis' => $kios_resmis] = $this->verifikasi_service->pemerintahSetVerifikasiPengguna();
         return view('dashboard.pemerintah.pages.verifikasi-pengguna', [

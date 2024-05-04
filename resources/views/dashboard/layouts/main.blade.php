@@ -15,11 +15,12 @@
       });
 
       var channel = pusher.subscribe('my-channel');
-      channel.bind('alokasi-changed', function(data) {
-        const alertNotif = document.getElementById('alert-notification');
-        alert(JSON.stringify(data['data']));
-        alertNotif.querySelector('#text-notification').innerText = JSON.stringify(data['data']);
-        alertNotif.classList.replace('hidden','flex');
+      channel.bind('alokasi-status-to-menunggu-pembayaran', function(data) {
+        let id_petanis = data['data']['id_petanis'];
+        let pesan = data['data']['pesan'];
+        if(id_petanis.includes(document.getElementById('petani').dataset.id)){
+          viewAlertNotifikasi(pesan,id_petanis)
+        }
       });
     </script>
     @vite(['resources/css/app.css','resources/js/app.js'])

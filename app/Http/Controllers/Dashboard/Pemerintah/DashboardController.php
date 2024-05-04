@@ -16,7 +16,7 @@ class DashboardController extends Controller
     }
     public function setDashboard(): View
     {
-        $id = Session::get('id',null);
+        $id = Session::get('id_pemerintah',null);
         ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         return view('dashboard.pemerintah.pages.index', [
             'title' => 'Pemerintah | Dashboard',

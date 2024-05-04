@@ -20,7 +20,7 @@ class TransaksiController extends Controller
     }
     public function setTransaksi(): View
     {
-        $id = Session::get('id',null);
+        $id = Session::get('id_kios_resmi',null);
         ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
         $alokasis = $this->transaksi_service->kiosResmiSetTransaksi($id);
         return view('dashboard.kios-resmi.pages.transaksi', [
@@ -42,7 +42,7 @@ class TransaksiController extends Controller
     }
     public function setRiwayatTransaksi(Request $request): View
     {
-        $id = Session::get('id');
+        $id = Session::get('id_kios_resmi');
         $tahun = date('Y');
         $musim_tanam = null;
         ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
