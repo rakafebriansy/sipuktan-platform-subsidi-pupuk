@@ -171,7 +171,12 @@ function dismissingDropdown(id){
 }
 (function(){
     if(document.URL.includes('/petani/')){
+        console.log(document.getElementById('dropdownNotifikasiPetaniButton').dataset)
+
         if(window.screen.width > 640) document.getElementById('dropdownProfilPetaniButton').dataset.dropdownPlacement = 'right-end';
+        if(window.screen.width > 640) document.getElementById('dropdownProfilPetaniButton').dataset.dropdownOffsetDistance = '35';
+        if(window.screen.width > 640) document.getElementById('dropdownNotifikasiPetaniButton').dataset.dropdownOffsetDistance = '20';
         if(window.screen.width > 640) document.getElementById('dropdownNotifikasiPetaniButton').dataset.dropdownPlacement = 'right-end';
+        if(window.screen.width > 640) document.getElementById('dropdownNotifikasiPetaniButton').dataset.dropdownOffsetSkidding = 0;
     }
 })();
