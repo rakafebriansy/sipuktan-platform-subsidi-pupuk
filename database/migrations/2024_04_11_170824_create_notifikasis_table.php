@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('notifikasis', function (Blueprint $table) {
             $table->id();
             $table->text('isi')->nullable(false);
-            $table->unsignedBigInteger('id_petani')->nullable(false);
-            $table->unsignedBigInteger('id_kios_resmi')->nullable(false);
-            $table->string('id_pemerintah',20)->nullable(false);
+            $table->unsignedBigInteger('id_petani')->nullable();
+            $table->unsignedBigInteger('id_kios_resmi')->nullable();
+            $table->string('id_pemerintah',20)->nullable();
 
             $table->foreign('id_petani')->on('petanis')->references('id');
             $table->foreign('id_kios_resmi')->on('kios_resmis')->references('id');

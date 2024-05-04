@@ -11,6 +11,7 @@ interface AlokasiService
     function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): Collection;
     function kiosResmiSetAlokasi(): Collection;
     function kiosResmiAlokasi(string $tahun, string $musim_tanam): bool;
+    function kiosResmiGetDistinctIdPetaniByTahunMusimTanam(string $tahun, string $musim_tanam): Collection;
     function pemerintahSetAlokasi(): array;
     function pemerintahSetAlokasiByTahun(string $tahun, string $musim_tanam): Collection;
     function pemerintahTambahAlokasi(array $alokasi): bool;

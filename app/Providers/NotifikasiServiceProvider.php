@@ -2,15 +2,14 @@
 
 namespace App\Providers;
 
-use App\Services\Impl\RiwayatTransaksiServiceImpl;
-use App\Services\RiwayatTransaksiService;
-use Illuminate\Contracts\Support\DeferrableProvider;
+use App\Services\Impl\NotifikasiServiceImpl;
+use App\Services\NotifikasiService;
 use Illuminate\Support\ServiceProvider;
 
-class RiwayatTransaksiProvider extends ServiceProvider implements DeferrableProvider
+class NotifikasiServiceProvider extends ServiceProvider
 {
     public array $singletons =[
-        RiwayatTransaksiService::class => RiwayatTransaksiServiceImpl::class
+        NotifikasiService::class => NotifikasiServiceImpl::class
     ];
     /**
      * Register services.
@@ -29,6 +28,6 @@ class RiwayatTransaksiProvider extends ServiceProvider implements DeferrableProv
     }
     public function provides():array
     {
-        return [RiwayatTransaksiService::class];
+        return [NotifikasiService::class];
     }
 }

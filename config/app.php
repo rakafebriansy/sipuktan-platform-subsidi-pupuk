@@ -174,6 +174,7 @@ return [
         App\Providers\AlokasiServiceProvider::class,
         App\Providers\TransaksiServiceProvider::class,
         App\Providers\LaporanServiceProvider::class,
+        App\Providers\NotifikasiServiceProvider::class,
     ])->toArray(),
 
     /*
