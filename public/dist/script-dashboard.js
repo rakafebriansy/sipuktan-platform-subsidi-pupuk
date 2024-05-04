@@ -166,6 +166,12 @@ function editStatusAlokasiPassId() {
     document.getElementById('alokasiTahun').value = document.getElementById('dropdownTahunButton').innerText;
     document.getElementById('alokasiMusimTanam').value = document.getElementById('dropdownMTButton').innerText;
 }
+function dismissingDropdown(id){
+    document.getElementById(id).click()
+}
 (function(){
-
+    if(document.URL.includes('/petani/')){
+        if(window.screen.width > 640) document.getElementById('dropdownProfilPetaniButton').dataset.dropdownPlacement = 'right-end';
+        if(window.screen.width > 640) document.getElementById('dropdownNotifikasiPetaniButton').dataset.dropdownPlacement = 'right-end';
+    }
 })();

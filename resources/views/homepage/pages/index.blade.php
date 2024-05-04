@@ -52,5 +52,32 @@
       </svg>
   </div>
 </div>
-
+<div id="dropdownLogin" class="z-50 cursor-pointer hidden bg-white rounded-lg shadow-2xl w-28 dark:bg-gray-700">
+  <ul class=" py-2 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLoginButton">
+    <li>
+      <a href="/petani/login" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
+        Petani
+      </a>
+    </li>
+    <li>
+      <a href="/kios-resmi/login" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
+        Kios Resmi
+      </a>
+    </li>
+  </ul>
+</div> 
+<div id="dropdownDaftar" class="z-50 cursor-pointer hidden bg-white rounded-lg shadow-2xl w-28 dark:bg-gray-700">
+  <ul class=" py-2 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDaftarButton">
+    <li>
+      <a href="/petani/register" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
+        Petani
+      </a>
+    </li>
+    <li>
+      <a href="/kios-resmi/register" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
+        Kios Resmi
+      </a>
+    </li>
+  </ul>
+</div> 
 @endsection

@@ -11,7 +11,7 @@
      <ul class="space-y-2 font-normal">
         <li>
          <div class="flex justify-between">
-            <button id="dropdownProfilPetaniButton" data-dropdown-toggle="dropdownProfilPetani" data-dropdown-placement="right-end"  class="flex w-full px-2 items-center gap-4 cursor-pointer text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <button id="dropdownProfilPetaniButton" data-dropdown-toggle="dropdownProfilPetani" data-dropdown-offset-distance="35" data-dropdown-placement="bottom-start"  class="flex w-full px-2 items-center gap-4 cursor-pointer text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
               <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                 <span class="font-medium text-gray-600 dark:text-gray-300">{{ $initials }}</span>
               </div>
@@ -20,8 +20,8 @@
                   <div class="text-sm text-gray-500 dark:text-gray-400">Petani</div>
               </div>
             </button>  
-            <button id="dropdownNotifikasiKiosButton">
-               <svg class="w-4 h-4 me-1 text-gray-500 transition duration-75 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <button id="dropdownNotifikasiPetaniButton" data-dropdown-toggle="dropdownNotifikasiPetani" data-dropdown-offset-distance="20" data-dropdown-placement="bottom-start" class="hover:bg-gray-200 rounded-full dark:hover:bg-gray-700">
+               <svg class="w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                 </svg>
             </button> 
@@ -96,8 +96,33 @@
 
 {{-- DROPDOWN --}}
 
+<div id="dropdownNotifikasiPetani" class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow min-w-44 max-w-80 dark:bg-gray-700 dark:divide-gray-600">
+  <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+    <div>Notifikasi</div>
+  </div>
+  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+    <li>
+      <div id="alert-1" class="flex items-center p-4 text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+        <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Info</span>
+        <div class="ms-3 text-sm font-medium">
+          A simple info alert with an <a href="#" class="font-semibold underline hover:no-underline">example link</a>. Give it a click if you like.
+        </div>
+          <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
+
 <div id="dropdownProfilPetani" class="z-50 hidden">
-   <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7] w-[22rem]">
+   <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7] min-w-[16rem]">
      <div class="bg-gray-100 border-b rounded-t-xl py-1 px-4 md:py-1 md:px-4 dark:bg-slate-900 dark:border-gray-700">
        <p class="mt-1 text-sm text-gray-500 dark:text-gray-500">
          Informasi Akun

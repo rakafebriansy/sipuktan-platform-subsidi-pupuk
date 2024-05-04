@@ -23,7 +23,7 @@ class PetaniRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nik' => ['required','min:16','numeric','unique:petanis,nik','min:16'],
+            'nik' => ['required','min:16','numeric','unique:petanis,nik'],
             'nama' => ['required','max:60','min:3'],
             'kata_sandi' => ['required','min:6'],
             'foto_ktp' => ['required','mimes:png,jpg','max:5140'],
