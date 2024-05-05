@@ -175,6 +175,7 @@ return [
         App\Providers\TransaksiServiceProvider::class,
         App\Providers\LaporanServiceProvider::class,
         App\Providers\NotifikasiServiceProvider::class,
+        App\Providers\FaqServiceProvider::class,
     ])->toArray(),
 
     /*

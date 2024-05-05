@@ -13,7 +13,7 @@ class AlokasiSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([PemerintahSeeder::class,JenisPupukSeeder::class,PetaniSeeder::class]);
+        $this->call([PemerintahSeeder::class,JenisPupukSeeder::class,PetaniSeeder::class,FaqSeeder::class]);
         Alokasi::create([
             'id' => 1,
             'jumlah_pupuk' => 30,
