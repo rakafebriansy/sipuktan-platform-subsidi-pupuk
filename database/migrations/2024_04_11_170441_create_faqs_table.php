@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->text('pertanyaan')->nullable(false);
             $table->text('jawaban')->nullable(false);
-            $table->string('id_kategori',60)->nullable(false);
             $table->string('id_pemerintah',20)->nullable(false);
 
             $table->foreign('id_kategori')->on('kategoris')->references('id');

@@ -17,28 +17,24 @@ class FaqSeeder extends Seeder
             'id' => 1,
             'pertanyaan' => fake()->sentence(),
             'jawaban' => fake()->sentence(),
-            'id_kategori' => 1,
             'id_pemerintah' => 1
         ]);
         Faq::create([
             'id' => 2,
             'pertanyaan' => fake()->sentence(),
             'jawaban' => fake()->sentence(),
-            'id_kategori' => 1,
             'id_pemerintah' => 1
         ]);
         Faq::create([
             'id' => 3,
             'pertanyaan' => fake()->sentence(),
             'jawaban' => fake()->sentence(),
-            'id_kategori' => 2,
             'id_pemerintah' => 1
         ]);
         Faq::create([
             'id' => 4,
             'pertanyaan' => fake()->sentence(),
             'jawaban' => fake()->sentence(),
-            'id_kategori' => 3,
             'id_pemerintah' => 1
         ]);
     }
