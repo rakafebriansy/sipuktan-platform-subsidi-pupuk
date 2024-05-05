@@ -37,16 +37,23 @@ class FaqController extends Controller
         $id = Session::get('id_pemerintah');
         $validated = $request->validated();
         if($this->faq_service->pemerintahBuatFaq($validated, $id)) {
-            return back()->with('success', 'Faq baru berhasil ditambahkan');
+            return back()->with('success', 'FAQ baru berhasil ditambahkan');
         }
-        return back()->with(['error' => 'Faq baru gagal ditambahkan']);
+        return back()->with(['error' => 'FAQ baru gagal ditambahkan']);
     }
     public function editFaq(PemerintahEditFaqRequest $request): RedirectResponse
     {
         $validated = $request->validated();
         if($this->faq_service->pemerintahEditFaq($validated)) {
-            return back()->with('success','Faq berhasil diperbarui');
+            return back()->with('success','FAQ berhasil diperbarui');
         }
-        return back()->withErrors(['error','Faq gagal diperbarui']);
+        return back()->withErrors(['error','FAQ gagal diperbarui']);
+    }
+    public function hapusFaq(Request $request): RedirectResponse
+    {
+        if($this->faq_service->pemerintahHapusFaq($request->id)) {
+            return back()->with('success','FAQ berhasil dihapus');
+        }
+        return back()->withErrors(['error' =>'FAQ gagal dihapus']);
     }
 }

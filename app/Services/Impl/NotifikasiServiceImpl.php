@@ -40,10 +40,9 @@ class NotifikasiServiceImpl implements NotifikasiService
     }
     public function ajaxDeleteNotifikasi(int $id): bool
     {
-        DB::transaction(function() use ($id) {
-            Notifikasi::where('id',$id)->delete();
+        return DB::transaction(function() use ($id) {
+            return Notifikasi::where('id',$id)->delete();
         });
-        return true;
     }
 }
 

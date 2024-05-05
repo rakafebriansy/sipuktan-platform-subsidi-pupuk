@@ -262,6 +262,10 @@ function editFaqPassId(btn,token){
     document.getElementById('editFaqModal').querySelector('[name="id"]').value = id;
     fetchGetFaqDetails(id,token);
 }
+function deleteFaqPassId(btn){
+    let id = btn.parentElement.dataset.id;
+    document.getElementById('deleteFaqModal').querySelector('[name="id"]').value = id;
+}
 
 (function(){
     if(document.URL.includes('/petani/') || document.URL.includes('/kios-resmi/')){

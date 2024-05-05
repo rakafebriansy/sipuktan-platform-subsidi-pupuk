@@ -43,10 +43,9 @@ class LaporanServiceImpl implements LaporanService
             $laporan['foto_surat_kuasa'] = $laporan['foto_surat_kuasa']->getClientOriginalName();
         }
         
-        DB::transaction(function () use ($laporan) {
-            Laporan::insert($laporan);
+        return DB::transaction(function () use ($laporan) {
+            return Laporan::insert($laporan);
         });
-        return true;
     }
     public function pemerintahSetLaporan(string $tahun, string $musim_tanam): Collection
     {
@@ -63,10 +62,9 @@ class LaporanServiceImpl implements LaporanService
     }
     public function pemerintahLaporan(int $id, string $status_verifikasi): bool
     {
-        DB::transaction(function () use ($id, $status_verifikasi) {
-            Laporan::where('id',$id)->update(['status_verifikasi' => $status_verifikasi]);
+        return DB::transaction(function () use ($id, $status_verifikasi) {
+            return Laporan::where('id',$id)->update(['status_verifikasi' => $status_verifikasi]);
         });
-        return true;
     }
     public function pemerintahGetIdKiosResmiByLaporan(int $id_laporan): int
     {

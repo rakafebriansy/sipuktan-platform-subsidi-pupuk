@@ -14,7 +14,7 @@ class AlokasiServiceImpl implements AlokasiService
 {    
     public function petaniSetAlokasi(int $id): Collection
     {
-        $alokasis = Alokasi::query()->select('alokasis.*','jenis_pupuks.*','kios_resmis.nama as kios_resmi')
+        $alokasis = Alokasi::select('alokasis.*','jenis_pupuks.*','kios_resmis.nama as kios_resmi')
         ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
         ->join('kios_resmis','alokasis.id_kios_resmi','kios_resmis.id')
         ->where('id_petani', $id)->orderBy('jenis_pupuks.jenis')->get();
@@ -28,12 +28,11 @@ class AlokasiServiceImpl implements AlokasiService
     }
     public function kiosResmiAlokasi(string $tahun, string $musim_tanam): bool
     {
-        DB::transaction(function () use ($tahun, $musim_tanam) {
-            Alokasi::where('tahun',$tahun)->where('musim_tanam',$musim_tanam)->where('status','Belum Tersedia')->update([
+        return DB::transaction(function () use ($tahun, $musim_tanam) {
+            return Alokasi::where('tahun',$tahun)->where('musim_tanam',$musim_tanam)->where('status','Belum Tersedia')->update([
                 'status' => 'Menunggu Pembayaran'
             ]);
         });
-        return true;
     }
     public function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): Collection
     {
@@ -68,11 +67,11 @@ class AlokasiServiceImpl implements AlokasiService
     }
     public function pemerintahBuatAlokasi(array $alokasi): bool
     {
-        $petani = Petani::query()->where('nik',$alokasi['nik'])->first();
+        $petani = Petani::where('nik',$alokasi['nik'])->first();
         $kelompok_tani = KelompokTani::find($petani->id_kelompok_tani);
         $kios_resmi = $kelompok_tani->kios_resmi;
-        DB::transaction(function() use ($alokasi, $petani, $kios_resmi){
-            Alokasi::create([
+        return DB::transaction(function() use ($alokasi, $petani, $kios_resmi){
+            return Alokasi::create([
                 'jumlah_pupuk' => $alokasi['jumlah_pupuk'],
                 'tahun' => $alokasi['tahun'],
                 'musim_tanam' => $alokasi['musim_tanam'],
@@ -81,23 +80,20 @@ class AlokasiServiceImpl implements AlokasiService
                 'id_kios_resmi' => $kios_resmi->id,
             ]);
         });
-        return true;
     }
     public function pemerintahHapusAlokasi(int $id): bool
     {
-        DB::transaction(function () use ($id) {
-            Alokasi::query()->where('id',$id)->delete();
+        return DB::transaction(function () use ($id) {
+            return Alokasi::where('id',$id)->delete();
         });
-        return true;
-
     }
     public function pemerintahEditAlokasi(array $alokasi): bool
     {
-        DB::transaction(function() use($alokasi) {
-            $petani = Petani::query()->where('nik',$alokasi['nik'])->first();
+        return DB::transaction(function() use($alokasi) {
+            $petani = Petani::where('nik',$alokasi['nik'])->first();
             $kelompok_tani = $petani->kelompok_tani;
             $kios_resmi = $kelompok_tani->kios_resmi;
-            Alokasi::query()->where('id',$alokasi['id'])->update([
+            return Alokasi::where('id',$alokasi['id'])->update([
                 'id_petani' => $petani->id,
                 'jumlah_pupuk' => $alokasi['jumlah_pupuk'],
                 'tahun' => $alokasi['tahun'],
@@ -106,7 +102,6 @@ class AlokasiServiceImpl implements AlokasiService
                 'id_kios_resmi' => $kios_resmi->id
             ]);
         });
-        return true;
     }
     public function ajaxDetailAlokasiPetani(int $id): string
     {

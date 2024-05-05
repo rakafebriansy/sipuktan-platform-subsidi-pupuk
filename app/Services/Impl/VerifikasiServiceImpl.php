@@ -22,17 +22,15 @@ class VerifikasiServiceImpl implements VerifikasiService
     }
     public function pemerintahVerifikasiPetani($ids): bool
     {
-        DB::transaction(function() use ($ids) {
-            Petani::whereIn('id',$ids)->update(['aktif' => true]);
+        return DB::transaction(function() use ($ids) {
+            return Petani::whereIn('id',$ids)->update(['aktif' => true]);
         });
-        return true;
     }
     public function pemerintahVerifikasiKiosResmi($ids): bool
     {
-        DB::transaction(function() use ($ids) {
-            KiosResmi::whereIn('id',$ids)->update(['aktif' => true]);
+        return DB::transaction(function() use ($ids) {
+            return KiosResmi::whereIn('id',$ids)->update(['aktif' => true]);
         });
-        return true;
     }
 }
 

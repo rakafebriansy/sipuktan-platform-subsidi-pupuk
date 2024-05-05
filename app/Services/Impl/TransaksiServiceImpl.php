@@ -75,7 +75,7 @@ class TransaksiServiceImpl implements TransaksiService
     }
     public function petaniCheckoutNonTunai(array $id_alokasis): bool
     {
-        DB::transaction(function () use ($id_alokasis) {
+        return DB::transaction(function () use ($id_alokasis) {
             $riwayat_transaksis = [];
             foreach($id_alokasis as $id_alokasi) {
                 $riwayat_transaksis[] = [
@@ -85,9 +85,8 @@ class TransaksiServiceImpl implements TransaksiService
             }
 
             RiwayatTransaksi::insert($riwayat_transaksis);
-            Alokasi::whereIn('id',$id_alokasis)->update(['status' => 'Dibayar']);
+            return Alokasi::whereIn('id',$id_alokasis)->update(['status' => 'Dibayar']);
         });
-        return true;
     }
     public function petaniSetRiwayatTransaksi(int $id_petani): Collection
     {

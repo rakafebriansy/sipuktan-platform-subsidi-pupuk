@@ -27,10 +27,9 @@ class FaqServiceImpl implements FaqService
     public function pemerintahBuatFaq(array $validated, int $id): bool
     {
         $validated['id_pemerintah'] = $id;
-        DB::transaction(function() use ($validated) {
-            Faq::insert($validated);
+        return DB::transaction(function() use ($validated) {
+            return Faq::insert($validated);
         });
-        return true;
     }
     public function pemerintahEditFaq(array $validated): bool
     {
@@ -44,11 +43,18 @@ class FaqServiceImpl implements FaqService
         });
         return true;
     }
+    public function pemerintahHapusFaq(int $id): bool
+    {
+        return DB::transaction(function () use ($id) {
+            return Faq::query()->where('id',$id)->delete();
+        });
+    }
     public function ajaxGetFaqDetail(int $id): string
     {
         $faq = Faq::where('id',$id)->first()->toJson(JSON_PRETTY_PRINT);
         return $faq;
     }
+
 }
 
 ?>

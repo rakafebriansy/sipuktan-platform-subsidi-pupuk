@@ -12,5 +12,6 @@ interface FaqService
     function pemerintahSetFaq(int $id): Collection;
     function pemerintahBuatFaq(array $validated, int $id): bool;
     function pemerintahEditFaq(array $validated): bool;
+    function pemerintahHapusFaq(int $id): bool;
     function ajaxGetFaqDetail(int $id): string;
 }
