@@ -50,7 +50,7 @@ class AkunController extends Controller
     {
         $validated = $request->validated();
         $this->akun_service->petaniRegister($validated, $request->file('foto_ktp'));
-        return back()->with('success','Silahkan tunggu verifikasi dari akun anda!');
+        return back()->with('success','Silakan tunggu verifikasi untuk akun anda!');
     }
     public function setLupaSandi(): View
     {

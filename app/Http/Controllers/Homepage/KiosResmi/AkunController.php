@@ -31,7 +31,7 @@ class AkunController extends Controller
         $validated = $request->validated();
         try {
             $this->akun_service->kiosResmiRegister($validated, $request->file('foto_ktp'));
-            return back()->with('success','Silahkan tunggu verifikasi dari akun anda!');
+            return back()->with('success','Silakan tunggu verifikasi untuk akun anda!');
         } catch (\Exception $e) {
             return back()->withErrors('dbErr','Akun gagal dibuat!');
         }

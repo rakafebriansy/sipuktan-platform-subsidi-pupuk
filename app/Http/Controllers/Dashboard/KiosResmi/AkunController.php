@@ -24,14 +24,13 @@ class AkunController extends Controller
     {
         $id = Session::get('id_kios_resmi',null);
         $validated = $request->validated();
-        if($validated['sandi_baru'] == $validated['sandi_ulang']) {
-            if($this->akun_service->kiosResmiGantiSandi($id,$validated)) {
+        if($this->akun_service->kiosResmiCekSandi($id,$validated['sandi_lama'])) {
+            if($validated['sandi_baru'] == $validated['sandi_ulang']) {
+                if($this->akun_service->kiosResmiGantiSandi($id,$validated['sandi_baru']))
                 return redirect('/kios-resmi/dashboard')->with('success','Kata sandi berhasil diperbarui');
-            } else {
-                return back()->withErrors(['failed' => 'Kata sandi lama salah']);
             }
-        } else {
             return back()->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
         }
+        return back()->withErrors(['failed' => 'Kata sandi lama salah']);
     }
 }

@@ -15,7 +15,7 @@ class AkunServiceImpl implements AkunService
 {    
     public function petaniLogin(string $nik, string $kata_sandi): object|null
     {
-        $petani = Petani::query()->where('nik',$nik)->first();
+        $petani = Petani::where('nik',$nik)->first();
         if(isset($petani)) {
             if(Hash::check($kata_sandi,$petani->kata_sandi)){
                 return $petani;
@@ -25,7 +25,7 @@ class AkunServiceImpl implements AkunService
     }
     public function kiosResmiLogin(string $nib, string $kata_sandi): object|null
     {
-        $kios_resmi = KiosResmi::query()->where('nib',$nib)->first();
+        $kios_resmi = KiosResmi::where('nib',$nib)->first();
         if(isset($kios_resmi)) {
             if(Hash::check($kata_sandi,$kios_resmi->kata_sandi)){
                 return $kios_resmi;
@@ -35,7 +35,7 @@ class AkunServiceImpl implements AkunService
     }
     public function pemerintahLogin(string $nama_pengguna, string $kata_sandi): object|null
     {
-        $pemerintah = Pemerintah::query()->where('nama_pengguna',$nama_pengguna)->first();
+        $pemerintah = Pemerintah::where('nama_pengguna',$nama_pengguna)->first();
         if(isset($pemerintah)) {
             if(Hash::check($kata_sandi,$pemerintah->kata_sandi)){
                 return $pemerintah;
@@ -74,37 +74,37 @@ class AkunServiceImpl implements AkunService
             ]);
         }); 
     }
-    public function petaniGantiSandi(int $id, array $sandi_petani): bool
+    public function petaniCekSandi(int $id, string $sandi_lama): bool
     {
-        $petani = Petani::find($id);
-        if(Hash::check($sandi_petani['sandi_lama'],$petani->kata_sandi)) {
-            $sandi_baru = Hash::make($sandi_petani['sandi_baru']);
-            Petani::query()->where('id',$id)->update(['kata_sandi' => $sandi_baru]);
-            return true;
-        } else {
-            return false;
-        }
+        $kios_resmi = Petani::find($id);
+        if(Hash::check($sandi_lama,$kios_resmi->kata_sandi)) return true;
+        return false;
     }
-    public function kiosResmiGantiSandi(int $id, array $sandi_kios): bool
+    public function petaniGantiSandi(int $id, string $sandi_baru): bool
+    {
+        $sandi_baru = Hash::make($sandi_baru);
+        return Petani::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+    }
+    public function kiosResmiCekSandi(int $id, string $sandi_lama): bool
     {
         $kios_resmi = KiosResmi::find($id);
-        if(Hash::check($sandi_kios['sandi_lama'],$kios_resmi->kata_sandi)) {
-            $sandi_baru = Hash::make($sandi_kios['sandi_baru']);
-            KiosResmi::query()->where('id',$id)->update(['kata_sandi' => $sandi_baru]);
-            return true;
-        } else {
-            return false;
-        }
+        if(Hash::check($sandi_lama,$kios_resmi->kata_sandi)) return true;
+        return false;
     }
-    public function pemerintahGantiSandi(int $id, array $sandi_pemerintah): bool
+    public function kiosResmiGantiSandi(int $id, string $sandi_baru): bool
     {
-        $pemerintah = Pemerintah::find($id);
-        if(Hash::check($sandi_pemerintah['sandi_lama'],$pemerintah->kata_sandi)) {
-            $sandi_baru = Hash::make($sandi_pemerintah['sandi_baru']);
-            Pemerintah::query()->where('id',$id)->update(['kata_sandi' => $sandi_baru]);
-            return true;
-        } else {
-            return false;
-        }
+        $sandi_baru = Hash::make($sandi_baru);
+        return KiosResmi::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+    }
+    public function pemerintahCekSandi(int $id, string $sandi_lama): bool
+    {
+        $kios_resmi = Pemerintah::find($id);
+        if(Hash::check($sandi_lama,$kios_resmi->kata_sandi)) return true;
+        return false;
+    }
+    public function pemerintahGantiSandi(int $id, string $sandi_baru): bool
+    {
+        $sandi_baru = Hash::make($sandi_baru);
+        return Pemerintah::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
     }
 }

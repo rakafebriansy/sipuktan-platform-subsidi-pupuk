@@ -25,14 +25,13 @@ class AkunController extends Controller
     {
         $id = Session::get('id_petani',null);
         $validated = $request->validated();
-        if($validated['sandi_baru'] == $validated['sandi_ulang']) {
-            if($this->akun_service->petaniGantiSandi($id,$validated)) {
+        if($this->akun_service->petaniCekSandi($id,$validated['sandi_lama'])) {
+            if($validated['sandi_baru'] == $validated['sandi_ulang']) {
+                $this->akun_service->petaniGantiSandi($id,$validated['sandi_baru']);
                 return redirect('/petani/dashboard')->with('success','Kata sandi berhasil diperbarui');
-            } else {
-                return back()->withErrors(['failed' => 'Kata sandi lama salah']);
             }
-        } else {
             return back()->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
         }
+        return back()->withErrors(['failed' => 'Kata sandi lama salah']);
     }
 }
