@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Dashboard\Pemerintah;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PemerintahBuatFaqRequest;
 use App\Services\DashboardService;
 use App\Services\FaqService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -28,5 +30,14 @@ class FaqController extends Controller
             'initials' => $initials,
             'faqs' => $faqs
         ]);
+    }
+    public function buatFaq(PemerintahBuatFaqRequest $request): RedirectResponse
+    {
+        $id = Session::get('id_pemerintah');
+        $validated = $request->validated();
+        if($this->faq_service->pemerintahBuatFaq($validated, $id)) {
+            return back()->with('success', 'Faq baru berhasil ditambahkan');
+        }
+        return back()->with(['error' => 'Faq baru gagal ditambahkan']);
     }
 }

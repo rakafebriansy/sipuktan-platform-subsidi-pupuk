@@ -48,10 +48,10 @@ class AlokasiController extends Controller
             'musim_tanam' => $musim_tanam
         ]);
     }
-    public function tambahAlokasi(PemerintahBuatAlokasiRequest $request):RedirectResponse
+    public function buatAlokasi(PemerintahBuatAlokasiRequest $request):RedirectResponse
     {
         $validated = $request->validated();
-        if($this->alokasi_service->pemerintahTambahAlokasi($validated)) {
+        if($this->alokasi_service->pemerintahBuatAlokasi($validated)) {
             return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with('success', 'Data alokasi berhasil ditambahkan');
         }
         return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with(['error' => 'Data alokasi gagal ditambahkan']);

@@ -77,12 +77,13 @@ Route::prefix('/pemerintah')->group(function(){
         Route::post('/verifikasi-pengguna/petani', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'verifikasiPetani']);
         Route::post('/verifikasi-/kios-resmi', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'verifikasiKiosResmi']);
         Route::get('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'setAlokasi']);
-        Route::post('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'tambahAlokasi']);
+        Route::post('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'buatAlokasi']);
         Route::put('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'hapusAlokasi']);
         Route::patch('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'editAlokasi']);
         Route::get('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'setLaporan']);
         Route::patch('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'laporan']);
         Route::get('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'setFaq']);
+        Route::post('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'buatFaq']);
     });
 });
 Route::prefix('/ajax')->group(function(){

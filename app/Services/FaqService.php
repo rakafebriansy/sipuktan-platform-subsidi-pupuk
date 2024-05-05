@@ -10,4 +10,5 @@ interface FaqService
     function getFaqPetani(): Collection;
     function getFaqKiosResmi(): Collection;
     function pemerintahSetFaq(int $id): Collection;
+    function pemerintahBuatFaq(array $validated, int $id): bool;
 }

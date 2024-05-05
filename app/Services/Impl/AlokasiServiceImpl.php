@@ -66,7 +66,7 @@ class AlokasiServiceImpl implements AlokasiService
 
         return $alokasis;
     }
-    public function pemerintahTambahAlokasi(array $alokasi): bool
+    public function pemerintahBuatAlokasi(array $alokasi): bool
     {
         $petani = Petani::query()->where('nik',$alokasi['nik'])->first();
         $kelompok_tani = KelompokTani::find($petani->id_kelompok_tani);
