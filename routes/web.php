@@ -82,6 +82,7 @@ Route::prefix('/pemerintah')->group(function(){
         Route::patch('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'editAlokasi']);
         Route::get('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'setLaporan']);
         Route::patch('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'laporan']);
+        Route::get('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'setFaq']);
     });
 });
 Route::prefix('/ajax')->group(function(){

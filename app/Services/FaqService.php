@@ -9,4 +9,5 @@ interface FaqService
 {
     function getFaqPetani(): Collection;
     function getFaqKiosResmi(): Collection;
+    function pemerintahSetFaq(int $id): Collection;
 }
