@@ -39,10 +39,10 @@ class VerifikasiController extends Controller
         $ids = $request->id_petanis;
         if(isset($ids)){
             if($this->verifikasi_service->pemerintahVerifikasiPetani($ids)) {
-                return redirect('/pemerintah/verifikasi-pengguna')->with('success','Berhasil memverifikasi akun petani.');
+                return back()->with('success','Berhasil memverifikasi akun petani.');
             }
         }
-        return redirect('/pemerintah/verifikasi-pengguna')->withErrors(['error' => 'Gagal memverifikasi akun.']);
+        return back()->withErrors(['error' => 'Gagal memverifikasi akun.']);
         
     }
     public function verifikasiKiosResmi(Request $request): RedirectResponse
@@ -50,9 +50,9 @@ class VerifikasiController extends Controller
         $ids = $request->id_kios_resmis;
         if(isset($ids)){
             if($this->verifikasi_service->pemerintahVerifikasiKiosResmi($ids)) {
-                return redirect('/pemerintah/verifikasi-pengguna')->with('success','Berhasil memverifikasi akun kios resmi.');
+                return back()->with('success','Berhasil memverifikasi akun kios resmi.');
             }
         }
-        return redirect('/pemerintah/verifikasi-pengguna')->withErrors(['error' => 'Gagal memverifikasi akun.']);
+        return back()->withErrors(['error' => 'Gagal memverifikasi akun.']);
     }
 }

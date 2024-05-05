@@ -31,9 +31,9 @@ class AkunController extends Controller
         $validated = $request->validated();
         try {
             $this->akun_service->kiosResmiRegister($validated, $request->file('foto_ktp'));
-            return redirect()->intended('/kios-resmi/register')->with('success','Silahkan tunggu verifikasi dari akun anda!');
+            return back()->with('success','Silahkan tunggu verifikasi dari akun anda!');
         } catch (\Exception $e) {
-            return redirect()->intended('/kios-resmi/register')->withErrors('dbErr','Akun gagal dibuat!');
+            return back()->withErrors('dbErr','Akun gagal dibuat!');
         }
     }
     public function setLogin(): View
@@ -54,9 +54,9 @@ class AkunController extends Controller
                 return redirect('/kios-resmi/dashboard');
 
             }
-            return redirect('/kios-resmi/login')->with('unverified','Akun anda belum diverifikasi');
+            return back()->with('unverified','Akun anda belum diverifikasi');
         } 
-        return redirect('/kios-resmi/login')->withErrors(['failed' => 'Kredensial salah']);
+        return back()->withErrors(['failed' => 'Kredensial salah']);
     }
     
     public function setLupaSandi(): View

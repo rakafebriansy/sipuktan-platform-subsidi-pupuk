@@ -29,10 +29,10 @@ class AkunController extends Controller
             if($this->akun_service->petaniGantiSandi($id,$validated)) {
                 return redirect('/petani/dashboard')->with('success','Kata sandi berhasil diperbarui');
             } else {
-                return redirect('/petani/ganti-sandi')->withErrors(['failed' => 'Kata sandi lama salah']);
+                return back()->withErrors(['failed' => 'Kata sandi lama salah']);
             }
         } else {
-            return redirect('/petani/ganti-sandi')->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
+            return back()->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
         }
     }
 }

@@ -30,7 +30,7 @@ class AkunController extends Controller
             $request->session()->put('role','pemerintah');
             return redirect('/pemerintah/dashboard');
         } 
-        return redirect('/pemerintah/login')->withErrors(['failed' => 'Kredensial salah']);
+        return back()->withErrors(['failed' => 'Kredensial salah']);
     }
 
 }

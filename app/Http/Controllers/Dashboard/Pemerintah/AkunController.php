@@ -28,10 +28,10 @@ class AkunController extends Controller
             if($this->akun_service->pemerintahGantiSandi($id,$validated)) {
                 return redirect('/pemerintah/dashboard')->with('success','Kata sandi berhasil diperbarui');
             } else {
-                return redirect('/pemerintah/ganti-sandi')->withErrors(['failed' => 'Kata sandi lama salah']);
+                return back()->withErrors(['failed' => 'Kata sandi lama salah']);
             }
         } else {
-            return redirect('/pemerintah/ganti-sandi')->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
+            return back()->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
         }
     }
 }

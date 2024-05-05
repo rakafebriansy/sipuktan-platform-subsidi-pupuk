@@ -54,16 +54,16 @@ class TransaksiController extends Controller
                 'total_harga' => $all_request['total_harga']
             ]);
         }
-        return redirect('/petani/transaksi')->withErrors(['db' => 'Pilih Pembayaran Yang Tersedia!']);
+        return back()->withErrors(['db' => 'Pilih Pembayaran Yang Tersedia!']);
 
     }
     public function checkoutNonTunai(Request $request): RedirectResponse
     {
         $id_alokasis = $request->all()['id_alokasis'];
         if ($this->transaksi_service->petaniCheckoutNonTunai($id_alokasis)) {
-            return redirect('/petani/transaksi')->with('success','Pembayaran Berhasil!');
+            return back()->with('success','Pembayaran Berhasil!');
         }
-        return redirect('/petani/transaksi')->withErrors(['db' => 'Pembayaran Gagal!']);
+        return back()->withErrors(['db' => 'Pembayaran Gagal!']);
     }
     public function setRiwayatTransaksi(Request $request): View
     {

@@ -34,9 +34,9 @@ class AkunController extends Controller
                 $request->session()->put('role','petani');
                 return redirect('/petani/dashboard');
             }
-            return redirect()->intended('/petani/login')->with('unverified','Akun anda belum diverifikasi');
+            return back()->with('unverified','Akun anda belum diverifikasi');
         } 
-        return redirect()->intended('/petani/login')->withErrors(['failed' => 'Kredensial salah']);
+        return back()->withErrors(['failed' => 'Kredensial salah']);
     }
     public function setRegister(): View
     {
@@ -50,7 +50,7 @@ class AkunController extends Controller
     {
         $validated = $request->validated();
         $this->akun_service->petaniRegister($validated, $request->file('foto_ktp'));
-        return redirect()->intended('/petani/register')->with('success','Silahkan tunggu verifikasi dari akun anda!');
+        return back()->with('success','Silahkan tunggu verifikasi dari akun anda!');
     }
     public function setLupaSandi(): View
     {
