@@ -266,6 +266,11 @@ function deleteFaqPassId(btn){
     let id = btn.parentElement.dataset.id;
     document.getElementById('deleteFaqModal').querySelector('[name="id"]').value = id;
 }
+function editNoTelpPassId(btn,mode) {
+    const editNoTelpModal = document.getElementById('editNoTelpModal');
+    editNoTelpModal.querySelector('[name="id"]').value = document.getElementById(mode).dataset.id;
+    editNoTelpModal.querySelector('[name="nomor_disabled"]').value = btn.previousElementSibling.innerText;
+}
 
 (function(){
     if(document.URL.includes('/petani/') || document.URL.includes('/kios-resmi/')){

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PetaniGantiSandiRequest;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class AkunController extends Controller
@@ -33,5 +34,15 @@ class AkunController extends Controller
             return back()->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
         }
         return back()->withErrors(['failed' => 'Kata sandi lama salah']);
+    }
+    public function gantiNoTelp(Request $request): RedirectResponse
+    {
+        $id = Session::get('id_petani',null);
+        $validated = $request->validate([
+            'nomor_telepon' => 'required'
+        ]);
+        if($this->akun_service->petaniGantiNoTelp($id, $validated['nomor_telepon']))
+        return back()->with('success','Nomor telepon berhasil diperbarui');
+        return back()->withErrors(['failed' => 'Nomor telepon gagal diperbarui']);
     }
 }

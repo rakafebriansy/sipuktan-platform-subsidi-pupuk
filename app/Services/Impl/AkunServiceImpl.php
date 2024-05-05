@@ -83,7 +83,15 @@ class AkunServiceImpl implements AkunService
     public function petaniGantiSandi(int $id, string $sandi_baru): bool
     {
         $sandi_baru = Hash::make($sandi_baru);
-        return Petani::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+        return DB::transaction(function() use($id, $sandi_baru) {
+            return Petani::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+        });
+    }
+    public function petaniGantiNoTelp(int $id, string $no_telp): bool
+    {
+        return DB::transaction(function() use($id, $no_telp){
+            return Petani::where('id',$id)->update(['nomor_telepon' => $no_telp]);
+        });
     }
     public function kiosResmiCekSandi(int $id, string $sandi_lama): bool
     {
@@ -94,7 +102,16 @@ class AkunServiceImpl implements AkunService
     public function kiosResmiGantiSandi(int $id, string $sandi_baru): bool
     {
         $sandi_baru = Hash::make($sandi_baru);
-        return KiosResmi::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+        return DB::transaction(function() use($id, $sandi_baru) {
+            return KiosResmi::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+        });
+    }
+    public function kiosResmiGantiNoTelp(int $id, string $no_telp): bool
+    {
+        return DB::transaction(function() use($id, $no_telp){
+            $pemilik_kios = KiosResmi::find($id)->pemilik_kios();
+            return $pemilik_kios->update(['nomor_telepon' => $no_telp]);
+        });
     }
     public function pemerintahCekSandi(int $id, string $sandi_lama): bool
     {
@@ -105,6 +122,9 @@ class AkunServiceImpl implements AkunService
     public function pemerintahGantiSandi(int $id, string $sandi_baru): bool
     {
         $sandi_baru = Hash::make($sandi_baru);
-        return Pemerintah::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+        return DB::transaction(function() use($id, $sandi_baru) {
+            return Pemerintah::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
+        });
     }
+
 }

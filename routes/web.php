@@ -29,6 +29,7 @@ Route::prefix('/petani')->group(function(){
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\Petani\DashboardController::class, 'setDashboard']);
         Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'setGantiSandi']);
         Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'gantiSandi']);
+        Route::patch('/ganti-nomor-telepon', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'gantiNoTelp']);
         Route::get('/transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setTransaksi']);
         Route::get('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setCheckoutNonTunai']);
         Route::post('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'checkoutNonTunai']);
@@ -49,6 +50,7 @@ Route::prefix('/kios-resmi')->group(function(){
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\KiosResmi\DashboardController::class, 'setDashboard']);
         Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'setGantiSandi']);
         Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'gantiSandi']);
+        Route::patch('/ganti-nomor-telepon', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'gantiNoTelp']);
         Route::get('/alokasi', [App\Http\Controllers\Dashboard\KiosResmi\AlokasiController::class, 'setAlokasi']);
         Route::patch('/alokasi', [App\Http\Controllers\Dashboard\KiosResmi\AlokasiController::class, 'alokasi']);
         Route::get('/transaksi', [App\Http\Controllers\Dashboard\KiosResmi\TransaksiController::class, 'setTransaksi']);

@@ -13,8 +13,10 @@ interface AkunService
     function kiosResmiRegister(array $data_kios, UploadedFile $foto_ktp): void;
     function petaniCekSandi(int $id, string $sandi_petani): bool;
     function petaniGantiSandi(int $id, string $sandi_petani): bool;
-    function kiosResmiGantiSandi(int $id, string $sandi_kios): bool;
+    function petaniGantiNoTelp(int $id, string $no_telp): bool;
     function kiosResmiCekSandi(int $id, string $sandi_kios): bool;
+    function kiosResmiGantiSandi(int $id, string $sandi_kios): bool;
+    function kiosResmiGantiNoTelp(int $id, string $no_telp): bool;
     function pemerintahCekSandi(int $id, string $sandi_pemerintah): bool;
     function pemerintahGantiSandi(int $id, string $sandi_pemerintah): bool;
 
