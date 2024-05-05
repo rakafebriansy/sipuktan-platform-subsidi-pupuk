@@ -21,11 +21,12 @@ class TransaksiController extends Controller
     public function setTransaksi(): View
     {
         $id = Session::get('id_kios_resmi',null);
-        ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
+        ['kios_resmi' => $kios_resmi,'notifikasis' => $notifikasis,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
         $alokasis = $this->transaksi_service->kiosResmiSetTransaksi($id);
         return view('dashboard.kios-resmi.pages.transaksi', [
             'title' => 'Kios Resmi | Transaksi',
             'kios_resmi' => $kios_resmi,
+            'notifikasis' => $notifikasis,
             'initials' => $initials,
             'alokasis' => $alokasis
         ]);
@@ -45,7 +46,7 @@ class TransaksiController extends Controller
         $id = Session::get('id_kios_resmi');
         $tahun = date('Y');
         $musim_tanam = null;
-        ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
+        ['kios_resmi' => $kios_resmi,'notifikasis' => $notifikasis,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
         $tahuns = $this->transaksi_service->kiosResmiSetRiwayatTransaksi($id);
         if(isset($request->tahun) && isset($request->musim_tanam)) {
             $tahun = $request->tahun;
@@ -58,6 +59,7 @@ class TransaksiController extends Controller
             'title' => 'Kios Resmi | Riwayat Transaksi',
             'kios_resmi' => $kios_resmi,
             'initials' => $initials,
+            'notifikasis' => $notifikasis,
             'riwayat_transaksis' => $riwayat_transaksis,
             'tahuns' => $tahuns,
             'tahun' => $tahun,

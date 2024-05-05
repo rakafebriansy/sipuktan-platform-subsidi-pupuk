@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('foto_surat_kuasa',255)->nullable();
             $table->string('foto_tanda_tangan',255)->nullable(false);
             $table->enum('status_verifikasi',['Terverifikasi','Belum Diverifikasi','Ditolak'])->nullable(false)->default('Belum Diverifikasi');
-            $table->unsignedBigInteger('id_riwayat_transaksi')->nullable(false);
+            $table->unsignedBigInteger('id_riwayat_transaksi')->nullable(false)->unique();
 
             $table->foreign('id_riwayat_transaksi')->on('riwayat_transaksis')->references('id');
         });

@@ -6,6 +6,7 @@
     @isset($total_harga)
     @endisset
     <title>{{ $title }}</title>
+    @vite(['resources/css/app.css','resources/js/app.js'])
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
       Pusher.logToConsole = true;
@@ -16,14 +17,32 @@
 
       var channel = pusher.subscribe('my-channel');
       channel.bind('alokasi-status-to-menunggu-pembayaran', function(data) {
-        let id_petanis = data['data']['id_petanis'];
+        let id_notifikasi = data['data']['detail_notifikasi']['id'];
+        let id_petani = data['data']['detail_notifikasi']['id_petani'];
         let pesan = data['data']['pesan'];
-        if(id_petanis.includes(document.getElementById('petani').dataset.id)){
-          viewAlertNotifikasi(pesan,id_petanis)
+        if(id_petani == document.getElementById('petani').dataset.id){
+          viewAlertNotifikasi(pesan, id_notifikasi)
+        }
+      });
+      channel.bind('laporan-status-to-ditolak', function(data) {
+        let id_kios_resmi = data['data']['id_kios_resmi'];
+        let id_notifikasi = data['data']['id'];
+        let pesan = data['data']['pesan'];
+        console.log(data)
+        if(id_kios_resmi == document.getElementById('kios-resmi').dataset.id){
+          console.log('ok')
+          viewAlertNotifikasi(pesan, id_notifikasi,'red')
+        }
+      });
+      channel.bind('laporan-status-to-diverifikasi', function(data) {
+        let id_kios_resmi = data['data']['id_kios_resmi'];
+        let id_notifikasi = data['data']['id'];
+        let pesan = data['data']['pesan'];
+        if(id_kios_resmi == document.getElementById('kios-resmi').dataset.id){
+          viewAlertNotifikasi(pesan, id_notifikasi)
         }
       });
     </script>
-    @vite(['resources/css/app.css','resources/js/app.js'])
   </head>
   <body>
     @yield('main')

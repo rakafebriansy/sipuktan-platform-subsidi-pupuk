@@ -39,11 +39,13 @@ class DashboardServiceImpl implements DashboardService
         $nama = explode(" ", $kios_resmi->pemilik);
         $initials = "";
 
+        $notifikasis = Notifikasi::where('id_kios_resmi',$id)->get();
+
         foreach ($nama as $key => $w) {
             if($key > 1) break;
             $initials .= mb_substr($w, 0, 1);
         } 
-        return ['kios_resmi' => $kios_resmi,'initials' =>$initials];
+        return ['kios_resmi' => $kios_resmi, 'notifikasis' => $notifikasis,'initials' =>$initials];
     }
     public function pemerintahSetSidebar(int $id): array
     {

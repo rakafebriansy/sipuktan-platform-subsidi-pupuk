@@ -30,7 +30,7 @@ class AlokasiController extends Controller
         $id = Session::get('id_kios_resmi',null);
         $tahun = date('Y');
         $musim_tanam = null;
-        ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
+        ['kios_resmi' => $kios_resmi,'notifikasis' => $notifikasis,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
         $tahuns = $this->alokasi_service->kiosResmiSetAlokasi();
         if(isset($request->tahun) && isset($request->musim_tanam)){
             $tahun = $request->tahun;
@@ -44,6 +44,7 @@ class AlokasiController extends Controller
             'kios_resmi' => $kios_resmi,
             'initials' => $initials,
             'tahuns' => $tahuns,
+            'notifikasis' => $notifikasis,
             'alokasis' => $alokasis,
             'tahun' => $tahun,
             'musim_tanam' => $musim_tanam
@@ -55,10 +56,13 @@ class AlokasiController extends Controller
         $musim_tanam = $request->musim_tanam;
         if ($this->alokasi_service->kiosResmiAlokasi($tahun, $musim_tanam)) {
             $pesan = 'Pupuk anda telah datang!';
-            $alokasis = $this->alokasi_service->kiosResmiGetDistinctIdPetaniByTahunMusimTanam($tahun, $musim_tanam);
-            if($this->notifikasi_service->sendManyNotifikasi($pesan, 'petani', $alokasis)) {
-                $data_notifikasi = ['pesan' => $pesan,'id_petanis' => $alokasis];
-                event(new AlokasiStatusToMenungguPembayaran($data_notifikasi));
+            $id_petanis = $this->alokasi_service->kiosResmiGetDistinctIdPetaniByTahunMusimTanam($tahun, $musim_tanam);
+            $detail_notifikasis = $this->notifikasi_service->sendManyNotifikasi($pesan, 'petani', $id_petanis);
+            if(count($detail_notifikasis)) {
+                foreach ($detail_notifikasis as $detail_notifikasi) {
+                    $data_notifikasi = ['pesan' => $pesan,'detail_notifikasi' => $detail_notifikasi];
+                    event(new AlokasiStatusToMenungguPembayaran($data_notifikasi));
+                }
                 return redirect('/kios-resmi/alokasi?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with('success','Kedatangan pupuk berhasil dikonfirmasi.');
             }
         }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamp('tanggal_transaksi')->nullable(false)->useCurrent();
             $table->enum('metode_pembayaran',['Tunai','Non-Tunai'])->nullable(false);
-            $table->unsignedBigInteger('id_alokasi')->nullable(false);
+            $table->unsignedBigInteger('id_alokasi')->nullable(false)->unique();
 
             $table->foreign('id_alokasi')->on('alokasis')->references('id');
         });

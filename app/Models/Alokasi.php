@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Alokasi extends Model
 {
@@ -38,5 +39,14 @@ class Alokasi extends Model
     public function riwayat_transaksi(): HasOne
     {
         return $this->hasOne(RiwayatTransaksi::class, 'id_riwayat_transaksi', 'id');
+    }
+    public function laporan(): HasOneThrough
+    {
+        return $this->hasOneThrough(Laporan::class, RiwayatTransaksi::class,
+        'id_alokasi', 
+        'id_riwayat_transaksi', 
+        'id', 
+        'id'
+    );
     }
 }

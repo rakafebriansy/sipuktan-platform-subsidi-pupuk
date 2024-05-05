@@ -24,7 +24,7 @@ class LaporanController extends Controller
         $id = Session::get('id_kios_resmi');
         $tahun = date('Y');
         $musim_tanam = null;
-        ['kios_resmi' => $kios_resmi,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
+        ['kios_resmi' => $kios_resmi,'notifikasis' => $notifikasis,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
         $tahuns = $this->laporan_service->kiosResmiSetLaporan($id);
         if(isset($request->tahun) && isset($request->musim_tanam)) {
             $tahun = $request->tahun;
@@ -38,6 +38,7 @@ class LaporanController extends Controller
             'kios_resmi' => $kios_resmi,
             'initials' => $initials,
             'laporans' => $laporans,
+            'notifikasis' => $notifikasis,
             'tahuns' => $tahuns,
             'tahun' => $tahun,
             'musim_tanam' => $musim_tanam

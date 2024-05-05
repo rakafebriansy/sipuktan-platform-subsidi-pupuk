@@ -11,7 +11,7 @@
      <ul class="space-y-2 font-normal">
         <li>
          <div class="flex items-center justify-between">
-                        <button id="dropdownProfilKiosButton" data-dropdown-toggle="dropdownProfilKios" data-dropdown-placement="right-end"  class="flex w-full px-2 items-center gap-4 cursor-pointer text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <button id="dropdownProfilButton" data-dropdown-toggle="dropdownProfil" data-dropdown-placement="right-end"  class="flex w-full px-2 items-center gap-4 cursor-pointer text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
               <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                 <span class="font-medium text-gray-600 dark:text-gray-300">{{ $initials }}</span>
               </div>
@@ -100,7 +100,7 @@
 
 {{-- DROPDOWN --}}
 
-<div id="dropdownProfilKios" class="z-50 hidden">
+<div id="dropdownProfil" class="z-50 hidden">
    <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7] w-[22rem]">
      <div class="bg-gray-100 border-b rounded-t-xl py-1 px-4 md:py-1 md:px-4 dark:bg-slate-900 dark:border-gray-700">
        <p class="mt-1 text-sm text-gray-500 dark:text-gray-500">

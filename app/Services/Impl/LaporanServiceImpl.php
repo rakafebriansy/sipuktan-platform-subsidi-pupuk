@@ -17,7 +17,7 @@ class LaporanServiceImpl implements LaporanService
     }
     public function kiosResmiSetLaporanByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection
     {
-        $laporans = Laporan::select('laporans.id','laporans.tanggal_pengambilan','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
+        $laporans = Laporan::select('laporans.id','laporans.tanggal_pengambilan', 'laporans.status_verifikasi','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
         ->join('riwayat_transaksis','riwayat_transaksis.id','laporans.id_riwayat_transaksi')
         ->join('alokasis','riwayat_transaksis.id_alokasi','alokasis.id')
         ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
@@ -67,6 +67,14 @@ class LaporanServiceImpl implements LaporanService
             Laporan::where('id',$id)->update(['status_verifikasi' => $status_verifikasi]);
         });
         return true;
+    }
+    public function pemerintahGetIdKiosResmiByLaporan(int $id_laporan): int
+    {
+        $laporan = DB::table('laporans')->select('alokasis.id_kios_resmi')
+        ->join('riwayat_transaksis','riwayat_transaksis.id','laporans.id_riwayat_transaksi')
+        ->join('alokasis','alokasis.id','riwayat_transaksis.id_alokasi')
+        ->first();
+        return $laporan->id_kios_resmi;
     }
 
     public function ajaxGetPetaniFromRiwayat(string $letters): Collection

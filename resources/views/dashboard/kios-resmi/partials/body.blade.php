@@ -16,7 +16,6 @@
     </button>
   </div>
   @elseif (session('success'))
-
   <div id="alert-1" class="absolute z-50 left-1/2 transform -translate-x-1/2 top-5 flex items-center p-4 mb-4 text-blue-800 border  border-blue-300  dark:border-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
     <span class="sr-only">Sukses</span>
     <div class="text-sm font-medium">

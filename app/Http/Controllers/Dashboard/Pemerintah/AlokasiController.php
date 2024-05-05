@@ -26,8 +26,10 @@ class AlokasiController extends Controller
         $id = Session::get('id_pemerintah',null);
         $tahun = date('Y');
         $musim_tanam = null;
-        ['pemerintah' => $pemerintah,'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
-        ['tahuns' => $tahuns, 'jenis_pupuks' => $jenis_pupuks] = $this->alokasi_service->pemerintahSetAlokasi();
+        ['pemerintah' => $pemerintah,
+        'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
+        ['tahuns' => $tahuns, 
+        'jenis_pupuks' => $jenis_pupuks] = $this->alokasi_service->pemerintahSetAlokasi();
         if(isset($request->tahun) && isset($request->musim_tanam)){
             $tahun = $request->tahun;
             $musim_tanam = $request->musim_tanam;

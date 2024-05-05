@@ -40,7 +40,7 @@ function fetchDeleteNotifikasi(id,token) {
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => console.log('ok'))
       .catch(e => console.error('Error'+e));
 }
 
@@ -49,7 +49,7 @@ function viewRiwayatSearchBox(data,list) {
     list.innerHTML = '';
     for(let i = 0; i < data.length; i++) {
         const a = document.createElement('a');
-        a.innerHTML = `${data[i]['nama']} | ${data[i]['jenis']} | ${data[i]['musim_tanam']} | ${data[i]['tahun']}`;
+        a.innerHTML = `<p class="inline">${data[i]['nama']}</p> <p class="text-xs font-normal inline ms-2">${data[i]['jenis']} | ${data[i]['musim_tanam']} | ${data[i]['tahun']}</p>`;
         a.dataset.id = data[i]['id'];
         a.setAttribute('onclick','setRiwayatIdLaporan(this)');
         a.classList.add('search-li');
@@ -78,26 +78,46 @@ function viewPetaniFromAlokasi(data) {
     table_rows.querySelector('tr td:nth-child(2)').innerText = data['nomor_telepon'];
     table_rows.querySelector('tr:nth-child(2) td:nth-child(2)').innerText = data['poktan'];
 }
-function viewAlertNotifikasi(message, id) {
+function viewAlertNotifikasi(message,id,mode='blue') {
     let xmlString =
-    `
-    <div id="alert-1" class="flex items-center p-4 text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-    </svg>
-    <span class="sr-only">Info</span>
-    <div class="ms-3 text-sm font-medium">
-        ${message}
-    </div>
-    <button data-id="${id}" type="button" onclick="deleteNotifikasi(this, 'petani')" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
-        <span class="sr-only">Close</span>
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-        </svg>
-    </button>
-    </div>
-    `;
-    target = document.querySelector('#dropdownNotifikasiPetani ul');
+        `
+        <div id="notifikasi-${id}" class="flex items-center p-4 text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+            <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div class="ms-3 text-sm font-medium">
+                ${message}
+            </div>
+                <button data-id="${id}" type="button" onclick="deleteRealtimeNotifikasi(this,'notifikasi-${id}')" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#notifikasi-${id}" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+            </button>
+        </div>
+        `;
+        if (mode == 'red') {
+            xmlString = 
+            `
+            <div id="notifikasi-${id}" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <div class="ms-3 text-sm font-medium">
+                    ${message}
+                </div>
+                    <button data-id="${id}" type="button" onclick="deleteRealtimeNotifikasi(this,'notifikasi-${id}')" class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" data-dismiss-target="#notifikasi-${id}" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                </button>
+            </div>
+            `;
+    }
+    target = document.querySelector('#dropdownNotifikasi ul');
     if (target.firstElementChild.id == 'no-notification') target.innerHTML = '';
     const li = document.createElement('li');
     li.innerHTML = xmlString;
@@ -207,25 +227,28 @@ function editStatusAlokasiPassId() {
 function dismissingDropdown(id){
     document.getElementById(id).click()
 }
-function deleteNotifikasi(btn,mode) {
+function deleteNotifikasi(btn) {
     let token;
-    switch (mode){
-        case 'petani':
-            token = document.getElementById('dropdownNotifikasiPetani').dataset.token;
-    }
+    token = document.getElementById('dropdownNotifikasi').dataset.token;
     fetchDeleteNotifikasi(btn.dataset.id,token)
+}
+function deleteRealtimeNotifikasi(btn,id) {
+    let token;
+    token = document.getElementById('dropdownNotifikasi').dataset.token;
+    fetchDeleteNotifikasi(btn.dataset.id,token)
+    document.querySelector('#'+id).classList.add('transition-opacity', 'duration-300', 'ease-out', 'opacity-0', 'hidden')
 }
 
 (function(){
-    if(document.URL.includes('/petani/')){
+    if(document.URL.includes('/petani/') || document.URL.includes('/kios-resmi/')){
         if(window.screen.width > 640) {
-            const profilPetani = document.getElementById('dropdownProfilPetaniButton');
-            const notifikasiPetani = document.getElementById('dropdownNotifikasiPetaniButton');
-            profilPetani.dataset.dropdownPlacement = 'right-end';
-            profilPetani.dataset.dropdownOffsetDistance = '35';
-            notifikasiPetani.dataset.dropdownOffsetDistance = '20';
-            notifikasiPetani.dataset.dropdownPlacement = 'right-end';
-            notifikasiPetani.dataset.dropdownOffsetSkidding = 0;
+            const profil = document.getElementById('dropdownProfilButton');
+            const notifikasi = document.getElementById('dropdownNotifikasiButton');
+            profil.dataset.dropdownPlacement = 'right-end';
+            profil.dataset.dropdownOffsetDistance = '35';
+            notifikasi.dataset.dropdownOffsetDistance = '20';
+            notifikasi.dataset.dropdownPlacement = 'right-end';
+            notifikasi.dataset.dropdownOffsetSkidding = 0;
         } 
     }
 })();

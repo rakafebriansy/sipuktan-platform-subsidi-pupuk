@@ -16,7 +16,6 @@ class AkunController extends Controller
     }
     public function setGantiSandi()
     {
-        $id = Session::get('id_kios_resmi',null);
         return response()->view('dashboard.kios-resmi.pages.ganti-sandi', [
             'title' => 'Kios Resmi | Ganti Kata Sandi'
         ]);

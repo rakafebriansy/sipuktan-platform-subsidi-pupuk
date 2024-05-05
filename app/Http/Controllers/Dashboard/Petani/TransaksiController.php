@@ -22,13 +22,16 @@ class TransaksiController extends Controller
     public function setTransaksi(): View
     {
         $id = Session::get('id',null);
-        ['petani' => $petani, 'notifikasis' => $notifikasis, 'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
+        ['petani' => $petani, 
+        'notifikasis' => $notifikasis, 
+        'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
         $alokasis = $this->transaksi_service->petaniSetTransaksi($id);
         return view('dashboard.petani.pages.transaksi', [
             'title' => 'Petani | Transaksi',
             'notifikasis' => $notifikasis,
             'initials' => $initials,
-            'alokasis' => $alokasis
+            'alokasis' => $alokasis,
+            'petani' => $petani
         ]);
     }
     public function setCheckoutNonTunai(Request $request): View|RedirectResponse
@@ -36,8 +39,11 @@ class TransaksiController extends Controller
         $petani = Petani::find(Session::get('id'));
         if(isset($request->all()['id_alokasis']) && isset($request->all()['total_harga'])) {
             $all_request = $request->all();
-            ['petani' => $petani, 'notifikasis' => $notifikasis, 'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($petani->id);
-            ['snap_token' => $snap_token, 'alokasis' => $alokasis] = $this->transaksi_service->petaniSetCheckoutNonTunai($all_request['total_harga'], $petani->nama, $all_request['id_alokasis']);
+            ['petani' => $petani, 
+            'notifikasis' => $notifikasis, 
+            'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($petani->id);
+            ['snap_token' => $snap_token, 
+            'alokasis' => $alokasis] = $this->transaksi_service->petaniSetCheckoutNonTunai($all_request['total_harga'], $petani->nama, $all_request['id_alokasis']);
             return view('dashboard.petani.pages.checkout', [
                 'title' => 'Petani | Checkout',
                 'notifikasis' => $notifikasis,
@@ -63,7 +69,9 @@ class TransaksiController extends Controller
     {
         $id = Session::get('id_petani');
         $tahun = intval(date('Y'));
-        ['petani' => $petani, 'notifikasis' => $notifikasis, 'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
+        ['petani' => $petani, 
+        'notifikasis' => $notifikasis, 
+        'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
         $tahuns = $this->transaksi_service->petaniSetRiwayatTransaksi($id);
         if(isset($request->tahun) && isset($request->musim_tanam)) {
             $tahun = $request->tahun;
@@ -74,6 +82,7 @@ class TransaksiController extends Controller
         return view('dashboard.petani.pages.riwayat-transaksi', [
             'title' => 'Petani | Riwayat Transaksi',
             'notifikasis' => $notifikasis,
+            'petani' => $petani,
             'initials' => $initials,
             'riwayat_transaksis' => $riwayat_transaksis,
             'tahuns' => $tahuns,
