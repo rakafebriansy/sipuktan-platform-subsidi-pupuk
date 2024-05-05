@@ -75,7 +75,7 @@
                <path d="M9.08997 9.00008C9.32507 8.33175 9.78912 7.76819 10.3999 7.40921C11.0107 7.05024 11.7289 6.91902 12.4271 7.03879C13.1254 7.15857 13.7588 7.52161 14.215 8.06361C14.6713 8.60561 14.921 9.2916 14.92 10.0001C14.92 12.0001 11.92 13.0001 11.92 13.0001" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
                <path d="M12 17H12.01" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>                
-              <span class="ms-3">Bantuan</span>
+              <span class="ms-3">Keluhan</span>
            </a>
         </li>
      </ul>

@@ -40,6 +40,6 @@
       </div>
     </div>
   </div>
-  <a href="/petani/dashboard" class="text-sm">< <span class="hover:underline">Kembali ke Dashboard</span></a>
+  <a href="/pemerintah/dashboard" class="text-sm">< <span class="hover:underline">Kembali ke Dashboard</span></a>
 </div>
 @endsection
