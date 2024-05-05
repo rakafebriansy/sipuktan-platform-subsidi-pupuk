@@ -84,6 +84,10 @@ Route::prefix('/pemerintah')->group(function(){
         Route::patch('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'laporan']);
         Route::get('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'setFaq']);
         Route::post('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'buatFaq']);
+        Route::patch('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'editFaq']);
+        Route::prefix('/ajax')->group(function(){
+            Route::post('/get-faq',[AjaxController::class,'getFaqDetail']);
+        });
     });
 });
 Route::prefix('/ajax')->group(function(){

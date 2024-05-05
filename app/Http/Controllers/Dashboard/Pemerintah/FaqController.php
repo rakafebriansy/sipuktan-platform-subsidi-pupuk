@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Pemerintah;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PemerintahBuatFaqRequest;
+use App\Http\Requests\PemerintahEditFaqRequest;
 use App\Services\DashboardService;
 use App\Services\FaqService;
 use Illuminate\Http\RedirectResponse;
@@ -39,5 +40,13 @@ class FaqController extends Controller
             return back()->with('success', 'Faq baru berhasil ditambahkan');
         }
         return back()->with(['error' => 'Faq baru gagal ditambahkan']);
+    }
+    public function editFaq(PemerintahEditFaqRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+        if($this->faq_service->pemerintahEditFaq($validated)) {
+            return back()->with('success','Faq berhasil diperbarui');
+        }
+        return back()->withErrors(['error','Faq gagal diperbarui']);
     }
 }

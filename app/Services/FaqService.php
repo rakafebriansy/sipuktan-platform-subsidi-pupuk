@@ -11,4 +11,6 @@ interface FaqService
     function getFaqKiosResmi(): Collection;
     function pemerintahSetFaq(int $id): Collection;
     function pemerintahBuatFaq(array $validated, int $id): bool;
+    function pemerintahEditFaq(array $validated): bool;
+    function ajaxGetFaqDetail(int $id): string;
 }

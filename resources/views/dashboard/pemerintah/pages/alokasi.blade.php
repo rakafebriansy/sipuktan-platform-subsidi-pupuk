@@ -38,8 +38,8 @@
                         <th scope="col" class="px-6 py-3">
                             <p class="inline-block">Status</p>
                         </th>
-                        <th scope="col" class="py-3 md:w-[40%] lg:w-[25%]">
-                            <span class="inline-block">Action</span>
+                        <th scope="col" class="py-3 md:w-[40%] lg:w-[20%]">
+                            <span class="inline-block">Aksi</span>
                         </th>
                     </tr>
                 </thead>

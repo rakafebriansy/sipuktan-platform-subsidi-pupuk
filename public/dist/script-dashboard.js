@@ -40,7 +40,26 @@ function fetchDeleteNotifikasi(id,token) {
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
-      .then(res => console.log('ok'))
+      .then(res => res)
+      .catch(e => console.error('Error'+e));
+}
+function fetchGetFaqDetails(id,token) {
+    fetch('/pemerintah/ajax/get-faq', {
+        headers: {
+            "X-CSRF-Token": token
+          },    
+        method: 'POST',
+        body: new URLSearchParams('id='+id)
+    }).then(res => res.json())
+      .then(data => {
+        const dropdownEditFaq = document.getElementById('editFaqModal');
+        dropdownEditFaq.querySelector('[name="pertanyaan"]').value = data['pertanyaan'];
+        dropdownEditFaq.querySelector('[name="jawaban"]').value = data['jawaban'];
+        dropdownEditFaq.querySelectorAll('option').forEach(element => {
+            if(element.innerText == data['jenis_pengguna']) element.setAttribute('selected','');
+        });
+
+      })
       .catch(e => console.error('Error'+e));
 }
 
@@ -237,6 +256,11 @@ function deleteRealtimeNotifikasi(btn,id) {
     token = document.getElementById('dropdownNotifikasi').dataset.token;
     fetchDeleteNotifikasi(btn.dataset.id,token)
     document.querySelector('#'+id).classList.add('transition-opacity', 'duration-300', 'ease-out', 'opacity-0', 'hidden')
+}
+function editFaqPassId(btn,token){
+    let id = btn.parentElement.dataset.id;
+    document.getElementById('editFaqModal').querySelector('[name="id"]').value = id;
+    fetchGetFaqDetails(id,token);
 }
 
 (function(){
