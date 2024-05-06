@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('keluhans', function (Blueprint $table) {
             $table->id();
+            $table->string('subjek')->nullable(false);
             $table->text('keluhan')->nullable(false);
             $table->text('balasan')->nullable();
             $table->date('tanggal_keluhan')->nullable(false)->useCurrent();
