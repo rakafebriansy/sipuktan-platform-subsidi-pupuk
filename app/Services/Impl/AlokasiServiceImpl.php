@@ -87,18 +87,15 @@ class AlokasiServiceImpl implements AlokasiService
             return Alokasi::where('id',$id)->delete();
         });
     }
-    public function pemerintahEditAlokasi(array $new_alokasi): bool
+    public function pemerintahEditAlokasi(array $alokasi): bool
     {
-        return DB::transaction(function() use($new_alokasi) {
-            $alokasi = Alokasi::find($new_alokasi['id']);
-            $condition1 = Petani::where('id',$alokasi->id_petani)->update(['nik' => $new_alokasi['nik']]);
-            $condition2 = $alokasi->update([
-                'jumlah_pupuk' => $new_alokasi['jumlah_pupuk'],
-                'tahun' => $new_alokasi['tahun'],
-                'id_jenis_pupuk' => $new_alokasi['id_jenis_pupuk'],
-                'musim_tanam' => $new_alokasi['musim_tanam'],
+        return DB::transaction(function() use($alokasi) {
+            return Alokasi::where('id',$alokasi['id'])->update([
+                'jumlah_pupuk' => $alokasi['jumlah_pupuk'],
+                'tahun' => $alokasi['tahun'],
+                'id_jenis_pupuk' => $alokasi['id_jenis_pupuk'],
+                'musim_tanam' => $alokasi['musim_tanam'],
             ]);
-            return $condition1 || $condition2;
         });
     }
     public function ajaxDetailAlokasiPetani(int $id): string

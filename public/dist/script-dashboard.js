@@ -152,10 +152,9 @@ function editPassId(btn){
     let inputs = hiddenId.nextElementSibling.querySelectorAll('input, option')
     let musim_tanam = document.getElementById('dropdownMTButton').innerText;
     hiddenId.value = btn.parentElement.dataset.id;
-    inputs[0].value = btn.parentElement.dataset.nik;
-    inputs[1].value = tds[1].innerText;
-    inputs[2].value = document.getElementById('dropdownTahunButton').innerText;
-    for(let i = 3; i < inputs.length; i++) {
+    inputs[0].value = tds[1].innerText;
+    inputs[1].value = document.getElementById('dropdownTahunButton').innerText;
+    for(let i = 2; i < inputs.length; i++) {
         let guess = inputs[i];
         if(guess.innerText == tds[2].innerText) {
             guess.setAttribute('selected','');

@@ -23,7 +23,6 @@ class PemerintahEditAlokasiRequest extends FormRequest
     {
         return [
             'id' => 'required',
-            'nik' => ['required','min:16','numeric','min:16'],
             'jumlah_pupuk' => 'required',
             'tahun' => 'required',
             'musim_tanam' => 'required',
