@@ -26,4 +26,17 @@ class PemerintahLoginRequest extends FormRequest
             'kata_sandi' => ['required','min:6'],
         ];
     }
+    
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'nama_pengguna.required' => 'Nama pengguna tidak boleh kosong',
+            'kata_sandi.required' => 'Kata sandi tidak boleh kosong',
+        ];
+    }
 }
