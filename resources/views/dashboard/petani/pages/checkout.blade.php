@@ -8,12 +8,6 @@
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <caption class=" w-full px-5 pt-5 pb-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                         <h1 class="inline-block text-2xl">Checkout</h1>
-                        <div class="text-sm font-normal">
-                            <p>Nama: <span>{{ $petani->nama }}</span></p>
-                            <p>NIK: <span>{{ $petani->nik }}</span></p>
-                            <p>Musim Tanam: <span>{{ $alokasis[0]->musim_tanam }}</span></p>
-                            <p>Kios: <span>{{ $petani->kios_resmi }}</span></p>
-                        </div>
                     </caption>
                     @if(count($alokasis))
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

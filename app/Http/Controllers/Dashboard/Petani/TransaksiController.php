@@ -46,6 +46,7 @@ class TransaksiController extends Controller
             'alokasis' => $alokasis] = $this->transaksi_service->petaniSetCheckoutNonTunai($all_request['total_harga'], $petani->nama, $all_request['id_alokasis']);
             return view('dashboard.petani.pages.checkout', [
                 'title' => 'Petani | Checkout',
+                'petani' => $petani,
                 'notifikasis' => $notifikasis,
                 'initials' => $initials,
                 'alokasis' => $alokasis,

@@ -26,7 +26,7 @@ class AlokasiSeeder extends Seeder
         ]);
         Alokasi::create([
             'id' => 2,
-            'jumlah_pupuk' => 60,
+            'jumlah_pupuk' => 2,
             'musim_tanam' => 1,
             'tahun' => 2024,
             'status' => 'Belum Tersedia',
