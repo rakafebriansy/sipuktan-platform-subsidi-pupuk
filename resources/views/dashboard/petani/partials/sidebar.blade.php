@@ -181,7 +181,7 @@
                      </tr>
                      <tr>
                        <th>
-                         <a href="/petani/ganti-nomor telep" class="inline-flex px-2 pt-3 pb-2 font-medium whitespace-nowrap items-center text-blue-600 hover:underline">
+                         <a href="/petani/ganti-sandi" class="inline-flex px-2 pt-3 pb-2 font-medium whitespace-nowrap items-center text-blue-600 hover:underline">
                            Ganti kata sandi
                          </a>
                        </th>
