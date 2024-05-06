@@ -29,4 +29,26 @@ class KiosResmiLaporanRequest extends FormRequest
             'foto_tanda_tangan' => 'required|mimes:png,jpg|max:5120',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'foto_bukti_pengambilan.required' => 'Foto bukti pengambilan tidak boleh kosong',
+            'foto_bukti_pengambilan.mimes:png,jpg' => 'Foto bukti pengambilan harus berekstensi .png atau .jpg',
+            'foto_bukti_pengambilan.max:5120' => 'Foto bukti pengambilan harus memiliki ukuran kurang dari 5MB',
+            'foto_ktp.required' => 'Foto KTP tidak boleh kosong',
+            'foto_ktp.mimes:png,jpg' => 'Foto KTP harus berekstensi .png atau .jpg',
+            'foto_ktp.max:5120' => 'Foto KTP harus memiliki ukuran kurang dari 5MB',
+            'foto_tanda_tangan.required' => 'Foto tanda tangan tidak boleh kosong',
+            'foto_tanda_tangan.mimes:png,jpg' => 'Foto tanda tangan harus berekstensi .png atau .jpg',
+            'foto_tanda_tangan.max:5120' => 'Foto tanda tangan harus memiliki ukuran kurang dari 5MB',
+            'foto_surat_kuasa.mimes:png,jpg' => 'Foto surat kuasa harus berekstensi .png atau .jpg',
+            'foto_surat_kuasa.max:5120' => 'Foto surat kuasa harus memiliki ukuran kurang dari 5MB',
+        ];
+    }
 }

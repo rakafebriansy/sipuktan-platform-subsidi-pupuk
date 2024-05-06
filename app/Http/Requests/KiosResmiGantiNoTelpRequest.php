@@ -25,4 +25,17 @@ class KiosResmiGantiNoTelpRequest extends FormRequest
             'nomor_telepon' => 'required|numeric'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'nomor_telepon.required' => 'Nomor telepon tidak boleh kosong',
+            'nomor_telepon.numeric' => 'Nomor telepon harus berupa angka',
+        ];
+    }
 }

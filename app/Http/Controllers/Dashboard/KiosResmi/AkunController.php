@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\KiosResmi;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KiosResmiGantiNoTelpRequest;
+use App\Http\Requests\KiosResmiGantiSandiRequest;
 use App\Http\Requests\KiosResmiLoginRequest;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
@@ -22,7 +23,7 @@ class AkunController extends Controller
             'title' => 'Kios Resmi | Ganti Kata Sandi'
         ]);
     }
-    public function gantiSandi(KiosResmiLoginRequest $request): RedirectResponse
+    public function gantiSandi(KiosResmiGantiSandiRequest $request): RedirectResponse
     {
         $id = Session::get('id_kios_resmi',null);
         $validated = $request->validated();
