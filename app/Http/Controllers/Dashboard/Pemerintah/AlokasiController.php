@@ -51,10 +51,14 @@ class AlokasiController extends Controller
     public function buatAlokasi(PemerintahBuatAlokasiRequest $request):RedirectResponse
     {
         $validated = $request->validated();
-        if($this->alokasi_service->pemerintahBuatAlokasi($validated)) {
-            return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with('success', 'Data alokasi berhasil ditambahkan');
+        $petani = $this->alokasi_service->pemerintahCekPetani($validated['nik']);
+        if(isset($petani)) {
+            if($this->alokasi_service->pemerintahBuatAlokasi($validated,$petani)) {
+                return back()->with('success', 'Data alokasi berhasil ditambahkan');
+            }
+            return back()->withErrors(['error' => 'Data alokasi gagal ditambahkan']);
         }
-        return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with(['error' => 'Data alokasi gagal ditambahkan']);
+        return back()->withErrors(['error' => 'Petani tidak terdaftar']);
     }
     public function hapusAlokasi(Request $request): RedirectResponse
     {

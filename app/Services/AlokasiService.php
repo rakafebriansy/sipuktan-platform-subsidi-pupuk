@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Http\Requests\PetaniRegisterRequest;
+use App\Models\Petani;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 
@@ -14,7 +15,8 @@ interface AlokasiService
     function kiosResmiGetDistinctIdPetaniByTahunMusimTanam(string $tahun, string $musim_tanam): array;
     function pemerintahSetAlokasi(): array;
     function pemerintahSetAlokasiByTahun(string $tahun, string $musim_tanam): Collection;
-    function pemerintahBuatAlokasi(array $alokasi): bool;
+    function pemerintahCekPetani(string $nik): Petani|null;
+    function pemerintahBuatAlokasi(array $alokasi,Petani $petani): bool;
     function pemerintahHapusAlokasi(int $id): bool;
     function pemerintahEditAlokasi(array $alokasi): bool;
     function ajaxDetailAlokasiPetani(int $id): string;

@@ -65,9 +65,14 @@ class AlokasiServiceImpl implements AlokasiService
 
         return $alokasis;
     }
-    public function pemerintahBuatAlokasi(array $alokasi): bool
+
+    public function pemerintahCekPetani(string $nik): Petani|null
     {
-        $petani = Petani::where('nik',$alokasi['nik'])->first();
+        $petani = Petani::where('nik',$nik)->first();
+        return $petani;
+    }
+    public function pemerintahBuatAlokasi(array $alokasi,Petani $petani): bool
+    {
         $kelompok_tani = KelompokTani::find($petani->id_kelompok_tani);
         $kios_resmi = $kelompok_tani->kios_resmi;
         return DB::transaction(function() use ($alokasi, $petani, $kios_resmi){

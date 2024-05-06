@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PemerintahBuatAlokasiRequest extends FormRequest
 {
+    private array $musim_tanam = ['MT1','MT2','MT3'];
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -22,11 +23,11 @@ class PemerintahBuatAlokasiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nik" => ['required','min:16','numeric','min:16'],
-            "jumlah_pupuk" => "required",
-            "tahun" => "required",
-            "id_jenis_pupuk" => "required",
-            "musim_tanam" => "required",
+            'nik' => ['required','min:16','numeric','min:16'],
+            'jumlah_pupuk' => 'required',
+            'tahun' => 'required|numeric',
+            'id_jenis_pupuk' => 'required|exists:jenis_pupuks,id',
+            'musim_tanam' => 'required|in:' . implode(',', $this->musim_tanam),
         ];
     }
 }
