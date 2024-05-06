@@ -29,9 +29,9 @@ class KiosResmiRegisterRequest extends FormRequest
             'jalan'=> 'required',
             'id_kecamatan' => 'required',
             'foto_ktp' => 'required|mimes:png,jpg',
-            'nik' => 'required',
+            'nik' => 'required|numeric',
             'nama_pemilik' => 'required',
-            'nomor_telepon' => 'required',
+            'nomor_telepon' => 'required|numeric',
         ];
     }
 }
