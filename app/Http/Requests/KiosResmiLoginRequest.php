@@ -22,8 +22,22 @@ class KiosResmiLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nib' => ['required','numeric','min:13'],
-            'kata_sandi' => ['required','min:6'],
+            'nib' => 'required|numeric',
+            'kata_sandi' => 'required',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'nib.required' => 'NIB tidak boleh kosong',
+            'nib.numeric' => 'NIB harus berupa angka',
+            'kata_sandi.required' => 'Kata sandi tidak boleh kosong',
         ];
     }
 }
