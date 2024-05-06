@@ -28,4 +28,18 @@ class PemerintahEditFaqRequest extends FormRequest
             'jenis_pengguna' => 'required'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'pertanyaan.required' => 'Pertanyaan tidak boleh kosong',
+            'jawaban.required' => 'Jawaban tidak boleh kosong',
+            'jenis_pengguna.required' => 'Jenis pengguna tidak boleh kosong',
+        ];
+    }
 }
