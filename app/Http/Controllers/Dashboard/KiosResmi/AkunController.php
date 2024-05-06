@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\KiosResmi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\KiosResmiGantiNoTelpRequest;
 use App\Http\Requests\KiosResmiLoginRequest;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
@@ -34,12 +35,10 @@ class AkunController extends Controller
         }
         return back()->withErrors(['failed' => 'Kata sandi lama salah']);
     }
-    public function gantiNoTelp(Request $request): RedirectResponse
+    public function gantiNoTelp(KiosResmiGantiNoTelpRequest $request): RedirectResponse
     {
         $id = Session::get('id_kios_resmi',null);
-        $validated = $request->validate([
-            'nomor_telepon' => 'required'
-        ]);
+        $validated = $request->validated();
         if($this->akun_service->kiosResmiGantiNoTelp($id, $validated['nomor_telepon']))
         return back()->with('success','Nomor telepon berhasil diperbarui');
         return back()->withErrors(['failed' => 'Nomor telepon gagal diperbarui']);

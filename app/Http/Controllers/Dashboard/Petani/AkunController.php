@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\Petani;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PetaniGantiNoTelpRequest;
 use App\Http\Requests\PetaniGantiSandiRequest;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
@@ -35,12 +36,10 @@ class AkunController extends Controller
         }
         return back()->withErrors(['failed' => 'Kata sandi lama salah']);
     }
-    public function gantiNoTelp(Request $request): RedirectResponse
+    public function gantiNoTelp(PetaniGantiNoTelpRequest $request): RedirectResponse
     {
         $id = Session::get('id_petani',null);
-        $validated = $request->validate([
-            'nomor_telepon' => 'required'
-        ]);
+        $validated = $request->validated();
         if($this->akun_service->petaniGantiNoTelp($id, $validated['nomor_telepon']))
         return back()->with('success','Nomor telepon berhasil diperbarui');
         return back()->withErrors(['failed' => 'Nomor telepon gagal diperbarui']);
