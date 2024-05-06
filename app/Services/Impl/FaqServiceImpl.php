@@ -33,20 +33,18 @@ class FaqServiceImpl implements FaqService
     }
     public function pemerintahEditFaq(array $validated): bool
     {
-        DB::transaction(function() use($validated) {
-
-            Faq::query()->where('id',$validated['id'])->update([
+        return DB::transaction(function() use($validated) {
+            return Faq::where('id',$validated['id'])->update([
                 'pertanyaan' => $validated['pertanyaan'],
                 'jawaban' => $validated['jawaban'],
                 'jenis_pengguna' => $validated['jenis_pengguna'],
             ]);
         });
-        return true;
     }
     public function pemerintahHapusFaq(int $id): bool
     {
         return DB::transaction(function () use ($id) {
-            return Faq::query()->where('id',$id)->delete();
+            return Faq::where('id',$id)->delete();
         });
     }
     public function ajaxGetFaqDetail(int $id): string

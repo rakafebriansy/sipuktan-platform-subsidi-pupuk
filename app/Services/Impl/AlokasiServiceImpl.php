@@ -76,7 +76,7 @@ class AlokasiServiceImpl implements AlokasiService
         $kelompok_tani = KelompokTani::find($petani->id_kelompok_tani);
         $kios_resmi = $kelompok_tani->kios_resmi;
         return DB::transaction(function() use ($alokasi, $petani, $kios_resmi){
-            return Alokasi::create([
+            return Alokasi::insert([
                 'jumlah_pupuk' => $alokasi['jumlah_pupuk'],
                 'tahun' => $alokasi['tahun'],
                 'musim_tanam' => $alokasi['musim_tanam'],
