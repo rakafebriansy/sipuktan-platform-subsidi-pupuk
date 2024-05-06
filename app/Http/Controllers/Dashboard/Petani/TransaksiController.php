@@ -21,7 +21,7 @@ class TransaksiController extends Controller
     }
     public function setTransaksi(): View
     {
-        $id = Session::get('id',null);
+        $id = Session::get('id_petani',null);
         ['petani' => $petani, 
         'notifikasis' => $notifikasis, 
         'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
@@ -36,7 +36,7 @@ class TransaksiController extends Controller
     }
     public function setCheckoutNonTunai(Request $request): View|RedirectResponse
     {
-        $petani = Petani::find(Session::get('id'));
+        $petani = Petani::find(Session::get('id_petani'));
         if(isset($request->all()['id_alokasis']) && isset($request->all()['total_harga'])) {
             $all_request = $request->all();
             ['petani' => $petani, 
