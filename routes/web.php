@@ -77,7 +77,7 @@ Route::prefix('/pemerintah')->group(function(){
         Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\Pemerintah\AkunController::class, 'gantiSandi']);
         Route::get('/verifikasi-pengguna', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'setVerifikasi']);
         Route::post('/verifikasi-pengguna/petani', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'verifikasiPetani']);
-        Route::post('/verifikasi-/kios-resmi', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'verifikasiKiosResmi']);
+        Route::post('/verifikasi-pengguna/kios-resmi', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'verifikasiKiosResmi']);
         Route::get('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'setAlokasi']);
         Route::post('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'buatAlokasi']);
         Route::put('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'hapusAlokasi']);
