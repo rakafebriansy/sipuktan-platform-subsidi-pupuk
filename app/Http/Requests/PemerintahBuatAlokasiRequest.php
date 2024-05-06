@@ -23,11 +23,32 @@ class PemerintahBuatAlokasiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nik' => ['required','min:16','numeric','min:16'],
+            'nik' => 'required|numeric|min:16',
             'jumlah_pupuk' => 'required',
             'tahun' => 'required|numeric',
             'id_jenis_pupuk' => 'required|exists:jenis_pupuks,id',
             'musim_tanam' => 'required|in:' . implode(',', $this->musim_tanam),
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'nik.required' => 'NIK tidak boleh kosong',
+            'nik.numeric' => 'NIK harus berupa angka',
+            'nik.min:16' => 'NIK harus harus berjumlah minimal 16 karakter',
+            'jumlah_pupuk.required' => 'Jumlah pupuk tidak boleh kosong',
+            'tahun.required' => 'Tahun tidak boleh kosong',
+            'tahun.numeric' => 'Tahun harus berupa angka',
+            'id_jenis_pupuk.required' => 'Jenis pupuk tidak boleh kosong',
+            'id_jenis_pupuk.exists:jenis_pupuks,id' => 'Jenis pupuk tersebut tidak tersedia',
+            'musim_tanam.required' => 'Musim tanam tidak boleh kosong',
+            'musim_tanam.in:' . implode(',', $this->musim_tanam) => 'Musim tanam tersebut tidak tersedia',
         ];
     }
 }
