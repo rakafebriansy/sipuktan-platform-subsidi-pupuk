@@ -68,7 +68,7 @@
                         <td class="px-6 py-4 italic">
                             {{ $laporan->status_verifikasi }}
                         </td>
-                        <td class="py-4 flex flex-row px-6 data-id="{{ $laporan->id }}"">
+                        <td class="py-4 flex flex-row px-6" data-id="{{ $laporan->id }}">
                             <button data-modal-target="detailLaporanModal" data-modal-toggle="detailLaporanModal"  type="button" onclick="getDetailLaporanFiles(this,'{{ csrf_token() }}')" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
                         </td>
                     </tr>
