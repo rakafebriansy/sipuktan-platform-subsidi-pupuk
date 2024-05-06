@@ -23,15 +23,43 @@ class KiosResmiRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nib' => ['required','numeric','min:13'],
-            'kata_sandi' => ['required','min:6'],
+            'nib' => 'required|numeric|min:13',
+            'kata_sandi' => 'required|min:6',
             'nama'=> 'required',
             'jalan'=> 'required',
             'id_kecamatan' => 'required',
-            'foto_ktp' => 'required|mimes:png,jpg',
-            'nik' => 'required|numeric',
+            'foto_ktp' => 'required|mimes:png,jpg|max:5120',
+            'nik' => 'required|numeric|min:16',
             'nama_pemilik' => 'required',
             'nomor_telepon' => 'required|numeric',
+        ];
+    }
+        
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'nib.required' => 'NIB tidak boleh kosong',
+            'nib.numeric' => 'NIB harus berupa angka',
+            'nib.min:13' => 'NIB harus harus berjumlah minimal 13 karakter',
+            'kata_sandi.required' => 'Kata sandi tidak boleh kosong',
+            'kata_sandi.min:6' => 'Kata sandi harus harus berjumlah minimal 6 karakter',
+            'nama.required' => 'Nama kios tidak boleh kosong',
+            'jalan.required' => 'Alamat tidak boleh kosong',
+            'id_kecamatan.required' => 'Kecamatan tidak boleh kosong',
+            'foto_ktp.required' => 'Foto KTP tidak boleh kosong',
+            'foto_ktp.mimes:png,jpg' => 'Foto KTP harus berekstensi .png atau .jpg',
+            'foto_ktp.max:5120' => 'Foto KTP harus memiliki ukuran kurang dari 5MB',
+            'nik.required' => 'NIK tidak boleh kosong',
+            'nik.numeric' => 'NIK harus berupa angka',
+            'nik.min:13' => 'NIK harus harus berjumlah minimal 16 karakter',
+            'nama_pemilik.required' => 'Nama tidak boleh kosong',
+            'nomor_telepon.required' => 'Nomor telepon tidak boleh kosong',
+            'nomor_telepon.numeric' => 'Nomor telepon harus berupa angka',
         ];
     }
 }
