@@ -69,6 +69,6 @@ class AlokasiController extends Controller
         if($this->alokasi_service->pemerintahEditAlokasi($validated)) {
             return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->with('success','Data alokasi berhasil diperbarui');
         }
-        return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->withErrors(['error','Data alokasi gagal diperbarui']);
+        return redirect('/pemerintah/alokasi?tahun=' . $validated['tahun'] . '&musim_tanam=' . $validated['musim_tanam'])->withErrors(['error' => 'Data alokasi gagal diperbarui']);
     }
 }
