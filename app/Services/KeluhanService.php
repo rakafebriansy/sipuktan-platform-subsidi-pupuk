@@ -10,7 +10,7 @@ interface KeluhanService
     function kiosResmiSetKeluhan(int $kios_resmi): Collection;
     function kiosResmiBuatKeluhan(array $keluhan, int $id_kios_resmi): bool;
     function pemerintahSetKeluhan(int $id_pemerintah): Collection;
-    function pemerintahBalasKeluhan(string $balasan, int $id_keluhan): bool;
+    function pemerintahBalasKeluhan(array $balasan): bool;
     function getKeluhanDetail(int $id): string;
 }
 

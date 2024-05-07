@@ -23,7 +23,8 @@ class PemerintahBalasKeluhanRequest extends FormRequest
     {
         return [
             'balasan' => 'required',
-            'id' => 'required'
+            'id' => 'required',
+            'id_pemerintah' => 'required'
         ];
     }
 

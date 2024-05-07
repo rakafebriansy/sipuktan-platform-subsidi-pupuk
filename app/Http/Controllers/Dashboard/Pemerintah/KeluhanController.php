@@ -36,7 +36,7 @@ class KeluhanController extends Controller
     public function balasKeluhan(PemerintahBalasKeluhanRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-        if($this->keluhan_service->pemerintahBalasKeluhan($validated['balasan'],$validated['id'])) {
+        if($this->keluhan_service->pemerintahBalasKeluhan($validated)) {
             return back()->with('success', 'Balasan keluhan berhasil ditambahkan');
         }
         return back()->with(['error' => 'Balasan keluhan gagal ditambahkan']);

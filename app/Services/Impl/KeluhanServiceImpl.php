@@ -37,11 +37,12 @@ class KeluhanServiceImpl implements KeluhanService
         $keluhans = Keluhan::all();
         return $keluhans;
     }
-    public function pemerintahBalasKeluhan(string $balasan, int $id_keluhan): bool
+    public function pemerintahBalasKeluhan(array $balasan): bool
     {
-        return DB::transaction(function() use($balasan, $id_keluhan) {
-            return Keluhan::where('id',$id_keluhan)->update([
-                'balasan' => $balasan
+        return DB::transaction(function() use($balasan) {
+            return Keluhan::where('id',$balasan['id'])->update([
+                'balasan' => $balasan['balasan'],
+                'id_pemerintah' => $balasan['id_pemerintah']
             ]);
         });
     }

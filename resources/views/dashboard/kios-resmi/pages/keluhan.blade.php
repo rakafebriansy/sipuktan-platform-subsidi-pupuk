@@ -27,7 +27,7 @@
                         <th scope="col" class="px-6 py-3">
                             <p class="inline-block">Status</p>
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 md:w-[24%] lg:w-[12%]">
                             <p class="inline-block">Aksi</p>
                         </th>
                     </tr>

@@ -115,7 +115,7 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
-            <form action="/kios-resmi/keluhan" method="post" class="p-4 md:p-5">
+            <form action="/pemerintah/keluhan" method="post" class="p-4 md:p-5">
                 @csrf
                 @method('patch')
                 <input type="hidden" name="id_pemerintah" value="{{ $pemerintah->id }}">
