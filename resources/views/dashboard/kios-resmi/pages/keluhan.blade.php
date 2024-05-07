@@ -123,7 +123,7 @@
                 </button>
             </div>
             <div class="p-4 md:p-5 space-y-4 text-sm">
-                <div id="detailKeluhanBody">
+                <div id="detailKeluhanBody" class="text-sm">
                     <div class="mb-3">
                         <h3 class="mb-1 font-medium text-gray-900 dark:text-white inline">Subjek: </h3>
                         <p class="inline"></p>

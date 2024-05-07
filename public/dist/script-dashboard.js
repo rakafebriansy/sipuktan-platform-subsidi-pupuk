@@ -65,6 +65,17 @@ function fetchGetKeluhanDetail(id,token) {
       .then(data => viewGetKeluhanDetail(data))
       .catch(e => console.error('Error'+e));
 }
+function fetchGetKeluhanBalas(id,token) {
+    fetch('/ajax/get-keluhan', {
+        headers: {
+            "X-CSRF-Token": token
+          },    
+        method: 'POST',
+        body: new URLSearchParams('id='+id)
+    }).then(res => res.json())
+      .then(data => viewGetKeluhanBalas(data))
+      .catch(e => console.error('Error'+e));
+}
 
 //UTILS
 function viewRiwayatSearchBox(data,list) {
@@ -163,6 +174,11 @@ function viewGetKeluhanDetail(data) {
     } else {
         detailKeluhanModalDivs[2].children[1].innerText = data['balasan'];
     }
+}
+function viewGetKeluhanBalas(data) {
+    const detailKeluhanModalDivs = document.querySelectorAll('#balasKeluhanBody div');
+    detailKeluhanModalDivs[0].children[1].innerText = data['subjek']
+    detailKeluhanModalDivs[1].children[1].innerText = data['keluhan']
 }
 
 
@@ -294,6 +310,12 @@ function editNoTelpPassId(btn,mode) {
 function getDetailKeluhan(btn,token) {
     const id = btn.parentElement.dataset.id;
     fetchGetKeluhanDetail(id,token);
+}
+function balasKeluhanPassId(btn,token) {
+    let id = btn.parentElement.dataset.id;
+    const balasKeluhanModal = document.getElementById('balasKeluhanModal');
+    balasKeluhanModal.querySelector('[name="id"]').value = id;
+    fetchGetKeluhanBalas(id,token);
 }
 
 (function(){

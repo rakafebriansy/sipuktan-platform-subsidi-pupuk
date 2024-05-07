@@ -7,12 +7,6 @@
                 <caption class="px-5 pt-5 pb-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                     <div class="flex justify-between items-center my-3">
                         <p class="text-2xl">Keluhan</p>
-                        <div class="flex items-center">
-                            <button data-modal-target="balasKeluhanModal" data-modal-toggle="balasKeluhanModal" type="button" class="focus:outline-none inline-flex text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                Buat Keluhan
-                            </button>
-                        </div>
                     </div>
                 </caption>
                 @if (count($keluhans))
@@ -27,7 +21,7 @@
                         <th scope="col" class="px-6 py-3">
                             <p class="inline-block">Status</p>
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 md:w-[24%] lg:w-[12%]">
                             <p class="inline-block">Aksi</p>
                         </th>
                     </tr>
@@ -46,6 +40,7 @@
                         </td>
                         <td class="py-4 flex flex-row px-6" data-id="{{ $keluhan->id }}">
                             <button data-modal-target="detailKeluhanModal" data-modal-toggle="detailKeluhanModal"  type="button" onclick="getDetailKeluhan(this,'{{ csrf_token() }}')" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                            <button data-modal-target="balasKeluhanModal" data-modal-toggle="balasKeluhanModal" type="button" onclick="balasKeluhanPassId(this, '{{ csrf_token() }}')" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Balas</button>
                         </td>
                     </tr>
                     @endforeach
@@ -71,72 +66,6 @@
 
 {{-- DROPDOWN --}}
 
-<div id="balasKeluhanModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-xl max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Tambah Laporan
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="balasKeluhanModal">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            <form action="/kios-resmi/laporan" method="post" enctype="multipart/form-data" class="p-4 md:p-5">
-                @csrf
-                <input type="hidden" name="id_riwayat_transaksi" id="idRiwayatTransaksi">
-                <input type="hidden" name="tahun" id="tahunSaatIni">
-                <input type="hidden" name="musim_tanam" id="musimTanamSaatIni">
-                <div class="grid gap-4 mb-4 grid-cols-2">
-                    <div class="col-span-2">
-                        <div class="">   
-                            <label for="default-search" class="mb-2 text-xs font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                                    </svg>
-                                </div>
-                                <input data-token="{{ csrf_token() }}" type="search" oninput="searchRiwayat(this)" autocomplete="off" id="riwayatSearch" class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari nama petani..." required />
-                                <div id="riwayatSearchBox" class="absolute w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                    <!-- AJAX -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bukti Pengambilan</label>
-                        <input name="foto_bukti_pengambilan" class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">PNG or JPG (MAX. 5MB)</p>
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto KTP</label>
-                        <input name="foto_ktp" class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">PNG or JPG (MAX. 5MB)</p>
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanda Tangan</label>
-                        <input name="foto_tanda_tangan" class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">PNG or JPG (MAX. 5MB)</p>
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Surat Kuasa (opsional)</label>
-                        <input name="foto_surat_kuasa" class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" type="file">
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">PNG or JPG (MAX. 5MB)</p>
-                    </div>
-                </div>
-                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                    Tambah
-                </button>
-            </form>
-        </div>
-    </div>
-</div> 
-
 @if(count($keluhans))
 <div id="detailKeluhanModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-sm max-h-full">
@@ -153,17 +82,17 @@
                 </button>
             </div>
             <div class="p-4 md:p-5 space-y-4">
-                <div id="detailKeluhanBody">
+                <div id="detailKeluhanBody" class="text-sm">
                     <div class="mb-3">
                         <h3 class="mb-1 font-medium text-gray-900 dark:text-white inline">Subjek: </h3>
                         <p class="inline"></p>
                     </div>
                     <div class="mb-3">
-                        <label for="keluhan" class="block font-medium text-gray-900 dark:text-white">Keluhan:</label>
+                        <label class="block font-medium text-gray-900 dark:text-white">Keluhan:</label>
                         <p></p>
                     </div>
                     <div class="mb-3">
-                        <label for="keluhan" class="block font-medium text-gray-900 dark:text-white">Balasan:</label>
+                        <label class="block font-medium text-gray-900 dark:text-white">Balasan:</label>
                         <p></p>
                     </div>
                 </div>                
@@ -171,5 +100,46 @@
         </div>
     </div>
 </div>
+
+<div id="balasKeluhanModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Tambah Keluhan
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="balasKeluhanModal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <form action="/kios-resmi/keluhan" method="post" class="p-4 md:p-5">
+                @csrf
+                @method('patch')
+                <input type="hidden" name="id_pemerintah" value="{{ $pemerintah->id }}">
+                <input type="hidden" name="id">
+                <div id="balasKeluhanBody" class="mb-4 text-sm">
+                    <div class="mb-3">
+                        <h3 class="mb-1 font-medium text-gray-900 dark:text-white inline">Subjek: </h3>
+                        <p class="inline"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="block font-medium text-gray-900 dark:text-white">Keluhan:</label>
+                        <p></p>
+                    </div>
+                    <div class="mb-2">
+                        <label for="balasan" class="block mb-1 font-medium text-gray-900 dark:text-white">Balasan:</label>
+                        <textarea name="balasan" rows="3" class="block p-2.5 w-full bg-gray-50 text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="resize: none" placeholder="Ketikkan balasan anda..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Balas
+                </button>
+            </form>
+        </div>
+    </div>
+</div> 
 @endif
 @endsection
