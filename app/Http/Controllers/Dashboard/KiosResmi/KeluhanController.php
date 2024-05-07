@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\KiosResmi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\KiosResmiKeluhanRequest;
 use App\Services\DashboardService;
 use App\Services\KeluhanService;
 use Illuminate\Http\RedirectResponse;
@@ -25,20 +26,21 @@ class KeluhanController extends Controller
         ['kios_resmi' => $kios_resmi, 
         'notifikasis' => $notifikasis, 
         'initials' => $initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
-        $keluhans = $this->keluhan_service->pemerintahSetKeluhan($id);
+        $keluhans = $this->keluhan_service->kiosResmiSetKeluhan($id);
         return view('dashboard.kios-resmi.pages.index', [
             'title' => 'Kios Resmi | Dashboard',
             'kios_resmi' => $kios_resmi,
             'notifikasis' => $notifikasis,
-            'initials' => $initials
+            'initials' => $initials,
+            'keluhans' => $keluhans
         ]);
     }
-    public function balasKeluhan(PemerintahBalasKeluhanRequest $request): RedirectResponse
+    public function balasKeluhan(KiosResmiKeluhanRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-        if($this->keluhan_service->pemerintahBalasKeluhan($validated['balasan'],$validated['id'])) {
-            return back()->with('success', 'Balasan keluhan berhasil ditambahkan');
+        if($this->keluhan_service->kiosResmiKeluhan($validated['balasan'],$validated['id_kios_resmi'])) {
+            return back()->with('success', 'Keluhan berhasil ditambahkan');
         }
-        return back()->with(['error' => 'Balasan keluhan gagal ditambahkan']);
+        return back()->with(['error' => 'Keluhan gagal ditambahkan']);
     }
 }
