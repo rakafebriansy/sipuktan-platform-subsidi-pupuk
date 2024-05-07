@@ -43,7 +43,7 @@ function fetchDeleteNotifikasi(id,token) {
       .then(res => res)
       .catch(e => console.error('Error'+e));
 }
-function fetchGetFaqDetails(id,token) {
+function fetchGetFaqDetail(id,token) {
     fetch('/pemerintah/ajax/get-faq', {
         headers: {
             "X-CSRF-Token": token
@@ -51,15 +51,18 @@ function fetchGetFaqDetails(id,token) {
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
-      .then(data => {
-        const dropdownEditFaq = document.getElementById('editFaqModal');
-        dropdownEditFaq.querySelector('[name="pertanyaan"]').value = data['pertanyaan'];
-        dropdownEditFaq.querySelector('[name="jawaban"]').value = data['jawaban'];
-        dropdownEditFaq.querySelectorAll('option').forEach(element => {
-            if(element.innerText == data['jenis_pengguna']) element.setAttribute('selected','');
-        });
-
-      })
+      .then(data => viewFaqDetail(data))
+      .catch(e => console.error('Error'+e));
+}
+function fetchGetKeluhanDetail(id,token) {
+    fetch('/ajax/get-keluhan', {
+        headers: {
+            "X-CSRF-Token": token
+          },    
+        method: 'POST',
+        body: new URLSearchParams('id='+id)
+    }).then(res => res.json())
+      .then(data => viewGetKeluhanDetail(data))
       .catch(e => console.error('Error'+e));
 }
 
@@ -96,6 +99,14 @@ function viewPetaniFromAlokasi(data) {
     const table_rows = document.querySelector('#detailAlokasiModal table tbody');
     table_rows.querySelector('tr td:nth-child(2)').innerText = data['nomor_telepon'];
     table_rows.querySelector('tr:nth-child(2) td:nth-child(2)').innerText = data['poktan'];
+}
+function viewFaqDetail(data) {
+    const dropdownEditFaq = document.getElementById('editFaqModal');
+    dropdownEditFaq.querySelector('[name="pertanyaan"]').value = data['pertanyaan'];
+    dropdownEditFaq.querySelector('[name="jawaban"]').value = data['jawaban'];
+    dropdownEditFaq.querySelectorAll('option').forEach(element => {
+        if(element.innerText == data['jenis_pengguna']) element.setAttribute('selected','');
+    });
 }
 function viewAlertNotifikasi(message,id,mode='blue') {
     let xmlString =
@@ -142,7 +153,17 @@ function viewAlertNotifikasi(message,id,mode='blue') {
     li.innerHTML = xmlString;
     target.appendChild(li);
 }
-
+function viewGetKeluhanDetail(data) {
+    const detailKeluhanModalDivs = document.querySelectorAll('#detailKeluhanBody div');
+    detailKeluhanModalDivs[0].children[1].innerText = data['subjek']
+    detailKeluhanModalDivs[1].children[1].innerText = data['keluhan']
+    if(data['balasan'] == null) {
+        detailKeluhanModalDivs[2].children[1].innerText = 'Belum ada balasan';
+        detailKeluhanModalDivs[2].children[1].classList.add('italic','text-gray-500');
+    } else {
+        detailKeluhanModalDivs[2].children[1].innerText = data['balasan'];
+    }
+}
 
 
 //EVENTS
@@ -259,7 +280,7 @@ function deleteRealtimeNotifikasi(btn,id) {
 function editFaqPassId(btn,token){
     let id = btn.parentElement.dataset.id;
     document.getElementById('editFaqModal').querySelector('[name="id"]').value = id;
-    fetchGetFaqDetails(id,token);
+    fetchGetFaqDetail(id,token);
 }
 function deleteFaqPassId(btn){
     let id = btn.parentElement.dataset.id;
@@ -269,6 +290,10 @@ function editNoTelpPassId(btn,mode) {
     const editNoTelpModal = document.getElementById('editNoTelpModal');
     editNoTelpModal.querySelector('[name="id"]').value = document.getElementById(mode).dataset.id;
     editNoTelpModal.querySelector('[name="nomor_disabled"]').value = btn.previousElementSibling.innerText;
+}
+function getDetailKeluhan(btn,token) {
+    const id = btn.parentElement.dataset.id;
+    fetchGetKeluhanDetail(id,token);
 }
 
 (function(){

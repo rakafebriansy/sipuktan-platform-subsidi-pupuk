@@ -45,6 +45,11 @@ class KeluhanServiceImpl implements KeluhanService
             ]);
         });
     }
+    public function getKeluhanDetail(int $id): string
+    {
+        $keluhan = Keluhan::find($id)->toJson(JSON_PRETTY_PRINT);
+        return $keluhan;
+    }
 }
 
 ?>

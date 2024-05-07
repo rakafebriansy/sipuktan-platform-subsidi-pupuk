@@ -101,6 +101,7 @@ Route::prefix('/pemerintah')->group(function(){
 });
 Route::prefix('/ajax')->group(function(){
     Route::post('/laporan-filenames',[AjaxController::class,'getLaporanFilenames']);
+    Route::post('/get-keluhan',[AjaxController::class,'getKeluhanDetail']);
 });
 Route::prefix('/bot')->group(function(){
     Route::get('/retreive',[TelegramBotController::class,'show']);

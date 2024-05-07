@@ -153,45 +153,19 @@
                 </button>
             </div>
             <div class="p-4 md:p-5 space-y-4">
-
-
-                <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <tbody>
-                            <tr class="bg-white dark:bg-gray-800">
-                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Bukti Pengambilan
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href="" class="underline"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white dark:bg-gray-800">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Foto KTP
-                                </th>
-                                <td class="px-6 py-4">
-                                    <a href="" class="underline"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white dark:bg-gray-800">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Surat Kuasa
-                                </th>
-                                <td class="px-6 py-4">
-                                    <a href="" class="italic"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white dark:bg-gray-800">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Tanda Tangan
-                                </th>
-                                <td class="px-6 py-4">
-                                    <a href="" class="underline"></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div id="detailKeluhanBody">
+                    <div class="mb-3">
+                        <h3 class="mb-1 font-medium text-gray-900 dark:text-white inline">Subjek: </h3>
+                        <p class="inline"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="keluhan" class="block font-medium text-gray-900 dark:text-white">Keluhan:</label>
+                        <p></p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="keluhan" class="block font-medium text-gray-900 dark:text-white">Balasan:</label>
+                        <p></p>
+                    </div>
                 </div>                
             </div>
         </div>

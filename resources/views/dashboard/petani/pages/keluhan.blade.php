@@ -45,7 +45,7 @@
                             {{ isset($keluhan->balasan)? 'Dibalas' : 'Belum dibalas' }}
                         </td>
                         <td class="py-4 flex flex-row px-6" data-id="{{ $keluhan->id }}">
-                            <button data-modal-target="detailKeluhanModal" data-modal-toggle="detailKeluhanModal"  type="button" onclick="blo(this,'{{ csrf_token() }}')" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                            <button data-modal-target="detailKeluhanModal" data-modal-toggle="detailKeluhanModal"  type="button" onclick="getDetailKeluhan(this,'{{ csrf_token() }}')" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
                         </td>
                     </tr>
                     @endforeach
@@ -109,7 +109,7 @@
 @if(count($keluhans))
 
 <div id="detailKeluhanModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-sm max-h-full">
+    <div class="relative w-full max-w-lg max-h-full">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-medium text-gray-900 dark:text-white">
@@ -122,47 +122,21 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
-            <div class="p-4 md:p-5 space-y-4">
-
-
-                <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <tbody>
-                            <tr class="bg-white dark:bg-gray-800">
-                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Bukti Pengambilan
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href="" class="underline"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white dark:bg-gray-800">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Foto KTP
-                                </th>
-                                <td class="px-6 py-4">
-                                    <a href="" class="underline"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white dark:bg-gray-800">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Surat Kuasa
-                                </th>
-                                <td class="px-6 py-4">
-                                    <a href="" class="italic"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white dark:bg-gray-800">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Tanda Tangan
-                                </th>
-                                <td class="px-6 py-4">
-                                    <a href="" class="underline"></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>                
+            <div class="p-4 md:p-5 space-y-4 text-sm">
+                <div id="detailKeluhanBody">
+                    <div class="mb-3">
+                        <h3 class="mb-1 font-medium text-gray-900 dark:text-white inline">Subjek: </h3>
+                        <p class="inline"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="keluhan" class="block font-medium text-gray-900 dark:text-white">Keluhan:</label>
+                        <p></p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="keluhan" class="block font-medium text-gray-900 dark:text-white">Balasan:</label>
+                        <p></p>
+                    </div>
+                </div>           
             </div>
         </div>
     </div>
