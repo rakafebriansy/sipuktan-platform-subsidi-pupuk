@@ -10,6 +10,7 @@ use App\Services\FaqService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class FaqController extends Controller
 {
@@ -19,7 +20,7 @@ class FaqController extends Controller
         $this->dashboard_service = $dashboard_service;
         $this->faq_service = $faq_service;
     }
-    public function setFaq()
+    public function setFaq(): View
     {
         $id = Session::get('id_pemerintah',null);
         ['pemerintah' => $pemerintah,

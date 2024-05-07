@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Dashboard\Pemerintah;
 use App\Http\Controllers\Controller;
 use App\Services\DashboardService;
 use App\Services\KeluhanService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class KeluhanController extends Controller
 {
@@ -17,17 +19,20 @@ class KeluhanController extends Controller
         $this->dashboard_service = $dashboard_service;
         $this->keluhan_service = $keluhan_service;
     }
-    public function setKeluhan()
+    public function setKeluhan(): View
     {
         $id = Session::get('id_pemerintah',null);
         ['pemerintah' => $pemerintah,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
-        $faqs = $this->keluha->pemerintahSetFaq($id);
+        $keluhans = $this->keluhan_service->pemerintahSetKeluhan($id);
         return view('dashboard.pemerintah.pages.keluhan', [
             'title' => 'Pemerintah | Dashboard',
             'pemerintah' => $pemerintah,
             'initials' => $initials,
-            'faqs' => $faqs
+            'keluhans' => $keluhans
         ]);
+    }
+    public function balasKeluhan(Request $request): RedirectResponse
+    {
     }
 }
