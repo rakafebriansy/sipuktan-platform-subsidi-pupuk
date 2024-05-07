@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('subjek')->nullable(false);
             $table->text('keluhan')->nullable(false);
             $table->text('balasan')->nullable();
-            $table->date('tanggal_keluhan')->nullable(false)->useCurrent();
-            $table->unsignedBigInteger('id_petani')->nullable(false);
-            $table->unsignedBigInteger('id_kios_resmi')->nullable(false);
+            $table->timestamp('tanggal_keluhan')->nullable(false)->useCurrent();
+            $table->unsignedBigInteger('id_petani')->nullable();
+            $table->unsignedBigInteger('id_kios_resmi')->nullable();
             $table->string('id_pemerintah',20)->nullable(false);
 
             $table->foreign('id_petani')->on('petanis')->references('id');
