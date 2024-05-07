@@ -2,15 +2,15 @@
 
 namespace App\Providers;
 
-use App\Services\Impl\VerifikasiServiceImpl;
-use App\Services\VerifikasiService;
+use App\Services\Impl\KeluhanServiceImpl;
+use App\Services\KeluhanService;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class VerifikasiServiceProvider extends ServiceProvider implements DeferrableProvider
+class KeluhanServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public array $singletons =[
-        VerifikasiService::class => VerifikasiServiceImpl::class
+        KeluhanService::class => KeluhanServiceImpl::class
     ];
     /**
      * Register services.
@@ -29,6 +29,6 @@ class VerifikasiServiceProvider extends ServiceProvider implements DeferrablePro
     }
     public function provides():array
     {
-        return [VerifikasiService::class];
+        return [KeluhanService::class];
     }
 }

@@ -4,9 +4,10 @@ namespace App\Providers;
 
 use App\Services\FaqService;
 use App\Services\Impl\FaqServiceImpl;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class FaqServiceProvider extends ServiceProvider
+class FaqServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public array $singletons =[
         FaqService::class => FaqServiceImpl::class
