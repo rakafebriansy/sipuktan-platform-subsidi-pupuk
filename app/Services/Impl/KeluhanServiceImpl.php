@@ -34,7 +34,7 @@ class KeluhanServiceImpl implements KeluhanService
     }
     public function pemerintahSetKeluhan(int $id_pemerintah): Collection
     {
-        $keluhans = Keluhan::where('id_pemerintah',$id_pemerintah)->get();
+        $keluhans = Keluhan::all();
         return $keluhans;
     }
     public function pemerintahBalasKeluhan(string $balasan, int $id_keluhan): bool
