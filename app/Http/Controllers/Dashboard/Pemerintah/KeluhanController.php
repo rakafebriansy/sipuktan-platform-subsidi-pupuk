@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\Pemerintah;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PemerintahBalasKeluhanRequest;
 use App\Services\DashboardService;
 use App\Services\KeluhanService;
 use Illuminate\Http\RedirectResponse;
@@ -32,7 +33,12 @@ class KeluhanController extends Controller
             'keluhans' => $keluhans
         ]);
     }
-    public function balasKeluhan(Request $request): RedirectResponse
+    public function balasKeluhan(PemerintahBalasKeluhanRequest $request): RedirectResponse
     {
+        $validated = $request->validated();
+        if($this->keluhan_service->pemerintahBalasKeluhan($validated['balasan'],$validated['id'])) {
+            return back()->with('success', 'Balasan keluhan berhasil ditambahkan');
+        }
+        return back()->with(['error' => 'Balasan keluhan gagal ditambahkan']);
     }
 }

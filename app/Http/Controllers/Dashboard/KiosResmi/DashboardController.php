@@ -16,7 +16,9 @@ class DashboardController extends Controller
     public function setDashboard(): View
     {
         $id = Session::get('id_kios_resmi',null);
-        ['kios_resmi' => $kios_resmi, 'notifikasis' => $notifikasis, 'initials' => $initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
+        ['kios_resmi' => $kios_resmi, 
+        'notifikasis' => $notifikasis, 
+        'initials' => $initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
         return view('dashboard.kios-resmi.pages.index', [
             'title' => 'Kios Resmi | Dashboard',
             'kios_resmi' => $kios_resmi,
