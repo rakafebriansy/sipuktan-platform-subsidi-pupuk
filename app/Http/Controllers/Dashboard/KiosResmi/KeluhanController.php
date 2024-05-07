@@ -27,18 +27,19 @@ class KeluhanController extends Controller
         'notifikasis' => $notifikasis, 
         'initials' => $initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
         $keluhans = $this->keluhan_service->kiosResmiSetKeluhan($id);
-        return view('dashboard.kios-resmi.pages.index', [
-            'title' => 'Kios Resmi | Dashboard',
+        return view('dashboard.kios-resmi.pages.keluhan', [
+            'title' => 'Kios Resmi | Keluhan',
             'kios_resmi' => $kios_resmi,
             'notifikasis' => $notifikasis,
             'initials' => $initials,
             'keluhans' => $keluhans
         ]);
     }
-    public function balasKeluhan(KiosResmiKeluhanRequest $request): RedirectResponse
+    public function buatKeluhan(KiosResmiKeluhanRequest $request): RedirectResponse
     {
+        $id = Session::get('id_kios_resmi');
         $validated = $request->validated();
-        if($this->keluhan_service->kiosResmiKeluhan($validated['balasan'],$validated['id_kios_resmi'])) {
+        if($this->keluhan_service->kiosResmiBuatKeluhan($validated,$id)) {
             return back()->with('success', 'Keluhan berhasil ditambahkan');
         }
         return back()->with(['error' => 'Keluhan gagal ditambahkan']);

@@ -13,19 +13,19 @@ class KeluhanServiceImpl implements KeluhanService
         $keluhans = Keluhan::where('id_petani',$id_petani)->get();
         return $keluhans;
     }
-    public function petaniKeluhan(array $keluhan, int $id_petani): bool
+    public function petaniBuatKeluhan(array $keluhan, int $id_petani): bool
     {
         $keluhan['id_petani'] = $id_petani;
         return DB::transaction(function() use($keluhan) {
             return Keluhan::insert($keluhan);
         });
     }
-    public function kiosResmiSetKeluhan(int $kios_resmi): Collection
+    public function kiosResmiSetKeluhan(int $id_kios_resmi): Collection
     {
-        $keluhans = Keluhan::where('id_kios_resmi',$kios_resmi)->get();
+        $keluhans = Keluhan::where('id_kios_resmi',$id_kios_resmi)->get();
         return $keluhans;
     }
-    public function kiosResmiKeluhan(array $keluhan, int $id_kios_resmi): bool
+    public function kiosResmiBuatKeluhan(array $keluhan, int $id_kios_resmi): bool
     {
         $keluhan['id_kios_resmi'] = $id_kios_resmi;
         return DB::transaction(function() use($keluhan) {

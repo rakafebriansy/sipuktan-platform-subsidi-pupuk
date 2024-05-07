@@ -34,6 +34,8 @@ Route::prefix('/petani')->group(function(){
         Route::get('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setCheckoutNonTunai']);
         Route::post('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'checkoutNonTunai']);
         Route::get('/riwayat-transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setRiwayatTransaksi']);
+        Route::get('/keluhan',[App\Http\Controllers\Dashboard\Petani\KeluhanController::class,'setKeluhan']);
+        Route::post('/keluhan',[App\Http\Controllers\Dashboard\Petani\KeluhanController::class,'buatKeluhan']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/delete-notifikasi',[AjaxController::class,'deleteNotifikasi']);
         });
@@ -58,6 +60,8 @@ Route::prefix('/kios-resmi')->group(function(){
         Route::get('/riwayat-transaksi', [App\Http\Controllers\Dashboard\KiosResmi\TransaksiController::class, 'setRiwayatTransaksi']);
         Route::get('/laporan', [App\Http\Controllers\Dashboard\KiosResmi\LaporanController::class, 'setLaporan']);
         Route::post('/laporan', [App\Http\Controllers\Dashboard\KiosResmi\LaporanController::class, 'laporan']);
+        Route::get('/keluhan',[App\Http\Controllers\Dashboard\KiosResmi\KeluhanController::class,'setKeluhan']);
+        Route::post('/keluhan',[App\Http\Controllers\Dashboard\KiosResmi\KeluhanController::class,'buatKeluhan']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/petani-riwayat',[AjaxController::class,'getPetaniFromRiwayat']);
             Route::post('/petani-alokasi',[AjaxController::class,'getPetaniFromAlokasi']);
@@ -88,6 +92,8 @@ Route::prefix('/pemerintah')->group(function(){
         Route::post('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'buatFaq']);
         Route::patch('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'editFaq']);
         Route::put('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'hapusFaq']);
+        Route::get('/keluhan',[App\Http\Controllers\Dashboard\Pemerintah\KeluhanController::class,'setKeluhan']);
+        Route::patch('/keluhan',[App\Http\Controllers\Dashboard\Pemerintah\KeluhanController::class,'balasKeluhan']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/get-faq',[AjaxController::class,'getFaqDetail']);
         });

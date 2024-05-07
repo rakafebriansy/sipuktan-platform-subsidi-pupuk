@@ -28,17 +28,18 @@ class KeluhanController extends Controller
         'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
         $keluhans = $this->keluhan_service->petaniSetKeluhan($id);
         return view('dashboard.petani.pages.keluhan', [
-            'title' => 'Petani | Alokasi',
+            'title' => 'Petani | Keluhan',
             'petani' => $petani,
             'notifikasis' => $notifikasis,
             'initials' => $initials,
             'keluhans' => $keluhans
         ]);
     }
-    public function balasKeluhan(PetaniKeluhanRequest $request): RedirectResponse
+    public function buatKeluhan(PetaniKeluhanRequest $request): RedirectResponse
     {
+        $id = Session::get('id_petani');
         $validated = $request->validated();
-        if($this->keluhan_service->kiosResmiKeluhan($validated['balasan'],$validated['id_petani'])) {
+        if($this->keluhan_service->petaniBuatKeluhan($validated,$id)) {
             return back()->with('success', 'Keluhan berhasil ditambahkan');
         }
         return back()->with(['error' => 'Keluhan gagal ditambahkan']);

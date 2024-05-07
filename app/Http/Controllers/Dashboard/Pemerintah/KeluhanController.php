@@ -27,7 +27,7 @@ class KeluhanController extends Controller
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         $keluhans = $this->keluhan_service->pemerintahSetKeluhan($id);
         return view('dashboard.pemerintah.pages.keluhan', [
-            'title' => 'Pemerintah | Dashboard',
+            'title' => 'Pemerintah | Keluhan',
             'pemerintah' => $pemerintah,
             'initials' => $initials,
             'keluhans' => $keluhans

@@ -27,7 +27,7 @@ class FaqController extends Controller
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         $faqs = $this->faq_service->pemerintahSetFaq($id);
         return view('dashboard.pemerintah.pages.faq', [
-            'title' => 'Pemerintah | Dashboard',
+            'title' => 'Pemerintah | FAQ',
             'pemerintah' => $pemerintah,
             'initials' => $initials,
             'faqs' => $faqs
