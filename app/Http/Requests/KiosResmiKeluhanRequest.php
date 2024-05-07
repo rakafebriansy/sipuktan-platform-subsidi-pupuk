@@ -22,6 +22,7 @@ class KiosResmiKeluhanRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'subjek' => 'required|min:60',
             'keluhan' => 'required',
             'id_kios_resmi' => 'required'
         ];
@@ -35,6 +36,8 @@ class KiosResmiKeluhanRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'subjek.required' => 'Subjek tidak boleh kosong',
+            'subjek.min:60' => 'Subjek harus berjumlah minimal 16 karakter',
             'keluhan.required' => 'Keluhan tidak boleh kosong',
         ];
     }

@@ -22,8 +22,9 @@ class PetaniKeluhanRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'subjek' => 'required|min:60',
             'keluhan' => 'required',
-            'id_pemerintah' => 'required'
+            'id_petani' => 'required'
         ];
     }
 
@@ -35,6 +36,8 @@ class PetaniKeluhanRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'subjek.required' => 'Subjek tidak boleh kosong',
+            'subjek.min:60' => 'Subjek harus berjumlah minimal 16 karakter',
             'keluhan.required' => 'Keluhan tidak boleh kosong',
         ];
     }
