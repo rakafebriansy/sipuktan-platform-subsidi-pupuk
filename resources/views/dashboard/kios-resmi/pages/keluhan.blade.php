@@ -12,7 +12,7 @@
                         <div class="flex items-center">
                             <button data-modal-target="laporModal" data-modal-toggle="laporModal" type="button" class="focus:outline-none inline-flex text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                 <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                Tambah Laporan
+                                Buat Keluhan
                             </button>
                         </div>
                         <div class="inline-flex gap-4">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </caption>
-                @if (count($laporans))
+                @if (count($keluhans))
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -51,25 +51,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($laporans as $laporan)
+                    @foreach ($keluhans as $keluhan)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4">
-                            {{ date('H:i d-m-Y',strtotime($laporan->tanggal_pengambilan))}}
+                            {{ date('H:i d-m-Y',strtotime($keluhan->tanggal_keluhan))}}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $laporan->nama_petani }}
+                            {{ $keluhan->subjek }}
                         </td>
-                        <td class="px-6 py-4">
-                            {{ $laporan->jenis }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $laporan->jumlah_pupuk }}kg
-                        </td>
-                        <td class="px-6 py-4 italic">
-                            {{ $laporan->status_verifikasi }}
-                        </td>
-                        <td class="py-4 flex flex-row px-6" data-id="{{ $laporan->id }}">
-                            <button data-modal-target="detailLaporanModal" data-modal-toggle="detailLaporanModal"  type="button" onclick="getDetailLaporanFiles(this,'{{ csrf_token() }}')" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                        <td class="py-4 flex flex-row px-6" data-id="{{ $keluhan->id }}">
+                            <button data-modal-target="detailKeluhanModal" data-modal-toggle="detailKeluhanModal"  type="button" onclick="blo(this,'{{ csrf_token() }}')" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
                         </td>
                     </tr>
                     @endforeach
@@ -196,14 +187,14 @@
 </div> 
 
 @if(count($laporans))
-<div id="detailLaporanModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="detailKeluhanModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-sm max-h-full">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-medium text-gray-900 dark:text-white">
                     Detail Petani
                 </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="detailLaporanModal">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="detailKeluhanModal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>

@@ -13,13 +13,11 @@ class KeluhanServiceImpl implements KeluhanService
         $keluhans = Keluhan::where('id_petani',$id_petani)->get();
         return $keluhans;
     }
-    public function petaniKeluhan(string $keluhan, int $id_petani): bool
+    public function petaniKeluhan(array $keluhan, int $id_petani): bool
     {
-        return DB::transaction(function() use($keluhan, $id_petani) {
-            return Keluhan::insert([
-                'keluhan' => $keluhan,
-                'id_petani' => $id_petani
-            ]);
+        $keluhan['id_petani'] = $id_petani;
+        return DB::transaction(function() use($keluhan) {
+            return Keluhan::insert($keluhan);
         });
     }
     public function kiosResmiSetKeluhan(int $kios_resmi): Collection
@@ -27,13 +25,11 @@ class KeluhanServiceImpl implements KeluhanService
         $keluhans = Keluhan::where('id_kios_resmi',$kios_resmi)->get();
         return $keluhans;
     }
-    public function kiosResmiKeluhan(string $keluhan, int $id_kios_resmi): bool
+    public function kiosResmiKeluhan(array $keluhan, int $id_kios_resmi): bool
     {
-        return DB::transaction(function() use($keluhan, $id_kios_resmi) {
-            return Keluhan::insert([
-                'keluhan' => $keluhan,
-                'id_kios_resmi' => $id_kios_resmi
-            ]);
+        $keluhan['id_kios_resmi'] = $id_kios_resmi;
+        return DB::transaction(function() use($keluhan) {
+            return Keluhan::insert($keluhan);
         });
     }
     public function pemerintahSetKeluhan(int $id_pemerintah): Collection
