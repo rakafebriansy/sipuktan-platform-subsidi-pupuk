@@ -48,7 +48,7 @@
                             <p class="inline-block">Status</p>
                         </th>
                         <th scope="col" class="py-3">
-                            <span class="inline-block">Action</span>
+                            <span class="inline-block">Aksi</span>
                         </th>
                     </tr>
                 </thead>

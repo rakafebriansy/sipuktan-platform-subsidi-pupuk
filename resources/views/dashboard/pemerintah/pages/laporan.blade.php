@@ -40,7 +40,7 @@
                             <p class="inline-block">Jumlah</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <p class="inline-block">Action</p>
+                            <p class="inline-block">Aksi</p>
                         </th>
                     </tr>
                 </thead>

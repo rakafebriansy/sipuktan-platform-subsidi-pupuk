@@ -29,7 +29,7 @@
                             <p class="inline-block">Tahun</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Action</span>
+                            <span class="sr-only">Aksi</span>
                         </th>
                     </tr>
                 </thead>
