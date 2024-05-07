@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_petani')->nullable(false);
 
             $table->foreign('id_jenis_pupuk')->on('jenis_pupuks')->references('id');
+            $table->foreign('id_kios_resmi')->on('kios_resmis')->references('id');
             $table->foreign('id_petani')->on('petanis')->references('id');
         });
     }

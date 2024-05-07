@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\TelegramBotController;
+use App\Jobs\UpdateMusimTanamJob;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -119,4 +120,8 @@ Route::get('/download/{folder_name}/{file_name}', function(string $folder_name, 
 });
 Route::get('/test/pusher', function(){
     return view('tests.pusher');
+});
+Route::get('/test/job', function(){
+    UpdateMusimTanamJob::dispatch();
+    return response()->json(['message' => 'ok']);
 });
