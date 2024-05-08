@@ -28,12 +28,12 @@ class AkunController extends Controller
     }
     public function register(KiosResmiRegisterRequest $request): RedirectResponse
     {
-        $validated = $request->validated();
         try {
+            $validated = $request->validated();
             $this->akun_service->kiosResmiRegister($validated, $request->file('foto_ktp'));
             return back()->with('success','Silakan tunggu verifikasi untuk akun anda!');
         } catch (\Exception $e) {
-            return back()->withErrors('dbErr','Akun gagal dibuat!');
+            return back()->withInput()->withErrors('dbErr','Akun gagal dibuat!');
         }
     }
     public function setLogin(): View

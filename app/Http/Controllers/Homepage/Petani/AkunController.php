@@ -48,9 +48,13 @@ class AkunController extends Controller
     }
     public function register(PetaniRegisterRequest $request): RedirectResponse
     {
-        $validated = $request->validated();
-        $this->akun_service->petaniRegister($validated, $request->file('foto_ktp'));
-        return back()->with('success','Silakan tunggu verifikasi untuk akun anda!');
+        try {
+            $validated = $request->validated();
+            $this->akun_service->petaniRegister($validated, $request->file('foto_ktp'));
+            return back()->with('success','Silakan tunggu verifikasi untuk akun anda!');
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors('dbErr','Akun gagal dibuat!');
+        }
     }
     public function setLupaSandi(): View
     {

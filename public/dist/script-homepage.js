@@ -1,4 +1,5 @@
 let choose_id_poktan = document.querySelector('#idPoktan');
+let choose_nama_poktan = document.querySelector('#namaPoktan');
 let dropdown_poktan = document.querySelector('#dropdownRegisterButton');
 
 function fileAnnounce(file) {
@@ -11,6 +12,7 @@ function dismissingDropdown(id){
 document.querySelectorAll('.poktan').forEach(element => {
     element.addEventListener('click',function(e){
         choose_id_poktan.value = event.target.dataset.value;
+        choose_nama_poktan.value = event.target.innerText;
         dropdown_poktan.innerHTML = event.target.innerText + 
         `
         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
