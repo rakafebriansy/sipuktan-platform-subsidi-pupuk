@@ -48,8 +48,8 @@ class LaporanController extends Controller
     {
         $validated = $request->validated();
         if($this->laporan_service->kiosResmiLaporan($validated)) {
-            return redirect('/kios-resmi/laporan?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with('success', 'Data laporan berhasil ditambahkan');
+            return back()->with('success', 'Data laporan berhasil ditambahkan');
         }
-        return redirect('/kios-resmi/laporan?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with(['error' => 'Data laporan gagal ditambahkan']);
+        return back()->withInput()->with(['error' => 'Data laporan gagal ditambahkan']);
     }
 }

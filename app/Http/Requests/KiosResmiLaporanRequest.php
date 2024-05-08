@@ -49,6 +49,7 @@ class KiosResmiLaporanRequest extends FormRequest
             'foto_tanda_tangan.max:5120' => 'Foto tanda tangan harus memiliki ukuran kurang dari 5MB',
             'foto_surat_kuasa.mimes:png,jpg' => 'Foto surat kuasa harus berekstensi .png atau .jpg',
             'foto_surat_kuasa.max:5120' => 'Foto surat kuasa harus memiliki ukuran kurang dari 5MB',
+            'id_riwayat_transaksi.required' => 'Transaksi tidak tersedia'
         ];
     }
 }
