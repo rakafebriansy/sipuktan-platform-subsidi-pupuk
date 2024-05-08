@@ -63,9 +63,9 @@ class AlokasiController extends Controller
                     $data_notifikasi = ['pesan' => $pesan,'detail_notifikasi' => $detail_notifikasi];
                     event(new AlokasiStatusToMenungguPembayaran($data_notifikasi));
                 }
-                return redirect('/kios-resmi/alokasi?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with('success','Kedatangan pupuk berhasil dikonfirmasi.');
+                return back()->with('success','Kedatangan pupuk berhasil dikonfirmasi.');
             }
         }
-        return redirect('/kios-resmi/alokasi?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->withErrors(['db' => 'Kedatangan pupuk sudah dikonfirmasi sebelumnya.']);
+        return back()->withErrors(['db' => 'Kedatangan pupuk sudah dikonfirmasi sebelumnya.']);
     }
 }

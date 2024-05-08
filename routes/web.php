@@ -104,12 +104,6 @@ Route::prefix('/ajax')->group(function(){
     Route::post('/laporan-filenames',[AjaxController::class,'getLaporanFilenames']);
     Route::post('/get-keluhan',[AjaxController::class,'getKeluhanDetail']);
 });
-Route::prefix('/bot')->group(function(){
-    Route::get('/retreive',[TelegramBotController::class,'show']);
-    Route::get('/msg',[TelegramBotController::class,'getMessages']);
-    Route::get('/send/{id}',[TelegramBotController::class,'sendMessage']);
-});
-
 
 Route::get('/logout', function(){
     Session::invalidate();
