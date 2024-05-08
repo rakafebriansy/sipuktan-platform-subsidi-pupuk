@@ -45,7 +45,12 @@
                 </thead>
                 <tbody>
                     @foreach ($alokasis as $alokasi)
-                    <tr class="alokasi-rows bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <tr @class([
+                        'bg-white' => !$isDibayar && !$isTidakDiambil,
+                        'bg-[#C0EFB8]' => $isDibayar,
+                        'bg-[#F97B7B]' => $isTidakDiambil,
+                        'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600'
+                        ])>
                         <th scope="row" class=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $alokasi->nama }}
                         </th>
