@@ -60,9 +60,12 @@
                         @endphp
                         <tr @class([
                             'bg-white' => !$isDibayar && !$isTidakDiambil,
-                            'bg-[#C0EFB8]' => $isDibayar,
+                            'hover:bg-gray-50' => !$isDibayar && !$isTidakDiambil,
+                            'bg-[#A5E09B]' => $isDibayar,
+                            'hover:bg-[#95D88A]' => $isDibayar,
                             'bg-[#F97B7B]' => $isTidakDiambil,
-                            'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600'
+                            'hover:bg-[#F56262]' => $isTidakDiambil,
+                            'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'dark:hover:bg-gray-600'
                             ])>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $alokasi->petani }} {{ $isDibayar }}
