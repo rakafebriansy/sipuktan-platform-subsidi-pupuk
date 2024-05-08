@@ -66,7 +66,7 @@ class AjaxController extends Controller
     public function getKeluhanDetail(Request $request)
     {
         if(isset($request->id)) {
-            $result = $this->keluhan_service->getKeluhanDetail($request->id);
+            $result = $this->keluhan_service->ajaxGetKeluhanDetail($request->id);
             return $result;
         }
         return '';
