@@ -3,9 +3,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    @isset($total_harga)
-    @endisset
     <title>{{ $title }}</title>
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
     @vite(['resources/css/app.css','resources/js/app.js'])
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
