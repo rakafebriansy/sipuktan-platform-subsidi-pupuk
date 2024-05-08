@@ -175,7 +175,7 @@
                         <select name="musim_tanam"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <option selected="">Pilih Musim Tanam</option>
                             @for ($i = 1; $i < 4; $i++)
-                                <option value="MT{{ $i }}" @selected(old('musim_tanam') == "MT$i")>MT 1</option>
+                                <option value="MT{{ $i }}" @selected(old('musim_tanam') == "MT$i")>MT {{ $i }}</option>
                             @endfor
                         </select>
                     </div>
