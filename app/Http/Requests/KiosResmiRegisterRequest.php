@@ -23,7 +23,7 @@ class KiosResmiRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nib' => 'required|numeric|min:13|unique:kios_resmis,nib',
+            'nib' => 'required|numeric|digits:13|unique:kios_resmis,nib',
             'kata_sandi' => 'required|min:6',
             'nama'=> 'required',
             'jalan'=> 'required',
@@ -46,7 +46,7 @@ class KiosResmiRegisterRequest extends FormRequest
             'nib.required' => 'NIB tidak boleh kosong',
             'nib.unique:kios_resmis,nib' => 'NIB telah terdaftar',
             'nib.numeric' => 'NIB harus berupa angka',
-            'nib.min:13' => 'NIB harus berjumlah minimal 13 karakter',
+            'nib.digits' => 'NIB harus berjumlah minimal 13 karakter',
             'kata_sandi.required' => 'Kata sandi tidak boleh kosong',
             'kata_sandi.min:6' => 'Kata sandi harus berjumlah minimal 6 karakter',
             'nama.required' => 'Nama kios tidak boleh kosong',

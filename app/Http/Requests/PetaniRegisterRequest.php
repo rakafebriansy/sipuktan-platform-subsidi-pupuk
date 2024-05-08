@@ -23,7 +23,7 @@ class PetaniRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nik' => 'required|min:16|numeric|unique:petanis,nik',
+            'nik' => 'required|numeric|unique:petanis,nik|digits:16',
             'nama' => 'required|max:60',
             'kata_sandi' => 'required|min:6',
             'foto_ktp' => 'required|mimes:png,jpg|max:5120',
@@ -43,9 +43,8 @@ class PetaniRegisterRequest extends FormRequest
             'nik.required' => 'NIK tidak boleh kosong',
             'nik.numeric' => 'NIK harus berupa angka',
             'nik.unique:petanis,nik' => 'NIK telah terdaftar',
-            'nik.min:16' => 'NIK harus berjumlah minimal 16 karakter',
+            'nik.digits' => 'NIK harus berjumlah tepat 16',
             'nama.required' => 'Nama tidak boleh kosong',
-            'nik.max:60' => 'Nama harus harus berjumlah maksimal 60 karakter',
             'kata_sandi.required' => 'Kata sandi tidak boleh kosong',
             'kata_sandi.min:6' => 'Kata sandi harus berjumlah minimal 6 karakter',
             'foto_ktp.required' => 'Foto KTP tidak boleh kosong',
