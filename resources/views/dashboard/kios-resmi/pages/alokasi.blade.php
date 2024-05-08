@@ -54,23 +54,32 @@
                 </thead>
                 <tbody>
                     @foreach ($alokasis as $alokasi)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $alokasi->petani }}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{ $alokasi->jumlah_pupuk }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $alokasi->jenis_pupuk->jenis }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $alokasi->status }}
-                        </td>
-                        <td class="py-4" data-id="{{ $alokasi->id }}">
-                            <button onclick="getPetaniFromAlokasi(this, '{{ csrf_token() }}')" data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" type="button"  class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
-                        </td>
-                    </tr>
+                        @php
+                            $isDibayar = $alokasi->status == "Dibayar";
+                            $isTidakDiambil = $alokasi->status == "Tidak Diambil";
+                        @endphp
+                        <tr @class([
+                            'bg-white' => !$isDibayar && !$isTidakDiambil,
+                            'bg-[#C0EFB8]' => $isDibayar,
+                            'bg-[#F97B7B]' => $isTidakDiambil,
+                            'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600'
+                            ])>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $alokasi->petani }} {{ $isDibayar }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $alokasi->jumlah_pupuk }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $alokasi->jenis_pupuk->jenis }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $alokasi->status }}
+                            </td>
+                            <td class="py-4" data-id="{{ $alokasi->id }}">
+                                <button onclick="getPetaniFromAlokasi(this, '{{ csrf_token() }}')" data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" type="button"  class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
                 @else
