@@ -35,31 +35,35 @@
                 </thead>
                 <tbody>
                     @foreach ($alokasis as $alokasi)
-                    <tr @class([
-                        'bg-white' => !$isDibayar && !$isTidakDiambil,
-                        'bg-[#C0EFB8]' => $isDibayar,
-                        'bg-[#F97B7B]' => $isTidakDiambil,
-                        'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600'
-                        ])>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $alokasi->jenis }}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{ $alokasi->jumlah_pupuk }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $alokasi->status }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $alokasi->musim_tanam }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $alokasi->tahun }}
-                        </td>
-                        {{-- <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td> --}}
-                    </tr>
+                        @php
+                        $isDibayar = $alokasi->status == "Dibayar";
+                        $isTidakDiambil = $alokasi->status == "Tidak Diambil";
+                        @endphp
+                        <tr @class([
+                            'bg-white' => !$isDibayar && !$isTidakDiambil,
+                            'bg-[#C0EFB8]' => $isDibayar,
+                            'bg-[#F97B7B]' => $isTidakDiambil,
+                            'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600'
+                            ])>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $alokasi->jenis }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $alokasi->jumlah_pupuk }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $alokasi->status }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $alokasi->musim_tanam }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $alokasi->tahun }}
+                            </td>
+                            {{-- <td class="px-6 py-4 text-right">
+                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            </td> --}}
+                        </tr>
                     @endforeach
 
                 </tbody>

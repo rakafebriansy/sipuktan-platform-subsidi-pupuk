@@ -45,30 +45,34 @@
                 </thead>
                 <tbody>
                     @foreach ($alokasis as $alokasi)
-                    <tr @class([
-                        'bg-white' => !$isDibayar && !$isTidakDiambil,
-                        'bg-[#C0EFB8]' => $isDibayar,
-                        'bg-[#F97B7B]' => $isTidakDiambil,
-                        'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600'
-                        ])>
-                        <th scope="row" class=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $alokasi->nama }}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{ $alokasi->jumlah_pupuk }}
-                        </td>
-                        <td class="px-6 py-4" data-value="{{ $alokasi->jenis_pupuk->id }}">
-                            {{ $alokasi->jenis }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $alokasi->status }}
-                        </td>
-                        <td data-id="{{ $alokasi->id_alokasi }}" data-poktan="{{ $alokasi->poktan }}" data-kios="{{ $alokasi->kios_resmi }}" data-nik="{{ $alokasi->nik }}" data-ktp="{{ $alokasi->foto_ktp }}" data-nomor="{{ $alokasi->nomor_telepon }}" class="py-4 flex flex-row ">
-                            <button  data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" onclick="detailPassId(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
-                            <button data-modal-target="editAlokasiModal" data-modal-toggle="editAlokasiModal" onclick="editPassId(this)" class=" bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Edit</button>
-                            <button data-modal-target="deleteAlokasiModal" data-modal-toggle="deleteAlokasiModal" onclick="deletePassId(this)" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Hapus</button>
-                        </td>
-                    </tr>
+                        @php
+                        $isDibayar = $alokasi->status == "Dibayar";
+                        $isTidakDiambil = $alokasi->status == "Tidak Diambil";
+                        @endphp
+                        <tr @class([
+                            'bg-white' => !$isDibayar && !$isTidakDiambil,
+                            'bg-[#C0EFB8]' => $isDibayar,
+                            'bg-[#F97B7B]' => $isTidakDiambil,
+                            'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600'
+                            ])>
+                            <th scope="row" class=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $alokasi->nama }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $alokasi->jumlah_pupuk }}
+                            </td>
+                            <td class="px-6 py-4" data-value="{{ $alokasi->jenis_pupuk->id }}">
+                                {{ $alokasi->jenis }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $alokasi->status }}
+                            </td>
+                            <td data-id="{{ $alokasi->id_alokasi }}" data-poktan="{{ $alokasi->poktan }}" data-kios="{{ $alokasi->kios_resmi }}" data-nik="{{ $alokasi->nik }}" data-ktp="{{ $alokasi->foto_ktp }}" data-nomor="{{ $alokasi->nomor_telepon }}" class="py-4 flex flex-row ">
+                                <button  data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" onclick="detailPassId(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                                <button data-modal-target="editAlokasiModal" data-modal-toggle="editAlokasiModal" onclick="editPassId(this)" class=" bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Edit</button>
+                                <button data-modal-target="deleteAlokasiModal" data-modal-toggle="deleteAlokasiModal" onclick="deletePassId(this)" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Hapus</button>
+                            </td>
+                        </tr>
                     @endforeach
 
                 </tbody>
