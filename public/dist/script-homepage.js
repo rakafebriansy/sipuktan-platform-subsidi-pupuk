@@ -1,5 +1,5 @@
-let choose_id_poktan = document.querySelector('#idPoktan');
-let choose_nama_poktan = document.querySelector('#namaPoktan');
+let choose_id_poktan = document.querySelector('#idDropdown');
+let choose_nama_poktan = document.querySelector('#namaDropdown');
 let dropdown_poktan = document.querySelector('#dropdownRegisterButton');
 
 function fileAnnounce(file) {

@@ -52,9 +52,10 @@
                             <label for="kata_sandi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi</label>
                             <input type="password" name="kata_sandi" value="{{ old('kata_sandi','') }}" id="kata_sandi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"  />
                         </div>
-                        <input type="hidden" value="" name="id_kelompok_tani" id="idPoktan">
+                        <input type="hidden" value="{{ old('id_kelompok_tani') }}" name="id_kelompok_tani" id="idDropdown">
+                        <input type="hidden" value="{{ old('kelompok_tani') }}" name="kelompok_tani" id="namaDropdown">
                         <button id="dropdownRegisterButton" data-dropdown-toggle="dropdownRegister" data-dropdown-placement="bottom" class="min-w-[13rem] justify-between py-2.5 px-5 mb-2 mt-4 text-sm font-medium text-gray-900 text-center focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center " type="button">
-                            <span>Kelompok Tani</span>
+                            <span>{{ old('kelompok_tani','') == ''? 'Kelompok Tani' : old('kelompok_tani','') }}</span>
                             <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                             </svg>
