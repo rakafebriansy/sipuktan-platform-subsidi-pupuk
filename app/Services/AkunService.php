@@ -7,7 +7,9 @@ use Illuminate\Http\UploadedFile;
 interface AkunService
 {
     function petaniLogin(string $nik, string $kata_sandi): object|null;
+    function petaniCekIngatSaya(string $uuid): bool;
     function kiosResmiLogin(string $nib, string $kata_sandi): object|null;
+    function kiosResmiCekIngatSaya(string $uuid): bool;
     function pemerintahLogin(string $nama_pengguna, string $kata_sandi): object|null;
     function petaniRegister(array $data_petani, UploadedFile $foto_ktp): void;
     function kiosResmiRegister(array $data_kios, UploadedFile $foto_ktp): void;

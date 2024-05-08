@@ -16,6 +16,9 @@ class HasRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
+        // if($request->hasCookie('uuid')) {
+        //     return $next($request);    
+        // }
         if(Session::get('role') == $role) {
             return $next($request);
         }

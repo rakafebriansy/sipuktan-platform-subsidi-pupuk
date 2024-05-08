@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_pemilik_kios')->nullable(false);
             $table->string('id_kecamatan',60)->nullable(false);
             $table->boolean('aktif')->nullable(false)->default(false);
-            $table->rememberToken();
+            $table->string('ingat_saya',255)->nullable();
 
             $table->foreign('id_pemilik_kios')->on('pemilik_kios')->references('id');
             $table->foreign('id_kecamatan')->on('kecamatans')->references('id');

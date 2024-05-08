@@ -23,6 +23,14 @@ class AkunServiceImpl implements AkunService
         }
         return null;
     }
+    public function petaniCekIngatSaya(string $uuid): bool
+    {
+        return Petani::where('uuid',$uuid)->exists();
+    }
+    public function kiosResmiCekIngatSaya(string $uuid): bool
+    {
+        return KiosResmi::where('uuid',$uuid)->exists();
+    }
     public function kiosResmiLogin(string $nib, string $kata_sandi): object|null
     {
         $kios_resmi = KiosResmi::where('nib',$nib)->first();
