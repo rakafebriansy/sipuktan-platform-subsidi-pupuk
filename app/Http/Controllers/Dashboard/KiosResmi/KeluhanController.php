@@ -42,6 +42,6 @@ class KeluhanController extends Controller
         if($this->keluhan_service->kiosResmiBuatKeluhan($validated,$id)) {
             return back()->with('success', 'Keluhan berhasil ditambahkan');
         }
-        return back()->with(['error' => 'Keluhan gagal ditambahkan']);
+        return back()->withInput()->with(['error' => 'Keluhan gagal ditambahkan']);
     }
 }
