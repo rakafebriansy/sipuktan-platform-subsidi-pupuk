@@ -22,7 +22,7 @@ class KiosResmiGantiNoTelpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nomor_telepon' => 'required|numeric'
+            'nomor_telepon' => 'required|numeric|unique:pemilik_kios,nomor_telepon'
         ];
     }
 

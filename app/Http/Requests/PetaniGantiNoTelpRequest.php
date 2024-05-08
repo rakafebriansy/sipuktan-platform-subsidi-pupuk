@@ -22,7 +22,7 @@ class PetaniGantiNoTelpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nomor_telepon' => 'required|numeric'
+            'nomor_telepon' => 'required|numeric|unique:petanis,nomor_telepon'
         ];
     }
     
