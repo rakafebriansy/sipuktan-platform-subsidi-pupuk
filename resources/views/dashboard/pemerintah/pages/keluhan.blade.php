@@ -5,9 +5,7 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <caption class="px-5 pt-5 pb-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    <div class="flex justify-between items-center my-3">
-                        <p class="text-2xl">Keluhan</p>
-                    </div>
+                    <p>Keluhan</p>
                 </caption>
                 @if (count($keluhans))
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

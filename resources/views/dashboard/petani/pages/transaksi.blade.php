@@ -7,7 +7,7 @@
                 @csrf
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <caption class=" w-full  px-5 pt-5 pb-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center">
                             <div class="">
                                 <p class="inline-block">Transaksi Non-Tunai</p>
                                 <span class="block m-0"><svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

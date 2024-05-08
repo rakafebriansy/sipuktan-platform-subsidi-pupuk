@@ -5,8 +5,8 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <caption class="px-5 pt-5 pb-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    <div class="flex justify-between items-center my-3">
-                        <p class="text-2xl">Frequently Asked Questions</p>
+                    <div class="flex justify-between mb-3">
+                        <p>Frequently Asked Questions</p>
                         <button data-modal-target="tambahFaqModal" data-modal-toggle="tambahFaqModal" class="block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type="button">
                             Tambah data
                           </button>
