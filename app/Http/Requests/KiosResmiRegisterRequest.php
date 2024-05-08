@@ -29,7 +29,7 @@ class KiosResmiRegisterRequest extends FormRequest
             'jalan'=> 'required',
             'id_kecamatan' => 'required',
             'foto_ktp' => 'required|mimes:png,jpg|max:5120',
-            'nik' => 'required|numeric|min:16|unique:pemilik_kios,nik',
+            'nik' => 'required|numeric|digits:16|unique:pemilik_kios,nik',
             'nama_pemilik' => 'required',
             'nomor_telepon' => 'required|numeric|unique:petanis,nomor_telepon',
         ];
@@ -44,24 +44,25 @@ class KiosResmiRegisterRequest extends FormRequest
     {
         return [
             'nib.required' => 'NIB tidak boleh kosong',
-            'nib.unique:kios_resmis,nib' => 'NIB telah terdaftar',
+            'nib.unique' => 'NIB telah terdaftar',
             'nib.numeric' => 'NIB harus berupa angka',
-            'nib.digits' => 'NIB harus berjumlah minimal 13 karakter',
+            'nib.digits' => 'NIB harus berjumlah tepat 13 karakter',
             'kata_sandi.required' => 'Kata sandi tidak boleh kosong',
-            'kata_sandi.min:6' => 'Kata sandi harus berjumlah minimal 6 karakter',
+            'kata_sandi.min' => 'Kata sandi harus berjumlah minimal 6 karakter',
             'nama.required' => 'Nama kios tidak boleh kosong',
             'jalan.required' => 'Alamat tidak boleh kosong',
             'id_kecamatan.required' => 'Kecamatan tidak boleh kosong',
             'foto_ktp.required' => 'Foto KTP tidak boleh kosong',
-            'foto_ktp.mimes:png,jpg' => 'Foto KTP harus berekstensi .png atau .jpg',
-            'foto_ktp.max:5120' => 'Foto KTP harus memiliki ukuran kurang dari 5MB',
+            'foto_ktp.mimes' => 'Foto KTP harus berekstensi .png atau .jpg',
+            'foto_ktp.max' => 'Foto KTP harus memiliki ukuran kurang dari 5MB',
             'nik.required' => 'NIK tidak boleh kosong',
             'nik.numeric' => 'NIK harus berupa angka',
-            'nik.unique:pemilik_kios,nik' => 'NIK telah terdaftar',
-            'nik.min:13' => 'NIK harus berjumlah minimal 16 karakter',
+            'nik.unique' => 'NIK telah terdaftar',
+            'nik.digits' => 'NIK harus berjumlah tepat 16 karakter',
             'nama_pemilik.required' => 'Nama tidak boleh kosong',
             'nomor_telepon.required' => 'Nomor telepon tidak boleh kosong',
             'nomor_telepon.numeric' => 'Nomor telepon harus berupa angka',
+            'nomor_telepon.unique' => 'Nomor telepon telah terdaftar',
         ];
     }
 }

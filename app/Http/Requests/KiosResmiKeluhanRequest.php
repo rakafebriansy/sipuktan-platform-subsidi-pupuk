@@ -37,7 +37,7 @@ class KiosResmiKeluhanRequest extends FormRequest
     {
         return [
             'subjek.required' => 'Subjek tidak boleh kosong',
-            'subjek.max:60' => 'Subjek harus berjumlah maksimal 60 karakter',
+            'subjek.max' => 'Subjek harus berjumlah maksimal 60 karakter',
             'keluhan.required' => 'Keluhan tidak boleh kosong',
         ];
     }

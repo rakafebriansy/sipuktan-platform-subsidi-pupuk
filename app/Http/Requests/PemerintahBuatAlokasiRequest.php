@@ -41,14 +41,14 @@ class PemerintahBuatAlokasiRequest extends FormRequest
         return [
             'nik.required' => 'NIK tidak boleh kosong',
             'nik.numeric' => 'NIK harus berupa angka',
-            'nik.min:16' => 'NIK harus harus berjumlah minimal 16 karakter',
+            'nik.min' => 'NIK harus harus berjumlah minimal 16 karakter',
             'jumlah_pupuk.required' => 'Jumlah pupuk tidak boleh kosong',
             'tahun.required' => 'Tahun tidak boleh kosong',
             'tahun.numeric' => 'Tahun harus berupa angka',
             'id_jenis_pupuk.required' => 'Jenis pupuk tidak boleh kosong',
-            'id_jenis_pupuk.exists:jenis_pupuks,id' => 'Jenis pupuk tersebut tidak tersedia',
+            'id_jenis_pupuk.exists' => 'Jenis pupuk tersebut tidak tersedia',
             'musim_tanam.required' => 'Musim tanam tidak boleh kosong',
-            'musim_tanam.in:' . implode(',', $this->musim_tanam) => 'Musim tanam tersebut tidak tersedia',
+            'musim_tanam.in' => 'Musim tanam tersebut tidak tersedia',
         ];
     }
 }

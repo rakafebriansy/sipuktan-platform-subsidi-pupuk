@@ -39,8 +39,8 @@ class KiosResmiGantiSandiRequest extends FormRequest
             'sandi_lama.required' => 'Kata sandi lama tidak boleh kosong',
             'sandi_baru.required' => 'Kata sandi baru tidak boleh kosong',
             'sandi_ulang.required' => 'Ulangi kata sandi baru tidak boleh kosong',
-            'sandi_baru.min:6' => 'Kata sandi baru harus berjumlah minimal 6 karakter',
-            'sandi_ulang.min:6' => 'Ulangi kata sandi baru harus berjumlah minimal 6 karakter',
+            'sandi_baru.min' => 'Kata sandi baru harus berjumlah minimal 6 karakter',
+            'sandi_ulang.min' => 'Ulangi kata sandi baru harus berjumlah minimal 6 karakter',
         ];
     }
 }
