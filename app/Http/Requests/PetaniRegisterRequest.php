@@ -27,7 +27,7 @@ class PetaniRegisterRequest extends FormRequest
             'nama' => 'required|max:60',
             'kata_sandi' => 'required|min:6',
             'foto_ktp' => 'required|mimes:png,jpg|max:5120',
-            'nomor_telepon' => 'required|numeric',
+            'nomor_telepon' => 'required|numeric|unique:petanis,nomor_telepon',
             'id_kelompok_tani' => 'required'
         ];
     }
