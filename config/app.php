@@ -177,6 +177,7 @@ return [
         App\Providers\NotifikasiServiceProvider::class,
         App\Providers\FaqServiceProvider::class,
         App\Providers\KeluhanServiceProvider::class,
+        App\Providers\TelegramBotServiceProvider::class,
     ])->toArray(),
 
     /*

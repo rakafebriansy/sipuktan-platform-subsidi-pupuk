@@ -1,4 +1,4 @@
-<b>Selamat datang di layanan chatbot otomatis Telegram SIPUKTAN.</b>
+<b>Selamat datang <strong>{{ $first_name }}</strong> di layanan chatbot otomatis Telegram SIPUKTAN.</b>
 <b>Untuk memulai, silakan pilih layanan yang tersedia.</b>
 Tentang SIPUKTAN            <i>/sipuktan</i>
 Tutorial registrasi website	<i>/registrasiweb</i>
