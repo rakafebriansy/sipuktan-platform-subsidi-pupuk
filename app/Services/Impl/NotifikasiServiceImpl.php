@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Services\Impl;
-use App\Models\Notifikasi;
 use App\Services\NotifikasiService;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Notifikasi;
 use Illuminate\Support\Facades\DB;
 
 class NotifikasiServiceImpl implements NotifikasiService

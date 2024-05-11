@@ -26,11 +26,12 @@ class TelegramBotController extends Controller
     /**
      * Show the bot information.
      */
-    private function sendMessage(string $id, string $text)
+    private function sendMessageHTML(string $id, string $rendered)
     {
         $this->telegram->sendMessage([
             'chat_id' => $id,
-            'text' => $text
+            'text' => $rendered,
+            'parse_mode' => 'html',
         ]);
     }
     public function getBotInformation()
@@ -47,7 +48,7 @@ class TelegramBotController extends Controller
     public function getMessagesByWebhook(string $token, Request $request): void
     {
         $user_id = $request['message']['from']['id'];
-        $text = 'anjg kau';
+        $text = '<b>anjg</b>';
         Log::channel('bot')->info(json_encode($request->all(),JSON_PRETTY_PRINT));
         $this->sendMessage($user_id,$text);
     }
