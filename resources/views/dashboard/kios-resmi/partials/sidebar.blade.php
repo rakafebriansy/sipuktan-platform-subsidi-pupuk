@@ -108,7 +108,7 @@
 
 {{-- DROPDOWN --}}
 
-<div id="dropdownNotifikasi" data-token="{{ csrf_token() }}" class="z-50 hidden min-h-8 bg-white divide-y divide-gray-100 rounded-lg shadow min-w-44 max-w-80 dark:bg-gray-700 dark:divide-gray-600">
+<div id="dropdownNotifikasi" class="z-50 hidden min-h-8 bg-white divide-y divide-gray-100 rounded-lg shadow min-w-44 max-w-80 dark:bg-gray-700 dark:divide-gray-600">
   <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
     <div>Notifikasi</div>
   </div>

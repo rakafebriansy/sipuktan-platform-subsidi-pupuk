@@ -23,11 +23,8 @@ function fetchPetaniFromAlokasi(id) {
       .then(res => viewPetaniFromAlokasi(JSON.parse(res)))
       .catch(e => console.error('Error'+e));
 }
-function fetchDeleteNotifikasi(id,token) {
+function fetchDeleteNotifikasi(id) {
     fetch('/petani/ajax/delete-notifikasi', {
-        headers: {
-            "X-CSRF-Token": token
-          },    
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
@@ -265,14 +262,10 @@ function dismissingDropdown(id){
     document.getElementById(id).click()
 }
 function deleteNotifikasi(btn) {
-    let token;
-    token = document.getElementById('dropdownNotifikasi').dataset.token;
-    fetchDeleteNotifikasi(btn.dataset.id,token)
+    fetchDeleteNotifikasi(btn.dataset.id)
 }
 function deleteRealtimeNotifikasi(btn,id) {
-    let token;
-    token = document.getElementById('dropdownNotifikasi').dataset.token;
-    fetchDeleteNotifikasi(btn.dataset.id,token)
+    fetchDeleteNotifikasi(btn.dataset.id)
     document.querySelector('#'+id).classList.add('transition-opacity', 'duration-300', 'ease-out', 'opacity-0', 'hidden')
 }
 function editFaqPassId(btn){
