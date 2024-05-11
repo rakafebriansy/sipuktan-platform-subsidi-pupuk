@@ -53,7 +53,7 @@ class TelegramBotController extends Controller
     }
     public function setWebhook(): bool
     {
-        $responses = $this->telegram->setWebhook(['url'=> env('APP_URL') . '/bot/webhook/' . env('TELEGRAM_BOT_TOKEN')]);
+        $responses = $this->telegram->setWebhook(['url'=> env('TELEGRAM_WEBHOOK_URL')]);
         return $responses;
     }
 }
