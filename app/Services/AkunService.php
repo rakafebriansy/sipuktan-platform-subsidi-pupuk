@@ -21,5 +21,6 @@ interface AkunService
     function kiosResmiGantiNoTelp(int $id, string $no_telp): bool;
     function pemerintahCekSandi(int $id, string $sandi_pemerintah): bool;
     function pemerintahGantiSandi(int $id, string $sandi_pemerintah): bool;
-
+    function petaniLupaSandi(string $nomor_telepon): string;
+    function kiosResmiLupaSandi(string $nomor_telepon): string;
 }

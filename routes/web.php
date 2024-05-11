@@ -24,7 +24,7 @@ Route::prefix('/petani')->group(function(){
     Route::get('/register', [App\Http\Controllers\Homepage\Petani\AkunController::class,'setRegister']);
     Route::post('/register', [App\Http\Controllers\Homepage\Petani\AkunController::class,'register']);
     Route::get('/lupa-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'setLupaSandi']);
-    Route::post('/lupa-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'LupaSandi']);
+    Route::post('/lupa-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'lupaSandi']);
     Route::middleware('hasRole:petani')->group(function(){
         Route::get('/alokasi', [App\Http\Controllers\Dashboard\Petani\AlokasiController::class, 'setAlokasi']);
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\Petani\DashboardController::class, 'setDashboard']);
@@ -47,7 +47,7 @@ Route::prefix('/kios-resmi')->group(function(){
     Route::post('/login',[App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'login']);
     Route::get('/register', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'setRegister']);
     Route::post('/register', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'register']);
-    Route::get('/lupa-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'lupaSandi']);
+    Route::get('/lupa-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'setLupaSandi']);
     Route::post('/lupa-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'lupaSandi']);
     Route::middleware('hasRole:kios-resmi')->group(function(){
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\KiosResmi\DashboardController::class, 'setDashboard']);
@@ -126,5 +126,4 @@ Route::prefix('/bot')->group(function(){
 
     Route::get('/set-webhook',[TelegramBotController::class,'setWebhook']);
     Route::post('/webhook/{token}',[TelegramBotController::class,'getMessagesByWebhook']);
-
 });

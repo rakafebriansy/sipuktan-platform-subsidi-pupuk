@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Homepage\KiosResmi;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KiosResmiLoginRequest;
+use App\Http\Requests\KiosResmiLupaSandiRequest;
 use App\Http\Requests\KiosResmiRegisterRequest;
 use App\Models\Kecamatan;
 use App\Services\AkunService;
@@ -64,5 +65,11 @@ class AkunController extends Controller
         return view('homepage.pages.kios-resmi.lupa-sandi',[
             'title' => 'Kios Resmi | Lupa Sandi'
         ]);
+    }
+    public function lupaSandi(KiosResmiLupaSandiRequest $request): RedirectResponse
+    {
+        $validated  = $request->validated();
+        $link = $this->akun_service->kiosResmiLupaSandi($validated['nomor_telepon']);
+        return redirect($link);
     }
 }

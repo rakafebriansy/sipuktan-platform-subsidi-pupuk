@@ -134,5 +134,13 @@ class AkunServiceImpl implements AkunService
             return Pemerintah::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
         });
     }
+    public function petaniLupaSandi(string $nomor_telepon): string
+    {
+        return 'https://t.me/sipuktan_bot?text=/petaniGantiSandi%20' . $nomor_telepon;
+    }
+    public function kiosResmiLupaSandi(string $nomor_telepon): string
+    {
+        return 'https://t.me/sipuktan_bot?text=/kiosResmiGanti-sandi%20' . $nomor_telepon;
+    }
 
 }

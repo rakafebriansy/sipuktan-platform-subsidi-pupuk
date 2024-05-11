@@ -17,10 +17,9 @@
           </div>
       
           <div class="mt-5">
-            <form action="/petani/lupa-sandi">
+            <form action="/petani/lupa-sandi" method="POST">
               @csrf
               <div class="grid">
-                <!-- Form Group -->
                 <div>
                     <div class="mb-5">
                         <label for="nomor_telepon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Telepon</label>

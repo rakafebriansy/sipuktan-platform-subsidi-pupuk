@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Homepage\Petani;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PetaniLoginRequest;
+use App\Http\Requests\PetaniLupaSandiRequest;
 use App\Http\Requests\PetaniRegisterRequest;
 use App\Models\KelompokTani;
 use App\Services\AkunService;
@@ -61,5 +62,11 @@ class AkunController extends Controller
         return view('homepage.pages.petani.lupa-sandi',[
             'title' => 'Petani | Lupa Sandi'
         ]);
+    }
+    public function lupaSandi(PetaniLupaSandiRequest $request): RedirectResponse
+    {
+        $validated  = $request->validated();
+        $link = $this->akun_service->petaniLupaSandi($validated['nomor_telepon']);
+        return redirect($link);
     }
 }
