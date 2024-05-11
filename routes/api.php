@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\TelegramBotController;
+use App\Http\Controllers\Api\TelegramBotController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
-Route::prefix('/bot')->group(function(){
-    Route::get('/retreive',[TelegramBotController::class,'show']);
-    Route::get('/msg',[TelegramBotController::class,'getMessages']);
-    Route::get('/send/{id}',[TelegramBotController::class,'sendMessage']);
 });

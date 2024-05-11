@@ -119,3 +119,12 @@ Route::get('/test/job', function(){
     UpdateMusimTanamJob::dispatch();
     return response()->json(['message' => 'ok']);
 });
+Route::prefix('/bot')->group(function(){
+    Route::get('/get-bot-info',[TelegramBotController::class,'getBotInformation']);
+    Route::get('/msg',[TelegramBotController::class,'getMessagesByPolling']);
+    Route::get('/send/{id}',[TelegramBotController::class,'sendMessage']);
+
+    Route::get('/set-webhook',[TelegramBotController::class,'setWebhook']);
+    Route::post('/webhook/{token}',[TelegramBotController::class,'getMessagesByWebhook']);
+
+});
