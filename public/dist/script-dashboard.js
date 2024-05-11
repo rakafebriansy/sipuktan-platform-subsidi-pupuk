@@ -1,31 +1,22 @@
 //FETCH
-function fetchRiwayatSearchBox(letters,token,list) {
+function fetchRiwayatSearchBox(letters,list) {
     fetch('/kios-resmi/ajax/petani-riwayat', {
-        headers: {
-            "X-CSRF-Token": token
-          },    
         method: 'POST',
         body: new URLSearchParams('letters='+letters)
     }).then(res => res.json())
       .then(res => viewRiwayatSearchBox(res,list))
       .catch(e => console.error('Error'+e));
 }
-function fetchDetailLaporanFiles(id,token) {
-    fetch('/ajax/laporan-filenames', {
-        headers: {
-            "X-CSRF-Token": token
-          },    
+function fetchDetailLaporanFiles(id) {
+    fetch('/ajax/laporan-filenames', {  
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
       .then(res => viewDetailLaporanFiles(res))
       .catch(e => console.error('Error'+e));
 }
-function fetchPetaniFromAlokasi(id,token) {
+function fetchPetaniFromAlokasi(id) {
     fetch('/kios-resmi/ajax/petani-alokasi', {
-        headers: {
-            "X-CSRF-Token": token
-          },    
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
@@ -43,33 +34,24 @@ function fetchDeleteNotifikasi(id,token) {
       .then(res => res)
       .catch(e => console.error('Error'+e));
 }
-function fetchGetFaqDetail(id,token) {
+function fetchGetFaqDetail(id) {
     fetch('/pemerintah/ajax/get-faq', {
-        headers: {
-            "X-CSRF-Token": token
-          },    
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
       .then(data => viewFaqDetail(data))
       .catch(e => console.error('Error'+e));
 }
-function fetchGetKeluhanDetail(id,token) {
+function fetchGetKeluhanDetail(id) {
     fetch('/ajax/get-keluhan', {
-        headers: {
-            "X-CSRF-Token": token
-          },    
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
       .then(data => viewGetKeluhanDetail(data))
       .catch(e => console.error('Error'+e));
 }
-function fetchGetKeluhanBalas(id,token) {
-    fetch('/ajax/get-keluhan', {
-        headers: {
-            "X-CSRF-Token": token
-          },    
+function fetchGetKeluhanBalas(id) {
+    fetch('/ajax/get-keluhan', { 
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
@@ -264,16 +246,16 @@ function setRiwayatIdLaporan(btn) {
 function searchRiwayat(input) {
     const list = document.getElementById('riwayatSearchBox');
     if(input.value.length > 1) {
-        fetchRiwayatSearchBox(input.value,input.dataset.token,list)
+        fetchRiwayatSearchBox(input.value,list)
     } else {
         list.innerHTML = '';
     }
 }
-function getDetailLaporanFiles(btn,token) {
-    fetchDetailLaporanFiles(btn.parentElement.dataset.id,token);
+function getDetailLaporanFiles(btn) {
+    fetchDetailLaporanFiles(btn.parentElement.dataset.id);
 }
-function getPetaniFromAlokasi(btn,token) {
-    fetchPetaniFromAlokasi(btn.parentElement.dataset.id,token);
+function getPetaniFromAlokasi(btn) {
+    fetchPetaniFromAlokasi(btn.parentElement.dataset.id);
 }
 function editStatusAlokasiPassId() {
     document.getElementById('alokasiTahun').value = document.getElementById('dropdownTahunButton').innerText;
@@ -293,10 +275,10 @@ function deleteRealtimeNotifikasi(btn,id) {
     fetchDeleteNotifikasi(btn.dataset.id,token)
     document.querySelector('#'+id).classList.add('transition-opacity', 'duration-300', 'ease-out', 'opacity-0', 'hidden')
 }
-function editFaqPassId(btn,token){
+function editFaqPassId(btn){
     let id = btn.parentElement.dataset.id;
     document.getElementById('editFaqModal').querySelector('[name="id"]').value = id;
-    fetchGetFaqDetail(id,token);
+    fetchGetFaqDetail(id);
 }
 function deleteFaqPassId(btn){
     let id = btn.parentElement.dataset.id;
@@ -307,15 +289,15 @@ function editNoTelpPassId(btn,mode) {
     editNoTelpModal.querySelector('[name="id"]').value = document.getElementById(mode).dataset.id;
     editNoTelpModal.querySelector('[name="nomor_disabled"]').value = btn.previousElementSibling.innerText;
 }
-function getDetailKeluhan(btn,token) {
+function getDetailKeluhan(btn) {
     const id = btn.parentElement.dataset.id;
-    fetchGetKeluhanDetail(id,token);
+    fetchGetKeluhanDetail(id);
 }
-function balasKeluhanPassId(btn,token) {
+function balasKeluhanPassId(btn) {
     let id = btn.parentElement.dataset.id;
     const balasKeluhanModal = document.getElementById('balasKeluhanModal');
     balasKeluhanModal.querySelector('[name="id"]').value = id;
-    fetchGetKeluhanBalas(id,token);
+    fetchGetKeluhanBalas(id);
 }
 
 (function(){
