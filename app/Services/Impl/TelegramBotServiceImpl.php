@@ -77,16 +77,44 @@ class TelegramBotServiceImpl implements TelegramBotService
                 'link' => env('APP_URL')
             ]);
             return [
-                'teks' => 'Silahkan masukkan nomor telepon terdaftar kios resmi anda!',
+                'teks' => $rendered_view,
                 'pengirim' => $request['message']['from']['id'],
-                'reply_markup' => [
-                    'keyboard' =>[[[
-                        'text'=>'Kirim nomor telepon saya',
-                        'request_contact'=>true,
-                    ]]],
-                    'resize_keyboard'=>true,
-                    'one_time_keyboard'=>true,
-                ]
+            ];
+        }
+        if($text == '/pupuk') {
+            $rendered_view = $this->setRenderedView('pupuk',[
+                'link' => env('APP_URL')
+            ]);
+            return [
+                'teks' => $rendered_view,
+                'pengirim' => $request['message']['from']['id'],
+            ];
+        }
+        if($text == '/kios') {
+            $rendered_view = $this->setRenderedView('kios',[
+                'link' => env('APP_URL')
+            ]);
+            return [
+                'teks' => $rendered_view,
+                'pengirim' => $request['message']['from']['id'],
+            ];
+        }
+        if($text == '/pupuktunai') {
+            $rendered_view = $this->setRenderedView('pupuktunai',[
+                'link' => env('APP_URL')
+            ]);
+            return [
+                'teks' => $rendered_view,
+                'pengirim' => $request['message']['from']['id'],
+            ];
+        }
+        if($text == '/pupuknontunai') {
+            $rendered_view = $this->setRenderedView('pupuknontunai',[
+                'link' => env('APP_URL')
+            ]);
+            return [
+                'teks' => $rendered_view,
+                'pengirim' => $request['message']['from']['id'],
             ];
         }
         if($text == '/menu') {
