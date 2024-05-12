@@ -34,7 +34,7 @@ class TelegramBotServiceImpl implements TelegramBotService
         if(isset($pemilik_kios)) {
             $token = DB::transaction(function() use($pemilik_kios) {
                 $token = uniqid();
-                $pemilik_kios->update(['token' => $token]);
+                $pemilik_kios->kios_resmi->update(['token' => $token]);
                 return $token;
             });
             return $token;

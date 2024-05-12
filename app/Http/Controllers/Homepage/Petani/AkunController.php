@@ -76,16 +76,18 @@ class AkunController extends Controller
     }
     public function setUbahSandi(): View
     {
-        return view('homepage.pages.petani.ubah-sandi',[
-            'title' => 'Petani | Ubah Sandi'
+        return view('homepage.pages.petani.lupa-ubah-sandi',[
+            'title' => 'Petani | Buat Sandi Baru'
         ]);
     }
     public function ubahSandi(PetaniLupaUbahSandiRequest $request): RedirectResponse
     {
         $validated  = $request->validated();
         if($validated['sandi_baru'] == $validated['sandi_ulang']) {
-            $this->akun_service->petaniLupaUbahSandi($validated['id_petani'],$validated['sandi_baru']);
-            return redirect('/petani/login')->with('success','Kata sandi berhasil diperbarui');
+            if($this->akun_service->petaniLupaUbahSandi($validated['id_petani'],$validated['sandi_baru'])){
+                return redirect('/petani/login')->with('success','Kata sandi berhasil diperbarui');
+            }
+            return back()->withErrors(['failed' => 'Token tidak valid']);
         }
         return back()->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
     }

@@ -20,7 +20,6 @@ class PemilikKios extends Model
         'nik',
         'foto_ktp',
         'nomor_telepon',
-        'token'
     ];
 
     public function kios_resmi(): HasOne

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\TelegramBotController;
 use App\Jobs\UpdateMusimTanamJob;
+use App\Models\KiosResmi;
 use App\Models\KredensialUbahSandi;
 use App\Models\Petani;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,8 @@ Route::prefix('/kios-resmi')->group(function(){
     Route::post('/register', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'register']);
     Route::get('/lupa-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'setLupaSandi']);
     Route::post('/lupa-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'lupaSandi']);
+    Route::get('/lupa-ubah-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'setUbahSandi']);
+    Route::post('/lupa-ubah-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'ubahSandi']);
     Route::middleware('hasRole:kios-resmi')->group(function(){
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\KiosResmi\DashboardController::class, 'setDashboard']);
         Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'setGantiSandi']);
@@ -116,13 +119,7 @@ Route::get('/logout', function(){
 Route::get('/download/{folder_name}/{file_name}', function(string $folder_name, string $file_name){
     return Storage::disk('public')->download('/' . $folder_name . '/' . $file_name);
 });
-Route::get('/test/pusher', function(){
-    return view('tests.pusher');
-});
-Route::get('/test/job', function(){
-    UpdateMusimTanamJob::dispatch();
-    return response()->json(['message' => 'ok']);
-});
+
 Route::prefix('/bot')->group(function(){
     Route::get('/get-bot-info',[TelegramBotController::class,'getBotInformation']);
     Route::get('/msg',[TelegramBotController::class,'getMessagesByPolling']);
@@ -130,4 +127,16 @@ Route::prefix('/bot')->group(function(){
 
     Route::get('/set-webhook',[TelegramBotController::class,'setWebhook']);
     Route::post('/webhook/{token}',[TelegramBotController::class,'getMessagesByWebhook']);
+});
+Route::prefix('/test')->group(function(){
+    Route::get('/',function(){
+        //
+    });
+    Route::get('/pusher', function(){
+        return view('tests.pusher');
+    });
+    Route::get('/job', function(){
+        UpdateMusimTanamJob::dispatch();
+        return response()->json(['message' => 'ok']);
+    });
 });

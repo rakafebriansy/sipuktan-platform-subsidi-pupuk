@@ -25,7 +25,7 @@ class KiosResmiLupaUbahSandiRequest extends FormRequest
             'id_kios_resmi' => 'required',
             'sandi_baru' => 'required|min:6',
             'sandi_ulang' => 'required|min:6',
-            'token' => 'required|exists:petanis,token',
+            'token' => 'required|exists:kios_resmis,token',
         ];
     }
 

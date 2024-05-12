@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Homepage\KiosResmi;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KiosResmiLoginRequest;
 use App\Http\Requests\KiosResmiLupaSandiRequest;
+use App\Http\Requests\KiosResmiLupaUbahSandiRequest;
 use App\Http\Requests\KiosResmiRegisterRequest;
 use App\Models\Kecamatan;
 use App\Services\AkunService;
@@ -74,5 +75,22 @@ class AkunController extends Controller
             return redirect('/kios-resmi/lupa-ubah-sandi')->with('id_kios_resmi',$kios_resmi->id);
         }
         return back()->withErrors(['error' => 'Nomor telepon tidak terdaftar!']);
+    }
+    public function setUbahSandi(): View
+    {
+        return view('homepage.pages.kios-resmi.lupa-ubah-sandi',[
+            'title' => 'Kios Resmi | Buat Sandi Baru'
+        ]);
+    }
+    public function ubahSandi(KiosResmiLupaUbahSandiRequest $request): RedirectResponse
+    {
+        $validated  = $request->validated();
+        if($validated['sandi_baru'] == $validated['sandi_ulang']) {
+            if($this->akun_service->kiosResmiLupaUbahSandi($validated['id_kios_resmi'],$validated['sandi_baru'])) {
+                return redirect('/kios-resmi/login')->with('success','Kata sandi berhasil diperbarui');
+            }
+            return back()->withErrors(['failed' => 'Token tidak valid']);
+        }
+        return back()->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
     }
 }

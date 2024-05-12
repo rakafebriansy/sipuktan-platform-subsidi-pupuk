@@ -23,6 +23,7 @@ class KiosResmi extends Model
         'kata_sandi',
         'id_pemilik_kios',
         'id_kecamatan',
+        'token'
     ];
 
     protected $guarded = ['id'];
