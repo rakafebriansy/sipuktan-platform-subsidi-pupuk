@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Services\AkunService;
 use App\Services\TelegramBotService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Telegram\Bot\Api;
 use Telegram\Bot\Laravel\Facades\Telegram;
@@ -13,6 +15,7 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 class TelegramBotController extends Controller
 {
     private TelegramBotService $telegram_bot_service;
+    private AkunService $akun_service;
     protected $telegram;
 
     /**
@@ -20,35 +23,32 @@ class TelegramBotController extends Controller
      *
      * @param  Api  $telegram
      */
-    public function __construct(Api $telegram, TelegramBotService $telegram_bot_service)
+    public function __construct(Api $telegram, TelegramBotService $telegram_bot_service, AkunService $akun_service)
     {
         $this->telegram = $telegram;
         $this->telegram_bot_service = $telegram_bot_service;
+        $this->akun_service = $akun_service;
     }
 
     /**
      * Show the bot information.
      */
-    private function sendMessageHTML(string $id, string $rendered)
+    private function sendMessageHTML(array $final_request)
     {
-        $this->telegram->sendMessage([
-            'chat_id' => $id,
-            'text' => $rendered,
+        $chat = [
+            'chat_id' => $final_request['pengirim'],
+            'text' => $final_request['teks'],
             'parse_mode' => 'html',
-        ]);
-    }
-    private function setPromptService(string $prompt) {
-        switch ($prompt) {
-            case 'test':
-                return 'test';
-            default:
-                return 'setWelcome';
+        ];
+        if(isset($final_request['reply_markup'])) {
+            $chat['reply_markup'] = json_encode($final_request['reply_markup']);
         }
+        $this->telegram->sendMessage($chat);
     }
+
     public function getBotInformation()
     {
         $response = $this->telegram->getMe();
-
         return $response;
     }
     public function getMessagesByPolling()
@@ -60,11 +60,12 @@ class TelegramBotController extends Controller
     {
         Log::channel('bot')->info(json_encode($request->all(),JSON_PRETTY_PRINT));
 
-        $user_id = $request['message']['from']['id'];
-        $text = $request['message']['text'];
-        $service_method = $this->setPromptService($text);
-        $response_text = $this->telegram_bot_service->$service_method($request->all());
-        $this->sendMessageHTML($user_id,$response_text);
+        if(isset($request['message']['text'])) {
+            $final_request = $this->telegram_bot_service->service($request);
+        } else if (isset($request['message']['reply_to_message']['text'])) {
+            $final_request = $this->telegram_bot_service->replyService($request);
+        }
+        $this->sendMessageHTML($final_request);
     }
     public function setWebhook(): bool
     {

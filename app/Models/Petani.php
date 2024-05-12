@@ -23,7 +23,8 @@ class Petani extends Model
         'kata_sandi',
         'foto_ktp',
         'nomor_telepon',
-        'id_kelompok_tani'
+        'id_kelompok_tani',
+        'token'
     ];
     protected $guarded = ['id'];
     protected $hidden = [
@@ -53,6 +54,10 @@ class Petani extends Model
         'id',
         'id'
     );
+    }
+    public function kredensial_ubah_sandis(): HasMany
+    {
+        return $this->hasMany(KredensialUbahSandi::class, 'id_petani','id');
     }
     
 }

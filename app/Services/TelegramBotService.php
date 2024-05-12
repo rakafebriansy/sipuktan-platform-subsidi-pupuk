@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Services;
+use Illuminate\Http\Request;
 
 interface TelegramBotService
 {
-    function setWelcome(array $request): string;
-    function test(array $request): string;
+    function service(Request $request): array;
+    function replyService(Request $request): array;
 }

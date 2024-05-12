@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nik',100)->nullable(false)->unique();
             $table->string('foto_ktp',100)->nullable(false);
             $table->string('nomor_telepon',20)->nullable(false)->unique();
+            $table->string('token',255)->nullable()->unique();
         });
     }
 

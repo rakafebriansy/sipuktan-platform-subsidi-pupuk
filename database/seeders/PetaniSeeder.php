@@ -31,7 +31,7 @@ class PetaniSeeder extends Seeder
             'kata_sandi' => Hash::make('geralt@1'),
             'foto_ktp' => 'ktp002.jpg',
             'aktif' => 1,
-            'nomor_telepon' => '081232163732',
+            'nomor_telepon' => '081233405169',
             'id_kelompok_tani' => 1
         ]);
         Petani::create([

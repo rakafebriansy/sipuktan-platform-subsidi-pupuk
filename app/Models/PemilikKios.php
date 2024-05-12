@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PemilikKios extends Model
@@ -18,11 +19,16 @@ class PemilikKios extends Model
         'nama_pemilik',
         'nik',
         'foto_ktp',
-        'nomor_telepon'
+        'nomor_telepon',
+        'token'
     ];
 
     public function kios_resmi(): HasOne
     {
         return $this->hasOne(KiosResmi::class,'id_pemilik_kios','id');
+    }
+    public function kredensial_ubah_sandis(): HasMany
+    {
+        return $this->hasMany(KredensialUbahSandi::class, 'id_pemilik_kios','id');
     }
 }

@@ -3,6 +3,8 @@
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\TelegramBotController;
 use App\Jobs\UpdateMusimTanamJob;
+use App\Models\KredensialUbahSandi;
+use App\Models\Petani;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -126,4 +128,7 @@ Route::prefix('/bot')->group(function(){
 
     Route::get('/set-webhook',[TelegramBotController::class,'setWebhook']);
     Route::post('/webhook/{token}',[TelegramBotController::class,'getMessagesByWebhook']);
+});
+Route::get('/test', function () {
+    //
 });

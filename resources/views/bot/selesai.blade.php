@@ -1,0 +1,1 @@
+Terima kasih telah menggunakan layanan chatbot Telegram SIPUKTAN 🙏🏼
