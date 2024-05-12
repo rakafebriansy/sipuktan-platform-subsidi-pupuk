@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PemerintahEditFaqRequest extends FormRequest
 {
+    private array $jenis_pengguna = ['Petani','Kios Resmi'];
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -25,7 +26,7 @@ class PemerintahEditFaqRequest extends FormRequest
             'id' => 'required',
             'pertanyaan' => 'required',
             'jawaban' => 'required',
-            'jenis_pengguna' => 'required'
+            'jenis_pengguna' => 'required|in:' . implode(',', $this->jenis_pengguna)
         ];
     }
 
@@ -40,6 +41,7 @@ class PemerintahEditFaqRequest extends FormRequest
             'pertanyaan.required' => 'Pertanyaan tidak boleh kosong',
             'jawaban.required' => 'Jawaban tidak boleh kosong',
             'jenis_pengguna.required' => 'Jenis pengguna tidak boleh kosong',
+            'jenis_pengguna.in' => 'Jenis pengguna tidak boleh kosong',
         ];
     }
 }
