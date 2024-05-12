@@ -31,14 +31,18 @@ class AlokasiController extends Controller
         $id = Auth::guard('kiosResmi')->user()->id;
         $tahun = date('Y');
         $musim_tanam = null;
-        ['kios_resmi' => $kios_resmi,'notifikasis' => $notifikasis,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
-        $tahuns = $this->alokasi_service->kiosResmiSetAlokasi();
+        ['kios_resmi' => $kios_resmi,
+        'notifikasis' => $notifikasis,
+        'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
+        ['saat_ini' => $saat_ini, 
+        'tahuns' => $tahuns] = $this->alokasi_service->kiosResmiSetAlokasi($id);
         if(isset($request->tahun) && isset($request->musim_tanam)){
             $tahun = $request->tahun;
             $musim_tanam = $request->musim_tanam;
             $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,$request->musim_tanam);
         } else {
-            $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,'MT1');
+            $musim_tanam = $saat_ini->musim_tanam;
+            $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$saat_ini->tahun,$saat_ini->musim_tanam);
         }
         return view('dashboard.kios-resmi.pages.alokasi', [
             'title' => 'Kios Resmi | Alokasi',

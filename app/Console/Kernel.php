@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->job(new UpdateMusimTanamJob('Menunggu Pembayaran'))->quarterly();
+        $schedule->job(new UpdateMusimTanamJob('Menunggu Pembayaran'))->timezone(env('TIMEZONE'))->quarterlyOn(4, '14:00');;
     }
 
     /**

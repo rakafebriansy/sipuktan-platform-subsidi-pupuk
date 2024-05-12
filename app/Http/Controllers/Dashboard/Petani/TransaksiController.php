@@ -75,12 +75,12 @@ class TransaksiController extends Controller
         ['petani' => $petani, 
         'notifikasis' => $notifikasis, 
         'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
-        $tahuns = $this->transaksi_service->petaniSetRiwayatTransaksi($id);
+        ['saat_ini' => $saat_ini,'tahuns' => $tahuns] = $this->transaksi_service->petaniSetRiwayatTransaksi($id);
         if(isset($request->tahun) && isset($request->musim_tanam)) {
             $tahun = $request->tahun;
             $riwayat_transaksis = $this->transaksi_service->petaniSetRiwayatTransaksiByTahun($id, $tahun);
         } else {
-            $riwayat_transaksis = $this->transaksi_service->petaniSetRiwayatTransaksiByTahun($id, $tahun);
+            $riwayat_transaksis = $this->transaksi_service->petaniSetRiwayatTransaksiByTahun($id, $saat_ini->tahun);
         }
         return view('dashboard.petani.pages.riwayat-transaksi', [
             'title' => 'Petani | Riwayat Transaksi',

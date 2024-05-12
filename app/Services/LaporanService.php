@@ -7,10 +7,10 @@ use Illuminate\Http\UploadedFile;
 
 interface LaporanService
 {
-    function kiosResmiSetLaporan(int $id_kios_resmi): Collection;
+    function kiosResmiSetLaporan(int $id_kios_resmi): array;
     function kiosResmiSetLaporanByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection;
     function kiosResmiLaporan($validated): bool;
-    function pemerintahSetLaporan(): Collection;
+    function pemerintahSetLaporan(): array;
     function pemerintahSetLaporanByTahun(string $tahun, string $musim_tanam): Collection;
     function pemerintahLaporan(int $id, string $status_verifikasi): bool;
     function pemerintahGetIdKiosResmiByLaporan(int $id_laporan): int;

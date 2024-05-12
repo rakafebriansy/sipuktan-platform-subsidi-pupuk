@@ -3,6 +3,7 @@
 namespace App\Services\Impl;
 use App\Models\Alokasi;
 use App\Models\Laporan;
+use App\Models\MusimTanam;
 use App\Models\RiwayatTransaksi;
 use App\Services\LaporanService;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,15 +11,17 @@ use Illuminate\Support\Facades\DB;
 
 class LaporanServiceImpl implements LaporanService
 {
-    public function kiosResmiSetLaporan(int $id_kios_resmi): Collection
+    public function kiosResmiSetLaporan(int $id_kios_resmi): array
     {
         $tahuns = Alokasi::distinct()->where('id_kios_resmi',$id_kios_resmi)->where('status','Dibayar')->orderBy('tahun','desc')->get(['tahun']);
-        return $tahuns;
+        $saat_ini = MusimTanam::first();
+        return ['saat_ini' => $saat_ini,'tahuns' => $tahuns];
     }
-    public function pemerintahSetLaporan(): Collection
+    public function pemerintahSetLaporan(): array
     {
         $tahuns = Alokasi::distinct()->where('status','Dibayar')->orderBy('tahun','desc')->get(['tahun']);
-        return $tahuns;
+        $saat_ini = MusimTanam::first();
+        return ['saat_ini' => $saat_ini,'tahuns' => $tahuns];
     }
     public function kiosResmiSetLaporanByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection
     {

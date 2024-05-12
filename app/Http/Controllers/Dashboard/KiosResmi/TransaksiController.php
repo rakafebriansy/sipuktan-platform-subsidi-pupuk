@@ -48,13 +48,14 @@ class TransaksiController extends Controller
         $tahun = date('Y');
         $musim_tanam = null;
         ['kios_resmi' => $kios_resmi,'notifikasis' => $notifikasis,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
-        $tahuns = $this->transaksi_service->kiosResmiSetRiwayatTransaksi($id);
+        ['saat_ini' => $saat_ini,'tahuns' => $tahuns] = $this->transaksi_service->kiosResmiSetRiwayatTransaksi($id);
         if(isset($request->tahun) && isset($request->musim_tanam)) {
             $tahun = $request->tahun;
             $musim_tanam = $request->musim_tanam;
             $riwayat_transaksis = $this->transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahun, $musim_tanam);
         } else {
-            $riwayat_transaksis = $this->transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $tahun, 'MT1');
+            $musim_tanam = $saat_ini->musim_tanam;
+            $riwayat_transaksis = $this->transaksi_service->kiosResmiSetRiwayatTransaksiByTahun($id, $saat_ini->tahun, $saat_ini->musim_tanam);
         }
         return view('dashboard.kios-resmi.pages.riwayat-transaksi', [
             'title' => 'Kios Resmi | Riwayat Transaksi',

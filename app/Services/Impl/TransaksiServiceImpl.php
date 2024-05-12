@@ -3,6 +3,7 @@
 namespace App\Services\Impl;
 
 use App\Models\Alokasi;
+use App\Models\MusimTanam;
 use App\Models\RiwayatTransaksi;
 use App\Services\TransaksiService;
 use Illuminate\Database\Eloquent\Collection;
@@ -88,10 +89,11 @@ class TransaksiServiceImpl implements TransaksiService
             return Alokasi::whereIn('id',$id_alokasis)->update(['status' => 'Dibayar']);
         });
     }
-    public function petaniSetRiwayatTransaksi(int $id_petani): Collection
+    public function petaniSetRiwayatTransaksi(int $id_petani): array
     {
         $tahuns = Alokasi::distinct()->where('id_petani',$id_petani)->where('status','Dibayar')->orderBy('tahun','desc')->get(['tahun']);
-        return $tahuns;
+        $saat_ini = MusimTanam::first();
+        return ['saat_ini' => $saat_ini,'tahuns' => $tahuns];
     }
     public function petaniSetRiwayatTransaksiByTahun(int $id_petani, string $tahun): Collection
     {
@@ -104,10 +106,11 @@ class TransaksiServiceImpl implements TransaksiService
         ->orderBy('riwayat_transaksis.tanggal_transaksi', 'desc')->get();
         return $riwayat_transaksis;
     }
-    public function kiosResmiSetRiwayatTransaksi(int $id_kios_resmi): Collection
+    public function kiosResmiSetRiwayatTransaksi(int $id_kios_resmi): array
     {
         $tahuns = Alokasi::distinct()->where('id_kios_resmi',$id_kios_resmi)->where('status','Dibayar')->orderBy('tahun','desc')->get(['tahun']);
-        return $tahuns;
+        $saat_ini = MusimTanam::first();
+        return ['saat_ini' => $saat_ini,'tahuns' => $tahuns];
     }
     public function kiosResmiSetRiwayatTransaksiByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection
     {

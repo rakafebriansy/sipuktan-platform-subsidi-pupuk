@@ -29,14 +29,16 @@ class AlokasiController extends Controller
         $musim_tanam = null;
         ['pemerintah' => $pemerintah,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
-        ['tahuns' => $tahuns, 
+        ['saat_ini' => $saat_ini,
+        'tahuns' => $tahuns, 
         'jenis_pupuks' => $jenis_pupuks] = $this->alokasi_service->pemerintahSetAlokasi();
         if(isset($request->tahun) && isset($request->musim_tanam)){
             $tahun = $request->tahun;
             $musim_tanam = $request->musim_tanam;
             $alokasis = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahun,$request->musim_tanam);
         } else {
-            $alokasis = $this->alokasi_service->pemerintahSetAlokasiByTahun($tahun,'MT1');
+            $musim_tanam = $saat_ini->musim_tanam;
+            $alokasis = $this->alokasi_service->pemerintahSetAlokasiByTahun($saat_ini->tahun,$saat_ini->musim_tanam);
         }
         return view('dashboard.pemerintah.pages.alokasi', [
             'title' => 'Pemerintah | Alokasi',

@@ -25,14 +25,18 @@ class LaporanController extends Controller
         $id = Auth::guard('kiosResmi')->user()->id;
         $tahun = date('Y');
         $musim_tanam = null;
-        ['kios_resmi' => $kios_resmi,'notifikasis' => $notifikasis,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
-        $tahuns = $this->laporan_service->kiosResmiSetLaporan($id);
+        ['kios_resmi' => $kios_resmi,
+        'notifikasis' => $notifikasis,
+        'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
+        ['saat_ini' => $saat_ini,
+        'tahuns' => $tahuns] = $this->laporan_service->kiosResmiSetLaporan($id);
         if(isset($request->tahun) && isset($request->musim_tanam)) {
             $tahun = $request->tahun;
             $musim_tanam = $request->musim_tanam;
             $laporans = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahun, $musim_tanam);
         } else {
-            $laporans = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $tahun, 'MT1');
+            $musim_tanam = $saat_ini->musim_tanam;
+            $laporans = $this->laporan_service->kiosResmiSetLaporanByTahun($id, $saat_ini->tahun, $saat_ini->musim_tanam);
         }
         return view('dashboard.kios-resmi.pages.laporan', [
             'title' => 'Kios Resmi | Laporan',

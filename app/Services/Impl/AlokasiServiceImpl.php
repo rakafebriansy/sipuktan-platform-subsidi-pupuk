@@ -5,6 +5,7 @@ namespace App\Services\Impl;
 use App\Models\Alokasi;
 use App\Models\JenisPupuk;
 use App\Models\KelompokTani;
+use App\Models\MusimTanam;
 use App\Models\Petani;
 use App\Services\AlokasiService;
 use Illuminate\Database\Eloquent\Collection;
@@ -20,11 +21,12 @@ class AlokasiServiceImpl implements AlokasiService
         ->where('id_petani', $id)->orderBy('jenis_pupuks.jenis')->get();
         return $alokasis;
     }
-    public function kiosResmiSetAlokasi(): Collection
+    public function kiosResmiSetAlokasi(int $id): array
     {
-        $tahuns = Alokasi::distinct()->orderBy('tahun','desc')->get(['tahun']);
+        $saat_ini = MusimTanam::first();
+        $tahuns = Alokasi::distinct()->where('id_kios_resmi',$id)->orderBy('tahun','desc')->get(['tahun']);
         
-        return $tahuns;
+        return ['saat_ini' => $saat_ini, 'tahuns' => $tahuns];
     }
     public function kiosResmiAlokasi(string $tahun, string $musim_tanam): bool
     {
@@ -52,7 +54,9 @@ class AlokasiServiceImpl implements AlokasiService
     {
         $jenis_pupuks = JenisPupuk::all();
         $tahuns = Alokasi::distinct()->orderBy('tahun','desc')->get(['tahun']);
-        return ['jenis_pupuks' => $jenis_pupuks, 'tahuns' => $tahuns];
+        $saat_ini = MusimTanam::first();
+        
+        return ['saat_ini' => $saat_ini, 'jenis_pupuks' => $jenis_pupuks, 'tahuns' => $tahuns];
     }
     public function pemerintahSetAlokasiByTahun(string $tahun, string $musim_tanam): Collection
     {

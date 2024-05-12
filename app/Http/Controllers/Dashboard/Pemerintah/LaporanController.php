@@ -33,13 +33,15 @@ class LaporanController extends Controller
         $musim_tanam = null;
         ['pemerintah' => $pemerintah,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id);
-        $tahuns = $this->laporan_service->pemerintahSetLaporan();
+        ['saat_ini' => $saat_ini,
+        'tahuns' => $tahuns] = $this->laporan_service->pemerintahSetLaporan();
         if(isset($request->tahun) && isset($request->musim_tanam)){
             $tahun = $request->tahun;
             $musim_tanam = $request->musim_tanam;
             $laporans = $this->laporan_service->pemerintahSetLaporanByTahun($tahun, $musim_tanam);
         } else {
-            $laporans = $this->laporan_service->pemerintahSetLaporanByTahun($tahun, 'MT1');
+            $musim_tanam = $saat_ini->musim_tanam;
+            $laporans = $this->laporan_service->pemerintahSetLaporanByTahun($saat_ini->tahun, $saat_ini->musim_tanam);
         }
         return view('dashboard.pemerintah.pages.laporan', [
             'title' => 'Pemerintah | Laporan',
