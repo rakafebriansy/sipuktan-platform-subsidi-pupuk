@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\KiosResmi;
 
 use App\Http\Controllers\Controller;
 use App\Services\DashboardService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -15,7 +16,7 @@ class DashboardController extends Controller
     }
     public function setDashboard(): View
     {
-        $id = Session::get('id_kios_resmi',null);
+        $id = Auth::guard('kiosResmi')->user()->id;
         ['kios_resmi' => $kios_resmi, 
         'notifikasis' => $notifikasis, 
         'initials' => $initials] = $this->dashboard_service->kiosResmiSetSidebar($id);

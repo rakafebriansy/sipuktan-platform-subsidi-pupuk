@@ -15,6 +15,11 @@ class LaporanServiceImpl implements LaporanService
         $tahuns = Alokasi::distinct()->where('id_kios_resmi',$id_kios_resmi)->where('status','Dibayar')->orderBy('tahun','desc')->get(['tahun']);
         return $tahuns;
     }
+    public function pemerintahSetLaporan(): Collection
+    {
+        $tahuns = Alokasi::distinct()->where('status','Dibayar')->orderBy('tahun','desc')->get(['tahun']);
+        return $tahuns;
+    }
     public function kiosResmiSetLaporanByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection
     {
         $laporans = Laporan::select('laporans.id','laporans.tanggal_pengambilan', 'laporans.status_verifikasi','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
@@ -47,7 +52,7 @@ class LaporanServiceImpl implements LaporanService
             return Laporan::insert($laporan);
         });
     }
-    public function pemerintahSetLaporan(string $tahun, string $musim_tanam): Collection
+    public function pemerintahSetLaporanByTahun(string $tahun, string $musim_tanam): Collection
     {
         $laporans = Laporan::select('laporans.id','laporans.status_verifikasi','laporans.tanggal_pengambilan','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani', 'kios_resmis.nama as nama_kios')
         ->join('riwayat_transaksis','riwayat_transaksis.id','laporans.id_riwayat_transaksi')

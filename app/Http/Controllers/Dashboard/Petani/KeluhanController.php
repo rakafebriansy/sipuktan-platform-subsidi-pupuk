@@ -8,6 +8,7 @@ use App\Services\DashboardService;
 use App\Services\KeluhanService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -22,7 +23,7 @@ class KeluhanController extends Controller
     }
     public function setKeluhan(): View
     {
-        $id = Session::get('id_petani',null);
+        $id = Auth::guard('petani')->user()->id;
         ['petani' => $petani, 
         'notifikasis' => $notifikasis, 
         'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);

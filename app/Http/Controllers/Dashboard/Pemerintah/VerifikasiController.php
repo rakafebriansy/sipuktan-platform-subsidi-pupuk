@@ -7,6 +7,7 @@ use App\Services\DashboardService;
 use App\Services\VerifikasiService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -21,7 +22,7 @@ class VerifikasiController extends Controller
     }
     public function setVerifikasi(): View
     {
-        $id = Session::get('id_pemerintah');
+        $id = Auth::guard('pemerintah')->user()->id;
         ['pemerintah' => $pemerintah,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         ['petanis' => $petanis, 

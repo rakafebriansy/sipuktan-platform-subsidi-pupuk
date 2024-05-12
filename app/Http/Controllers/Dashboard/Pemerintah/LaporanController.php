@@ -12,6 +12,7 @@ use App\Services\LaporanService;
 use App\Services\NotifikasiService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -27,18 +28,18 @@ class LaporanController extends Controller
     }
     public function setLaporan(Request $request): View
     {
-        $id = Session::get('id_pemerintah');
+        $id = Auth::guard('pemerintah')->user()->id;
         $tahun = date('Y');
         $musim_tanam = null;
         ['pemerintah' => $pemerintah,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id);
-        $tahuns = $this->laporan_service->kiosResmiSetLaporan($id);
+        $tahuns = $this->laporan_service->pemerintahSetLaporan();
         if(isset($request->tahun) && isset($request->musim_tanam)){
             $tahun = $request->tahun;
             $musim_tanam = $request->musim_tanam;
-            $laporans = $this->laporan_service->pemerintahSetLaporan($tahun, $musim_tanam);
+            $laporans = $this->laporan_service->pemerintahSetLaporanByTahun($tahun, $musim_tanam);
         } else {
-            $laporans = $this->laporan_service->pemerintahSetLaporan($tahun, 'MT1');
+            $laporans = $this->laporan_service->pemerintahSetLaporanByTahun($tahun, 'MT1');
         }
         return view('dashboard.pemerintah.pages.laporan', [
             'title' => 'Pemerintah | Laporan',

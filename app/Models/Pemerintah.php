@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Pemerintah extends Model
+class Pemerintah extends Model implements Authenticatable
 {
     use HasFactory;
     protected $table = 'pemerintahs';
@@ -33,5 +34,29 @@ class Pemerintah extends Model
     public function keluhans(): HasMany
     {
         return $this->hasMany(Keluhan::class, 'id_pemerintah', 'id');
+    }
+    public function getAuthIdentifierName()
+    {
+        return 'nama_pengguna';
+    }
+    public function getAuthIdentifier()
+    {
+        return $this->nama_pengguna;
+    }
+    public function getAuthPassword()
+    {
+        return $this->kata_sandi;
+    }
+    public function getRememberToken()
+    {
+        //
+    }
+    public function setRememberToken($value)
+    {
+        //
+    }
+    public function getRememberTokenName()
+    {
+        //
     }
 }

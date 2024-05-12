@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Pemerintah;
 
 use App\Http\Controllers\Controller;
 use App\Services\DashboardService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -16,7 +17,7 @@ class DashboardController extends Controller
     }
     public function setDashboard(): View
     {
-        $id = Session::get('id_pemerintah',null);
+        $id = Auth::guard('pemerintah')->user()->id;
         ['pemerintah' => $pemerintah,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         return view('dashboard.pemerintah.pages.index', [

@@ -9,6 +9,7 @@ use App\Services\AlokasiService;
 use App\Services\DashboardService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -23,7 +24,7 @@ class AlokasiController extends Controller
     }
     public function setAlokasi(Request $request): View
     {
-        $id = Session::get('id_pemerintah',null);
+        $id = Auth::guard('pemerintah')->user()->id;
         $tahun = date('Y');
         $musim_tanam = null;
         ['pemerintah' => $pemerintah,

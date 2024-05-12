@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Petani;
 use App\Http\Controllers\Controller;
 use App\Services\AlokasiService;
 use App\Services\DashboardService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -18,7 +19,7 @@ class AlokasiController extends Controller
     }
     public function setAlokasi(): View
     {
-        $id = Session::get('id_petani',null);
+        $id = Auth::guard('petani')->user()->id;
         ['petani' => $petani, 
         'notifikasis' => $notifikasis, 
         'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);

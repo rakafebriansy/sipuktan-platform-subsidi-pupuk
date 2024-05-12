@@ -10,6 +10,7 @@ use App\Http\Requests\PetaniUbahSandiRequest;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class AkunController extends Controller
@@ -27,7 +28,7 @@ class AkunController extends Controller
     }
     public function ubahSandi(PetaniUbahSandiRequest $request): RedirectResponse
     {
-        $id = Session::get('id_petani',null);
+        $id = Auth::guard('petani')->user()->id;
         $validated = $request->validated();
         if($this->akun_service->petaniCekSandi($id,$validated['sandi_lama'])) {
             if($validated['sandi_baru'] == $validated['sandi_ulang']) {
@@ -40,7 +41,7 @@ class AkunController extends Controller
     }
     public function ubahNoTelp(PetaniUbahNoTelpRequest $request): RedirectResponse
     {
-        $id = Session::get('id_petani',null);
+        $id = Auth::guard('petani')->user()->id;
         $validated = $request->validated();
         if($this->akun_service->petaniUbahNoTelp($id, $validated['nomor_telepon']))
         return back()->with('success','Nomor telepon berhasil diperbarui');

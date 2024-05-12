@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PemerintahUbahSandiRequest;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class AkunController extends Controller
@@ -22,7 +23,7 @@ class AkunController extends Controller
     }
     public function ubahSandi(PemerintahUbahSandiRequest $request): RedirectResponse
     {
-        $id = Session::get('id_pemerintah',null);
+        $id = Auth::guard('pemerintah')->user()->id;
         $validated = $request->validated();
         if($this->akun_service->pemerintahCekSandi($id,$validated['sandi_lama'])) {
             if($validated['sandi_baru'] == $validated['sandi_ulang']) {

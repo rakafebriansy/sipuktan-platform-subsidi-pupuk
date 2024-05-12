@@ -7,6 +7,7 @@ use App\Services\DashboardService;
 use App\Services\TransaksiService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -20,7 +21,7 @@ class TransaksiController extends Controller
     }
     public function setTransaksi(): View
     {
-        $id = Session::get('id_kios_resmi',null);
+        $id = Auth::guard('kiosResmi')->user()->id;
         ['kios_resmi' => $kios_resmi,'notifikasis' => $notifikasis,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);
         $alokasis = $this->transaksi_service->kiosResmiSetTransaksi($id);
         return view('dashboard.kios-resmi.pages.transaksi', [

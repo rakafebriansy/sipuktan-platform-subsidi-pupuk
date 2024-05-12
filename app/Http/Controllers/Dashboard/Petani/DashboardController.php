@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Petani;
 
 use App\Http\Controllers\Controller;
 use App\Services\DashboardService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -15,7 +16,7 @@ class DashboardController extends Controller
     }
     public function setDashboard(): View
     {
-        $id = Session::get('id_petani',null);
+        $id = Auth::guard('petani')->user()->id;
         ['petani' => $petani, 
         'notifikasis' => $notifikasis, 
         'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);

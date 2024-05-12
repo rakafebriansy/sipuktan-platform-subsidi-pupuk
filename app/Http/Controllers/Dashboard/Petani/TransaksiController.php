@@ -8,6 +8,7 @@ use App\Services\DashboardService;
 use App\Services\TransaksiService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -21,7 +22,7 @@ class TransaksiController extends Controller
     }
     public function setTransaksi(): View
     {
-        $id = Session::get('id_petani',null);
+        $id = Auth::guard('petani')->user()->id;
         ['petani' => $petani, 
         'notifikasis' => $notifikasis, 
         'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);

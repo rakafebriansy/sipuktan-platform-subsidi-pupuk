@@ -8,6 +8,7 @@ use App\Services\DashboardService;
 use App\Services\LaporanService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -21,7 +22,7 @@ class LaporanController extends Controller
     }
     public function setLaporan(Request $request): View
     {
-        $id = Session::get('id_kios_resmi');
+        $id = Auth::guard('kiosResmi')->user()->id;
         $tahun = date('Y');
         $musim_tanam = null;
         ['kios_resmi' => $kios_resmi,'notifikasis' => $notifikasis,'initials' =>$initials] = $this->dashboard_service->kiosResmiSetSidebar($id);

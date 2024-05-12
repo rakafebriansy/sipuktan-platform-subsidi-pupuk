@@ -9,6 +9,7 @@ use App\Services\DashboardService;
 use App\Services\FaqService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -22,7 +23,7 @@ class FaqController extends Controller
     }
     public function setFaq(): View
     {
-        $id = Session::get('id_pemerintah',null);
+        $id = Auth::guard('pemerintah')->user()->id;
         ['pemerintah' => $pemerintah,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         $faqs = $this->faq_service->pemerintahSetFaq($id);
@@ -35,7 +36,7 @@ class FaqController extends Controller
     }
     public function buatFaq(PemerintahBuatFaqRequest $request): RedirectResponse
     {
-        $id = Session::get('id_pemerintah');
+        $id = Auth::guard('pemerintah')->user()->id;
         $validated = $request->validated();
         if($this->faq_service->pemerintahBuatFaq($validated, $id)) {
             return back()->with('success', 'FAQ baru berhasil ditambahkan');

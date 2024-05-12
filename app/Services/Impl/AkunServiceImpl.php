@@ -8,6 +8,7 @@ use App\Models\PemilikKios;
 use App\Models\Petani;
 use App\Services\AkunService;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,11 +16,14 @@ class AkunServiceImpl implements AkunService
 {    
     public function petaniLogin(string $nik, string $kata_sandi): object|null
     {
-        $petani = Petani::where('nik',$nik)->first();
-        if(isset($petani)) {
-            if(Hash::check($kata_sandi,$petani->kata_sandi)){
-                return $petani;
-            }
+        $kredensial = [
+            'nik' => $nik,
+            'password' => $kata_sandi
+        ];
+        if(Auth::guard('petani')->attempt($kredensial)) {
+            $petani = Petani::where('nik',$nik)->first();
+            Auth::guard('petani')->login($petani);
+            return $petani;
         }
         return null;
     }
@@ -33,21 +37,27 @@ class AkunServiceImpl implements AkunService
     }
     public function kiosResmiLogin(string $nib, string $kata_sandi): object|null
     {
-        $kios_resmi = KiosResmi::where('nib',$nib)->first();
-        if(isset($kios_resmi)) {
-            if(Hash::check($kata_sandi,$kios_resmi->kata_sandi)){
-                return $kios_resmi;
-            }
+        $kredensial = [
+            'nib' => $nib,
+            'password' => $kata_sandi
+        ];
+        if(Auth::guard('kios_resmi')->attempt($kredensial)) {
+            $kios_resmi = KiosResmi::where('nib',$nib)->first();
+            Auth::guard('kios_resmi')->login($kios_resmi);
+            return $kios_resmi;
         }
         return null;
     }
     public function pemerintahLogin(string $nama_pengguna, string $kata_sandi): object|null
     {
-        $pemerintah = Pemerintah::where('nama_pengguna',$nama_pengguna)->first();
-        if(isset($pemerintah)) {
-            if(Hash::check($kata_sandi,$pemerintah->kata_sandi)){
-                return $pemerintah;
-            }
+        $kredensial = [
+            'nama_pengguna' => $nama_pengguna,
+            'password' => $kata_sandi
+        ];
+        if(Auth::guard('pemerintah')->attempt($kredensial)) {
+            $pemerintah = Pemerintah::where('nama_pengguna',$nama_pengguna)->first();
+            Auth::guard('pemerintah')->login($pemerintah);
+            return $pemerintah;
         }
         return null;
     }

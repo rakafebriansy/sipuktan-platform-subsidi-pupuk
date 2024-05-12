@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Foundation\Auth\User as Model;
 
-class KiosResmi extends Model
+class KiosResmi extends Model implements Authenticatable
 {
     use HasFactory;
     protected $table = 'kios_resmis';
@@ -23,6 +24,7 @@ class KiosResmi extends Model
         'kata_sandi',
         'id_pemilik_kios',
         'id_kecamatan',
+        'ingat_saya',
         'token'
     ];
 
@@ -62,5 +64,29 @@ class KiosResmi extends Model
         'id', 
         'id'
     );
+    }
+    public function getAuthIdentifierName()
+    {
+        return 'nib';
+    }
+    public function getAuthIdentifier()
+    {
+        return $this->nib;
+    }
+    public function getAuthPassword()
+    {
+        return $this->kata_sandi;
+    }
+    public function getRememberToken()
+    {
+        return $this->ingat_saya;
+    }
+    public function setRememberToken($value)
+    {
+        $this->ingat_saya = $value;
+    }
+    public function getRememberTokenName()
+    {
+        return 'ingat_saya';
     }
 }

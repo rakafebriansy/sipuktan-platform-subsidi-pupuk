@@ -7,7 +7,9 @@ use App\Http\Requests\KiosResmiUbahNoTelpRequest;
 use App\Http\Requests\KiosResmiUbahSandiRequest;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class AkunController extends Controller
 {
@@ -15,15 +17,15 @@ class AkunController extends Controller
     public function __construct(AkunService $akun_service) {
         $this->akun_service = $akun_service;
     }
-    public function setUbahSandi()
+    public function setUbahSandi(): View
     {
-        return response()->view('dashboard.kios-resmi.pages.ubah-sandi', [
+        return view('dashboard.kios-resmi.pages.ubah-sandi', [
             'title' => 'Kios Resmi | Ubah Kata Sandi'
         ]);
     }
     public function ubahSandi(KiosResmiUbahSandiRequest $request): RedirectResponse
     {
-        $id = Session::get('id_kios_resmi',null);
+        $id = Auth::guard('kiosResmi')->user()->id;
         $validated = $request->validated();
         if($this->akun_service->kiosResmiCekSandi($id,$validated['sandi_lama'])) {
             if($validated['sandi_baru'] == $validated['sandi_ulang']) {
@@ -36,7 +38,7 @@ class AkunController extends Controller
     }
     public function ubahNoTelp(KiosResmiUbahNoTelpRequest $request): RedirectResponse
     {
-        $id = Session::get('id_kios_resmi',null);
+        $id = Auth::guard('kiosResmi')->user()->id;
         $validated = $request->validated();
         if($this->akun_service->kiosResmiUbahNoTelp($id, $validated['nomor_telepon']))
         return back()->with('success','Nomor telepon berhasil diperbarui');

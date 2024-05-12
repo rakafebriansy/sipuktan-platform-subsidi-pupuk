@@ -37,17 +37,14 @@ return [
 
     'guards' => [
         'petani' => [
-            'redirectTo' => 'dashboard.petani.pages.index',
             'driver' => 'session',
             'provider' => 'petanis',
         ],
         'kiosResmi' => [
-            'redirectTo' => 'dashboard.kios-resmi.pages.index',
             'driver' => 'session',
             'provider' => 'kiosResmis'
         ],
         'pemerintah' => [
-            'redirectTo' => 'dashboard.pemerintah.pages.index',
             'driver' => 'session',
             'provider' => 'pemerintahs'
         ],

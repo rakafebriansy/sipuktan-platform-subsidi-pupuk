@@ -8,6 +8,7 @@ use App\Services\DashboardService;
 use App\Services\KeluhanService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -22,7 +23,7 @@ class KeluhanController extends Controller
     }
     public function setKeluhan(): View
     {
-        $id = Session::get('id_kios_resmi',null);
+        $id = Auth::guard('kiosResmi')->user()->id;
         ['kios_resmi' => $kios_resmi, 
         'notifikasis' => $notifikasis, 
         'initials' => $initials] = $this->dashboard_service->kiosResmiSetSidebar($id); 
@@ -37,7 +38,7 @@ class KeluhanController extends Controller
     }
     public function buatKeluhan(KiosResmiKeluhanRequest $request): RedirectResponse
     {
-        $id = Session::get('id_kios_resmi');
+        $id = Auth::guard('kiosResmi')->user()->id;
         $validated = $request->validated();
         if($this->keluhan_service->kiosResmiBuatKeluhan($validated,$id)) {
             return back()->with('success', 'Keluhan berhasil ditambahkan');
