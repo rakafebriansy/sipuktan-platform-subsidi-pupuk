@@ -77,7 +77,7 @@
   <div id="dropdownRegister" class="z-10 hidden bg-white rounded-lg shadow max-w-60 dark:bg-gray-700">
     <ul class="max-h-48 py-2 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRegisterButton">
           @foreach ($kecamatans as $kecamatan)
-            <li>
+            <li onclick="dismissingDropdown('dropdownRegisterButton')">
                 <p data-value="{{ $kecamatan->id }}" class="flex cursor-pointer items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white poktan">
                 {{ $kecamatan->nama }}
                 </p>
