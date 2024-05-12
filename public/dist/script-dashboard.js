@@ -20,7 +20,15 @@ function fetchPetaniFromAlokasi(id) {
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
-      .then(res => viewPetaniFromAlokasi(JSON.parse(res)))
+      .then(res => viewPetaniFromAlokasi(res))
+      .catch(e => console.error('Error'+e));
+}
+function fetchPetaniFromAlokasiPemerintah(id) {
+    fetch('/pemerintah/ajax/petani-alokasi', {
+        method: 'POST',
+        body: new URLSearchParams('id='+id)
+    }).then(res => res.json())
+      .then(res => viewPetaniFromAlokasiPemerintah(res))
       .catch(e => console.error('Error'+e));
 }
 function fetchDeleteNotifikasi(id) {
@@ -89,6 +97,14 @@ function viewPetaniFromAlokasi(data) {
     const table_rows = document.querySelector('#detailAlokasiModal table tbody');
     table_rows.querySelector('tr td:nth-child(2)').innerText = data['nomor_telepon'];
     table_rows.querySelector('tr:nth-child(2) td:nth-child(2)').innerText = data['poktan'];
+}
+function viewPetaniFromAlokasiPemerintah(data) {
+    document.querySelector('#detailAlokasiModal img').setAttribute('src','/storage/foto_ktps/' + data['foto_ktp']);
+    const table_rows = document.querySelector('#detailAlokasiModal table tbody');
+    table_rows.querySelector('tr td:nth-child(2)').innerText = data['nik'];
+    table_rows.querySelector('tr:nth-child(2) td:nth-child(2)').innerText = data['nomor_telepon'];
+    table_rows.querySelector('tr:nth-child(3) td:nth-child(2)').innerText = data['poktan'];
+    table_rows.querySelector('tr:nth-child(4) td:nth-child(2)').innerText = data['kios_resmi'];
 }
 function viewFaqDetail(data) {
     const dropdownEditFaq = document.getElementById('editFaqModal');
@@ -186,15 +202,6 @@ function deletePassId(btn){
     document.getElementById('deleteAlokasiTahun').value = document.getElementById('dropdownTahunButton').innerText;
     document.getElementById('deleteAlokasiId').value = btn.parentElement.dataset.id;
 }
-function detailPassId(btn){
-    const detailBody = document.querySelector('#detailAlokasiBody');
-    const btnParent = btn.parentElement;
-    detailBody.querySelector('img').setAttribute('src','/storage/foto_ktps/' + btnParent.dataset.ktp);
-    detailBody.querySelector('td.detailNik').innerText = btnParent.dataset.nik
-    detailBody.querySelector('td.detailNomor').innerText = btnParent.dataset.nomor
-    detailBody.querySelector('td.detailPoktan').innerText = btnParent.dataset.poktan
-    detailBody.querySelector('td.detailKios').innerText = btnParent.dataset.kios
-}
 function getAlokasiFromMt(li, mode) {
     document.getElementById('dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/alokasi?tahun=' + document.querySelector('#dropdownTahunButton').innerText  + '&&musim_tanam=' + li.querySelector('p').innerText );
@@ -253,6 +260,9 @@ function getDetailLaporanFiles(btn) {
 }
 function getPetaniFromAlokasi(btn) {
     fetchPetaniFromAlokasi(btn.parentElement.dataset.id);
+}
+function getPetaniFromAlokasiPemerintah(btn) {
+    fetchPetaniFromAlokasiPemerintah(btn.parentElement.dataset.id);
 }
 function editStatusAlokasiPassId() {
     document.getElementById('alokasiTahun').value = document.getElementById('dropdownTahunButton').innerText;

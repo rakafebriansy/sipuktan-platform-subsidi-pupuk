@@ -108,6 +108,7 @@ Route::prefix('/pemerintah')->group(function(){
         Route::get('/logout',[App\Http\Controllers\Dashboard\Pemerintah\AkunController::class,'logout']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/get-faq',[AjaxController::class,'getFaqDetail']);
+            Route::post('/petani-alokasi',[AjaxController::class,'getPetaniFromAlokasiPemerintah']);
         });
     });
 });

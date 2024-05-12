@@ -43,7 +43,15 @@ class AjaxController extends Controller
     {
         if(isset($request->id)) {
             $detail_petani = $this->alokasi_service->ajaxDetailAlokasiPetani($request->id);
-            return json_encode($detail_petani);
+            return $detail_petani;
+        }
+        return '';
+    }
+    public function getPetaniFromAlokasiPemerintah(Request $request)
+    {
+        if(isset($request->id)) {
+            $detail_petani = $this->alokasi_service->ajaxDetailAlokasiPetaniByPemerintah($request->id);
+            return $detail_petani;
         }
         return '';
     }

@@ -109,7 +109,17 @@ class AlokasiServiceImpl implements AlokasiService
         ->join('petanis','alokasis.id_petani','petanis.id')
         ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
         ->where('alokasis.id',$id)
-        ->first();
+        ->first()->toJson(JSON_PRETTY_PRINT);
+        return $detail_petani;
+    }
+    public function ajaxDetailAlokasiPetaniByPemerintah(int $id): string
+    {
+        $detail_petani = Alokasi::select('petanis.nik','petanis.foto_ktp','petanis.nomor_telepon', 'kelompok_tanis.nama as poktan','kios_resmis.nama as kios_resmi')
+        ->join('petanis','alokasis.id_petani','petanis.id')
+        ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
+        ->join('kios_resmis','kelompok_tanis.id_kios_resmi','kios_resmis.id')
+        ->where('alokasis.id',$id)
+        ->first()->toJson(JSON_PRETTY_PRINT);
         return $detail_petani;
     }
     
