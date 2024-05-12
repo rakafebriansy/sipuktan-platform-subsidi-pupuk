@@ -279,6 +279,7 @@ function deleteFaqPassId(btn){
 }
 function editNoTelpPassId(btn,mode) {
     const editNoTelpModal = document.getElementById('editNoTelpModal');
+    document.getElementById('dropdownProfil').classList.replace('block','hidden');
     editNoTelpModal.querySelector('[name="id"]').value = document.getElementById(mode).dataset.id;
     editNoTelpModal.querySelector('[name="nomor_disabled"]').value = btn.previousElementSibling.innerText;
 }

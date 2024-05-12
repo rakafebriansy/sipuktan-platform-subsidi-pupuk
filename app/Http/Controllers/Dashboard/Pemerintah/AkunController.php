@@ -34,4 +34,9 @@ class AkunController extends Controller
         }
         return back()->withErrors(['failed' => 'Kata sandi lama salah']);
     }
+    public function logout()
+    {
+        Auth::guard('pemerintah')->logout();
+        return redirect("/");
+    }
 }

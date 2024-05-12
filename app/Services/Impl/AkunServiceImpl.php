@@ -41,9 +41,9 @@ class AkunServiceImpl implements AkunService
             'nib' => $nib,
             'password' => $kata_sandi
         ];
-        if(Auth::guard('kios_resmi')->attempt($kredensial)) {
+        if(Auth::guard('kiosResmi')->attempt($kredensial)) {
             $kios_resmi = KiosResmi::where('nib',$nib)->first();
-            Auth::guard('kios_resmi')->login($kios_resmi);
+            Auth::guard('kiosResmi')->login($kios_resmi);
             return $kios_resmi;
         }
         return null;

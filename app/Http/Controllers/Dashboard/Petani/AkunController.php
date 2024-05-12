@@ -47,4 +47,9 @@ class AkunController extends Controller
         return back()->with('success','Nomor telepon berhasil diperbarui');
         return back()->withErrors(['failed' => 'Nomor telepon gagal diperbarui']);
     }
+    public function logout()
+    {
+        Auth::guard('petani')->logout();
+        return redirect("/");
+    }
 }

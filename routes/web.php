@@ -6,6 +6,7 @@ use App\Jobs\UpdateMusimTanamJob;
 use App\Models\KiosResmi;
 use App\Models\KredensialUbahSandi;
 use App\Models\Petani;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,7 @@ Route::prefix('/petani')->group(function(){
         Route::get('/riwayat-transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setRiwayatTransaksi']);
         Route::get('/keluhan',[App\Http\Controllers\Dashboard\Petani\KeluhanController::class,'setKeluhan']);
         Route::post('/keluhan',[App\Http\Controllers\Dashboard\Petani\KeluhanController::class,'buatKeluhan']);
+        Route::get('/logout',[App\Http\Controllers\Dashboard\Petani\AkunController::class,'logout']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/delete-notifikasi',[AjaxController::class,'deleteNotifikasi']);
         });
@@ -70,6 +72,7 @@ Route::prefix('/kios-resmi')->group(function(){
         Route::post('/laporan', [App\Http\Controllers\Dashboard\KiosResmi\LaporanController::class, 'laporan']);
         Route::get('/keluhan',[App\Http\Controllers\Dashboard\KiosResmi\KeluhanController::class,'setKeluhan']);
         Route::post('/keluhan',[App\Http\Controllers\Dashboard\KiosResmi\KeluhanController::class,'buatKeluhan']);
+        Route::get('/logout',[App\Http\Controllers\Dashboard\KiosResmi\AkunController::class,'logout']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/petani-riwayat',[AjaxController::class,'getPetaniFromRiwayat']);
             Route::post('/petani-alokasi',[AjaxController::class,'getPetaniFromAlokasi']);
@@ -102,6 +105,7 @@ Route::prefix('/pemerintah')->group(function(){
         Route::delete('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'hapusFaq']);
         Route::get('/keluhan',[App\Http\Controllers\Dashboard\Pemerintah\KeluhanController::class,'setKeluhan']);
         Route::patch('/keluhan',[App\Http\Controllers\Dashboard\Pemerintah\KeluhanController::class,'balasKeluhan']);
+        Route::get('/logout',[App\Http\Controllers\Dashboard\Pemerintah\AkunController::class,'logout']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/get-faq',[AjaxController::class,'getFaqDetail']);
         });
@@ -110,11 +114,6 @@ Route::prefix('/pemerintah')->group(function(){
 Route::prefix('/ajax')->group(function(){
     Route::post('/laporan-filenames',[AjaxController::class,'getLaporanFilenames']);
     Route::post('/get-keluhan',[AjaxController::class,'getKeluhanDetail']);
-});
-
-Route::get('/logout', function(){
-    Session::invalidate();
-    return redirect("/");
 });
 Route::get('/download/{folder_name}/{file_name}', function(string $folder_name, string $file_name){
     return Storage::disk('public')->download('/' . $folder_name . '/' . $file_name);
