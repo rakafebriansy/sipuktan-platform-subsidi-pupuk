@@ -13,31 +13,31 @@ class RiwayatTransaksiSeeder extends Seeder
      */
     public function run(): void
     {
-        RiwayatTransaksi::create([
+        RiwayatTransaksi::insert([
             'id' => 1,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Non-Tunai',
             'id_alokasi' => 1,
         ]);
-        RiwayatTransaksi::create([
+        RiwayatTransaksi::insert([
             'id' => 2,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Non-Tunai',
             'id_alokasi' => 2,
         ]);
-        RiwayatTransaksi::create([
+        RiwayatTransaksi::insert([
             'id' => 3,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Tunai',
             'id_alokasi' => 3,
         ]);
-        RiwayatTransaksi::create([
+        RiwayatTransaksi::insert([
             'id' => 4,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Tunai',
             'id_alokasi' => 4,
         ]);
-        RiwayatTransaksi::create([
+        RiwayatTransaksi::insert([
             'id' => 5,
             'tanggal_transaksi' => fake()->date(),
             'metode_pembayaran' => 'Tunai',

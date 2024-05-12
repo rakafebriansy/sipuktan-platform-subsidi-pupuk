@@ -13,7 +13,7 @@ class LaporanSeeder extends Seeder
      */
     public function run(): void
     {
-        Laporan::create([
+        Laporan::insert([
             'id' => 1,
             'tanggal_pengambilan'=> fake()->date(),
             'foto_bukti_pengambilan' => 'bukti001.jpg',
@@ -23,7 +23,7 @@ class LaporanSeeder extends Seeder
             'status_verifikasi' => 'Belum Diverifikasi',
             'id_riwayat_transaksi' => 1
         ]);
-        Laporan::create([
+        Laporan::insert([
             'id' => 2,
             'tanggal_pengambilan'=> fake()->date(),
             'foto_bukti_pengambilan' => 'bukti002.jpg',
@@ -33,7 +33,7 @@ class LaporanSeeder extends Seeder
             'status_verifikasi' => 'Belum Diverifikasi',
             'id_riwayat_transaksi' => 2
         ]);
-        Laporan::create([
+        Laporan::insert([
             'id' => 3,
             'tanggal_pengambilan'=> fake()->date(),
             'foto_bukti_pengambilan' => 'bukti003.jpg',

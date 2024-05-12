@@ -13,7 +13,7 @@ class MusimTanamSeeder extends Seeder
      */
     public function run(): void
     {
-        MusimTanam::create([
+        MusimTanam::insert([
             'id' => 1,
             'musim_tanam' => 'MT1',
             'tahun' => 2024

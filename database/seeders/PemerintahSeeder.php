@@ -15,7 +15,7 @@ class PemerintahSeeder extends Seeder
     public function run(): void
     {
         $this->call(MusimTanamSeeder::class);
-        Pemerintah::create([
+        Pemerintah::insert([
             'id' => 1,
             'nama_pengguna' => 'admin1',
             'kata_sandi' => Hash::make('pemerintah@1'),

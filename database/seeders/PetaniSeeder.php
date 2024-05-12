@@ -15,7 +15,7 @@ class PetaniSeeder extends Seeder
     public function run(): void
     {
         $this->call([KecamatanSeeder::class, PemilikKiosSeeder::class, KiosResmiSeeder::class, KelompokTaniSeeder::class]);
-        Petani::create([
+        Petani::insert([
             'id' => 1,
             'nik' => '0025362728812549',
             'nama' => 'Yennefer Vengenberg',
@@ -24,7 +24,7 @@ class PetaniSeeder extends Seeder
             'nomor_telepon' => '081263563732',
             'id_kelompok_tani' => 1
         ]);
-        Petani::create([
+        Petani::insert([
             'id' => 2,
             'nik' => '0025635728812549',
             'nama' => 'Geralt Rivia',
@@ -34,7 +34,7 @@ class PetaniSeeder extends Seeder
             'nomor_telepon' => '081233405169',
             'id_kelompok_tani' => 1
         ]);
-        Petani::create([
+        Petani::insert([
             'id' => 3,
             'nik' => '0025362728811549',
             'nama' => 'Radovid',

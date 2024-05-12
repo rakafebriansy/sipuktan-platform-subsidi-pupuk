@@ -64,7 +64,7 @@ class TransaksiController extends Controller
     {
         $id_alokasis = $request->all()['id_alokasis'];
         if ($this->transaksi_service->petaniCheckoutNonTunai($id_alokasis)) {
-            return back()->with('success','Pembayaran Berhasil!');
+            return redirect('/petani/transaksi')->with('success','Pembayaran Berhasil!');
         }
         return back()->withErrors(['db' => 'Pembayaran Gagal!']);
     }

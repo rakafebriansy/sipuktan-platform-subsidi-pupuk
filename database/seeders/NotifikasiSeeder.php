@@ -13,19 +13,19 @@ class NotifikasiSeeder extends Seeder
      */
     public function run(): void
     {
-        Notifikasi::create([
+        Notifikasi::insert([
             'id' => 1,
             'isi' => fake()->sentence(),
             'id_petani' => 1,
             'id_pemerintah' => 1
         ]);
-        Notifikasi::create([
+        Notifikasi::insert([
             'id' => 2,
             'isi' => fake()->sentence(),
             'id_petani' => 1,
             'id_pemerintah' => 1
         ]);
-        Notifikasi::create([
+        Notifikasi::insert([
             'id' => 3,
             'isi' => fake()->sentence(),
             'id_kios_resmi' => 2,

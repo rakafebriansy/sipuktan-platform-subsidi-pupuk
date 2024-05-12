@@ -13,17 +13,17 @@ class JenisPupukSeeder extends Seeder
      */
     public function run(): void
     {
-        JenisPupuk::create([
+        JenisPupuk::insert([
             'id' => 'ponskha',
             'jenis' => 'Ponshka',
             'harga' => 2300
         ]);
-        JenisPupuk::create([
+        JenisPupuk::insert([
             'id' => 'urea',
             'jenis' => 'Urea',
             'harga' => 2250
         ]);
-        JenisPupuk::create([
+        JenisPupuk::insert([
             'id' => 'sp36',
             'jenis' => 'SP-36',
             'harga' => 2400

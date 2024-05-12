@@ -13,17 +13,17 @@ class KelompokTaniSeeder extends Seeder
      */
     public function run(): void
     {
-        KelompokTani::create([
+        KelompokTani::insert([
             'id' => 1,
             'nama' => 'Poktan Sumbersari 1',
             'id_kios_resmi' => 1,
         ]);
-        KelompokTani::create([
+        KelompokTani::insert([
             'id' => 2,
             'nama' => 'Poktan Kebonsari 1',
             'id_kios_resmi' => 2,
         ]);
-        KelompokTani::create([
+        KelompokTani::insert([
             'id' => 3,
             'nama' => 'Poktan Jayabaya',
             'id_kios_resmi' => 3,

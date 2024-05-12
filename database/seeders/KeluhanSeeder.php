@@ -13,21 +13,21 @@ class KeluhanSeeder extends Seeder
      */
     public function run(): void
     {
-        Keluhan::create([
+        Keluhan::insert([
             'id' => 1,
             'keluhan' => fake()->sentence(),
             'balasan' => fake()->sentence(),
             'tanggal_keluhan' => fake()->date(),
             'id_petani' => 1
         ]);
-        Keluhan::create([
+        Keluhan::insert([
             'id' => 1,
             'keluhan' => fake()->sentence(),
             'balasan' => fake()->sentence(),
             'tanggal_keluhan' => fake()->date(),
             'id_petani' => 2
         ]);
-        Keluhan::create([
+        Keluhan::insert([
             'id' => 1,
             'keluhan' => fake()->sentence(),
             'balasan' => fake()->sentence(),

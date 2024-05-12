@@ -14,7 +14,7 @@ class KiosResmiSeeder extends Seeder
      */
     public function run(): void
     {
-        KiosResmi::create([
+        KiosResmi::insert([
             'id' => 1,
             'nib' => '0908897766',
             'nama' => 'Harapan',
@@ -24,7 +24,7 @@ class KiosResmiSeeder extends Seeder
             'aktif' => 1,
             'id_kecamatan' => 'sumbersari'
         ]);
-        KiosResmi::create([
+        KiosResmi::insert([
             'id' => 2,
             'nib' => '9312737498',
             'nama' => 'Tani Jaya',
@@ -33,7 +33,7 @@ class KiosResmiSeeder extends Seeder
             'id_pemilik_kios' => 2,
             'id_kecamatan' => 'kebonsari'
         ]);
-        KiosResmi::create([
+        KiosResmi::insert([
             'id' => 3,
             'nib' => '128474710',
             'nama' => 'Makmur Jaya',

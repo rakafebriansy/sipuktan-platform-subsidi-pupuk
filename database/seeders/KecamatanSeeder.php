@@ -13,23 +13,23 @@ class KecamatanSeeder extends Seeder
      */
     public function run(): void
     {
-        Kecamatan::create([
+        Kecamatan::insert([
             'id' => 'patrang',
             'nama' => 'Patrang'
         ]);
-        Kecamatan::create([
+        Kecamatan::insert([
             'id' => 'sumbersari',
             'nama' => 'Sumbersari'
         ]);
-        Kecamatan::create([
+        Kecamatan::insert([
             'id' => 'pakusari',
             'nama' => 'Pakusari'
         ]);
-        Kecamatan::create([
+        Kecamatan::insert([
             'id' => 'kebonsari',
             'nama' => 'Kebonsari'
         ]);
-        Kecamatan::create([
+        Kecamatan::insert([
             'id' => 'ajung',
             'nama' => 'Ajung'
         ]);
