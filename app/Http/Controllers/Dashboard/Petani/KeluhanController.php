@@ -38,7 +38,7 @@ class KeluhanController extends Controller
     }
     public function buatKeluhan(PetaniKeluhanRequest $request): RedirectResponse
     {
-        $id = Session::get('id_petani');
+        $id = Auth::guard('petani')->user()->id;
         $validated = $request->validated();
         if($this->keluhan_service->petaniBuatKeluhan($validated,$id)) {
             return back()->with('success', 'Keluhan berhasil ditambahkan');

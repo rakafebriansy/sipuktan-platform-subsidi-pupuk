@@ -8,10 +8,7 @@ use App\Services\TelegramBotService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Telegram\Bot\Api;
-use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramBotController extends Controller
 {

@@ -44,7 +44,7 @@ class TelegramBotServiceImpl implements TelegramBotService
     public function service(Request $request): array
     {
         $text = $request['message']['text'];
-        if(str_contains($text, '/ubahsandipetani')) {
+        if($text == '/ubahsandipetani') {
             return [
                 'teks' => 'Silahkan masukkan nomor telepon terdaftar petani anda!',
                 'pengirim' => $request['message']['from']['id'],
@@ -58,7 +58,7 @@ class TelegramBotServiceImpl implements TelegramBotService
                 ]
             ];
         }
-        if(str_contains($text, '/ubahsandikiosresmi')) {
+        if($text == '/ubahsandikiosresmi') {
             return [
                 'teks' => 'Silahkan masukkan nomor telepon terdaftar kios resmi anda!',
                 'pengirim' => $request['message']['from']['id'],
@@ -72,7 +72,24 @@ class TelegramBotServiceImpl implements TelegramBotService
                 ]
             ];
         }
-        if(str_contains($text, '/menu')) {
+        if($text == '/sipuktan') {
+            $rendered_view = $this->setRenderedView('sipuktan',[
+                'link' => env('APP_URL')
+            ]);
+            return [
+                'teks' => 'Silahkan masukkan nomor telepon terdaftar kios resmi anda!',
+                'pengirim' => $request['message']['from']['id'],
+                'reply_markup' => [
+                    'keyboard' =>[[[
+                        'text'=>'Kirim nomor telepon saya',
+                        'request_contact'=>true,
+                    ]]],
+                    'resize_keyboard'=>true,
+                    'one_time_keyboard'=>true,
+                ]
+            ];
+        }
+        if($text == '/menu') {
             $rendered_view = $this->setRenderedView('menu',[
                 'first_name' => $request['message']['from']['first_name']
             ]);

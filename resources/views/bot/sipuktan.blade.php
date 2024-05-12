@@ -1,0 +1,2 @@
+SIPUKTAN adalah sistem informasi berbasis website yang terintegrasi dengan aplikasi Telegram untuk memudahkan proses penyampaian informasi dan transaksi pupuk bersubsidi oleh petani.
+Situs web resmi SIPUKTAN dapat diakses pada <b>{{ $link }}</b>
