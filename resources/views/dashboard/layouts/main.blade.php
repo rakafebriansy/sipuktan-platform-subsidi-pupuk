@@ -29,7 +29,6 @@
         let pesan = data['data']['pesan'];
         console.log(data)
         if(id_kios_resmi == document.getElementById('kios-resmi').dataset.id){
-          console.log('ok')
           viewAlertNotifikasi(pesan, id_notifikasi,'red')
         }
       });

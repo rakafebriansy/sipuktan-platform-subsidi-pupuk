@@ -1,7 +1,7 @@
 @extends('homepage.layouts.main')
 @section('wrapper')
 <div class="relative overflow-hidden top-0 start-1/2 bg-no-repeat bg-top size-full z-5 transform -translate-x-1/2">
-  <img src="{{ asset('/images/farmer.png') }}" class="w-full h-full absolute z-20" alt="">
+  <img src="{{ asset('/images/farmer.webp') }}" class="w-full h-full absolute z-20" alt="">
   <div class="bg-gradient-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,0.6)] w-full h-full absolute z-30"></div>
   <div class="w-full h-full justify-center items-center flex z-40 relative">
     <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 ">

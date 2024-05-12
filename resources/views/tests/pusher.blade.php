@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-    <!DOCTYPE html>
     <head>
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
       <title>Pusher Test</title>
-
     </head>
     <body>
       <h1>Pusher Test</h1>
