@@ -258,7 +258,7 @@
               </button>
               <form method="post" action="/pemerintah/alokasi" class="p-4 md:p-5 text-center">
                 @csrf
-                @method('put')
+                @method('delete')
                 <input type="hidden" name="id" value="" id="deleteAlokasiId">
                 <input type="hidden" name="tahun" value="" id="deleteAlokasiTahun">
                 <input type="hidden" name="musim_tanam" value="" id="deleteAlokasiMT">
