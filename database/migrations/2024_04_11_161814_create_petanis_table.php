@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('nomor_telepon',20)->nullable(false)->unique();
             $table->unsignedBigInteger('id_kelompok_tani')->nullable(false);
             $table->boolean('aktif')->nullable(false)->default(false);
-            $table->string('ingat_saya',255)->nullable();
             $table->string('token',255)->nullable()->unique();
 
             $table->foreign('id_kelompok_tani')->on('kelompok_tanis')->references('id');

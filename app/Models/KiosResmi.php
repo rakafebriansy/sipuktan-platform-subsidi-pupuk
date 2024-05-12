@@ -24,14 +24,11 @@ class KiosResmi extends Model implements Authenticatable
         'kata_sandi',
         'id_pemilik_kios',
         'id_kecamatan',
-        'ingat_saya',
         'token'
     ];
 
     protected $guarded = ['id'];
-    protected $hidden = [
-     'kata_sandi', 'remember_token',
-    ];
+    protected $hidden = ['kata_sandi'];
     public function pemilik_kios(): BelongsTo
     {
         return $this->belongsTo(PemilikKios::class,'id_pemilik_kios','id');
@@ -79,14 +76,14 @@ class KiosResmi extends Model implements Authenticatable
     }
     public function getRememberToken()
     {
-        return $this->ingat_saya;
+        //
     }
     public function setRememberToken($value)
     {
-        $this->ingat_saya = $value;
+        //
     }
     public function getRememberTokenName()
     {
-        return 'ingat_saya';
+        //
     }
 }

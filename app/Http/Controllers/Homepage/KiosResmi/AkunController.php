@@ -11,6 +11,7 @@ use App\Models\Kecamatan;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;
 
 class AkunController extends Controller
@@ -50,8 +51,11 @@ class AkunController extends Controller
         $kios_resmi = $this->akun_service->kiosResmiLogin($request->nib,$request->kata_sandi);
         if(isset($kios_resmi)) {
             if($kios_resmi->aktif) {
+                if($request->remember == 'on'){
+                    setcookie('sipuktan_nib',$request->nib,time() + 60*24);
+                    setcookie('sipuktan_kata_sandi_kios',$request->kata_sandi,time() + 60*24);
+                }
                 return redirect('/kios-resmi/dashboard');
-
             }
             return back()->with('unverified','Akun anda belum diverifikasi');
         } 

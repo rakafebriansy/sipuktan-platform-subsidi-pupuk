@@ -23,8 +23,9 @@ class PetaniLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nik' => 'required|numeric|min:16',
-            'kata_sandi' => 'required|min:6',
+            'nik' => 'required',
+            'kata_sandi' => 'required',
+            'remember' => 'nullable',
         ];
     }
         

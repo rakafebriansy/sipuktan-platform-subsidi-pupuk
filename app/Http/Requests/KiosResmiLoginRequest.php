@@ -24,6 +24,7 @@ class KiosResmiLoginRequest extends FormRequest
         return [
             'nib' => 'required|numeric',
             'kata_sandi' => 'required',
+            'remember' => 'nullable',
         ];
     }
 

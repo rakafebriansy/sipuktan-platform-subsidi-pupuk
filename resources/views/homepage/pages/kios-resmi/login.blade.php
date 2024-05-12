@@ -23,18 +23,18 @@
             <div class="grid">
               <div class="mb-5">
                 <label for="nib" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIB</label>
-                <input type="text" name="nib" id="nib" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
+                <input type="text" name="nib" id="nib" @if (isset($_COOKIE['sipuktan_nib'])) value="{{ $_COOKIE['sipuktan_nib'] }}" @else value="{{ old('nib','') }}" @endif class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" />
               </div>
               <div class="mb-5">
                 <div class="flex justify-between items-center">
                   <label for="kata_sandi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi</label>
                   <a class="text-sm text-blue-600 decoration-2 hover:underline font-medium" href="/kios-resmi/lupa-sandi">Lupa sandi?</a>
                 </div>
-                <input type="password" name="kata_sandi" id="kata_sandi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
+                <input type="password" name="kata_sandi" id="kata_sandi" @isset($_COOKIE['sipuktan_kata_sandi_kios']) value="{{ $_COOKIE['sipuktan_kata_sandi_kios'] }}" @endisset id="kata_sandi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" />
               </div> 
               <div class="flex items-center">
                 <div class="flex">
-                  <input id="remember-me" name="remember-me" type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  <input id="remember-me" name="remember" type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                 </div>
                 <div class="ms-3">
                   <label for="remember-me" class="text-sm dark:text-white">Ingat saya</label>

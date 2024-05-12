@@ -11,6 +11,7 @@ use App\Http\Requests\PetaniRegisterRequest;
 use App\Models\KelompokTani;
 use App\Services\AkunService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;
 
 class AkunController extends Controller
@@ -32,6 +33,10 @@ class AkunController extends Controller
         $petani = $this->akun_service->petaniLogin($request->nik,$request->kata_sandi);
         if(isset($petani)) {
             if($petani->aktif) {
+                if($request->remember == 'on'){
+                    setcookie('sipuktan_nik',$request->nik,time() + 60*24);
+                    setcookie('sipuktan_kata_sandi_petani',$request->kata_sandi,time() + 60*24);
+                }
                 return redirect('/petani/dashboard');
             }
             return back()->with('unverified','Akun anda belum diverifikasi');

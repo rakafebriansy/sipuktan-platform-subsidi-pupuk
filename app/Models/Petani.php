@@ -25,13 +25,10 @@ class Petani extends Model implements Authenticatable
         'foto_ktp',
         'nomor_telepon',
         'id_kelompok_tani',
-        'ingat_saya',
         'token'
     ];
     protected $guarded = ['id'];
-    protected $hidden = [
-     'kata_sandi', 'remember_token',
-    ];
+    protected $hidden = ['kata_sandi'];
     public function kelompok_tani(): BelongsTo
     {
         return $this->belongsTo(KelompokTani::class,'id_kelompok_tani','id');
@@ -71,14 +68,14 @@ class Petani extends Model implements Authenticatable
     }
     public function getRememberToken()
     {
-        return $this->ingat_saya;
+        //
     }
     public function setRememberToken($value)
     {
-        $this->ingat_saya = $value;
+        //
     }
     public function getRememberTokenName()
     {
-        return 'ingat_saya';
+        //
     }
 }
