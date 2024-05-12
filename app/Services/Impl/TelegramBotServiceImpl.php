@@ -8,6 +8,7 @@ use App\Models\RiwayatChat;
 use App\Services\TelegramBotService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class TelegramBotServiceImpl implements TelegramBotService
 {
@@ -28,7 +29,7 @@ class TelegramBotServiceImpl implements TelegramBotService
         }
         return null;
     }
-    private function pemilikKiosCekNomorTelepon(string $nomor_telepon): string|null
+    private function kiosResmiCekNomorTelepon(string $nomor_telepon): string|null
     {
         $pemilik_kios = PemilikKios::where('nomor_telepon',$nomor_telepon)->first();
         if(isset($pemilik_kios)) {
@@ -38,6 +39,19 @@ class TelegramBotServiceImpl implements TelegramBotService
                 return $token;
             });
             return $token;
+        }
+        return null;
+    }
+    private function petaniGetInfoKios(string $nik, string $kata_sandi): array|null
+    {
+        $petani = Petani::where('nik',$nik)->first();
+        if(isset($petani) && Hash::check($kata_sandi, $petani->kata_sandi)) {
+            $kios_resmi = $petani->kelompok_tani->kios_resmi;
+            $kecamatan = $kios_resmi->kecamatan;
+            return [
+                'nama' => $kios_resmi->nama,
+                'alamat' => $kios_resmi->jalan . ', ' . $kecamatan->nama,
+            ];
         }
         return null;
     }
@@ -81,8 +95,24 @@ class TelegramBotServiceImpl implements TelegramBotService
                 'pengirim' => $request['message']['from']['id'],
             ];
         }
-        if($text == '/pupuk') {
-            $rendered_view = $this->setRenderedView('pupuk',[
+        if(str_contains($text,'/kios')) {
+            $separated = explode(' ',$text);
+            if(count($separated) == 3) {
+                $data = $this->petaniGetInfoKios($separated[1],$separated[2]);
+                if(isset($data)) {
+                    $rendered_view = $this->setRenderedView('kios-success',[
+                        'nama' => $data['nama'],
+                        'alamat' => $data['alamat']
+                    ]);
+                } else {
+                    $rendered_view = $this->setRenderedView('kios-failed');
+                }
+                return [
+                    'teks' => $rendered_view,
+                    'pengirim' => $request['message']['from']['id'],
+                ];
+            }
+            $rendered_view = $this->setRenderedView('kios',[
                 'link' => env('APP_URL')
             ]);
             return [
@@ -90,8 +120,8 @@ class TelegramBotServiceImpl implements TelegramBotService
                 'pengirim' => $request['message']['from']['id'],
             ];
         }
-        if($text == '/kios') {
-            $rendered_view = $this->setRenderedView('kios',[
+        if($text == '/belipupuk') {
+            $rendered_view = $this->setRenderedView('belipupuk',[
                 'link' => env('APP_URL')
             ]);
             return [
@@ -126,6 +156,15 @@ class TelegramBotServiceImpl implements TelegramBotService
                 'pengirim' => $request['message']['from']['id'],
             ];
         }
+        if($text == '/registrasiweb') {
+            $rendered_view = $this->setRenderedView('registrasiweb',[
+                'first_name' => $request['message']['from']['first_name']
+            ]);
+            return [
+                'teks' => $rendered_view,
+                'pengirim' => $request['message']['from']['id'],
+            ];
+        }
         return [
             'teks' => 'klik /menu',
             'pengirim' => $request['message']['from']['id'],
@@ -151,7 +190,7 @@ class TelegramBotServiceImpl implements TelegramBotService
         if($text == 'Silahkan masukkan nomor telepon terdaftar kios resmi anda!') {
             $nomor_telepon = $request['message']['contact']['phone_number'];
             if(substr($nomor_telepon,0,3) == '+62') $nomor_telepon = str_replace('+62','0',$nomor_telepon);
-            $result = $this->pemilikKiosCekNomorTelepon($nomor_telepon);
+            $result = $this->kiosResmiCekNomorTelepon($nomor_telepon);
             if(isset($result)) {
                 $text = 'Masukkan token berikut pada website: <b>'.$result.'</b>';
             } else {

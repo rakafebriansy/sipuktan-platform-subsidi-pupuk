@@ -1,1 +1,1 @@
-Untuk mengakses informasi personal mengenai pupuk subsidi, silakan kirimkan NIB yang sudah terdaftar dengan format "<b>/pupuk <i>NIB anda</i></b>"
+Untuk mengakses informasi personal mengenai pupuk subsidi, silakan kirimkan NIB yang sudah terdaftar dengan format "<b>/pupuk <i>NIK anda</i></b>"
