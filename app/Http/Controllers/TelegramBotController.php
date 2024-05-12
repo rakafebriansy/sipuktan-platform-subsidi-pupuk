@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Services\AkunService;
 use App\Services\TelegramBotService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -67,9 +68,12 @@ class TelegramBotController extends Controller
         }
         $this->sendMessageHTML($final_request);
     }
-    public function setWebhook(): bool
+    public function setWebhook(): RedirectResponse
     {
         $responses = $this->telegram->setWebhook(['url'=> env('APP_URL') . '/bot/webhook/' . env('TELEGRAM_BOT_TOKEN')]);
-        return $responses;
+        if($responses) {
+            return redirect('/');
+        }
+        return redirect('/')->withErrors(['error' => 'Something went wrong with our webhook']);
     }
 }
