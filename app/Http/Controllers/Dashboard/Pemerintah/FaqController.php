@@ -40,7 +40,7 @@ class FaqController extends Controller
         if($this->faq_service->pemerintahBuatFaq($validated, $id)) {
             return back()->with('success', 'FAQ baru berhasil ditambahkan');
         }
-        return back()->with(['error' => 'FAQ baru gagal ditambahkan']);
+        return back()->withInput()->withErrors(['error' => 'FAQ baru gagal ditambahkan']);
     }
     public function editFaq(PemerintahEditFaqRequest $request): RedirectResponse
     {
@@ -48,13 +48,13 @@ class FaqController extends Controller
         if($this->faq_service->pemerintahEditFaq($validated)) {
             return back()->with('success','FAQ berhasil diperbarui');
         }
-        return back()->withErrors(['error','FAQ gagal diperbarui']);
+        return back()->withInput()->withErrors(['error','FAQ gagal diperbarui']);
     }
     public function hapusFaq(Request $request): RedirectResponse
     {
         if($this->faq_service->pemerintahHapusFaq($request->id)) {
             return back()->with('success','FAQ berhasil dihapus');
         }
-        return back()->withErrors(['error' =>'FAQ gagal dihapus']);
+        return back()->withInput()->withErrors(['error' =>'FAQ gagal dihapus']);
     }
 }
