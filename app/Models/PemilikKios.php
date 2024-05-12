@@ -27,8 +27,4 @@ class PemilikKios extends Model
     {
         return $this->hasOne(KiosResmi::class,'id_pemilik_kios','id');
     }
-    public function kredensial_ubah_sandis(): HasMany
-    {
-        return $this->hasMany(KredensialUbahSandi::class, 'id_pemilik_kios','id');
-    }
 }

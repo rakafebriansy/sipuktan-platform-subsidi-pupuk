@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Homepage\Petani;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PetaniLoginRequest;
 use App\Http\Requests\PetaniLupaSandiRequest;
+use App\Http\Requests\PetaniLupaUbahSandi;
+use App\Http\Requests\PetaniLupaUbahSandiRequest;
 use App\Http\Requests\PetaniRegisterRequest;
 use App\Models\KelompokTani;
 use App\Services\AkunService;
@@ -66,7 +68,25 @@ class AkunController extends Controller
     public function lupaSandi(PetaniLupaSandiRequest $request): RedirectResponse
     {
         $validated  = $request->validated();
-        $link = $this->akun_service->petaniLupaSandi($validated['nomor_telepon']);
-        return redirect($link);
+        $petani = $this->akun_service->petaniLupaSandi($validated['nomor_telepon']);
+        if(isset($petani)) {
+            return redirect('/petani/lupa-ubah-sandi')->with('id_petani',$petani->id);
+        }
+        return back()->withErrors(['error' => 'Nomor telepon tidak terdaftar!']);
+    }
+    public function setUbahSandi(): View
+    {
+        return view('homepage.pages.petani.ubah-sandi',[
+            'title' => 'Petani | Ubah Sandi'
+        ]);
+    }
+    public function ubahSandi(PetaniLupaUbahSandiRequest $request): RedirectResponse
+    {
+        $validated  = $request->validated();
+        if($validated['sandi_baru'] == $validated['sandi_ulang']) {
+            $this->akun_service->petaniLupaUbahSandi($validated['id_petani'],$validated['sandi_baru']);
+            return redirect('/petani/login')->with('success','Kata sandi berhasil diperbarui');
+        }
+        return back()->withErrors(['failed' => 'Konfirmasi kata sandi tidak sama']);
     }
 }

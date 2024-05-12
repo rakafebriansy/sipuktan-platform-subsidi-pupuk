@@ -27,6 +27,8 @@ Route::prefix('/petani')->group(function(){
     Route::post('/register', [App\Http\Controllers\Homepage\Petani\AkunController::class,'register']);
     Route::get('/lupa-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'setLupaSandi']);
     Route::post('/lupa-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'lupaSandi']);
+    Route::get('/lupa-ubah-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'setUbahSandi']);
+    Route::post('/lupa-ubah-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'ubahSandi']);
     Route::middleware('hasRole:petani')->group(function(){
         Route::get('/alokasi', [App\Http\Controllers\Dashboard\Petani\AlokasiController::class, 'setAlokasi']);
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\Petani\DashboardController::class, 'setDashboard']);
@@ -128,7 +130,4 @@ Route::prefix('/bot')->group(function(){
 
     Route::get('/set-webhook',[TelegramBotController::class,'setWebhook']);
     Route::post('/webhook/{token}',[TelegramBotController::class,'getMessagesByWebhook']);
-});
-Route::get('/test', function () {
-    //
 });

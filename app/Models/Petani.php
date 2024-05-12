@@ -55,9 +55,5 @@ class Petani extends Model
         'id'
     );
     }
-    public function kredensial_ubah_sandis(): HasMany
-    {
-        return $this->hasMany(KredensialUbahSandi::class, 'id_petani','id');
-    }
     
 }

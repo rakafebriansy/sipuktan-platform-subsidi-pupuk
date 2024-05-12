@@ -2,6 +2,9 @@
 
 namespace App\Services;
 use App\Http\Requests\PetaniRegisterRequest;
+use App\Models\KiosResmi;
+use App\Models\PemilikKios;
+use App\Models\Petani;
 use Illuminate\Http\UploadedFile;
 
 interface AkunService
@@ -12,6 +15,8 @@ interface AkunService
     function kiosResmiCekIngatSaya(string $uuid): bool;
     function pemerintahLogin(string $nama_pengguna, string $kata_sandi): object|null;
     function petaniRegister(array $data_petani, UploadedFile $foto_ktp): void;
+    function petaniLupaSandi(string $nomor_telepon): Petani;
+    function petaniLupaUbahSandi(int $id, string $sandi_baru): bool;
     function kiosResmiRegister(array $data_kios, UploadedFile $foto_ktp): void;
     function petaniCekSandi(int $id, string $sandi_petani): bool;
     function petaniGantiSandi(int $id, string $sandi_petani): bool;
@@ -21,6 +26,7 @@ interface AkunService
     function kiosResmiGantiNoTelp(int $id, string $no_telp): bool;
     function pemerintahCekSandi(int $id, string $sandi_pemerintah): bool;
     function pemerintahGantiSandi(int $id, string $sandi_pemerintah): bool;
-    function petaniLupaSandi(string $nomor_telepon): string;
-    function kiosResmiLupaSandi(string $nomor_telepon): string;
+    function kiosResmiLupaSandi(string $nomor_telepon): KiosResmi;
+    function kiosResmiLupaUbahSandi(int $id, string $sandi_baru): bool;
+
 }

@@ -22,11 +22,7 @@ class TelegramBotServiceImpl implements TelegramBotService
             $token = DB::transaction(function() use($petani) {
                 $token = uniqid();
                 $petani->update(['token' => $token]);
-                $result = KredensialUbahSandi::create([
-                    'token' => $token,
-                    'id_petani' => $petani->id
-                ]);
-                return $result->token;
+                return $token;
             });
             return $token;
         }
@@ -39,11 +35,7 @@ class TelegramBotServiceImpl implements TelegramBotService
             $token = DB::transaction(function() use($pemilik_kios) {
                 $token = uniqid();
                 $pemilik_kios->update(['token' => $token]);
-                $result = KredensialUbahSandi::create([
-                    'token' => $token,
-                    'id_pemilik_kios' => $pemilik_kios->id
-                ]);
-                return $result->token;
+                return $token;
             });
             return $token;
         }

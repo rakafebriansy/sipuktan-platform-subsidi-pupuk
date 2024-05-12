@@ -69,7 +69,10 @@ class AkunController extends Controller
     public function lupaSandi(KiosResmiLupaSandiRequest $request): RedirectResponse
     {
         $validated  = $request->validated();
-        $link = $this->akun_service->kiosResmiLupaSandi($validated['nomor_telepon']);
-        return redirect($link);
+        $kios_resmi = $this->akun_service->kiosResmiLupaSandi($validated['nomor_telepon']);
+        if(isset($kios_resmi)) {
+            return redirect('/kios-resmi/lupa-ubah-sandi')->with('id_kios_resmi',$kios_resmi->id);
+        }
+        return back()->withErrors(['error' => 'Nomor telepon tidak terdaftar!']);
     }
 }

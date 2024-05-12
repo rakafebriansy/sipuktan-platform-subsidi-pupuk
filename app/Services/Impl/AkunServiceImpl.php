@@ -134,13 +134,36 @@ class AkunServiceImpl implements AkunService
             return Pemerintah::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
         });
     }
-    public function petaniLupaSandi(string $nomor_telepon): string
+    public function petaniLupaSandi(string $nomor_telepon): Petani
     {
-        return 'https://t.me/sipuktan_bot?text=/petaniGantiSandi%20' . $nomor_telepon;
+        return Petani::where('nomor_telepon',$nomor_telepon)->first();
     }
-    public function kiosResmiLupaSandi(string $nomor_telepon): string
+    public function kiosResmiLupaSandi(string $nomor_telepon): KiosResmi
     {
-        return 'https://t.me/sipuktan_bot?text=/kiosResmiGanti-sandi%20' . $nomor_telepon;
+        $pemilik_kios = PemilikKios::where('nomor_telepon',$nomor_telepon)->first();
+        return $pemilik_kios->kios_resmi;
+    }
+    public function petaniLupaUbahSandi(int $id, string $sandi_baru): bool
+    {
+        $sandi_baru = Hash::make($sandi_baru);
+        return DB::transaction(function() use($id, $sandi_baru) {
+            $petani = Petani::find($id);
+            return $petani->update([
+                'kata_sandi' => $sandi_baru,
+                'token' => null
+            ]);
+        });
+    }
+    public function kiosResmiLupaUbahSandi(int $id, string $sandi_baru): bool
+    {
+        $sandi_baru = Hash::make($sandi_baru);
+        return DB::transaction(function() use($id, $sandi_baru) {
+            $kios_resmi = KiosResmi::find($id);
+            return $kios_resmi->update([
+                'kata_sandi' => $sandi_baru,
+                'token' => null
+            ]);
+        });
     }
 
 }
