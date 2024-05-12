@@ -31,7 +31,7 @@ Route::prefix('/petani')->group(function(){
     Route::post('/lupa-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'lupaSandi']);
     Route::get('/lupa-ubah-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'setUbahSandi']);
     Route::post('/lupa-ubah-sandi', [App\Http\Controllers\Homepage\Petani\AkunController::class, 'ubahSandi']);
-    Route::middleware('hasRole:petani')->group(function(){
+    Route::middleware('authPetani')->group(function(){
         Route::get('/alokasi', [App\Http\Controllers\Dashboard\Petani\AlokasiController::class, 'setAlokasi']);
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\Petani\DashboardController::class, 'setDashboard']);
         Route::get('/ubah-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'setUbahSandi']);
@@ -58,7 +58,7 @@ Route::prefix('/kios-resmi')->group(function(){
     Route::post('/lupa-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'lupaSandi']);
     Route::get('/lupa-ubah-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'setUbahSandi']);
     Route::post('/lupa-ubah-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'ubahSandi']);
-    Route::middleware('hasRole:kios-resmi')->group(function(){
+    Route::middleware('authKiosResmi')->group(function(){
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\KiosResmi\DashboardController::class, 'setDashboard']);
         Route::get('/ubah-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'setUbahSandi']);
         Route::patch('/ubah-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'ubahSandi']);
@@ -86,7 +86,7 @@ Route::get('/admin', function() {
 Route::prefix('/pemerintah')->group(function(){
     Route::get('/login',[App\Http\Controllers\Homepage\Pemerintah\AkunController::class, 'setLogin']);
     Route::post('/login',[App\Http\Controllers\Homepage\Pemerintah\AkunController::class, 'login']);
-    Route::middleware('hasRole:pemerintah')->group(function(){
+    Route::middleware('authPemerintah')->group(function(){
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\Pemerintah\DashboardController::class, 'setDashboard']);
         Route::get('/ubah-sandi', [App\Http\Controllers\Dashboard\Pemerintah\AkunController::class, 'setUbahSandi']);
         Route::patch('/ubah-sandi', [App\Http\Controllers\Dashboard\Pemerintah\AkunController::class, 'ubahSandi']);

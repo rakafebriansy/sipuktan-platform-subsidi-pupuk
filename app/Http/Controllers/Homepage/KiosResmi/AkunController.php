@@ -50,9 +50,6 @@ class AkunController extends Controller
         $kios_resmi = $this->akun_service->kiosResmiLogin($request->nib,$request->kata_sandi);
         if(isset($kios_resmi)) {
             if($kios_resmi->aktif) {
-                $request->session()->regenerate();
-                $request->session()->put('id_kios_resmi',$kios_resmi->id);
-                $request->session()->put('role','kios-resmi');
                 return redirect('/kios-resmi/dashboard');
 
             }

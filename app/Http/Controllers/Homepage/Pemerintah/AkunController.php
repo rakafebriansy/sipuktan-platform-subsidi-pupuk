@@ -25,9 +25,6 @@ class AkunController extends Controller
     {
         $pemerintah = $this->akun_service->pemerintahLogin($request->nama_pengguna,$request->kata_sandi);
         if(isset($pemerintah)) {
-            $request->session()->regenerate();
-            $request->session()->put('id_pemerintah',$pemerintah->id);
-            $request->session()->put('role','pemerintah');
             return redirect('/pemerintah/dashboard');
         } 
         return back()->withErrors(['failed' => 'Kredensial salah']);
