@@ -113,8 +113,8 @@
                      </tr>
                      <tr>
                        <th>
-                         <a href="/pemerintah/ganti-sandi" class="inline-flex px-2 pt-3 pb-2 font-medium whitespace-nowrap items-center text-blue-600 hover:underline">
-                           Ganti kata sandi
+                         <a href="/pemerintah/ubah-sandi" class="inline-flex px-2 pt-3 pb-2 font-medium whitespace-nowrap items-center text-blue-600 hover:underline">
+                           Ubah kata sandi
                          </a>
                        </th>
                      </tr>

@@ -4,14 +4,14 @@
   <div class="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
     <div class="p-4 sm:p-7 w-[24rem]">
       <div class="text-center">
-        <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Ganti kata sandi</h1>
+        <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Ubah kata sandi</h1>
         <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
             Gunakan kombinasi sandi yang kuat!
         </p>
       </div>
   
       <div class="mt-5">
-        <form action="/petani/ganti-sandi" method="POST">
+        <form action="/kios-resmi/ubah-sandi" method="POST">
           @csrf
           @method('patch')
           <div class="grid">
@@ -40,6 +40,6 @@
       </div>
     </div>
   </div>
-  <a href="/petani/dashboard" class="text-sm">< <span class="hover:underline">Kembali ke Dashboard</span></a>
+  <a href="/kios-resmi/dashboard" class="text-sm">< <span class="hover:underline">Kembali ke Dashboard</span></a>
 </div>
 @endsection

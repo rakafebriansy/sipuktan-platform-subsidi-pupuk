@@ -88,14 +88,14 @@ class AkunServiceImpl implements AkunService
         if(Hash::check($sandi_lama,$kios_resmi->kata_sandi)) return true;
         return false;
     }
-    public function petaniGantiSandi(int $id, string $sandi_baru): bool
+    public function petaniUbahSandi(int $id, string $sandi_baru): bool
     {
         $sandi_baru = Hash::make($sandi_baru);
         return DB::transaction(function() use($id, $sandi_baru) {
             return Petani::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
         });
     }
-    public function petaniGantiNoTelp(int $id, string $no_telp): bool
+    public function petaniUbahNoTelp(int $id, string $no_telp): bool
     {
         return DB::transaction(function() use($id, $no_telp){
             return Petani::where('id',$id)->update(['nomor_telepon' => $no_telp]);
@@ -107,14 +107,14 @@ class AkunServiceImpl implements AkunService
         if(Hash::check($sandi_lama,$kios_resmi->kata_sandi)) return true;
         return false;
     }
-    public function kiosResmiGantiSandi(int $id, string $sandi_baru): bool
+    public function kiosResmiUbahSandi(int $id, string $sandi_baru): bool
     {
         $sandi_baru = Hash::make($sandi_baru);
         return DB::transaction(function() use($id, $sandi_baru) {
             return KiosResmi::where('id',$id)->update(['kata_sandi' => $sandi_baru]);
         });
     }
-    public function kiosResmiGantiNoTelp(int $id, string $no_telp): bool
+    public function kiosResmiUbahNoTelp(int $id, string $no_telp): bool
     {
         return DB::transaction(function() use($id, $no_telp){
             $pemilik_kios = KiosResmi::find($id)->pemilik_kios();
@@ -127,7 +127,7 @@ class AkunServiceImpl implements AkunService
         if(Hash::check($sandi_lama,$kios_resmi->kata_sandi)) return true;
         return false;
     }
-    public function pemerintahGantiSandi(int $id, string $sandi_baru): bool
+    public function pemerintahUbahSandi(int $id, string $sandi_baru): bool
     {
         $sandi_baru = Hash::make($sandi_baru);
         return DB::transaction(function() use($id, $sandi_baru) {

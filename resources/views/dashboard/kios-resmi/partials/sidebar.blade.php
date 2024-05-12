@@ -186,8 +186,8 @@
                      </tr>
                      <tr>
                        <th>
-                         <a href="/kios-resmi/ganti-sandi" class="inline-flex px-2 pt-3 pb-2 font-medium whitespace-nowrap items-center text-blue-600 hover:underline">
-                           Ganti kata sandi
+                         <a href="/kios-resmi/ubah-sandi" class="inline-flex px-2 pt-3 pb-2 font-medium whitespace-nowrap items-center text-blue-600 hover:underline">
+                           Ubah kata sandi
                          </a>
                        </th>
                      </tr>
@@ -212,7 +212,7 @@
               </button>
           </div>
           
-          <form  action="/kios-resmi/ganti-nomor-telepon" method="post" class="p-4 md:p-5">
+          <form  action="/kios-resmi/ubah-nomor-telepon" method="post" class="p-4 md:p-5">
             @csrf
             @method('patch')
             <input type="hidden" name="id">

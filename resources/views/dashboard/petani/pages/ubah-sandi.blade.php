@@ -4,14 +4,14 @@
   <div class="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
     <div class="p-4 sm:p-7 w-[24rem]">
       <div class="text-center">
-        <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Ganti kata sandi</h1>
+        <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Ubah kata sandi</h1>
         <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
             Gunakan kombinasi sandi yang kuat!
         </p>
       </div>
   
       <div class="mt-5">
-        <form action="/kios-resmi/ganti-sandi" method="POST">
+        <form action="/petani/ubah-sandi" method="POST">
           @csrf
           @method('patch')
           <div class="grid">
@@ -34,12 +34,12 @@
                 </div>
             </div>
   
-            <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Reset kata sandi</button>
+            <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Ubah kata sandi</button>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <a href="/kios-resmi/dashboard" class="text-sm">< <span class="hover:underline">Kembali ke Dashboard</span></a>
+  <a href="/petani/dashboard" class="text-sm">< <span class="hover:underline">Kembali ke Dashboard</span></a>
 </div>
 @endsection

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class KiosResmiGantiNoTelpRequest extends FormRequest
+class PetaniUbahSandiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,12 @@ class KiosResmiGantiNoTelpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nomor_telepon' => 'required|numeric|unique:pemilik_kios,nomor_telepon'
+            'sandi_lama' => 'required',
+            'sandi_baru' => 'required|min:6',
+            'sandi_ulang' => 'required|min:6',
         ];
     }
-
+    
     /**
      * Get the error messages for the defined validation rules.
      *
@@ -34,8 +36,11 @@ class KiosResmiGantiNoTelpRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'nomor_telepon.required' => 'Nomor telepon tidak boleh kosong',
-            'nomor_telepon.numeric' => 'Nomor telepon harus berupa angka',
+            'sandi_lama.required' => 'Kata sandi lama tidak boleh kosong',
+            'sandi_baru.required' => 'Kata sandi baru tidak boleh kosong',
+            'sandi_ulang.required' => 'Ulangi kata sandi baru tidak boleh kosong',
+            'sandi_baru.min' => 'Kata sandi baru harus berjumlah minimal 6 karakter',
+            'sandi_ulang.min' => 'Ulangi kata sandi baru harus berjumlah minimal 6 karakter',
         ];
     }
 }

@@ -33,9 +33,9 @@ Route::prefix('/petani')->group(function(){
     Route::middleware('hasRole:petani')->group(function(){
         Route::get('/alokasi', [App\Http\Controllers\Dashboard\Petani\AlokasiController::class, 'setAlokasi']);
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\Petani\DashboardController::class, 'setDashboard']);
-        Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'setGantiSandi']);
-        Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'gantiSandi']);
-        Route::patch('/ganti-nomor-telepon', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'gantiNoTelp']);
+        Route::get('/ubah-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'setUbahSandi']);
+        Route::patch('/ubah-sandi', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'ubahSandi']);
+        Route::patch('/ubah-nomor-telepon', [App\Http\Controllers\Dashboard\Petani\AkunController::class, 'ubahNoTelp']);
         Route::get('/transaksi', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setTransaksi']);
         Route::get('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'setCheckoutNonTunai']);
         Route::post('/checkout', [App\Http\Controllers\Dashboard\Petani\TransaksiController::class, 'checkoutNonTunai']);
@@ -58,9 +58,9 @@ Route::prefix('/kios-resmi')->group(function(){
     Route::post('/lupa-ubah-sandi', [App\Http\Controllers\Homepage\KiosResmi\AkunController::class, 'ubahSandi']);
     Route::middleware('hasRole:kios-resmi')->group(function(){
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\KiosResmi\DashboardController::class, 'setDashboard']);
-        Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'setGantiSandi']);
-        Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'gantiSandi']);
-        Route::patch('/ganti-nomor-telepon', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'gantiNoTelp']);
+        Route::get('/ubah-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'setUbahSandi']);
+        Route::patch('/ubah-sandi', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'ubahSandi']);
+        Route::patch('/ubah-nomor-telepon', [App\Http\Controllers\Dashboard\KiosResmi\AkunController::class, 'ubahNoTelp']);
         Route::get('/alokasi', [App\Http\Controllers\Dashboard\KiosResmi\AlokasiController::class, 'setAlokasi']);
         Route::patch('/alokasi', [App\Http\Controllers\Dashboard\KiosResmi\AlokasiController::class, 'alokasi']);
         Route::get('/transaksi', [App\Http\Controllers\Dashboard\KiosResmi\TransaksiController::class, 'setTransaksi']);
@@ -85,8 +85,8 @@ Route::prefix('/pemerintah')->group(function(){
     Route::post('/login',[App\Http\Controllers\Homepage\Pemerintah\AkunController::class, 'login']);
     Route::middleware('hasRole:pemerintah')->group(function(){
         Route::get('/dashboard', [App\Http\Controllers\Dashboard\Pemerintah\DashboardController::class, 'setDashboard']);
-        Route::get('/ganti-sandi', [App\Http\Controllers\Dashboard\Pemerintah\AkunController::class, 'setGantiSandi']);
-        Route::patch('/ganti-sandi', [App\Http\Controllers\Dashboard\Pemerintah\AkunController::class, 'gantiSandi']);
+        Route::get('/ubah-sandi', [App\Http\Controllers\Dashboard\Pemerintah\AkunController::class, 'setUbahSandi']);
+        Route::patch('/ubah-sandi', [App\Http\Controllers\Dashboard\Pemerintah\AkunController::class, 'ubahSandi']);
         Route::get('/verifikasi-pengguna', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'setVerifikasi']);
         Route::post('/verifikasi-pengguna/petani', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'verifikasiPetani']);
         Route::post('/verifikasi-pengguna/kios-resmi', [App\Http\Controllers\Dashboard\Pemerintah\VerifikasiController::class, 'verifikasiKiosResmi']);
