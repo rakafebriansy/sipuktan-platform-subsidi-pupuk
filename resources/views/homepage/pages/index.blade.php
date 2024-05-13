@@ -49,31 +49,31 @@
               <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
                 <div class="">1</div>
               </div>
-              <div class="inline w-[90%]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div class="inline w-[90%]">Cari username sipuktan_bot pada kolom pencarian telegram atau klik <a class="text-blue-600 hover:underline" href="t.me/sipuktan_bot">disini</a>.</div>
             </li>
             <li class="w-full flex justify-between items-center mb-5">
               <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
                 <div class="">2</div>
               </div>
-              <div class="inline w-[90%]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div class="inline w-[90%]">Ketik pertanyaan atau permasalahan yang ingin ditanyakan.</div>
             </li>
             <li class="w-full flex justify-between items-center mb-5">
               <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
                 <div class="">3</div>
               </div>
-              <div class="inline w-[90%]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div class="inline w-[90%]">Sipuktan_bot akan otomatis membalas dengan mengirimkan pilihan kata kunci bot yang bisa digunakan.</div>
             </li>
             <li class="w-full flex justify-between items-center mb-5">
               <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
                 <div class="">4</div>
               </div>
-              <div class="inline w-[90%]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div class="inline w-[90%]">Pilih salah satu kata kunci yang mewakili pertanyaan atau permasalahan.</div>
             </li>
             <li class="w-full flex justify-between items-center mb-5">
               <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
                 <div class="">5</div>
               </div>
-              <div class="inline w-[90%]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div class="inline w-[90%]">Telegram secara otomatis akan menjawab pertanyaan atau permasalahanmu.</div>
             </li>
           </ul>
         </div>
