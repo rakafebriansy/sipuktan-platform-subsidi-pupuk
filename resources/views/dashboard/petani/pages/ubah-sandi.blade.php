@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <a href="/petani/dashboard" class="text-sm">< <span class="hover:underline">Kembali ke Dashboard</span></a>
+    <a href="/petani/dashboard" class="text-sm text-white">< <span class="hover:underline">Kembali ke Dashboard</span></a>
   </div>
 </div>
 @endsection
