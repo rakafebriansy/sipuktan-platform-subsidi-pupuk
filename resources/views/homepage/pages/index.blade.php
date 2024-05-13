@@ -49,7 +49,7 @@
               <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
                 <div class="">1</div>
               </div>
-              <div class="inline w-[90%]">Cari username sipuktan_bot pada kolom pencarian telegram atau klik <a class="text-blue-600 hover:underline" href="t.me/sipuktan_bot">disini</a>.</div>
+              <div class="inline w-[90%]">Cari username sipuktan_bot pada kolom pencarian telegram atau klik <a class="text-blue-600 hover:underline" href="https://t.me/sipuktan_bot">disini</a>.</div>
             </li>
             <li class="w-full flex justify-between items-center mb-5">
               <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
