@@ -71,7 +71,7 @@ class FaqSeeder extends Seeder
         ]);
         Faq::insert([
             'id' => 9,
-            'pertanyaan' => 'Bagaimana jika masa pengambilan sudah habis tetapi ada yang belum mengambil?',
+            'pertanyaan' => 'Bagaimana jika masa pengambilan sudah habis tetapi belum ambil?',
             'jawaban' => 'Alokasi pupuk bagi petani yang tidak mengambil sampai musim tanam berakhir akan otomatis berubah status menjadi “Tidak Diambil”',
             'jenis_pengguna' => 'Kios Resmi',
             'id_pemerintah' => 1

@@ -3,10 +3,6 @@
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\TelegramBotController;
 use App\Jobs\UpdateMusimTanamJob;
-use App\Models\KiosResmi;
-use App\Models\KredensialUbahSandi;
-use App\Models\Petani;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*

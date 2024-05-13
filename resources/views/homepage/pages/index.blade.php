@@ -84,7 +84,7 @@
     </div>
   </div>
 </div>
-<div class="flex flex-col items-center justify-center w-full">
+<div class="flex flex-col items-center justify-center w-full mb-10">
   <div class=" h-24 flex items-center justify-center">
     <h1 class="text-4xl font-bold">FAQ</h1>
   </div> 
@@ -125,8 +125,56 @@
     </div>
   </div>
 </div>
-<div class="flex justify-center">
-
+<div class="flex justify-center bg-[#F0FFE6] py-20">
+  <div class="w-[80%] grid grid-cols-2 gap-[10%]">
+    <div class="">
+      <h2 class="text-4xl font-semibold">Pupuk Subsidi</h2>
+      <h2 class="mt-1 text-4xl font-semibold text-[#4CAF4F]">Petani Membangun Negeri</h2>
+      <p class="mt-2">Dedikasi Kolaborasi Program Pemerintah Pupuk Subsidi</p>
+    </div>
+    <div class="grid grid-cols-2 w-full">
+      <div class="h-full grid grid-rows-2 gap-4">
+        <div class="flex justify-end">
+          <div class="flex justify-start gap-4 w-[60%]">
+            <img src="{{ asset('images/petani-landing.png') }}" alt="">
+            <div class="flex flex-col justify-center">
+              <p class="text-xl font-bold">{{ $count_info['petani'] }}</p>
+              <p class="text-xs">Petani</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <div class="flex justify-start gap-4 w-[60%]">
+            <img src="{{ asset('images/pupuk-landing.png') }}" alt="">      
+            <div class="flex flex-col justify-center">
+              <p class="text-xl font-bold">{{ $count_info['pupuk'] }}kg</p>
+              <p class="text-xs">Pupuk</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="h-full grid grid-rows-2 gap-4">
+        <div class="flex justify-end">
+          <div class="flex justify-start gap-4 w-[60%]">
+            <img src="{{ asset('images/poktan-landing.png') }}" alt="">
+            <div class="flex flex-col justify-center">
+              <p class="text-xl font-bold">{{ $count_info['poktan'] }}</p>
+              <p class="text-xs">Kelompok Tani</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <div class="flex justify-start gap-4 w-[60%]">
+            <img src="{{ asset('images/kios-landing.png') }}" alt="">
+            <div class="flex flex-col justify-center">
+              <p class="text-xl font-bold">{{ $count_info['kios_resmi'] }}</p>
+              <p class="text-xs">Kios Resmi</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
