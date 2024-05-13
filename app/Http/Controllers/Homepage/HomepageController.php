@@ -18,7 +18,7 @@ class HomepageController extends Controller
         $faqs_kios_resmi = $this->faq_service->getFaqKiosResmi();
         $faqs_petani = $this->faq_service->getFaqPetani();
         return view('homepage.pages.index', [
-            'title' => 'Homepage',
+            'title' => 'SIPUKTAN',
             'faqs_petani' => $faqs_petani,
             'faqs_kios_resmi' => $faqs_kios_resmi
         ]);
