@@ -6,8 +6,8 @@
       <div class="w-full mt-4 p-3 box-border rounded-md shadow-md">
          <p>SIPUKTAN Solusi terdepan untuk meningkatkan kesejahteraan petani dan mendukung pertanian yang berkelanjutan! Dengan sistem ini, petani dapat dengan mudah mengakses subsidi pupuk yang dibutuhkan, memastikan produksi yang lebih baik dan keberlanjutan lingkungan dengan dukungan pemerintah yang efektif.</p>
       </div>
-      <div class="w-full mt-4 grid grid-cols-4 gap-4 text-sm">
-         <div class="col-span-1 h-full">
+      <div class="w-full mt-4 md:grid md:grid-cols-4 md:gap-4 text-sm">
+         <div class="col-span-1 md:-full mb-4 md:mb-0">
             <div class="p-3 box-border rounded-md shadow-md mb-4">
                <h2 class="mb-3 text-lg font-bold">Pupuk Urea</h2>
                <p>Pupuk urea biasanya diterapkan secara langsung ke tanah atau dicampur dengan air untuk disemprotkan ke tanaman sebagai larutan pupuk. Ini memberikan akses yang cepat dan efisien bagi tanaman untuk menyerap nutrisi.</p>
@@ -21,26 +21,26 @@
                <p>Pupuk SP-36 membantu dalam pembentukan akar yang kuat, perkembangan bunga dan buah, serta proses metabolisme energi dalam tanaman. pupuk SP-36 sangat berguna untuk meningkatkan kesuburan tanah dan meningkatkan produksi tanaman.</p>
             </div>
          </div>
-         <div class="col-span-3 h-full box-border flex flex-col gap-4">
-            <div class="grid-cols-2 grid gap-4 h-[40%]">
-               <div class="p-3 box-border rounded-md shadow-md">
-                  <div class="h-[10%] w-full">
+         <div class="col-span-3 h-full box-border md:flex md:flex-col md:gap-4">
+            <div class="md:grid-cols-2 md:grid md:gap-4 md:h-[40%] mb-4 md:mb-0">
+               <div class="p-3 box-border rounded-md shadow-md mb-4 md:mb-0">
+                  <div class="md:h-[10%] w-full">
                      <h2 class="mb-2 text-center text-md font-bold">Langkah-Langkah Pembayaran Non-Tunai</h2>
                   </div>
-                  <div class="h-[90%] w-full flex items-center">
+                  <div class="md:h-[90%] w-full flex items-center">
                      <img src="../images/Langkah non Tunai.png" alt="">
                   </div>
                </div>
                <div class="p-3 box-border rounded-md shadow-md">
-                  <div class="h-[10%] w-full">
+                  <div class="md:h-[10%] w-full">
                      <h2 class="mb-2 text-center text-md font-bold">Langkah-Langkah Pembayaran Tunai</h2>
                   </div>
-                  <div class="h-[90%] w-full flex justify-center items-center">
+                  <div class="md:h-[90%] w-full flex justify-center items-center">
                      <img class="" src="../images/Langkah Tunai.png" alt="">
                   </div>
                </div>
             </div>
-            <div class="p-3 box-border rounded-md shadow-md h-[60%]">
+            <div class="p-3 box-border rounded-md shadow-md md:h-[60%]">
                <div class="mb-4 w-full">
                   <h2 class="mb-2 text-center text-md font-bold">Penyaluran Pupuk Subsidi Per 10 Tahun</h2>
                </div>
