@@ -1,6 +1,6 @@
 @extends('homepage.layouts.main')
 @section('wrapper')
-<div class="relative overflow-hidden top-0 start-1/2 bg-no-repeat bg-top size-full z-5 transform -translate-x-1/2">
+<div id="beranda" class="relative overflow-hidden top-0 start-1/2 bg-no-repeat bg-top size-full z-5 transform -translate-x-1/2">
   <img src="{{ asset('/images/farmer.webp') }}" class="w-full h-full absolute z-20" alt="">
   <div class="bg-gradient-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,0.6)] w-full h-full absolute z-30"></div>
   <div class="w-full h-full justify-center items-center flex z-40 relative">
@@ -35,7 +35,7 @@
     </div>
   </div>
 </div>
-<div class="grid grid-rows-5 bg-gradient-to-l from-[rgba(97,129,35,0.8)] via-white via-40% to-white">
+<div id="telegram" class="grid grid-rows-5 bg-gradient-to-l from-[rgba(97,129,35,0.8)] via-white via-40% to-white">
   <div class="row-span-1"></div>
   <div class="flex flex-col items-center justify-center row-span-3">
     <div class="grid grid-cols-3 h-full w-[80%]">
@@ -84,7 +84,7 @@
     </div>
   </div>
 </div>
-<div class="flex flex-col items-center justify-center w-full mb-10">
+<div id="faq" class="flex flex-col items-center justify-center w-full mb-10">
   <div class=" h-24 flex items-center justify-center">
     <h1 class="text-4xl font-bold">FAQ</h1>
   </div> 
@@ -125,7 +125,7 @@
     </div>
   </div>
 </div>
-<div class="flex justify-center bg-[#F0FFE6] py-20">
+<div id="kolaborasi" class="flex justify-center bg-[#F0FFE6] py-20">
   <div class="w-[80%] grid grid-cols-2 gap-[10%]">
     <div class="">
       <h2 class="text-4xl font-semibold">Pupuk Subsidi</h2>
@@ -176,7 +176,7 @@
     </div>
   </div>
 </div>
-<div class="flex justify-center py-20">
+<div id="tujuan" class="flex justify-center py-20">
   <div class="w-[80%] text-center flex flex-col justify-center gap-2 font-thin">
     <h2 class="text-4xl font-bold">Tujuan Dedikasi Bersama</h2>
     <p>Kami hadir untuk</p>
@@ -198,6 +198,19 @@
       </div>
     </div>
   </div>
+</div>
+<div class="flex justify-center bg-[#F0FFE6] py-20">
+  <img class="w-[30%]" src="{{ asset('images/sipuktan.png') }}" alt="">
+</div>
+<div class="flex flex-col items-center justify-center py-20 gap-4">
+  <ul class="flex justify-center gap-8">
+    <li><a href="#beranda" class="hover:underline">Beranda</a></li>
+    <li><a href="#telegram" class="hover:underline">Bot Telegram</a></li>
+    <li><a href="#faq" class="hover:underline">FAQ</a></li>
+    <li><a href="#kolaborasi" class="hover:underline">Kolaborasi</a></li>
+    <li><a href="#tujuan" class="hover:underline">Tujuan</a></li>
+  </ul>
+  <p class="text-small text-gray-500">© Copyright 2024 - SIPUKTAN</p>
 </div>
 
 
