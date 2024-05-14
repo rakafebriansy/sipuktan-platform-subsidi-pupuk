@@ -5,7 +5,7 @@
     <img src="{{ asset('/../images/farmer.webp') }}" class="w-full absolute z-20" alt="">
     <div class="bg-gradient-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,0.6)] w-full h-full absolute z-30"></div>
     <div class="flex justify-center flex-col gap-4 items-center h-full z-40 relative">
-        <div class="m-4brg bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700 p-5">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700 p-5">
             <div class="text-center">
                 <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Registrasi Petani</h1>
                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
@@ -18,7 +18,7 @@
             <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
             <form action="/petani/register" method="POST" class=" mx-auto md:grid md:grid-cols-2 md:gap-x-6" enctype="multipart/form-data">
                 @csrf
-                <div class="">
+                <div class="flex justify-between flex-col">
                     <div class="mb-5">
                         <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
                         <input type="text" name="nik" value="{{ old('nik','') }}" id="nik" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"  />
@@ -33,8 +33,9 @@
                     </div>
                 </div>
                 <div class="flex flex-col">    
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto KTP</label>
                     <div class="flex items-center justify-center w-full mb-5">
-                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                             <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                 <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>

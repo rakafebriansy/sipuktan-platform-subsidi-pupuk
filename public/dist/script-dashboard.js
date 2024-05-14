@@ -32,7 +32,7 @@ function fetchPetaniFromAlokasiPemerintah(id) {
       .catch(e => console.error('Error'+e));
 }
 function fetchDeleteNotifikasi(id) {
-    fetch('/petani/ajax/delete-notifikasi', {
+    fetch('/ajax/delete-notifikasi', {
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
@@ -160,6 +160,14 @@ function viewAlertNotifikasi(message,id,mode='blue') {
     if (target.firstElementChild.id == 'no-notification') target.innerHTML = '';
     target.appendChild(li);
 }
+function viewAksiLaporanNotifikasi(id) {
+    console.log(id)
+    console.log(document.querySelector('#laporan-' + id))
+    const lastElement = document.querySelector('#laporan-' + id).lastElementChild;
+    lastElement.previousElementSibling.innerText = 'Ditolak';
+    lastElement.lastElementChild.classList.replace('hidden','inline-block')
+    lastElement.appendChild(btn);
+}
 function viewGetKeluhanDetail(data) {
     const detailKeluhanModalDivs = document.querySelectorAll('#detailKeluhanBody div');
     detailKeluhanModalDivs[0].children[1].innerText = data['subjek']
@@ -267,7 +275,7 @@ function editStatusAlokasiPassId() {
 function dismissingDropdown(id){
     document.getElementById(id).click()
 }
-function deleteNotifikasi(btn) {
+function deleteNotifikasi(btn,id) {
     let notifikasi = document.querySelector('#'+id);
     let parent = notifikasi.parentElement;
     fetchDeleteNotifikasi(btn.dataset.id);
@@ -316,6 +324,9 @@ function balasKeluhanPassId(btn) {
     const balasKeluhanModal = document.getElementById('balasKeluhanModal');
     balasKeluhanModal.querySelector('[name="id"]').value = id;
     fetchGetKeluhanBalas(id);
+}
+function editLaporanPassId(btn) {
+    document.getElementById('editLaporanId').value = btn.parentElement.dataset.id;
 }
 
 (function(){

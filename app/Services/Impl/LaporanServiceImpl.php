@@ -68,10 +68,16 @@ class LaporanServiceImpl implements LaporanService
         ->orderBy('laporans.tanggal_pengambilan', 'desc')->get();
         return $laporans;
     }
-    public function pemerintahLaporan(int $id, string $status_verifikasi): bool
+    public function pemerintahSetujuiLaporan(int $id): bool
     {
-        return DB::transaction(function () use ($id, $status_verifikasi) {
-            return Laporan::where('id',$id)->update(['status_verifikasi' => $status_verifikasi]);
+        return DB::transaction(function () use ($id) {
+            return Laporan::where('id',$id)->update(['status_verifikasi' => 'Terverifikasi']);
+        });
+    }
+    public function pemerintahTolakLaporan(int $id, $catatan): bool
+    {
+        return DB::transaction(function () use ($id) {
+            return Laporan::where('id',$id)->update(['status_verifikasi' => 'Ditolak']);
         });
     }
     public function pemerintahGetIdKiosResmiByLaporan(int $id_laporan): int

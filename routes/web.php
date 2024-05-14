@@ -40,9 +40,6 @@ Route::prefix('/petani')->group(function(){
         Route::get('/keluhan',[App\Http\Controllers\Dashboard\Petani\KeluhanController::class,'setKeluhan']);
         Route::post('/keluhan',[App\Http\Controllers\Dashboard\Petani\KeluhanController::class,'buatKeluhan']);
         Route::get('/logout',[App\Http\Controllers\Dashboard\Petani\AkunController::class,'logout']);
-        Route::prefix('/ajax')->group(function(){
-            Route::post('/delete-notifikasi',[AjaxController::class,'deleteNotifikasi']);
-        });
     });
 });
 Route::prefix('/kios-resmi')->group(function(){
@@ -94,7 +91,8 @@ Route::prefix('/pemerintah')->group(function(){
         Route::delete('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'hapusAlokasi']);
         Route::patch('/alokasi', [App\Http\Controllers\Dashboard\Pemerintah\AlokasiController::class, 'editAlokasi']);
         Route::get('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'setLaporan']);
-        Route::patch('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'laporan']);
+        Route::patch('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'setujuiLaporan']);
+        Route::delete('/laporan',[App\Http\Controllers\Dashboard\Pemerintah\LaporanController::class,'tolakLaporan']);
         Route::get('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'setFaq']);
         Route::post('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'buatFaq']);
         Route::patch('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'editFaq']);
@@ -109,6 +107,7 @@ Route::prefix('/pemerintah')->group(function(){
     });
 });
 Route::prefix('/ajax')->group(function(){
+    Route::post('/delete-notifikasi',[AjaxController::class,'deleteNotifikasi']);
     Route::post('/laporan-filenames',[AjaxController::class,'getLaporanFilenames']);
     Route::post('/get-keluhan',[AjaxController::class,'getKeluhanDetail']);
 });

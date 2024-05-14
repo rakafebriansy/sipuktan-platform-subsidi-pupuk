@@ -19,6 +19,6 @@ class AuthKiosResmi
         if(Auth::guard('kiosResmi')->check()) {
             return $next($request);
         }
-        return redirect('petani/login');
+        return redirect('kios-resmi/login');
     }
 }

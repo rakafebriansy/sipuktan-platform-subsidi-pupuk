@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Dashboard\Pemerintah;
 use App\Events\LaporanStatusToDitolak;
 use App\Events\LaporanStatusToDiverifikasi;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PemerintahLaporanRequest;
+use App\Http\Requests\PemerintahSetujuiLaporanRequest;
+use App\Http\Requests\PemerintahTolakLaporanRequest;
 use App\Models\Alokasi;
 use App\Models\Laporan;
 use App\Services\DashboardService;
@@ -53,35 +56,39 @@ class LaporanController extends Controller
             'musim_tanam' => $musim_tanam,
         ]);
     }
-    public function laporan(Request $request): RedirectResponse
+    public function setujuiLaporan(PemerintahSetujuiLaporanRequest $request): RedirectResponse
     {
-        $status_verifikasi = $request->status_verifikasi;
-        $id_kios_resmi = $this->laporan_service->pemerintahGetIdKiosResmiByLaporan($request->id);
-        if($status_verifikasi == 'Terverifikasi'){
-            if($this->laporan_service->pemerintahLaporan($request->id, $status_verifikasi)) {
-                $pesan = 'Laporan telah diverifikasi.';
-                $id_notifikasi = $this->notifikasi_service->sendNotifikasi($pesan, 'kios_resmi', $id_kios_resmi);
-                $data_notifikasi = [
-                    'pesan' => $pesan, 
-                    'id' => $id_notifikasi,
-                    'id_kios_resmi' => $id_kios_resmi
-                ];
-                event(new LaporanStatusToDiverifikasi($data_notifikasi));
-                return redirect('/pemerintah/laporan?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with('success','Berhasil menyetujui laporan kios resmi.');
-            } 
-        } else if($status_verifikasi == 'Ditolak') {
-            if($this->laporan_service->pemerintahLaporan($request->id, $status_verifikasi)) {
-                $pesan = 'Laporan telah ditolak.';
-                $id_notifikasi = $this->notifikasi_service->sendNotifikasi($pesan, 'kios_resmi', $id_kios_resmi);
-                $data_notifikasi = [
-                    'pesan' => $pesan, 
-                    'id' => $id_notifikasi,
-                    'id_kios_resmi' => $id_kios_resmi
-                ];
-                event(new LaporanStatusToDitolak($data_notifikasi));
-                return redirect('/pemerintah/laporan?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->with('success','Berhasil menolak laporan kios resmi.');
-            } 
+        $validated = $request->validated();
+        $id_kios_resmi = $this->laporan_service->pemerintahGetIdKiosResmiByLaporan($validated['id']);
+        if($this->laporan_service->pemerintahSetujuiLaporan($validated['id'])) {
+            $pesan = 'Laporan telah diverifikasi.';
+            $id_notifikasi = $this->notifikasi_service->sendNotifikasi($pesan, 'kios_resmi', $id_kios_resmi);
+            $data_notifikasi = [
+                'pesan' => $pesan, 
+                'id' => $id_notifikasi,
+                'id_kios_resmi' => $id_kios_resmi
+            ];
+            event(new LaporanStatusToDiverifikasi($data_notifikasi));
+            return back()->with('success','Berhasil menyetujui laporan kios resmi.');
         }
-        return redirect('/pemerintah/laporan?tahun=' . $request->tahun . '&musim_tanam=' . $request->musim_tanam)->withErrors(['failed'=>'Gagal mengubah status laporan kios resmi.']);
+        return back()->withErrors(['failed'=>'Gagal mengubah status laporan kios resmi.']);
+    }
+    public function tolakLaporan(PemerintahTolakLaporanRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+        $id_kios_resmi = $this->laporan_service->pemerintahGetIdKiosResmiByLaporan($validated['id']);
+        if($this->laporan_service->pemerintahTolakLaporan($validated['id'], $validated['catatan'])) {
+            $pesan = 'Laporan anda ditolak!<span class="block">'.$validated['catatan'].'.</span>';
+            $id_notifikasi = $this->notifikasi_service->sendNotifikasi($pesan, 'kios_resmi', $id_kios_resmi);
+            $data_notifikasi = [
+                'pesan' => $pesan, 
+                'id' => $id_notifikasi,
+                'id_kios_resmi' => $id_kios_resmi,
+                'id_laporan' => $validated['id']
+            ];
+            event(new LaporanStatusToDitolak($data_notifikasi));
+            return back()->with('success','Berhasil menolak laporan kios resmi.');
+        } 
+        return back()->withErrors(['failed'=>'Gagal mengubah status laporan kios resmi.']);
     }
 }

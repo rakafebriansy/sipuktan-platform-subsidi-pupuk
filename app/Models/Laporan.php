@@ -21,7 +21,10 @@ class Laporan extends Model
         'foto_surat_kuasa',
         'foto_tanda_tangan',
         'status_verifikasi',
-        'id_riwayat_transaksi'
+        'id_riwayat_transaksi',
+        'telah_diedit',
+        'tanggal_diedit',
+        'catatan'
     ];
     public function riwayat_transaksi(): BelongsTo
     {

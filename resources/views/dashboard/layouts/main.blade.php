@@ -20,16 +20,18 @@
         let id_petani = data['data']['detail_notifikasi']['id_petani'];
         let pesan = data['data']['pesan'];
         if(id_petani == document.getElementById('petani').dataset.id){
-          viewAlertNotifikasi(pesan, id_notifikasi)
+          viewAlertNotifikasi(pesan, id_notifikasi);
         }
       });
       channel.bind('laporan-status-to-ditolak', function(data) {
         let id_kios_resmi = data['data']['id_kios_resmi'];
+        let id_laporan = data['data']['id_laporan'];
         let id_notifikasi = data['data']['id'];
         let pesan = data['data']['pesan'];
         console.log(data)
         if(id_kios_resmi == document.getElementById('kios-resmi').dataset.id){
-          viewAlertNotifikasi(pesan, id_notifikasi,'red')
+          viewAlertNotifikasi(pesan, id_notifikasi,'red');
+          viewAksiLaporanNotifikasi(id_laporan);
         }
       });
       channel.bind('laporan-status-to-diverifikasi', function(data) {
@@ -37,7 +39,7 @@
         let id_notifikasi = data['data']['id'];
         let pesan = data['data']['pesan'];
         if(id_kios_resmi == document.getElementById('kios-resmi').dataset.id){
-          viewAlertNotifikasi(pesan, id_notifikasi)
+          viewAlertNotifikasi(pesan, id_notifikasi);
         }
       });
     </script>
