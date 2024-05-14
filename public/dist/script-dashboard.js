@@ -342,17 +342,32 @@ function balasKeluhanPassId(btn) {
     balasKeluhanModal.querySelector('[name="id"]').value = id;
     fetchGetKeluhanBalas(id);
 }
+function verifikasiLaporanPassId(btn,mode='') {
+    document.getElementById('verifikasiLaporan'+mode+'Id').value = btn.parentElement.dataset.id
+    if(mode == 'Ori'){
+        document.getElementById('verifikasiLaporanModalOri').classList.replace('hidden','flex');
+        document.getElementById('backdropModal').classList.replace('hidden','block');   
+    }
+}
 function editLaporanPassId(btn) {
     document.getElementById('editLaporanId').value = btn.parentElement.dataset.id;
+}
+function tolakLaporanPassId(btn,mode='') {
+    document.getElementById('tolakLaporan'+mode+'Id').value = btn.parentElement.dataset.id
+    if(mode == 'Ori'){
+        document.getElementById('tolakLaporanModalOri').classList.replace('hidden','flex');
+        document.getElementById('backdropModal').classList.replace('hidden','block');   
+    }
 }
 function detailLaporanPassModalOri(btn) {
     document.getElementById('detailLaporanModalOri').classList.replace('hidden','flex');
     document.getElementById('backdropModal').classList.replace('hidden','block');   
     fetchDetailLaporanFiles(btn.parentElement.dataset.id,'detailLaporanModalOri');
 }
-function closeDetailLaporanPassModalOri() {
+function closeLaporanPassModalOri(mode) {
+    console.log('ok')
     document.getElementById('backdropModal').classList.replace('block','hidden');   
-    document.getElementById('detailLaporanModalOri').classList.replace('flex','hidden');
+    document.getElementById(mode+'LaporanModalOri').classList.replace('flex','hidden');
 }
 
 
@@ -367,15 +382,5 @@ function closeDetailLaporanPassModalOri() {
             notifikasi.dataset.dropdownPlacement = 'right-end';
             notifikasi.dataset.dropdownOffsetSkidding = 0;
         } 
-    }
-    if(document.URL.includes('/pemerintah/laporan')){
-        if(document.getElementById('detailLaporanModalOri').style.display == 'block') {
-            window.onclick = function(event) {
-                if(!event.target.closest('.not-close')){ 
-                    console.log(event)
-                    closeDetailLaporanPassModalOri();
-                }
-            }
-        }
     }
 })();
