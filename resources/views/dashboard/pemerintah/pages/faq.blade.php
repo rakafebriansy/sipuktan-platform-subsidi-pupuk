@@ -12,7 +12,6 @@
                           </button>
                     </div>
                 </caption>
-                @if(count($faqs))
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -31,38 +30,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($faqs as $faq)
-                    <tr class="alokasi-rows bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th class="px-6 py-4 font-medium text-gray-700 dark:text-gray-400">
-                            {{ $faq->jenis_pengguna }}
+                    @if(count($faqs))
+                        @foreach ($faqs as $faq)
+                        <tr class="alokasi-rows bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th class="px-6 py-4 font-medium text-gray-700 dark:text-gray-400">
+                                {{ $faq->jenis_pengguna }}
+                            </th>
+                            <td scope="row" class=" px-6 py-4">
+                                {{ $faq->pertanyaan }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $faq->jawaban }}
+                            </td>
+                            <td data-id="{{ $faq->id }}" class="py-4 flex flex-row justify-start pe-2">
+                                <button data-modal-target="editFaqModal" data-modal-toggle="editFaqModal" onclick="editFaqPassId(this)" class=" bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Ubah</button>
+                                <button data-modal-target="deleteFaqModal" data-modal-toggle="deleteFaqModal" onclick="deleteFaqPassId(this)" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Hapus</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <th id="no-data" colspan="5" class="text-center py-4">
+                            Belum ada data
                         </th>
-                        <td scope="row" class=" px-6 py-4">
-                            {{ $faq->pertanyaan }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $faq->jawaban }}
-                        </td>
-                        <td data-id="{{ $faq->id }}" class="py-4 flex flex-row justify-start pe-2">
-                            <button data-modal-target="editFaqModal" data-modal-toggle="editFaqModal" onclick="editFaqPassId(this)" class=" bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Ubah</button>
-                            <button data-modal-target="deleteFaqModal" data-modal-toggle="deleteFaqModal" onclick="deleteFaqPassId(this)" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Hapus</button>
-                        </td>
-                    </tr>
-                    @endforeach
-
+                    @endif
                 </tbody>
-                @else
-                <div class="flex justify-center">
-                    <thead>
-                        <th class="text-center">
-                            <h1 class="p-5">Belum ada data.</h1>
-                        </th>
-                    </thead>
-                    <tbody>
-                        <td>
-                        </td>
-                    </tbody>
-                </div>
-                @endif
             </table>
         </div>
     </div>

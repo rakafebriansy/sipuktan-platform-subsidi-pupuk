@@ -15,7 +15,6 @@
                         </div>
                     </div>
                 </caption>
-                @if (count($keluhans))
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -33,37 +32,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($keluhans as $keluhan)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4">
-                            {{ date('H:i d-m-Y',strtotime($keluhan->tanggal_keluhan))}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $keluhan->subjek }}
-                        </td>
-                        <td class="px-6 py-4 italic">
-                            {{ isset($keluhan->balasan)? 'Dibalas' : 'Belum dibalas' }}
-                        </td>
-                        <td class="py-4 flex flex-row px-6" data-id="{{ $keluhan->id }}">
-                            <button data-modal-target="detailKeluhanModal" data-modal-toggle="detailKeluhanModal"  type="button" onclick="getDetailKeluhan(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
-                        </td>
-                    </tr>
-                    @endforeach
-
-                </tbody>
-                @else
-                <div class="flex justify-center">
-                    <thead>
-                        <th class="text-center">
-                            <h1>Belum ada data.</h1>
+                    @if (count($keluhans))
+                        @foreach ($keluhans as $keluhan)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <td class="px-6 py-4">
+                                    {{ date('H:i d-m-Y',strtotime($keluhan->tanggal_keluhan))}}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $keluhan->subjek }}
+                                </td>
+                                <td class="px-6 py-4 italic">
+                                    {{ isset($keluhan->balasan)? 'Dibalas' : 'Belum dibalas' }}
+                                </td>
+                                <td class="py-4 flex flex-row px-6" data-id="{{ $keluhan->id }}">
+                                    <button data-modal-target="detailKeluhanModal" data-modal-toggle="detailKeluhanModal"  type="button" onclick="getDetailKeluhan(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <th id="no-data" colspan="5" class="text-center py-4">
+                            Belum ada data
                         </th>
-                    </thead>
-                    <tbody>
-                        <td>
-                        </td>
-                    </tbody>
-                </div>
-                @endif
+                    @endif
+                </tbody>
             </table>
         </div>
     </div>

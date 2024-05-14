@@ -37,7 +37,7 @@ class LaporanServiceImpl implements LaporanService
         ->orderBy('laporans.tanggal_pengambilan', 'desc')->get();
         return $laporans;
     }
-    public function kiosResmiLaporan($laporan): bool
+    public function kiosResmiLaporan($laporan): int|null
     {
         $laporan['foto_bukti_pengambilan']->storePubliclyAs('foto_bukti_pengambilans', $laporan['foto_bukti_pengambilan']->getClientOriginalName(), 'public');
         $laporan['foto_bukti_pengambilan'] = $laporan['foto_bukti_pengambilan']->getClientOriginalName();
@@ -52,7 +52,7 @@ class LaporanServiceImpl implements LaporanService
         }
         
         return DB::transaction(function () use ($laporan) {
-            return Laporan::insert($laporan);
+            return Laporan::insertGetId($laporan);
         });
     }
     public function kiosResmiUbahLaporan($laporan): bool

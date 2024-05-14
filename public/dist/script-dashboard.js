@@ -169,8 +169,6 @@ function viewAlertNotifikasi(message,id,mode='blue') {
     target.appendChild(li);
 }
 function viewAksiLaporanNotifikasi(id) {
-    console.log(id)
-    console.log(document.querySelector('#laporan-' + id))
     const lastElement = document.querySelector('#laporan-' + id).lastElementChild;
     lastElement.previousElementSibling.innerText = 'Ditolak';
     lastElement.lastElementChild.classList.replace('hidden','inline-block')
@@ -194,8 +192,13 @@ function viewGetKeluhanBalas(data) {
 }
 function viewTableRowLaporanNotifikasi(xmlString) {
     const tr = document.createElement('tr');
+    const tbody = document.getElementById('no-data').parentElement;
     tr.classList.add('bg-white','border-b','dark:bg-gray-800','dark:border-gray-700','hover:bg-gray-50','dark:hover:bg-gray-600');
     tr.innerHTML = xmlString;
+    if(tbody == null) {
+        tbody.parentElement.innerHTML = '';
+        tbody.parentElement.appendChild(tr);
+    }
 }
 
 

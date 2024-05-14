@@ -13,7 +13,7 @@ class LaporanSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([AlokasiSeeder::class,RiwayatTransaksiSeeder::class]);
+        $this->call(RiwayatTransaksiSeeder::class);
         Laporan::insert([
             'id' => 1,
             'tanggal_pengambilan'=> fake()->date(),

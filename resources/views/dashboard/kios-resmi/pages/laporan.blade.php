@@ -27,7 +27,6 @@
                         </div>
                     </div>
                 </caption>
-                @if (count($laporans))
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -51,48 +50,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($laporans as $laporan)
-                    <tr id="laporan-{{ $laporan->id }}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4">
-                            {{ date('H:i d-m-Y',strtotime($laporan->tanggal_pengambilan))}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $laporan->nama_petani }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $laporan->jenis }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $laporan->jumlah_pupuk }}kg
-                        </td>
-                        <td class="px-6 py-4 italic">
-                            {{ $laporan->status_verifikasi }}
-                        </td>
-                        <td class="py-4 flex flex-row px-6" data-id="{{ $laporan->id }}">
-                            <button data-modal-target="detailLaporanModal" data-modal-toggle="detailLaporanModal"  type="button" onclick="getDetailLaporanFiles(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
-                            <button data-modal-target="editLaporanModal" data-modal-toggle="editLaporanModal" onclick="editLaporanPassId(this)" @class([
-                                'inline-block' => $laporan->status_verifikasi == 'Ditolak',
-                                'hidden' => $laporan->status_verifikasi !== 'Ditolak',
-                                'bg-yellow-100','text-yellow-800','text-xs','font-medium','me-2','px-2.5','py-0.5','rounded','dark:bg-gray-700','dark:text-yellow-300','border','border-yellow-300'
-                                ])>Ubah</button>
-                        </td>
-                    </tr>
-                    @endforeach
-
-                </tbody>
-                @else
-                <div class="flex justify-center">
-                    <thead>
-                        <th class="text-center">
-                            <h1>Belum ada data.</h1>
+                    @if (count($laporans))
+                        @foreach ($laporans as $laporan)
+                        <tr id="laporan-{{ $laporan->id }}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4">
+                                {{ date('H:i d-m-Y',strtotime($laporan->tanggal_pengambilan))}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $laporan->nama_petani }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $laporan->jenis }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $laporan->jumlah_pupuk }}kg
+                            </td>
+                            <td class="px-6 py-4 italic">
+                                {{ $laporan->status_verifikasi }}
+                            </td>
+                            <td class="py-4 flex flex-row px-6" data-id="{{ $laporan->id }}">
+                                <button data-modal-target="detailLaporanModal" data-modal-toggle="detailLaporanModal"  type="button" onclick="getDetailLaporanFiles(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                                <button data-modal-target="editLaporanModal" data-modal-toggle="editLaporanModal" onclick="editLaporanPassId(this)" @class([
+                                    'inline-block' => $laporan->status_verifikasi == 'Ditolak',
+                                    'hidden' => $laporan->status_verifikasi !== 'Ditolak',
+                                    'bg-yellow-100','text-yellow-800','text-xs','font-medium','me-2','px-2.5','py-0.5','rounded','dark:bg-gray-700','dark:text-yellow-300','border','border-yellow-300'
+                                    ])>Ubah</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <th id="no-data" colspan="5" class="text-center py-4">
+                            Belum ada data
                         </th>
-                    </thead>
-                    <tbody>
-                        <td>
-                        </td>
-                    </tbody>
-                </div>
-                @endif
+                    @endif
+                </tbody>
             </table>
         </div>
     </div>

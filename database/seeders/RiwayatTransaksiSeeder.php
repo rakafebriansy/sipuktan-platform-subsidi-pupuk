@@ -13,6 +13,7 @@ class RiwayatTransaksiSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(AlokasiSeeder::class);
         RiwayatTransaksi::insert([
             'id' => 1,
             'tanggal_transaksi' => fake()->date(),

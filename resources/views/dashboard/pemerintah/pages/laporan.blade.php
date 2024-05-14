@@ -24,7 +24,6 @@
                         </div>
                     </div>
                 </caption>
-                @if (count($laporans))
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -48,63 +47,55 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($laporans as $laporan)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4">
-                            {{ date('H:i d-m-Y',strtotime($laporan->tanggal_pengambilan))}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $laporan->nama_petani }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $laporan->jenis }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $laporan->jumlah_pupuk }}kg
-                        </td>
-                        <td class="px-6 py-4">
-                            @if ($laporan->telah_diedit == true)
-                                @php
-                                    $satuan = 'menit';
-                                    $selisih = now()->diffInMinutes($laporan->tanggal_diedit);
-                                    if($selisih > 60) {
-                                        $selisih = now()->diffInHours($laporan->tanggal_diedit);
-                                        $satuan = 'jam';
-                                        if($selisih > 24) {
-                                            $selisih = now()->diffInDays($laporan->tanggal_diedit);
-                                            $satuan = 'hari';
+                    @if (count($laporans))
+                        @foreach ($laporans as $laporan)
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4">
+                                {{ date('H:i d-m-Y',strtotime($laporan->tanggal_pengambilan))}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $laporan->nama_petani }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $laporan->jenis }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $laporan->jumlah_pupuk }}kg
+                            </td>
+                            <td class="px-6 py-4">
+                                @if ($laporan->telah_diedit == true)
+                                    @php
+                                        $satuan = 'menit';
+                                        $selisih = now()->diffInMinutes($laporan->tanggal_diedit);
+                                        if($selisih > 60) {
+                                            $selisih = now()->diffInHours($laporan->tanggal_diedit);
+                                            $satuan = 'jam';
+                                            if($selisih > 24) {
+                                                $selisih = now()->diffInDays($laporan->tanggal_diedit);
+                                                $satuan = 'hari';
+                                            }
                                         }
-                                    }
-                                @endphp
-                                    <p class="italic">diedit {{ $selisih . ' ' . $satuan }} lalu</p>
-                            @else
-                                <p class="italic">{{ $laporan->status_verifikasi }}</p>
-                            @endif
-                        </td>
-                        <td class="py-4 flex flex-row px-6" data-id="{{ $laporan->id }}">
-                            <button data-modal-target="detailLaporanModal" data-modal-toggle="detailLaporanModal" type="button" onclick="getDetailLaporanFiles(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
-                            @if($laporan->status_verifikasi == 'Belum Diverifikasi')
-                                <button data-modal-target="verifikasiLaporanModal" data-modal-toggle="verifikasiLaporanModal" type="button" onclick="document.getElementById('verifikasiLaporanId').value = this.parentElement.dataset.id" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Setujui</button>
-                                <button data-modal-target="tolakLaporanModal" data-modal-toggle="tolakLaporanModal" type="button"onclick="document.getElementById('tolakLaporanId').value = this.parentElement.dataset.id" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Tolak</button>
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-
-                </tbody>
-                @else
-                <div class="flex justify-center">
-                    <thead>
-                        <th class="text-center">
-                            <h1>Belum ada data.</h1>
+                                    @endphp
+                                        <p class="italic">diedit {{ $selisih . ' ' . $satuan }} lalu</p>
+                                @else
+                                    <p class="italic">{{ $laporan->status_verifikasi }}</p>
+                                @endif
+                            </td>
+                            <td class="py-4 flex flex-row px-6" data-id="{{ $laporan->id }}">
+                                <button data-modal-target="detailLaporanModal" data-modal-toggle="detailLaporanModal" type="button" onclick="getDetailLaporanFiles(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                                @if($laporan->status_verifikasi == 'Belum Diverifikasi')
+                                    <button data-modal-target="verifikasiLaporanModal" data-modal-toggle="verifikasiLaporanModal" type="button" onclick="document.getElementById('verifikasiLaporanId').value = this.parentElement.dataset.id" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Setujui</button>
+                                    <button data-modal-target="tolakLaporanModal" data-modal-toggle="tolakLaporanModal" type="button"onclick="document.getElementById('tolakLaporanId').value = this.parentElement.dataset.id" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Tolak</button>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <th id="no-data" colspan="5" class="text-center py-4">
+                            Belum ada data
                         </th>
-                    </thead>
-                    <tbody>
-                        <td>
-                        </td>
-                    </tbody>
-                </div>
-                @endif
+                    @endif
+                </tbody>
             </table>
         </div>
     </div>
@@ -112,7 +103,6 @@
 
 {{-- DROPDOWN --}}
 @foreach ($laporans as $laporan)
-    @if ($laporan->status_verifikasi == 'Belum Diverifikasi')
         <div id="detailLaporanModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-sm max-h-full">
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -172,6 +162,7 @@
                 </div>
             </div>
         </div>
+    @if ($laporan->status_verifikasi == 'Belum Diverifikasi')
         <div id="verifikasiLaporanModal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <form action="/pemerintah/laporan" method="post" class="relative bg-white rounded-lg shadow dark:bg-gray-700">

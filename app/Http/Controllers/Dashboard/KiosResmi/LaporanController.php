@@ -56,16 +56,17 @@ class LaporanController extends Controller
     }
     public function laporan(KiosResmiLaporanRequest $request): RedirectResponse
     {
-        $nama = Auth::user()->nama;
-        $id = Auth::user()->id;
+        $nama = Auth::guard('kiosResmi')->user()->nama;
+        $id_kios_resmi = Auth::guard('kiosResmi')->user()->id;
         $validated = $request->validated();
-        if($this->laporan_service->kiosResmiLaporan($validated)) {
+        $id_laporan = $this->laporan_service->kiosResmiLaporan($validated);
+        if(isset($id_laporan)) {
             $pesan = 'Laporan dari kios '.$nama.' telah masuk.';
-            $id_notifikasi = $this->notifikasi_service->sendNotifikasi($pesan, 'pemerintah', $id);
+            $id_notifikasi = $this->notifikasi_service->sendNotifikasi($pesan, 'pemerintah', $id_kios_resmi);
             $data_notifikasi = [
                 'pesan' => $pesan, 
                 'id' => $id_notifikasi,
-                'id_laporan' => $validated['id']
+                'id_laporan' => $id_laporan
             ];
             event(new LaporanDibuat($data_notifikasi));
             return back()->with('success', 'Data laporan berhasil ditambahkan');

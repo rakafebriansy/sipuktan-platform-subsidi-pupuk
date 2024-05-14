@@ -9,7 +9,6 @@
                     <caption class=" w-full px-5 pt-5 pb-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                         <h1 class="inline-block text-2xl">Checkout</h1>
                     </caption>
-                    @if(count($alokasis))
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
@@ -24,38 +23,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($alokasis as $alokasi)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <input type="hidden" name="id_alokasis[]" value="{{ $alokasi->id }}" id="">
-                            <td scope="row" class="px-6 py-4">
-                                {{ $alokasi->jenis }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $alokasi->jumlah_pupuk }}kg
-                            </td>
-                            <td class="px-6 py-4">
-                                Rp{{ $alokasi->total_harga }}
-                            </td>
-                        </tr>
-                        @endforeach
-                        <tr>
-                            <td colspan="2" scope="col" class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">Total:</td>
-                            <td scope="col" class="px-6 font-medium py-3 text-gray-900">Rp{{ $total_harga }}</td>
-                        </tr>
-                    </tbody>
-                    @else
-                    <div class="flex justify-center">
-                        <thead>
-                            <th class="text-center">
-                                <h1>Belum ada data.</h1>
+                        @if(count($alokasis))
+                            @foreach ($alokasis as $alokasi)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <input type="hidden" name="id_alokasis[]" value="{{ $alokasi->id }}" id="">
+                                    <td scope="row" class="px-6 py-4">
+                                        {{ $alokasi->jenis }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $alokasi->jumlah_pupuk }}kg
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Rp{{ $alokasi->total_harga }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td colspan="2" scope="col" class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">Total:</td>
+                                <td scope="col" class="px-6 font-medium py-3 text-gray-900">Rp{{ $total_harga }}</td>
+                            </tr>
+                        @else
+                            <th id="no-data" colspan="5" class="text-center py-4">
+                                Belum ada data
                             </th>
-                        </thead>
-                        <tbody>
-                            <td>
-                            </td>
-                        </tbody>
-                    </div>
-                    @endif
+                        @endif
+                    </tbody>
                 </table>    
             </div>
         </div>

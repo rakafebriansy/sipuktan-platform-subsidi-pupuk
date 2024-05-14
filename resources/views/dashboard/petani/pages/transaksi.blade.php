@@ -25,7 +25,6 @@
                             </div>
                         </div>
                     </caption>
-                    @if(count($alokasis))
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="p-4 sr-only">
@@ -43,43 +42,36 @@
                             <th scope="col" class="px-6 py-3">
                                 Total Harga
                             </th>
-    
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($alokasis as $alokasi)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input name="id_alokasis[]" onclick="sumTotalCheck()" value="{{ $alokasi->id }}" data-harga="{{ $alokasi->total_harga }}" type="checkbox" class="transaksi-check w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $alokasi->jenis }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ $alokasi->jumlah_pupuk }}kg
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $alokasi->total_harga }}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    @else
-                    <div class="flex justify-center">
-                        <thead>
-                            <th class="text-center">
-                                <h1>Belum ada data.</h1>
-                            </th>
-                        </thead>
-                        <tbody>
-                            <td>
-                            </td>
-                        </tbody>
-                    </div>
+                        @if(count($alokasis))
+                            @foreach ($alokasis as $alokasi)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <td class="w-4 p-4">
+                                        <div class="flex items-center">
+                                            <input name="id_alokasis[]" onclick="sumTotalCheck()" value="{{ $alokasi->id }}" data-harga="{{ $alokasi->total_harga }}" type="checkbox" class="transaksi-check w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label class="sr-only">checkbox</label>
+                                        </div>
+                                    </td>
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $alokasi->jenis }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ $alokasi->jumlah_pupuk }}kg
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $alokasi->total_harga }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                        <th id="no-data" colspan="5" class="text-center py-4">
+                            Belum ada data
+                        </th>
                     @endif
+                    </tbody>
                 </table>
             </form>
 

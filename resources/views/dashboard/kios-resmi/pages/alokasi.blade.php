@@ -32,7 +32,6 @@
                         </div>
                     </div>
                 </caption>
-                @if(count($alokasis))
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -53,51 +52,44 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($alokasis as $alokasi)
-                        @php
-                            $isDibayar = $alokasi->status == "Dibayar";
-                            $isTidakDiambil = $alokasi->status == "Tidak Diambil";
-                        @endphp
-                        <tr @class([
-                            'bg-white' => !$isDibayar && !$isTidakDiambil,
-                            'hover:bg-gray-50' => !$isDibayar && !$isTidakDiambil,
-                            'bg-[#A5E09B]' => $isDibayar,
-                            'hover:bg-[#95D88A]' => $isDibayar,
-                            'bg-[#F97B7B]' => $isTidakDiambil,
-                            'hover:bg-[#F56262]' => $isTidakDiambil,
-                            'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'dark:hover:bg-gray-600'
-                            ])>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $alokasi->petani }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ $alokasi->jumlah_pupuk }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $alokasi->jenis_pupuk->jenis }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $alokasi->status }}
-                            </td>
-                            <td class="py-4" data-id="{{ $alokasi->id }}">
-                                <button onclick="getPetaniFromAlokasi(this)" data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" type="button"  class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-                @else
-                <div class="flex  justify-center">
-                    <thead>
-                        <th class="text-center">
-                            <h1 class="p-5">Belum ada data.</h1>
+                    @if(count($alokasis))
+                        @foreach ($alokasis as $alokasi)
+                            @php
+                                $isDibayar = $alokasi->status == "Dibayar";
+                                $isTidakDiambil = $alokasi->status == "Tidak Diambil";
+                            @endphp
+                            <tr @class([
+                                'bg-white' => !$isDibayar && !$isTidakDiambil,
+                                'hover:bg-gray-50' => !$isDibayar && !$isTidakDiambil,
+                                'bg-[#A5E09B]' => $isDibayar,
+                                'hover:bg-[#95D88A]' => $isDibayar,
+                                'bg-[#F97B7B]' => $isTidakDiambil,
+                                'hover:bg-[#F56262]' => $isTidakDiambil,
+                                'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'dark:hover:bg-gray-600'
+                                ])>
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $alokasi->petani }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ $alokasi->jumlah_pupuk }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $alokasi->jenis_pupuk->jenis }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $alokasi->status }}
+                                </td>
+                                <td class="py-4" data-id="{{ $alokasi->id }}">
+                                    <button onclick="getPetaniFromAlokasi(this)" data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" type="button"  class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <th id="no-data" colspan="5" class="text-center py-4">
+                            Belum ada data
                         </th>
-                    </thead>
-                    <tbody>
-                        <td>
-                        </td>
-                    </tbody>
-                </div>
-                @endif
+                    @endif
+                </tbody>
             </table>
         </div>
     </div>

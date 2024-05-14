@@ -16,7 +16,6 @@
                             @endif
                         </div>
                     </caption>
-                    @if(count($petanis))
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="p-4 sr-only">
@@ -40,49 +39,42 @@
                             <th scope="col" class="px-6 py-3">
                                 Kelompok Tani
                             </th>
-    
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($petanis as $petani)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input name="id_petanis[]" value="{{ $petani->id }}" id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $petani->nik }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ $petani->nama }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $petani->nomor_telepon }}
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="/../download/foto_ktps/{{ $petani->foto_ktp }}" class="hover:underline">{{ $petani->foto_ktp }}</a>
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $petani->nama_poktan }}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    @else
-                    <div class="flex justify-center">
-                        <thead>
-                            <th class="text-center">
-                                <h1>Belum ada data.</h1>
-                            </th>
-                        </thead>
-                        <tbody>
-                            <td>
-                            </td>
-                        </tbody>
-                    </div>
+                        @if(count($petanis))
+                            @foreach ($petanis as $petani)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <td class="w-4 p-4">
+                                    <div class="flex items-center">
+                                        <input name="id_petanis[]" value="{{ $petani->id }}" id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                    </div>
+                                </td>
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $petani->nik }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ $petani->nama }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $petani->nomor_telepon }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="/../download/foto_ktps/{{ $petani->foto_ktp }}" class="hover:underline">{{ $petani->foto_ktp }}</a>
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $petani->nama_poktan }}
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                        <th id="no-data" colspan="5" class="text-center py-4">
+                            Belum ada data
+                        </th>
                     @endif
+                    </tbody>
                 </table>
             </form>
 
@@ -102,7 +94,6 @@
                             @endif
                         </div>
                     </caption>
-                    @if(count($kios_resmis))
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="p-4 sr-only">
@@ -135,51 +126,44 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($kios_resmis as $kios_resmi)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input name="id_kios_resmis[]" value="{{ $kios_resmi->id }}" id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $kios_resmi->nib }}
+                        @if(count($kios_resmis))
+                            @foreach ($kios_resmis as $kios_resmi)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <td class="w-4 p-4">
+                                    <div class="flex items-center">
+                                        <input name="id_kios_resmis[]" value="{{ $kios_resmi->id }}" id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                    </div>
+                                </td>
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $kios_resmi->nib }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ $kios_resmi->nama }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $kios_resmi->jalan }}, {{ $kios_resmi->kecamatan }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $kios_resmi->nik }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $kios_resmi->nama_pemilik }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $kios_resmi->nomor_telepon }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="/download/foto_ktps/{{ $kios_resmi->foto_ktp }}" class="hover:underline">{{ $kios_resmi->foto_ktp }}</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <th id="no-data" colspan="5" class="text-center py-4">
+                                Belum ada data
                             </th>
-                            <td class="px-6 py-4">
-                                {{ $kios_resmi->nama }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $kios_resmi->jalan }}, {{ $kios_resmi->kecamatan }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $kios_resmi->nik }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $kios_resmi->nama_pemilik }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $kios_resmi->nomor_telepon }}
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="/download/foto_ktps/{{ $kios_resmi->foto_ktp }}" class="hover:underline">{{ $kios_resmi->foto_ktp }}</a>
-                            </td>
-                        </tr>
-                        @endforeach
+                        @endif
                     </tbody>
-                    @else
-                    <div class="flex justify-center">
-                        <thead>
-                            <th class="text-center">
-                                <h1>Belum ada data.</h1>
-                            </th>
-                        </thead>
-                        <tbody>
-                            <td>
-                            </td>
-                        </tbody>
-                    </div>
-                    @endif
                 </table>
             </form>
         </div>
