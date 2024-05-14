@@ -25,7 +25,7 @@ class LaporanServiceImpl implements LaporanService
     }
     public function kiosResmiSetLaporanByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection
     {
-        $laporans = Laporan::select('laporans.id','laporans.tanggal_pengambilan', 'laporans.status_verifikasi','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
+        $laporans = Laporan::select('laporans.id','laporans.tanggal_pengambilan', 'laporans.status_verifikasi', 'laporans.telah_diedit', 'laporans.tanggal_diedit','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani')
         ->join('riwayat_transaksis','riwayat_transaksis.id','laporans.id_riwayat_transaksi')
         ->join('alokasis','riwayat_transaksis.id_alokasi','alokasis.id')
         ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
@@ -86,7 +86,7 @@ class LaporanServiceImpl implements LaporanService
     }
     public function pemerintahSetLaporanByTahun(string $tahun, string $musim_tanam): Collection
     {
-        $laporans = Laporan::select('laporans.id','laporans.status_verifikasi','laporans.tanggal_pengambilan','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani', 'kios_resmis.nama as nama_kios')
+        $laporans = Laporan::select('laporans.id','laporans.status_verifikasi','laporans.tanggal_pengambilan', 'laporans.status_verifikasi', 'laporans.telah_diedit', 'laporans.tanggal_diedit','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani', 'kios_resmis.nama as nama_kios')
         ->join('riwayat_transaksis','riwayat_transaksis.id','laporans.id_riwayat_transaksi')
         ->join('alokasis','riwayat_transaksis.id_alokasi','alokasis.id')
         ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
