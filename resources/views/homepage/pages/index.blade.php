@@ -176,6 +176,29 @@
     </div>
   </div>
 </div>
+<div class="flex justify-center py-20">
+  <div class="w-[80%] text-center flex flex-col justify-center gap-2 font-thin">
+    <h2 class="text-4xl font-bold">Tujuan Dedikasi Bersama</h2>
+    <p>Kami hadir untuk</p>
+    <div class="w-full grid grid-cols-3 text-center mt-10 gap-16">
+      <div class="flex flex-col justify-center items-center border-box p-10 gap-1 shadow-md">
+        <img src="{{ asset('images/transparansi-informasi.png') }}" alt="">
+        <h3 class="text-3xl font-semibold mb-1">Transparansi Informasi</h3>
+        <p>Kami memfasilitasi transparansi informasi alokasi subsidi pupuk bagi petani dan kios resmi</p>
+      </div>
+      <div class="flex flex-col justify-center items-center border-box p-10 gap-1 shadow-md">
+        <img src="{{ asset('images/transparansi-informasi.png') }}" alt="">
+        <h3 class="text-3xl font-semibold mb-1">Kualitas Hasil Panen</h3>
+        <p>Kami membantu petani untuk bisa memastikan kualitas pupuk subsidi mampu membantu meningkatkan kualitas hasil panen</p>
+      </div>
+      <div class="flex flex-col justify-center items-center border-box p-10 gap-1 shadow-md">
+        <img src="{{ asset('images/transparansi-informasi.png') }}" alt="">
+        <h3 class="text-3xl font-semibold mb-1">Pengawasan Subsidi</h3>
+        <p>Kami berusaha memberikan pengawasan yang maksimal terhadap penyebaran dan pembelian pupuk subsidi untuk mencegah keterlibatan pihak illegal</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
