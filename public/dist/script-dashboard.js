@@ -63,6 +63,14 @@ function fetchGetKeluhanBalas(id) {
       .then(data => viewGetKeluhanBalas(data))
       .catch(e => console.error('Error'+e));
 }
+function fetchTableRowLaporanNotifikasi(id) {
+    fetch('/pemerintah/ajax/get-laporan-blade', { 
+        method: 'POST',
+        body: new URLSearchParams('id='+id)
+    }).then(res => res.text())
+      .then(data => viewTableRowLaporanNotifikasi(data))
+      .catch(e => console.error('Error'+e));
+}
 
 //UTILS
 function viewRiwayatSearchBox(data,list) {
@@ -183,6 +191,11 @@ function viewGetKeluhanBalas(data) {
     const detailKeluhanModalDivs = document.querySelectorAll('#balasKeluhanBody div');
     detailKeluhanModalDivs[0].children[1].innerText = data['subjek']
     detailKeluhanModalDivs[1].children[1].innerText = data['keluhan']
+}
+function viewTableRowLaporanNotifikasi(xmlString) {
+    const tr = document.createElement('tr');
+    tr.classList.add('bg-white','border-b','dark:bg-gray-800','dark:border-gray-700','hover:bg-gray-50','dark:hover:bg-gray-600');
+    tr.innerHTML = xmlString;
 }
 
 
@@ -330,7 +343,7 @@ function editLaporanPassId(btn) {
 }
 
 (function(){
-    if(document.URL.includes('/petani/') || document.URL.includes('/kios-resmi/')){
+    if(document.URL.includes('/petani/') || document.URL.includes('/kios-resmi/') || document.URL.includes('/pemerintah/')){
         if(window.screen.width > 640) {
             const profil = document.getElementById('dropdownProfilButton');
             const notifikasi = document.getElementById('dropdownNotifikasiButton');

@@ -51,12 +51,15 @@ class DashboardServiceImpl implements DashboardService
     {
         $pemerintah = Pemerintah::find($id);
         $nama = explode(" ", $pemerintah->nama_pengguna);
+
+        $notifikasis = Notifikasi::where('id_pemerintah',$id)->get();
+
         $initials = "";
 
         foreach ($nama as $key => $w) {
             if($key > 1) break;
             $initials .= mb_substr($w, 0, 1);
         } 
-        return ['pemerintah' => $pemerintah,'initials' =>$initials];
+        return ['pemerintah' => $pemerintah, 'notifikasis' => $notifikasis,'initials' =>$initials];
     }
 }

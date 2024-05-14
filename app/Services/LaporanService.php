@@ -18,4 +18,5 @@ interface LaporanService
     function pemerintahGetIdKiosResmiByLaporan(int $id_laporan): int;
     function ajaxGetPetaniFromRiwayat(string $letters): Collection;
     function ajaxGetLaporanFilenames(string $id): string;
+    function ajaxGetLaporanBlade(string $id): string;
 }

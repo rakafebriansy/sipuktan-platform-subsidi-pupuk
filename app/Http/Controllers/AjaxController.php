@@ -79,4 +79,12 @@ class AjaxController extends Controller
         }
         return '';
     }
+    public function getLaporanBlade(Request $request)
+    {
+        if(isset($request->id)) {
+            $result = $this->laporan_service->ajaxGetLaporanBlade($request->id);
+            return $result;
+        }
+        return '';
+    }
 }

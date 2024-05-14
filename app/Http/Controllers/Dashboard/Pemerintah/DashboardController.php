@@ -19,10 +19,12 @@ class DashboardController extends Controller
     {
         $id = Auth::guard('pemerintah')->user()->id;
         ['pemerintah' => $pemerintah,
+        'notifikasis' => $notifikasis,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         return view('dashboard.pemerintah.pages.index', [
             'title' => 'Pemerintah | Dashboard',
             'pemerintah' => $pemerintah,
+            'notifikasis' => $notifikasis,
             'initials' => $initials
         ]);
     }

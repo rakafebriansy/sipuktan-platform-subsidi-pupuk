@@ -35,6 +35,7 @@ class LaporanController extends Controller
         $tahun = date('Y');
         $musim_tanam = null;
         ['pemerintah' => $pemerintah,
+        'notifikasis' => $notifikasis,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id);
         ['saat_ini' => $saat_ini,
         'tahuns' => $tahuns] = $this->laporan_service->pemerintahSetLaporan();
@@ -52,6 +53,7 @@ class LaporanController extends Controller
             'pemerintah' => $pemerintah,
             'initials' => $initials,
             'tahuns' => $tahuns,
+            'notifikasis' => $notifikasis,
             'tahun' => $tahun,
             'musim_tanam' => $musim_tanam,
         ]);

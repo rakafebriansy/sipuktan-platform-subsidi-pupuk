@@ -42,6 +42,15 @@
           viewAlertNotifikasi(pesan, id_notifikasi);
         }
       });
+      channel.bind('laporan-dibuat', function(data) {
+        let id_laporan = data['data']['id_laporan'];
+        let id_notifikasi = data['data']['id'];
+        let pesan = data['data']['pesan'];
+        if(id_kios_resmi == document.getElementById('pemerintah').dataset.id){
+          viewAlertNotifikasi(pesan, id_notifikasi);
+          fetchTableRowLaporanNotifikasi(id_laporan);
+        }
+      });
     </script>
   </head>
   <body>

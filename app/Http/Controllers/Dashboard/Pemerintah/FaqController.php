@@ -25,10 +25,12 @@ class FaqController extends Controller
     {
         $id = Auth::guard('pemerintah')->user()->id;
         ['pemerintah' => $pemerintah,
+        'notifikasis' => $notifikasis,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         $faqs = $this->faq_service->pemerintahSetFaq($id);
         return view('dashboard.pemerintah.pages.faq', [
             'title' => 'Pemerintah | FAQ',
+            'notifikasis' => $notifikasis,
             'pemerintah' => $pemerintah,
             'initials' => $initials,
             'faqs' => $faqs

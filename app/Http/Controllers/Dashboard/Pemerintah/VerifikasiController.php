@@ -24,6 +24,7 @@ class VerifikasiController extends Controller
     {
         $id = Auth::guard('pemerintah')->user()->id;
         ['pemerintah' => $pemerintah,
+        'notifikasis' => $notifikasis,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         ['petanis' => $petanis, 
         'kios_resmis' => $kios_resmis] = $this->verifikasi_service->pemerintahSetVerifikasiPengguna();
@@ -31,6 +32,7 @@ class VerifikasiController extends Controller
             'title' => 'Pemerintah | Verifikasi Pengguna',
             'petanis' => $petanis,
             'kios_resmis' => $kios_resmis,
+            'notifikasis' => $notifikasis,
             'pemerintah' => $pemerintah,
             'initials' => $initials,
         ]);

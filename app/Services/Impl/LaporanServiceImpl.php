@@ -141,6 +141,18 @@ class LaporanServiceImpl implements LaporanService
         $laporan_filenames = Laporan::find($id)->toJson(JSON_PRETTY_PRINT);
         return $laporan_filenames;
     }
+    public function ajaxGetLaporanBlade(string $id): string
+    {
+        $laporan = Laporan::select('laporans.id','laporans.status_verifikasi','laporans.tanggal_pengambilan', 'laporans.status_verifikasi', 'laporans.telah_diedit', 'laporans.tanggal_diedit','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani', 'kios_resmis.nama as nama_kios')
+        ->join('riwayat_transaksis','riwayat_transaksis.id','laporans.id_riwayat_transaksi')
+        ->join('alokasis','riwayat_transaksis.id_alokasi','alokasis.id')
+        ->join('jenis_pupuks','alokasis.id_jenis_pupuk','jenis_pupuks.id')
+        ->join('kios_resmis','alokasis.id_kios_resmi','kios_resmis.id')
+        ->join('petanis','alokasis.id_petani','petanis.id')
+        ->where('laporans.id',$id)->first();
+        
+        return view('dashboard.pemerintah.elements.alokasi-row')->render();
+    }
 }
 
 ?>

@@ -28,6 +28,7 @@ class AlokasiController extends Controller
         $tahun = date('Y');
         $musim_tanam = null;
         ['pemerintah' => $pemerintah,
+        'notifikasis' => $notifikasis,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         ['saat_ini' => $saat_ini,
         'tahuns' => $tahuns, 
@@ -46,6 +47,7 @@ class AlokasiController extends Controller
             'jenis_pupuks' => $jenis_pupuks,
             'initials' => $initials,
             'tahuns' => $tahuns,
+            'notifikasis' => $notifikasis,
             'alokasis' => $alokasis,
             'tahun' => $tahun,
             'musim_tanam' => $musim_tanam

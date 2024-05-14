@@ -104,6 +104,7 @@ Route::prefix('/pemerintah')->group(function(){
         Route::prefix('/ajax')->group(function(){
             Route::post('/get-faq',[AjaxController::class,'getFaqDetail']);
             Route::post('/petani-alokasi',[AjaxController::class,'getPetaniFromAlokasiPemerintah']);
+            Route::post('/get-laporan-blade',[AjaxController::class,'getLaporanBlade']);
         });
     });
 });

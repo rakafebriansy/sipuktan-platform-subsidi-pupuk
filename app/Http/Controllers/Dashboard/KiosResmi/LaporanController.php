@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard\KiosResmi;
 
+use App\Events\LaporanDibuat;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KiosResmiLaporanRequest;
 use App\Http\Requests\KiosResmiUbahLaporanRequest;
 use App\Services\DashboardService;
 use App\Services\LaporanService;
+use App\Services\NotifikasiService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +19,11 @@ class LaporanController extends Controller
 {
     private DashboardService $dashboard_service;
     private LaporanService $laporan_service;
-    public function __construct(LaporanService $laporan_service, DashboardService $dashboard_service) {
+    private NotifikasiService $notifikasi_service;
+    public function __construct(LaporanService $laporan_service, DashboardService $dashboard_service, NotifikasiService $notifikasi_service) {
         $this->laporan_service = $laporan_service;
         $this->dashboard_service = $dashboard_service;
+        $this->notifikasi_service = $notifikasi_service;
     }
     public function setLaporan(Request $request): View
     {
@@ -52,8 +56,18 @@ class LaporanController extends Controller
     }
     public function laporan(KiosResmiLaporanRequest $request): RedirectResponse
     {
+        $nama = Auth::user()->nama;
+        $id = Auth::user()->id;
         $validated = $request->validated();
         if($this->laporan_service->kiosResmiLaporan($validated)) {
+            $pesan = 'Laporan dari kios '.$nama.' telah masuk.';
+            $id_notifikasi = $this->notifikasi_service->sendNotifikasi($pesan, 'pemerintah', $id);
+            $data_notifikasi = [
+                'pesan' => $pesan, 
+                'id' => $id_notifikasi,
+                'id_laporan' => $validated['id']
+            ];
+            event(new LaporanDibuat($data_notifikasi));
             return back()->with('success', 'Data laporan berhasil ditambahkan');
         }
         return back()->withInput()->with(['error' => 'Data laporan gagal ditambahkan']);

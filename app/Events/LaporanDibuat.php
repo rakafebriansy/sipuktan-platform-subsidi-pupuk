@@ -10,10 +10,9 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class LaporanStatusToDitolak implements ShouldBroadcast
+class LaporanDibuat
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
     public array $data;
 
     /**
@@ -35,6 +34,6 @@ class LaporanStatusToDitolak implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return 'laporan-status-to-ditolak';
+        return 'laporan-dibuat';
     }
 }

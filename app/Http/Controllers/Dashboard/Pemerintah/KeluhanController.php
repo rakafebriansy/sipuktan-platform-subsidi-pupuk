@@ -25,12 +25,14 @@ class KeluhanController extends Controller
     {
         $id = Auth::guard('pemerintah')->user()->id;
         ['pemerintah' => $pemerintah,
+        'notifikasis' => $notifikasis,
         'initials' =>$initials] = $this->dashboard_service->pemerintahSetSidebar($id); 
         $keluhans = $this->keluhan_service->pemerintahSetKeluhan($id);
         return view('dashboard.pemerintah.pages.keluhan', [
             'title' => 'Pemerintah | Keluhan',
             'pemerintah' => $pemerintah,
             'initials' => $initials,
+            'notifikasis' => $notifikasis,
             'keluhans' => $keluhans
         ]);
     }
