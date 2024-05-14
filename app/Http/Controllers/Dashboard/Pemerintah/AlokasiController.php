@@ -56,6 +56,7 @@ class AlokasiController extends Controller
     public function buatAlokasi(PemerintahBuatAlokasiRequest $request):RedirectResponse
     {
         $validated = $request->validated();
+        $validated['id_pemerintah'] = Auth::guard('pemerintah')->user()->id;
         $petani = $this->alokasi_service->pemerintahCekPetani($validated['nik']);
         if(isset($petani)) {
             if($this->alokasi_service->pemerintahBuatAlokasi($validated,$petani)) {

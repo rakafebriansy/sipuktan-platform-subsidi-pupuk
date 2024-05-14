@@ -22,7 +22,8 @@ class AlokasiSeeder extends Seeder
             'status' => 'Belum Tersedia',
             'id_jenis_pupuk' => 'urea',
             'id_kios_resmi' => 1,
-            'id_petani' => 1
+            'id_petani' => 1,
+            'id_pemerintah' => 1
         ]);
         Alokasi::insert([
             'id' => 2,
@@ -32,7 +33,8 @@ class AlokasiSeeder extends Seeder
             'status' => 'Belum Tersedia',
             'id_jenis_pupuk' => 'sp36',
             'id_kios_resmi' => 1,
-            'id_petani' => 1
+            'id_petani' => 1,
+            'id_pemerintah' => 1
         ]);
         Alokasi::insert([
             'id' => 3,
@@ -42,7 +44,8 @@ class AlokasiSeeder extends Seeder
             'status' => 'Belum Tersedia',
             'id_jenis_pupuk' => 'ponskha',
             'id_kios_resmi' => 1,
-            'id_petani' => 1
+            'id_petani' => 1,
+            'id_pemerintah' => 1
         ]);
         Alokasi::insert([
             'id' => 4,
@@ -52,7 +55,8 @@ class AlokasiSeeder extends Seeder
             'status' => 'Belum Tersedia',
             'id_jenis_pupuk' => 'urea',
             'id_kios_resmi' => 1,
-            'id_petani' => 2
+            'id_petani' => 2,
+            'id_pemerintah' => 1
         ]);
         Alokasi::insert([
             'id' => 5,
@@ -62,7 +66,8 @@ class AlokasiSeeder extends Seeder
             'status' => 'Belum Tersedia',
             'id_jenis_pupuk' => 'ponskha',
             'id_kios_resmi' => 1,
-            'id_petani' => 2
+            'id_petani' => 2,
+            'id_pemerintah' => 1
         ]);
     }
 }

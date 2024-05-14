@@ -16,7 +16,7 @@
                 <span class="font-medium text-gray-600 dark:text-gray-300">{{ $initials }}</span>
               </div>
               <div class="font-medium dark:text-white">
-                  <div id="pemerintah">{{ $pemerintah->nama_pengguna }}</div>
+                  <div id="pemerintah" data-id="{{ $pemerintah->id }}">{{ $pemerintah->nama_pengguna }}</div>
               </div>
             </button> 
             <button id="dropdownNotifikasiButton" data-dropdown-toggle="dropdownNotifikasi" data-dropdown-offset-skidding="100" data-dropdown-offset-distance="25" data-dropdown-placement="bottom-end" class="hover:bg-gray-200 rounded-full dark:hover:bg-gray-700 p-2">

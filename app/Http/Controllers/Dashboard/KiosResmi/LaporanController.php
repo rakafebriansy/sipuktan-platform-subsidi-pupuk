@@ -59,14 +59,15 @@ class LaporanController extends Controller
         $nama = Auth::guard('kiosResmi')->user()->nama;
         $id_kios_resmi = Auth::guard('kiosResmi')->user()->id;
         $validated = $request->validated();
-        $id_laporan = $this->laporan_service->kiosResmiLaporan($validated);
-        if(isset($id_laporan)) {
+        $ids = $this->laporan_service->kiosResmiLaporan($validated);
+        if(isset($ids)) {
             $pesan = 'Laporan dari kios '.$nama.' telah masuk.';
             $id_notifikasi = $this->notifikasi_service->sendNotifikasi($pesan, 'pemerintah', $id_kios_resmi);
             $data_notifikasi = [
                 'pesan' => $pesan, 
                 'id' => $id_notifikasi,
-                'id_laporan' => $id_laporan
+                'id_pemerintah' => $ids['id_pemerintah'],
+                'id_laporan' => $ids['id_laporan'],
             ];
             event(new LaporanDibuat($data_notifikasi));
             return back()->with('success', 'Data laporan berhasil ditambahkan');

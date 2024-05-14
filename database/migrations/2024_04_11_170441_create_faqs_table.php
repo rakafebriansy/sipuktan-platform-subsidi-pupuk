@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('pertanyaan')->nullable(false);
             $table->text('jawaban')->nullable(false);
             $table->enum('jenis_pengguna',['Petani','Kios Resmi'])->nullable(false);
-            $table->string('id_pemerintah',20)->nullable(false);
+            $table->unsignedBigInteger('id_pemerintah')->nullable(false);
 
             $table->foreign('id_pemerintah')->on('pemerintahs')->references('id');
         });

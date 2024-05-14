@@ -79,9 +79,9 @@
                         </tr>
                         @endforeach
                     @else
-                        <th id="no-data" colspan="5" class="text-center py-4">
+                        <tr id="no-data" colspan="5" class="text-center py-4">
                             Belum ada data
-                        </th>
+                        </tr>
                     @endif
                 </tbody>
             </table>

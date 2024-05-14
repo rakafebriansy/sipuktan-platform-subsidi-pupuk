@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('isi')->nullable(false);
             $table->unsignedBigInteger('id_petani')->nullable();
             $table->unsignedBigInteger('id_kios_resmi')->nullable();
-            $table->string('id_pemerintah',20)->nullable();
+            $table->unsignedBigInteger('id_pemerintah')->nullable();
 
             $table->foreign('id_petani')->on('petanis')->references('id');
             $table->foreign('id_kios_resmi')->on('kios_resmis')->references('id');

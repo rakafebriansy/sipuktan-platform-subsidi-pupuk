@@ -22,7 +22,8 @@ class Alokasi extends Model
         'tahun',
         'id_jenis_pupuk',
         'id_kios_resmi',
-        'id_petani'
+        'id_petani',
+        'id_pemerintah',
     ];
     public function petani(): BelongsTo
     {

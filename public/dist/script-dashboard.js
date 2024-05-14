@@ -192,13 +192,13 @@ function viewGetKeluhanBalas(data) {
 }
 function viewTableRowLaporanNotifikasi(xmlString) {
     const tr = document.createElement('tr');
-    const tbody = document.getElementById('no-data').parentElement;
+    const tbody = document.querySelector('#mainTable > tbody');
     tr.classList.add('bg-white','border-b','dark:bg-gray-800','dark:border-gray-700','hover:bg-gray-50','dark:hover:bg-gray-600');
     tr.innerHTML = xmlString;
-    if(tbody == null) {
-        tbody.parentElement.innerHTML = '';
-        tbody.parentElement.appendChild(tr);
+    if(tbody.firstElementChild.id == 'no-data') {
+        tbody.innerHTML = '';
     }
+    tbody.parentElement.appendChild(tr);
 }
 
 

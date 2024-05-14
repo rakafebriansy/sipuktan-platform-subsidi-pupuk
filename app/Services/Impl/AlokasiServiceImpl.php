@@ -87,6 +87,7 @@ class AlokasiServiceImpl implements AlokasiService
                 'id_jenis_pupuk' => $alokasi['id_jenis_pupuk'],
                 'id_petani' => $petani->id,
                 'id_kios_resmi' => $kios_resmi->id,
+                'id_pemerintah' => $alokasi['id_pemerintah']
             ]);
         });
     }

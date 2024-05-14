@@ -44,11 +44,17 @@
       });
       channel.bind('laporan-dibuat', function(data) {
         let id_laporan = data['data']['id_laporan'];
+        let id_pemerintah = data['data']['id_pemerintah'];
         let id_notifikasi = data['data']['id'];
         let pesan = data['data']['pesan'];
-        if(id_kios_resmi == document.getElementById('pemerintah').dataset.id){
+        const pemerintah = document.getElementById('pemerintah');
+        if(pemerintah != null && id_pemerintah == pemerintah.dataset.id){
           viewAlertNotifikasi(pesan, id_notifikasi);
-          fetchTableRowLaporanNotifikasi(id_laporan);
+          console.log('ok');
+          if(document.URL.includes('/pemerintah/laporan')) {
+            console.log('ko');
+            fetchTableRowLaporanNotifikasi(id_laporan);
+          }
         }
       });
     </script>
