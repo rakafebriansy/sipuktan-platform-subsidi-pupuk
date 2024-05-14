@@ -43,9 +43,9 @@
                                 <td scope="col" class="px-6 font-medium py-3 text-gray-900">Rp{{ $total_harga }}</td>
                             </tr>
                         @else
-                            <th id="no-data" colspan="5" class="text-center py-4">
-                                Belum ada data
-                            </th>
+                        <tr id="no-data" >
+                            <td colspan="5" class="text-center py-4">Belum ada data</td> 
+                        </tr>
                         @endif
                     </tbody>
                 </table>    

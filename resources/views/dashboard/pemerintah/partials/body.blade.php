@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
 @section('main')
-@include('dashboard.pemerintah.partials.sidebar') <?php //memanggil keseluruhan kode program dari file lain?>
+@include('dashboard.pemerintah.partials.sidebar')
 <div class="wrapper relative">
     @if ($errors->any())
     <div id="alert-2" class="absolute z-50 left-1/2 transform -translate-x-1/2 top-5 flex border border-red-300 dark:border-red-800 min-h-[5%] items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">

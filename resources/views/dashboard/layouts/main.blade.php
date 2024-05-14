@@ -19,7 +19,8 @@
         let id_notifikasi = data['data']['detail_notifikasi']['id'];
         let id_petani = data['data']['detail_notifikasi']['id_petani'];
         let pesan = data['data']['pesan'];
-        if(id_petani == document.getElementById('petani').dataset.id){
+        const petani = document.getElementById('petani');
+        if(petani !== null && id_kios_resmi == petani.dataset.id){
           viewAlertNotifikasi(pesan, id_notifikasi);
         }
       });
@@ -28,8 +29,7 @@
         let id_laporan = data['data']['id_laporan'];
         let id_notifikasi = data['data']['id'];
         let pesan = data['data']['pesan'];
-        console.log(data)
-        if(id_kios_resmi == document.getElementById('kios-resmi').dataset.id){
+        if(kiosResmi !== null && id_kios_resmi == kiosResmi.dataset.id){
           viewAlertNotifikasi(pesan, id_notifikasi,'red');
           viewAksiLaporanNotifikasi(id_laporan);
         }
@@ -38,22 +38,28 @@
         let id_kios_resmi = data['data']['id_kios_resmi'];
         let id_notifikasi = data['data']['id'];
         let pesan = data['data']['pesan'];
-        if(id_kios_resmi == document.getElementById('kios-resmi').dataset.id){
+        const kiosResmi = document.getElementById('kios-resmi');
+        if(kiosResmi !== null && id_kios_resmi == kiosResmi.dataset.id){
           viewAlertNotifikasi(pesan, id_notifikasi);
         }
       });
       channel.bind('laporan-dibuat', function(data) {
-        let id_laporan = data['data']['id_laporan'];
-        let id_pemerintah = data['data']['id_pemerintah'];
-        let id_notifikasi = data['data']['id'];
-        let pesan = data['data']['pesan'];
         const pemerintah = document.getElementById('pemerintah');
-        if(pemerintah != null && id_pemerintah == pemerintah.dataset.id){
-          viewAlertNotifikasi(pesan, id_notifikasi);
-          console.log('ok');
+        if(pemerintah != null){
+          viewAlertNotifikasi(data['data']['pesan'], data['data']['id']);
           if(document.URL.includes('/pemerintah/laporan')) {
+            fetchTableRowLaporanNotifikasi(data['data']['id_laporan']);
+          }
+        }
+      });
+      channel.bind('keluhan-dibuat', function(data) {
+        const pemerintah = document.getElementById('pemerintah');
+        if(pemerintah != null){
+          viewAlertNotifikasi(data['data']['pesan'], data['data']['id']);
+          console.log('ok');
+          if(document.URL.includes('/pemerintah/keluhan')) {
             console.log('ko');
-            fetchTableRowLaporanNotifikasi(id_laporan);
+            fetchTableRowKeluhanNotifikasi(data['data']['id_keluhan']);
           }
         }
       });

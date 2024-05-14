@@ -153,9 +153,11 @@ class LaporanServiceImpl implements LaporanService
         ->join('petanis','alokasis.id_petani','petanis.id')
         ->where('laporans.id',$id)->first();
         
-        return view('dashboard.pemerintah.elements.alokasi-row', [
-            'laporan' => $laporan
-            ])->render();
+        $xmlStrings = [
+            'row' => view('dashboard.pemerintah.elements.laporan-row', ['laporan' => $laporan])->render(),
+            'dropdowns' => view('dashboard.pemerintah.elements.laporan-row', ['laporan' => $laporan])->render()
+        ];
+        return json_encode($xmlStrings,JSON_PRETTY_PRINT);
     }
 }
 

@@ -127,7 +127,7 @@ Route::prefix('/bot')->group(function(){
 });
 Route::prefix('/test')->group(function(){
     Route::get('/',function(){
-        //
+        return view('dashboard.pemerintah.elements.laporan-dropdowns')->render();
     });
     Route::get('/pusher', function(){
         return view('tests.pusher');

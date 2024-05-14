@@ -191,14 +191,18 @@ function viewGetKeluhanBalas(data) {
     detailKeluhanModalDivs[1].children[1].innerText = data['keluhan']
 }
 function viewTableRowLaporanNotifikasi(xmlString) {
+    xmlString = JSON.parse(xmlString)
+    console.log(xmlString)
     const tr = document.createElement('tr');
     const tbody = document.querySelector('#mainTable > tbody');
     tr.classList.add('bg-white','border-b','dark:bg-gray-800','dark:border-gray-700','hover:bg-gray-50','dark:hover:bg-gray-600');
-    tr.innerHTML = xmlString;
+    tr.innerHTML = xmlString['row'];
+    const btns = tr.querySelectorAll('button');
     if(tbody.firstElementChild.id == 'no-data') {
         tbody.innerHTML = '';
     }
     tbody.parentElement.appendChild(tr);
+    document.getElementById('content').insertAdjacentHTML('beforeend',xmlString['dropdowns']);
 }
 
 
