@@ -155,7 +155,7 @@ class LaporanServiceImpl implements LaporanService
         
         $xmlStrings = [
             'row' => view('dashboard.pemerintah.elements.laporan-row', ['laporan' => $laporan])->render(),
-            'dropdowns' => view('dashboard.pemerintah.elements.laporan-dropdowns', ['laporan' => $laporan])->render(),
+            // 'dropdowns' => view('dashboard.pemerintah.elements.laporan-dropdowns', ['laporan' => $laporan])->render(),
             'backdropModal' => view('dashboard.pemerintah.elements.laporan-backdropmodal')->render()
         ];
         return json_encode($xmlStrings,JSON_PRETTY_PRINT);

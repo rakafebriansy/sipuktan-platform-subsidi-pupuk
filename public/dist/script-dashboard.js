@@ -199,7 +199,6 @@ function viewTableRowLaporanNotifikasi(xmlString) {
     tr.classList.add('bg-white','border-b','dark:bg-gray-800','dark:border-gray-700','hover:bg-gray-50','dark:hover:bg-gray-600');
     tr.innerHTML = xmlString['row'];
     tbody.appendChild(tr);
-    document.querySelector('.wrapper').insertAdjacentHTML('beforeend',xmlString['dropdowns']);
     document.querySelector('body').insertAdjacentHTML('beforeend',xmlString['backdropModal']);
 }
 
@@ -368,5 +367,15 @@ function closeDetailLaporanPassModalOri() {
             notifikasi.dataset.dropdownPlacement = 'right-end';
             notifikasi.dataset.dropdownOffsetSkidding = 0;
         } 
+    }
+    if(document.URL.includes('/pemerintah/laporan')){
+        if(document.getElementById('detailLaporanModalOri').style.display == 'block') {
+            window.onclick = function(event) {
+                if(!event.target.closest('.not-close')){ 
+                    console.log(event)
+                    closeDetailLaporanPassModalOri();
+                }
+            }
+        }
     }
 })();
