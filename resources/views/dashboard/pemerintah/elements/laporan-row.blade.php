@@ -30,9 +30,9 @@
     @endif
 </td>
 <td class="py-4 flex flex-row px-6" data-id="{{ $laporan->id }}">
-    <button data-modal-target="detailLaporanModal" data-modal-toggle="detailLaporanModal" type="button" onclick="getDetailLaporanFiles(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
+    <button type="button" onclick="detailLaporanPassModalOri(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
     @if($laporan->status_verifikasi == 'Belum Diverifikasi')
-        <button data-modal-target="verifikasiLaporanModal" data-modal-toggle="verifikasiLaporanModal" type="button" onclick="document.getElementById('verifikasiLaporanId').value = this.parentElement.dataset.id" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Setujui</button>
-        <button data-modal-target="tolakLaporanModal" data-modal-toggle="tolakLaporanModal" type="button"onclick="document.getElementById('tolakLaporanId').value = this.parentElement.dataset.id" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Tolak</button>
+        <button type="button" onclick="document.getElementById('verifikasiLaporanId').value = this.parentElement.dataset.id" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Setujui</button>
+        <button type="button"onclick="document.getElementById('tolakLaporanId').value = this.parentElement.dataset.id" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Tolak</button>
     @endif
 </td>

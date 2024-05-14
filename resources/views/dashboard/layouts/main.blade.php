@@ -47,7 +47,9 @@
         const pemerintah = document.getElementById('pemerintah');
         if(pemerintah != null){
           viewAlertNotifikasi(data['data']['pesan'], data['data']['id']);
+          console.log('ok')
           if(document.URL.includes('/pemerintah/laporan')) {
+            console.log('kos')
             fetchTableRowLaporanNotifikasi(data['data']['id_laporan']);
           }
         }

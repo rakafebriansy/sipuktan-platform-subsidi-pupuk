@@ -7,12 +7,12 @@ function fetchRiwayatSearchBox(letters,list) {
       .then(res => viewRiwayatSearchBox(res,list))
       .catch(e => console.error('Error'+e));
 }
-function fetchDetailLaporanFiles(id) {
+function fetchDetailLaporanFiles(id,modal) {
     fetch('/ajax/laporan-filenames', {  
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
-      .then(res => viewDetailLaporanFiles(res))
+      .then(res => viewDetailLaporanFiles(res,modal))
       .catch(e => console.error('Error'+e));
 }
 function fetchPetaniFromAlokasi(id) {
@@ -67,7 +67,7 @@ function fetchTableRowLaporanNotifikasi(id) {
     fetch('/pemerintah/ajax/get-laporan-blade', { 
         method: 'POST',
         body: new URLSearchParams('id='+id)
-    }).then(res => res.text())
+    }).then(res => res.json())
       .then(data => viewTableRowLaporanNotifikasi(data))
       .catch(e => console.error('Error'+e));
 }
@@ -84,8 +84,8 @@ function viewRiwayatSearchBox(data,list) {
         list.appendChild(a);
     }
 }
-function viewDetailLaporanFiles(data) {
-    const table_rows = document.querySelector('#detailLaporanModal table tbody');
+function viewDetailLaporanFiles(data,modal) {
+    const table_rows = document.querySelector('#'+modal+' table tbody');
     table_rows.querySelector('tr td:nth-child(2) > a').innerText = data['foto_bukti_pengambilan'];
     table_rows.querySelector('tr td:nth-child(2) > a').setAttribute('href','/download/foto_bukti_pengambilans/'+data['foto_bukti_pengambilan']);
     table_rows.querySelector('tr:nth-child(2) td:nth-child(2) > a').innerText = data['foto_ktp'];
@@ -191,18 +191,16 @@ function viewGetKeluhanBalas(data) {
     detailKeluhanModalDivs[1].children[1].innerText = data['keluhan']
 }
 function viewTableRowLaporanNotifikasi(xmlString) {
-    xmlString = JSON.parse(xmlString)
-    console.log(xmlString)
     const tr = document.createElement('tr');
     const tbody = document.querySelector('#mainTable > tbody');
-    tr.classList.add('bg-white','border-b','dark:bg-gray-800','dark:border-gray-700','hover:bg-gray-50','dark:hover:bg-gray-600');
-    tr.innerHTML = xmlString['row'];
-    const btns = tr.querySelectorAll('button');
     if(tbody.firstElementChild.id == 'no-data') {
         tbody.innerHTML = '';
     }
-    tbody.parentElement.appendChild(tr);
-    document.getElementById('content').insertAdjacentHTML('beforeend',xmlString['dropdowns']);
+    tr.classList.add('bg-white','border-b','dark:bg-gray-800','dark:border-gray-700','hover:bg-gray-50','dark:hover:bg-gray-600');
+    tr.innerHTML = xmlString['row'];
+    tbody.appendChild(tr);
+    document.querySelector('.wrapper').insertAdjacentHTML('beforeend',xmlString['dropdowns']);
+    document.querySelector('body').insertAdjacentHTML('beforeend',xmlString['backdropModal']);
 }
 
 
@@ -280,7 +278,7 @@ function searchRiwayat(input) {
     }
 }
 function getDetailLaporanFiles(btn) {
-    fetchDetailLaporanFiles(btn.parentElement.dataset.id);
+    fetchDetailLaporanFiles(btn.parentElement.dataset.id,'detailLaporanModal');
 }
 function getPetaniFromAlokasi(btn) {
     fetchPetaniFromAlokasi(btn.parentElement.dataset.id);
@@ -348,6 +346,16 @@ function balasKeluhanPassId(btn) {
 function editLaporanPassId(btn) {
     document.getElementById('editLaporanId').value = btn.parentElement.dataset.id;
 }
+function detailLaporanPassModalOri(btn) {
+    document.getElementById('detailLaporanModalOri').classList.replace('hidden','flex');
+    document.getElementById('backdropModal').classList.replace('hidden','block');   
+    fetchDetailLaporanFiles(btn.parentElement.dataset.id,'detailLaporanModalOri');
+}
+function closeDetailLaporanPassModalOri() {
+    document.getElementById('backdropModal').classList.replace('block','hidden');   
+    document.getElementById('detailLaporanModalOri').classList.replace('flex','hidden');
+}
+
 
 (function(){
     if(document.URL.includes('/petani/') || document.URL.includes('/kios-resmi/') || document.URL.includes('/pemerintah/')){
