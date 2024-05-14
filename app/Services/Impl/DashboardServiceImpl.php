@@ -52,7 +52,7 @@ class DashboardServiceImpl implements DashboardService
         $pemerintah = Pemerintah::find($id);
         $nama = explode(" ", $pemerintah->nama_pengguna);
 
-        $notifikasis = Notifikasi::where('id_pemerintah',$id)->get();
+        $notifikasis = Notifikasi::whereNotNull('id_pemerintah')->get();
 
         $initials = "";
 

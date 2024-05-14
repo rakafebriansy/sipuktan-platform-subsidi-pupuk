@@ -25,11 +25,12 @@ class KeluhanServiceImpl implements KeluhanService
         $keluhans = Keluhan::where('id_kios_resmi',$id_kios_resmi)->get();
         return $keluhans;
     }
-    public function kiosResmiBuatKeluhan(array $keluhan, int $id_kios_resmi): bool
+    public function kiosResmiBuatKeluhan(array $keluhan, int $id_kios_resmi): int|null
     {
         $keluhan['id_kios_resmi'] = $id_kios_resmi;
         return DB::transaction(function() use($keluhan) {
-            return Keluhan::insert($keluhan);
+            $keluhan = Keluhan::create($keluhan);
+            return $keluhan->id;
         });
     }
     public function pemerintahSetKeluhan(int $id_pemerintah): Collection
@@ -50,6 +51,17 @@ class KeluhanServiceImpl implements KeluhanService
     {
         $keluhan = Keluhan::find($id)->toJson(JSON_PRETTY_PRINT);
         return $keluhan;
+    }
+    public function ajaxGetKeluhanBlade(int $id): string
+    {
+        $keluhan = Keluhan::find($id);
+        $xmlString = [
+            'row' => view('dashboard.kios-resmi.elements.keluhan-row',[
+                'keluhan' => $keluhan
+            ])->render(),
+            'backdropModal' => view('dashboard.pemerintah.elements.laporan-backdropmodal')->render(),
+            ];
+        return json_encode($xmlString,JSON_PRETTY_PRINT);
     }
 }
 

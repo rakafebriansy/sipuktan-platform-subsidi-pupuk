@@ -37,7 +37,7 @@ class LaporanServiceImpl implements LaporanService
         ->orderBy('laporans.tanggal_pengambilan', 'desc')->get();
         return $laporans;
     }
-    public function kiosResmiLaporan($laporan): array|null
+    public function kiosResmiLaporan($laporan): int|null
     {
         $laporan['foto_bukti_pengambilan']->storePubliclyAs('foto_bukti_pengambilans', $laporan['foto_bukti_pengambilan']->getClientOriginalName(), 'public');
         $laporan['foto_bukti_pengambilan'] = $laporan['foto_bukti_pengambilan']->getClientOriginalName();
@@ -53,8 +53,7 @@ class LaporanServiceImpl implements LaporanService
         
         return DB::transaction(function () use ($laporan) {
             $laporan = Laporan::create($laporan);
-            $alokasi = $laporan->riwayat_transaksi->alokasi;
-            return ['id_laporan' => $laporan->id, 'id_pemerintah' => $alokasi->id_pemerintah];
+            return $laporan->id;
         });
     }
     public function kiosResmiUbahLaporan($laporan): bool
@@ -155,7 +154,6 @@ class LaporanServiceImpl implements LaporanService
         
         $xmlStrings = [
             'row' => view('dashboard.pemerintah.elements.laporan-row', ['laporan' => $laporan])->render(),
-            // 'dropdowns' => view('dashboard.pemerintah.elements.laporan-dropdowns', ['laporan' => $laporan])->render(),
             'backdropModal' => view('dashboard.pemerintah.elements.laporan-backdropmodal')->render()
         ];
         return json_encode($xmlStrings,JSON_PRETTY_PRINT);

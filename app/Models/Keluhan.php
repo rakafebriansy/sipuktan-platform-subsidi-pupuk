@@ -15,6 +15,7 @@ class Keluhan extends Model
     public $incrementing = true;
     public $timestamps = false;
     public $fillable = [
+        'subjek',
         'keluhan',
         'balasan',
         'tanggal_keluhan',

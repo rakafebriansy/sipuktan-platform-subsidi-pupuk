@@ -9,7 +9,7 @@ interface LaporanService
 {
     function kiosResmiSetLaporan(int $id_kios_resmi): array;
     function kiosResmiSetLaporanByTahun(int $id_kios_resmi, string $tahun, string $musim_tanam): Collection;
-    function kiosResmiLaporan($laporan): array|null;
+    function kiosResmiLaporan($laporan): int|null;
     function kiosResmiUbahLaporan($laporan): bool;
     function pemerintahSetLaporan(): array;
     function pemerintahSetLaporanByTahun(string $tahun, string $musim_tanam): Collection;

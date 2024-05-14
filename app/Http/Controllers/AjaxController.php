@@ -87,4 +87,12 @@ class AjaxController extends Controller
         }
         return '';
     }
+    public function getKeluhanBlade(Request $request)
+    {
+        if(isset($request->id)) {
+            $result = $this->keluhan_service->ajaxGetKeluhanBlade($request->id);
+            return $result;
+        }
+        return '';
+    }
 }

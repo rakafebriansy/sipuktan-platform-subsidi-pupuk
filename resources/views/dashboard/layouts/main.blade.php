@@ -25,21 +25,15 @@
         }
       });
       channel.bind('laporan-status-to-ditolak', function(data) {
-        let id_kios_resmi = data['data']['id_kios_resmi'];
-        let id_laporan = data['data']['id_laporan'];
-        let id_notifikasi = data['data']['id'];
-        let pesan = data['data']['pesan'];
-        if(kiosResmi !== null && id_kios_resmi == kiosResmi.dataset.id){
-          viewAlertNotifikasi(pesan, id_notifikasi,'red');
-          viewAksiLaporanNotifikasi(id_laporan);
+        const kiosResmi = document.getElementById('kios-resmi');
+        if(kiosResmi !== null && data['data']['id_kios_resmi'] == kiosResmi.dataset.id){
+          viewAlertNotifikasi(data['data']['pesan'], data['data']['id'],'red');
+          viewAksiLaporanNotifikasi(data['data']['id_laporan']);
         }
       });
       channel.bind('laporan-status-to-diverifikasi', function(data) {
-        let id_kios_resmi = data['data']['id_kios_resmi'];
-        let id_notifikasi = data['data']['id'];
-        let pesan = data['data']['pesan'];
         const kiosResmi = document.getElementById('kios-resmi');
-        if(kiosResmi !== null && id_kios_resmi == kiosResmi.dataset.id){
+        if(kiosResmi !== null && data['data']['id_kios_resmi'] == kiosResmi.dataset.id){
           viewAlertNotifikasi(pesan, id_notifikasi);
         }
       });
@@ -47,9 +41,7 @@
         const pemerintah = document.getElementById('pemerintah');
         if(pemerintah != null){
           viewAlertNotifikasi(data['data']['pesan'], data['data']['id']);
-          console.log('ok')
           if(document.URL.includes('/pemerintah/laporan')) {
-            console.log('kos')
             fetchTableRowLaporanNotifikasi(data['data']['id_laporan']);
           }
         }
@@ -57,11 +49,10 @@
       channel.bind('keluhan-dibuat', function(data) {
         const pemerintah = document.getElementById('pemerintah');
         if(pemerintah != null){
-          viewAlertNotifikasi(data['data']['pesan'], data['data']['id']);
+          viewAlertNotifikasi(data['data']['pesan'], data['data']['id'],'yellow');
           console.log('ok');
           if(document.URL.includes('/pemerintah/keluhan')) {
-            console.log('ko');
-            fetchTableRowKeluhanNotifikasi(data['data']['id_keluhan']);
+            fetchTableRowKeluhanNotifikasi(data['data']['id_keluhan'],data['data']['mode']);
           }
         }
       });
