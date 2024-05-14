@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\KiosResmi;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KiosResmiLaporanRequest;
+use App\Http\Requests\KiosResmiUbahLaporanRequest;
 use App\Services\DashboardService;
 use App\Services\LaporanService;
 use Illuminate\Http\RedirectResponse;
@@ -56,5 +57,13 @@ class LaporanController extends Controller
             return back()->with('success', 'Data laporan berhasil ditambahkan');
         }
         return back()->withInput()->with(['error' => 'Data laporan gagal ditambahkan']);
+    }
+    public function ubahLaporan(KiosResmiUbahLaporanRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+        if($this->laporan_service->kiosResmiUbahLaporan($validated)) {
+            return back()->with('success', 'Data laporan berhasil diperbarui');
+        }
+        return back()->withInput()->with(['error' => 'Data laporan gagal diperbarui']);
     }
 }

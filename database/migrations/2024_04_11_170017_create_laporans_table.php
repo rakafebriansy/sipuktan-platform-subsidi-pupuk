@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('foto_tanda_tangan',255)->nullable(false);
             $table->enum('status_verifikasi',['Terverifikasi','Belum Diverifikasi','Ditolak'])->nullable(false)->default('Belum Diverifikasi');
             $table->text('catatan')->nullable();
-            $table->boolean('telah_diedit')->nullable();
+            $table->boolean('telah_diedit')->nullable(false)->default(0);
             $table->timestamp('tanggal_diedit')->nullable();
             $table->unsignedBigInteger('id_riwayat_transaksi')->nullable(false)->unique();
 

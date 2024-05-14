@@ -55,6 +55,35 @@ class LaporanServiceImpl implements LaporanService
             return Laporan::insert($laporan);
         });
     }
+    public function kiosResmiUbahLaporan($laporan): bool
+    {
+        $laporan['foto_bukti_pengambilan']->storePubliclyAs('foto_bukti_pengambilans', $laporan['foto_bukti_pengambilan']->getClientOriginalName(), 'public');
+        $laporan['foto_bukti_pengambilan'] = $laporan['foto_bukti_pengambilan']->getClientOriginalName();
+        $laporan['foto_ktp']->storePubliclyAs('foto_ktp_laporans', $laporan['foto_ktp']->getClientOriginalName(), 'public');
+        $laporan['foto_ktp'] = $laporan['foto_ktp']->getClientOriginalName();
+        $laporan['foto_tanda_tangan']->storePubliclyAs('foto_tanda_tangans', $laporan['foto_tanda_tangan']->getClientOriginalName(), 'public');
+        $laporan['foto_tanda_tangan'] = $laporan['foto_tanda_tangan']->getClientOriginalName();
+        
+        if(isset($laporan['foto_surat_kuasa'])) {
+            $laporan['foto_surat_kuasa']->storePubliclyAs('foto_surat_kuasas', $laporan['foto_surat_kuasa']->getClientOriginalName(), 'public');
+            $laporan['foto_surat_kuasa'] = $laporan['foto_surat_kuasa']->getClientOriginalName();
+        } else {
+            $laporan['foto_surat_kuasa'] = '';
+        }
+        
+        return DB::transaction(function () use ($laporan) {
+            return $laporan = Laporan::where('id',$laporan['id_laporan'])->update([
+                'foto_bukti_pengambilan' => $laporan['foto_bukti_pengambilan'],
+                'foto_ktp' => $laporan['foto_ktp'],
+                'foto_tanda_tangan' => $laporan['foto_tanda_tangan'],
+                'foto_surat_kuasa' => $laporan['foto_surat_kuasa'],
+                'status_verifikasi' => 'Belum Diverifikasi',
+                'telah_diedit' => true,
+                'tanggal_diedit' => now(),
+
+            ]);
+        });
+    }
     public function pemerintahSetLaporanByTahun(string $tahun, string $musim_tanam): Collection
     {
         $laporans = Laporan::select('laporans.id','laporans.status_verifikasi','laporans.tanggal_pengambilan','alokasis.jumlah_pupuk','jenis_pupuks.jenis as jenis','petanis.nama as nama_petani', 'kios_resmis.nama as nama_kios')
@@ -71,13 +100,19 @@ class LaporanServiceImpl implements LaporanService
     public function pemerintahSetujuiLaporan(int $id): bool
     {
         return DB::transaction(function () use ($id) {
-            return Laporan::where('id',$id)->update(['status_verifikasi' => 'Terverifikasi']);
+            return Laporan::where('id',$id)->update([
+                'status_verifikasi' => 'Terverifikasi',
+            ]);
         });
     }
     public function pemerintahTolakLaporan(int $id, $catatan): bool
     {
-        return DB::transaction(function () use ($id) {
-            return Laporan::where('id',$id)->update(['status_verifikasi' => 'Ditolak']);
+        return DB::transaction(function () use ($id, $catatan) {
+            return Laporan::where('id',$id)->update([
+                'status_verifikasi' => 'Ditolak',
+                'catatan' => $catatan,
+                'telah_diedit' => false
+            ]);
         });
     }
     public function pemerintahGetIdKiosResmiByLaporan(int $id_laporan): int

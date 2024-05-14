@@ -43,7 +43,7 @@
                             {{ $faq->jawaban }}
                         </td>
                         <td data-id="{{ $faq->id }}" class="py-4 flex flex-row justify-start pe-2">
-                            <button data-modal-target="editFaqModal" data-modal-toggle="editFaqModal" onclick="editFaqPassId(this)" class=" bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Edit</button>
+                            <button data-modal-target="editFaqModal" data-modal-toggle="editFaqModal" onclick="editFaqPassId(this)" class=" bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Ubah</button>
                             <button data-modal-target="deleteFaqModal" data-modal-toggle="deleteFaqModal" onclick="deleteFaqPassId(this)" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Hapus</button>
                         </td>
                     </tr>
@@ -119,7 +119,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Edit Data Alokasi Pupuk
+                    Ubah Data Alokasi Pupuk
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editFaqModal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">

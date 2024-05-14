@@ -63,6 +63,7 @@ Route::prefix('/kios-resmi')->group(function(){
         Route::get('/riwayat-transaksi', [App\Http\Controllers\Dashboard\KiosResmi\TransaksiController::class, 'setRiwayatTransaksi']);
         Route::get('/laporan', [App\Http\Controllers\Dashboard\KiosResmi\LaporanController::class, 'setLaporan']);
         Route::post('/laporan', [App\Http\Controllers\Dashboard\KiosResmi\LaporanController::class, 'laporan']);
+        Route::put('/laporan', [App\Http\Controllers\Dashboard\KiosResmi\LaporanController::class, 'ubahLaporan']);
         Route::get('/keluhan',[App\Http\Controllers\Dashboard\KiosResmi\KeluhanController::class,'setKeluhan']);
         Route::post('/keluhan',[App\Http\Controllers\Dashboard\KiosResmi\KeluhanController::class,'buatKeluhan']);
         Route::get('/logout',[App\Http\Controllers\Dashboard\KiosResmi\AkunController::class,'logout']);
