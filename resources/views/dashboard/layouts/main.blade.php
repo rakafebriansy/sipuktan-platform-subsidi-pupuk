@@ -50,9 +50,8 @@
         const pemerintah = document.getElementById('pemerintah');
         if(pemerintah != null){
           viewAlertNotifikasi(data['data']['pesan'], data['data']['id'],'yellow');
-          console.log('ok');
           if(document.URL.includes('/pemerintah/keluhan')) {
-            fetchTableRowKeluhanNotifikasi(data['data']['id_keluhan'],data['data']['mode']);
+            fetchTableRowKeluhanNotifikasi(data['data']['id_keluhan']);
           }
         }
       });

@@ -13,11 +13,12 @@ class KeluhanServiceImpl implements KeluhanService
         $keluhans = Keluhan::where('id_petani',$id_petani)->get();
         return $keluhans;
     }
-    public function petaniBuatKeluhan(array $keluhan, int $id_petani): bool
+    public function petaniBuatKeluhan(array $keluhan, int $id_petani): int|null
     {
         $keluhan['id_petani'] = $id_petani;
         return DB::transaction(function() use($keluhan) {
-            return Keluhan::insert($keluhan);
+            $keluhan = Keluhan::create($keluhan);
+            return $keluhan->id;
         });
     }
     public function kiosResmiSetKeluhan(int $id_kios_resmi): Collection
@@ -56,7 +57,7 @@ class KeluhanServiceImpl implements KeluhanService
     {
         $keluhan = Keluhan::find($id);
         $xmlString = [
-            'row' => view('dashboard.kios-resmi.elements.keluhan-row',[
+            'row' => view('dashboard.pemerintah.elements.keluhan-row',[
                 'keluhan' => $keluhan
             ])->render(),
             'backdropModal' => view('dashboard.pemerintah.elements.laporan-backdropmodal')->render(),

@@ -53,7 +53,6 @@ class KeluhanController extends Controller
                 'pesan' => $pesan, 
                 'id' => $id_notifikasi,
                 'id_keluhan' => $id_keluhan,
-                'mode' => 'kios-resmi'
             ];
             event(new KeluhanDibuat($data_notifikasi));
             return back()->with('success', 'Keluhan berhasil ditambahkan');

@@ -71,8 +71,8 @@ function fetchTableRowLaporanNotifikasi(id) {
       .then(data => viewTableRowNotifikasi(data))
       .catch(e => console.error('Error'+e));
 }
-function fetchTableRowKeluhanNotifikasi(id,mode) {
-    fetch('/pemerintah/ajax/get-keluhan-blade/'+mode, { 
+function fetchTableRowKeluhanNotifikasi(id) {
+    fetch('/pemerintah/ajax/get-keluhan-blade', { 
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())

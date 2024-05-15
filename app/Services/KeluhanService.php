@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 interface KeluhanService
 {
     function petaniSetKeluhan(int $id_petani): Collection;
-    function petaniBuatKeluhan(array $keluhan, int $id_petani): bool;
+    function petaniBuatKeluhan(array $keluhan, int $id_petani): int|null;
     function kiosResmiSetKeluhan(int $kios_resmi): Collection;
     function kiosResmiBuatKeluhan(array $keluhan, int $id_kios_resmi): int|null;
     function pemerintahSetKeluhan(int $id_pemerintah): Collection;

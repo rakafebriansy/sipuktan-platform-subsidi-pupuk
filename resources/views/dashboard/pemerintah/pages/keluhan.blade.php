@@ -16,6 +16,9 @@
                             <p class="inline-block">Subjek</p>
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            <p class="inline-block">Pengirim</p>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             <p class="inline-block">Status</p>
                         </th>
                         <th scope="col" class="px-6 py-3 md:w-[24%] lg:w-[12%]">
@@ -29,6 +32,9 @@
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="px-6 py-4">
                                 {{ date('H:i d-m-Y',strtotime($keluhan->tanggal_keluhan))}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $keluhan->nama }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $keluhan->subjek }}
@@ -61,7 +67,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                    Detail Petani
+                    Detail Keluhan
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="detailKeluhanModal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -137,7 +143,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                    Detail Petani
+                    Detail Keluhan
                 </h3>
                 <button type="button" onclick="closePassModalOri('detail','Keluhan')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
