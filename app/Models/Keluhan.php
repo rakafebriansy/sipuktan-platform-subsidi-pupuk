@@ -23,15 +23,15 @@ class Keluhan extends Model
         'id_kios_resmi',
         'id_pemerintah'
     ];
-    public function petanis(): BelongsTo
+    public function petani(): BelongsTo
     {
         return $this->belongsTo(Petani::class, 'id_petani','id');
     }
-    public function kios_resmis(): BelongsTo
+    public function kios_resmi(): BelongsTo
     {
         return $this->belongsTo(KiosResmi::class, 'id_kios_resmi','id');
     }
-    public function pemerintahs(): BelongsTo
+    public function pemerintah(): BelongsTo
     {
         return $this->belongsTo(Pemerintah::class, 'id_pemerintah','id');
     }

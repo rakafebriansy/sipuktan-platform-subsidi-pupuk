@@ -2,7 +2,12 @@
     {{ date('H:i d-m-Y',strtotime($keluhan->tanggal_keluhan))}}
 </td>
 <td class="px-6 py-4">
-    {{ $keluhan->nama }}
+    @isset($keluhan->id_kios_resmi)
+    {{ $keluhan->kios_resmi->nama }} <span class="font-bold">(K)</span>
+    @endisset
+    @isset($keluhan->id_petani)
+        {{ $keluhan->petani->nama }} <span class="font-bold">(P)</span>
+    @endisset
 </td>
 <td class="px-6 py-4">
     {{ $keluhan->subjek }}

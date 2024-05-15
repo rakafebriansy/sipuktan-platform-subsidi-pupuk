@@ -2,6 +2,7 @@
 
 namespace App\Services\Impl;
 use App\Models\Keluhan;
+use App\Models\Petani;
 use App\Services\KeluhanService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +38,7 @@ class KeluhanServiceImpl implements KeluhanService
     public function pemerintahSetKeluhan(int $id_pemerintah): Collection
     {
         $keluhans = Keluhan::all();
+        $petani = Petani::find($keluhans[0]->id_petani);
         return $keluhans;
     }
     public function pemerintahBalasKeluhan(array $balasan): bool
