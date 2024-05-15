@@ -19,14 +19,10 @@
         </div>
       </div>
     </main>
-    <!-- ========== END MAIN CONTENT ========== -->
-  
-    <!-- ========== FOOTER ========== -->
     <footer class="mt-auto text-center py-5">
       <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
-        <p class="text-sm text-gray-500 dark:text-neutral-500">© Sipuktan. 2024.</p>
+        <p class="text-sm text-gray-500 dark:text-neutral-500">© Copyright 2024 - SIPUKTAN</p>
       </div>
     </footer>
-    <!-- ========== END FOOTER ========== -->
   </div>
 @endsection
