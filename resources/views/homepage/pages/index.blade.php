@@ -35,42 +35,41 @@
     </div>
   </div>
 </div>
-<div id="telegram" class="grid grid-rows-5 bg-gradient-to-l from-[rgba(97,129,35,0.8)] via-white via-40% to-white">
-  <div class="row-span-1"></div>
-  <div class="flex flex-col items-center justify-center row-span-3">
-    <div class="grid grid-cols-3 h-full w-[80%]">
-      <div class="col-span-2">
-        <div class="">
-          <p class="text-4xl font-bold">Cara Menggunakan Telegram SIPUKTAN</p>
-        </div>
-        <div class="p-5 box-border">
+<div id="telegram" class="bg-[#F0FFE6] md:bg-gradient-to-l md:from-[rgba(97,129,35,0.8)] md:via-white md:via-40% md:to-white py-10 md:py-20">
+  <div class="flex flex-col items-center justify-center">
+    <div class="flex justify-start w-[80%] mb-5">
+      <p class="text-3xl md:text-4xl font-semibold md:font-bold">Cara Menggunakan Bot Telegram SIPUKTAN</p>
+    </div>
+    <div class="flex flex-col-reverse md:grid md:grid-cols-3 h-full w-[80%]">
+      <div class="col-span-2 mt-7">
+        <div class="p-2 md:p-5 box-border text-sm md:text-base">
           <ul>
             <li class="w-full flex justify-between items-center mb-5">
-              <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
+              <div class="w-7 md:w-10 h-7 md:h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center me-3">
                 <div class="">1</div>
               </div>
               <div class="inline w-[90%]">Cari username sipuktan_bot pada kolom pencarian telegram atau klik <a class="text-blue-600 hover:underline" href="https://t.me/sipuktan_bot">disini</a>.</div>
             </li>
             <li class="w-full flex justify-between items-center mb-5">
-              <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
+              <div class="w-7 md:w-10 h-7 md:h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center me-3">
                 <div class="">2</div>
               </div>
               <div class="inline w-[90%]">Ketik pertanyaan atau permasalahan yang ingin ditanyakan.</div>
             </li>
             <li class="w-full flex justify-between items-center mb-5">
-              <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
+              <div class="w-7 md:w-10 h-7 md:h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center me-3">
                 <div class="">3</div>
               </div>
               <div class="inline w-[90%]">Sipuktan_bot akan otomatis membalas dengan mengirimkan pilihan kata kunci bot yang bisa digunakan.</div>
             </li>
             <li class="w-full flex justify-between items-center mb-5">
-              <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
+              <div class="w-7 md:w-10 h-7 md:h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center me-3">
                 <div class="">4</div>
               </div>
               <div class="inline w-[90%]">Pilih salah satu kata kunci yang mewakili pertanyaan atau permasalahan.</div>
             </li>
             <li class="w-full flex justify-between items-center mb-5">
-              <div class="w-10 h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center">
+              <div class="w-7 md:w-10 h-7 md:h-10 rounded-full inline-flex bg-[#B3DBC2] justify-center items-center me-3">
                 <div class="">5</div>
               </div>
               <div class="inline w-[90%]">Telegram secara otomatis akan menjawab pertanyaan atau permasalahanmu.</div>
@@ -78,7 +77,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-span-1 flex justify-center items-center">
+      <div class="col-span-1 flex justify-center items-center mt-2">
         <img src="../images/Telegram Sipuktan.png" class="h-full" alt="">
       </div>
     </div>
