@@ -16,19 +16,19 @@
       </div>
   
       <div class="mt-5 max-w-4xl text-center mx-auto">
-        <h1 class="block font-bold text-white text-4xl md:text-5xl lg:text-6xl dark:text-gray-200">
+        <h1 class="block font-bold text-white text-2xl md:text-5xl lg:text-6xl dark:text-gray-200">
           Sistem Informasi Subsidi Pupuk Petani Terintegrasi
         </h1>
       </div>
   
       <div class="mt-5 max-w-6xl text-center mx-auto">
-        <p class="text-lg text-white dark:text-gray-400">
+        <p class="text-xs md:text-lg text-white dark:text-gray-400">
           Solusi terdepan untuk meningkatkan kesejahteraan petani dan mendukung pertanian yang berkelanjutan! Dengan sistem ini, petani dapat dengan mudah mengakses subsidi pupuk yang dibutuhkan, memastikan produksi yang lebih baik dan keberlanjutan lingkungan dengan dukungan pemerintah yang efektif.
         </p>
       </div>
   
       <div class="mt-8 gap-3 flex justify-center">
-        <button type="button" id="dropdownDaftarButton" data-dropdown-toggle="dropdownDaftar" data-dropdown-placement="bottom" data-dropdown-offset-distance="15" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+        <button type="button" id="dropdownDaftarButton" data-dropdown-toggle="dropdownDaftar" data-dropdown-placement="bottom" data-dropdown-offset-distance="15" class="py-2.5 px-5 me-2 mb-2 text-xs md:text-base font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
           Daftar sekarang!
         </button>
       </div>
@@ -87,12 +87,12 @@
   <div class=" h-24 flex items-center justify-center">
     <h1 class="text-4xl font-bold">FAQ</h1>
   </div> 
-  <div class="w-[90%] grid grid-cols-2 gap-8">
+  <div class="w-[90%] md:grid md:grid-cols-2 md:gap-8 px-4">
     <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
       @foreach ($faqs_petani as $faq_petani)
         <h2 id="accordion-flush-heading-{{ $faq_petani->id }}">
           <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-{{ $faq_petani->id }}" aria-expanded="true" aria-controls="accordion-flush-body-{{ $faq_petani->id }}">
-            <span>{{ $faq_petani->pertanyaan }}</span>
+            <span class=" text-start">{{ $faq_petani->pertanyaan }}</span>
             <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
             </svg>
@@ -124,27 +124,27 @@
     </div>
   </div>
 </div>
-<div id="kolaborasi" class="flex justify-center bg-[#F0FFE6] py-20">
-  <div class="w-[80%] grid grid-cols-2 gap-[10%]">
-    <div class="">
-      <h2 class="text-4xl font-semibold">Pupuk Subsidi</h2>
-      <h2 class="mt-1 text-4xl font-semibold text-[#4CAF4F]">Petani Membangun Negeri</h2>
-      <p class="mt-2">Dedikasi Kolaborasi Program Pemerintah Pupuk Subsidi</p>
+<div id="kolaborasi" class="flex justify-center bg-[#F0FFE6] py-10 md:py-20">
+  <div class="w-[80%] md:grid md:grid-cols-2 md:gap-[10%]">
+    <div class="mb-8">
+      <h2 class="text-2xl md:text-4xl font-semibold">Pupuk Subsidi</h2>
+      <h2 class="mt-1 text-2xl md:text-4xl font-semibold text-[#4CAF4F]">Petani Membangun Negeri</h2>
+      <p class="text-xs md:text-base mt-2">Dedikasi Kolaborasi Program Pemerintah Pupuk Subsidi</p>
     </div>
     <div class="grid grid-cols-2 w-full">
       <div class="h-full grid grid-rows-2 gap-4">
-        <div class="flex justify-end">
-          <div class="flex justify-start gap-4 w-[60%]">
-            <img src="{{ asset('images/petani-landing.png') }}" alt="">
+        <div class="flex md:justify-end">
+          <div class="flex justify-start items-center gap-4 w-full">
+            <img class="" src="{{ asset('images/petani-landing.png') }}" alt="">
             <div class="flex flex-col justify-center">
               <p class="text-xl font-bold">{{ $count_info['petani'] }}</p>
               <p class="text-xs">Petani</p>
             </div>
           </div>
         </div>
-        <div class="flex justify-end">
-          <div class="flex justify-start gap-4 w-[60%]">
-            <img src="{{ asset('images/pupuk-landing.png') }}" alt="">      
+        <div class="flex md:justify-end">
+          <div class="flex justify-start items-center gap-4 w-full">
+            <img class="" src="{{ asset('images/pupuk-landing.png') }}" alt="">      
             <div class="flex flex-col justify-center">
               <p class="text-xl font-bold">{{ $count_info['pupuk'] }}kg</p>
               <p class="text-xs">Pupuk</p>
@@ -153,18 +153,18 @@
         </div>
       </div>
       <div class="h-full grid grid-rows-2 gap-4">
-        <div class="flex justify-end">
-          <div class="flex justify-start gap-4 w-[60%]">
-            <img src="{{ asset('images/poktan-landing.png') }}" alt="">
+        <div class="flex md:justify-end">
+          <div class="flex justify-start items-center gap-4 w-full">
+            <img class="" src="{{ asset('images/poktan-landing.png') }}" alt="">
             <div class="flex flex-col justify-center">
               <p class="text-xl font-bold">{{ $count_info['poktan'] }}</p>
               <p class="text-xs">Kelompok Tani</p>
             </div>
           </div>
         </div>
-        <div class="flex justify-end">
-          <div class="flex justify-start gap-4 w-[60%]">
-            <img src="{{ asset('images/kios-landing.png') }}" alt="">
+        <div class="flex md:justify-end">
+          <div class="flex justify-start items-center gap-4 w-full">
+            <img class="" src="{{ asset('images/kios-landing.png') }}" alt="">
             <div class="flex flex-col justify-center">
               <p class="text-xl font-bold">{{ $count_info['kios_resmi'] }}</p>
               <p class="text-xs">Kios Resmi</p>
@@ -175,22 +175,22 @@
     </div>
   </div>
 </div>
-<div id="tujuan" class="flex justify-center py-20">
+<div id="tujuan" class="flex justify-center py-10 md:py-20">
   <div class="w-[80%] text-center flex flex-col justify-center gap-2 font-thin">
-    <h2 class="text-4xl font-bold">Tujuan Dedikasi Bersama</h2>
+    <h2 class="text-2xl md:text-4xl font-semibold md:font-bold">Tujuan Dedikasi Bersama</h2>
     <p>Kami hadir untuk</p>
-    <div class="w-full grid grid-cols-3 text-center mt-10 gap-16">
-      <div class="flex flex-col justify-center items-center border-box p-10 gap-1 shadow-md">
+    <div class="w-full grid grid-rows-3 md:grid-cols-3 text-center mt-10 gap-16">
+      <div class="flex flex-col justify-center items-center border-box p-5 md:p-10 gap-1 shadow-md">
         <img src="{{ asset('images/transparansi-informasi.png') }}" alt="">
         <h3 class="text-3xl font-semibold mb-1">Transparansi Informasi</h3>
         <p>Kami memfasilitasi transparansi informasi alokasi subsidi pupuk bagi petani dan kios resmi</p>
       </div>
-      <div class="flex flex-col justify-center items-center border-box p-10 gap-1 shadow-md">
+      <div class="flex flex-col justify-center items-center border-box p-5 md:p-10 gap-1 shadow-md">
         <img src="{{ asset('images/transparansi-informasi.png') }}" alt="">
         <h3 class="text-3xl font-semibold mb-1">Kualitas Hasil Panen</h3>
         <p>Kami membantu petani untuk bisa memastikan kualitas pupuk subsidi mampu membantu meningkatkan kualitas hasil panen</p>
       </div>
-      <div class="flex flex-col justify-center items-center border-box p-10 gap-1 shadow-md">
+      <div class="flex flex-col justify-center items-center border-box p-5 md:p-10 gap-1 shadow-md">
         <img src="{{ asset('images/transparansi-informasi.png') }}" alt="">
         <h3 class="text-3xl font-semibold mb-1">Pengawasan Subsidi</h3>
         <p>Kami berusaha memberikan pengawasan yang maksimal terhadap penyebaran dan pembelian pupuk subsidi untuk mencegah keterlibatan pihak illegal</p>
@@ -198,11 +198,11 @@
     </div>
   </div>
 </div>
-<div class="flex justify-center bg-[#F0FFE6] py-20">
+<div class="flex justify-center bg-[#F0FFE6] py-10 md:py-20">
   <img class="w-[30%]" src="{{ asset('images/sipuktan.png') }}" alt="">
 </div>
-<div class="flex flex-col items-center justify-center py-20 gap-4">
-  <ul class="flex justify-center gap-8">
+<div class="text-xs md:text-base flex flex-col items-center justify-center py-10 md:py-20 gap-4">
+  <ul class="flex justify-center gap-3 md:gap-8 >
     <li><a href="#beranda" class="hover:underline">Beranda</a></li>
     <li><a href="#telegram" class="hover:underline">Bot Telegram</a></li>
     <li><a href="#faq" class="hover:underline">FAQ</a></li>
