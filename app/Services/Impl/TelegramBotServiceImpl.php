@@ -55,10 +55,26 @@ class TelegramBotServiceImpl implements TelegramBotService
         }
         return null;
     }
+    private function petaniGetInfoPupuk(string $nik, string $kata_sandi): array|null
+    {
+        $petani = Petani::where('nik',$nik)->first();
+        $now = now()->format('Y');
+        if(isset($petani) && Hash::check($kata_sandi, $petani->kata_sandi)) {
+            $alokasis_1 = $petani->alokasis->where('tahun',$now)->where('musim_tanam','MT1');
+            $alokasis_2 = $petani->alokasis->where('tahun',$now)->where('musim_tanam','MT1');
+            $alokasis_3 = $petani->alokasis->where('tahun',$now)->where('musim_tanam','MT1');
+            return [
+                'alokasis_1' => $alokasis_1,
+                'alokasis_2' => $alokasis_2,
+                'alokasis_3' => $alokasis_3
+            ];
+        }
+        return null;
+    }
     public function service(Request $request): array
     {
         $text = $request['message']['text'];
-        if($text == '/ubahsandipetani') {
+        if(str_contains($text,'/ubahsandipetani')) {
             return [
                 'teks' => 'Silahkan masukkan nomor telepon terdaftar petani anda!',
                 'pengirim' => $request['message']['from']['id'],
@@ -72,7 +88,7 @@ class TelegramBotServiceImpl implements TelegramBotService
                 ]
             ];
         }
-        if($text == '/ubahsandikiosresmi') {
+        if(str_contains($text,'/ubahsandikiosresmi')) {
             return [
                 'teks' => 'Silahkan masukkan nomor telepon terdaftar kios resmi anda!',
                 'pengirim' => $request['message']['from']['id'],
@@ -86,7 +102,21 @@ class TelegramBotServiceImpl implements TelegramBotService
                 ]
             ];
         }
-        if($text == '/sipuktan') {
+        if(str_contains($text,'/subsidi')) {
+            $rendered_view = $this->setRenderedView('subsidi');
+            return [
+                'teks' => $rendered_view,
+                'pengirim' => $request['message']['from']['id'],
+            ];
+        }
+        if(str_contains($text,'/alur')) {
+            $rendered_view = $this->setRenderedView('alur');
+            return [
+                'teks' => $rendered_view,
+                'pengirim' => $request['message']['from']['id'],
+            ];
+        }
+        if(str_contains($text,'/sipuktan')) {
             $rendered_view = $this->setRenderedView('sipuktan',[
                 'link' => env('APP_URL')
             ]);
@@ -120,6 +150,33 @@ class TelegramBotServiceImpl implements TelegramBotService
                 'pengirim' => $request['message']['from']['id'],
             ];
         }
+        if(str_contains($text,'/pupuk')) {
+            $separated = explode(' ',$text);
+            if(count($separated) == 3) {
+                $data = $this->petaniGetInfoPupuk($separated[1],$separated[2]);
+                if(isset($data)) {
+                    $rendered_view = $this->setRenderedView('pupuk-success',[
+                        'alokasis_1' => $data['alokasis_1'],
+                        'alokasis_2' => $data['alokasis_2'],
+                        'alokasis_3' => $data['alokasis_3'],
+                    ]);
+                    // $rendered_view = json_encode($alokasis[0]->musim_tanam);
+                } else {
+                    $rendered_view = json_encode($alokasis);
+                }
+                return [
+                    'teks' => $rendered_view,
+                    'pengirim' => $request['message']['from']['id'],
+                ];
+            }
+            $rendered_view = $this->setRenderedView('pupuk',[
+                'link' => env('APP_URL')
+            ]);
+            return [
+                'teks' => $rendered_view,
+                'pengirim' => $request['message']['from']['id'],
+            ];
+        }
         if($text == '/belipupuk') {
             $rendered_view = $this->setRenderedView('belipupuk',[
                 'link' => env('APP_URL')
@@ -129,7 +186,7 @@ class TelegramBotServiceImpl implements TelegramBotService
                 'pengirim' => $request['message']['from']['id'],
             ];
         }
-        if($text == '/pupuktunai') {
+        if(str_contains($text,'/pupuktunai')) {
             $rendered_view = $this->setRenderedView('pupuktunai',[
                 'link' => env('APP_URL')
             ]);
@@ -138,7 +195,7 @@ class TelegramBotServiceImpl implements TelegramBotService
                 'pengirim' => $request['message']['from']['id'],
             ];
         }
-        if($text == '/pupuknontunai') {
+        if(str_contains($text,'/pupuknontunai')) {
             $rendered_view = $this->setRenderedView('pupuknontunai',[
                 'link' => env('APP_URL')
             ]);
@@ -147,7 +204,7 @@ class TelegramBotServiceImpl implements TelegramBotService
                 'pengirim' => $request['message']['from']['id'],
             ];
         }
-        if($text == '/menu') {
+        if(str_contains($text,'/menu')) {
             $rendered_view = $this->setRenderedView('menu',[
                 'first_name' => $request['message']['from']['first_name']
             ]);
@@ -156,7 +213,7 @@ class TelegramBotServiceImpl implements TelegramBotService
                 'pengirim' => $request['message']['from']['id'],
             ];
         }
-        if($text == '/registrasiweb') {
+        if(str_contains($text,'/registrasiweb')) {
             $rendered_view = $this->setRenderedView('registrasiweb',[
                 'first_name' => $request['message']['from']['first_name']
             ]);
