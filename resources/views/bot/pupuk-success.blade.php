@@ -1,4 +1,4 @@
-Rincian pupuk subsidi yang Anda terima tahun ini adalah sebagai berikut:
+Rincian pupuk subsidi pada tahun {{ now()->format('Y') }} yang Anda terima tahun ini adalah sebagai berikut:
 
 @if(count($alokasis_1))
 <b>Musim Tanam 1</b>
