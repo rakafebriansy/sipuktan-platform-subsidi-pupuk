@@ -69,5 +69,27 @@ class AlokasiSeeder extends Seeder
             'id_petani' => 2,
             'id_pemerintah' => 1
         ]);
+        Alokasi::insert([
+            'id' => 6,
+            'jumlah_pupuk' => 12,
+            'musim_tanam' => 2,
+            'tahun' => 2024,
+            'status' => 'Belum Tersedia',
+            'id_jenis_pupuk' => 'ponskha',
+            'id_kios_resmi' => 1,
+            'id_petani' => 2,
+            'id_pemerintah' => 1
+        ]);
+        Alokasi::insert([
+            'id' => 7,
+            'jumlah_pupuk' => 22,
+            'musim_tanam' => 3,
+            'tahun' => 2024,
+            'status' => 'Belum Tersedia',
+            'id_jenis_pupuk' => 'ponskha',
+            'id_kios_resmi' => 1,
+            'id_petani' => 2,
+            'id_pemerintah' => 1
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard\Petani;
 
+use App\Charts\AlokasiPupukSubsidiPerTahunChart;
 use App\Http\Controllers\Controller;
 use App\Services\DashboardService;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class DashboardController extends Controller
     public function __construct(DashboardService $dashboard_service) {
         $this->dashboard_service = $dashboard_service;
     }
-    public function setDashboard(): View
+    public function setDashboard(AlokasiPupukSubsidiPerTahunChart $alokasi_chart): View
     {
         $id = Auth::guard('petani')->user()->id;
         ['petani' => $petani, 
@@ -24,7 +25,8 @@ class DashboardController extends Controller
             'title' => 'Petani | Dashboard',
             'petani' => $petani,
             'notifikasis' => $notifikasis,
-            'initials' => $initials
+            'initials' => $initials,
+            'alokasi_chart' => $alokasi_chart->build()
         ]);
     }
 }

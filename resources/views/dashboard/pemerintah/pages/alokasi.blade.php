@@ -62,7 +62,7 @@
                                     {{ $alokasi->nama }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $alokasi->jumlah_pupuk }}
+                                    {{ $alokasi->jumlah_pupuk }}kg
                                 </td>
                                 <td class="px-6 py-4" data-value="{{ $alokasi->jenis_pupuk->id }}">
                                     {{ $alokasi->jenis }}

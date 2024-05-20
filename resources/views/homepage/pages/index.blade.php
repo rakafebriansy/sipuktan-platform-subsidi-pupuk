@@ -179,7 +179,7 @@
   <div class="w-[80%] text-center flex flex-col justify-center gap-2 font-thin">
     <h2 class="text-2xl md:text-4xl font-semibold md:font-bold">Tujuan Dedikasi Bersama</h2>
     <p>Kami hadir untuk</p>
-    <div class="w-full grid grid-rows-3 md:grid-cols-3 text-center mt-10 gap-16">
+    <div class="w-full grid md:grid-cols-3 text-center mt-10 gap-16">
       <div class="flex flex-col justify-center items-center border-box p-5 md:p-10 gap-1 shadow-md">
         <img src="{{ asset('images/transparansi-informasi.png') }}" alt="">
         <h3 class="text-3xl font-semibold mb-1">Transparansi Informasi</h3>

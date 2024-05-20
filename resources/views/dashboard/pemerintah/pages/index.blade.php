@@ -41,11 +41,10 @@
                </div>
             </div>
             <div class="p-3 box-border rounded-md shadow-md md:h-[60%]">
-               <div class="mb-4 w-full">
-                  <h2 class="mb-2 text-center text-md font-bold">Penyaluran Pupuk Subsidi Per 10 Tahun</h2>
-               </div>
-               <div class="w-full flex justify-center items-center">
-                  <img class="w-[70%]" src="../images/Subsidi 10 Tahun.png" alt="">
+               <div class="w-full flex justify-center">
+                  <div class="w-[70%]">
+                     {!! $alokasi_chart->container() !!}
+                  </div>
                </div>
             </div>
          </div>

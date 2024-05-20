@@ -59,6 +59,10 @@
   </head>
   <body>
     @yield('main')
+    @if (str_contains($_SERVER['REQUEST_URI'],'dashboard'))
+        <script src="{{ $alokasi_chart->cdn() }}"></script>
+        {{ $alokasi_chart->script() }}
+    @endif
     @isset($total_harga)
       <script src="https://app.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
       <script type="text/javascript">

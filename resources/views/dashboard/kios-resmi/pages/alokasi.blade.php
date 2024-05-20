@@ -71,7 +71,7 @@
                                     {{ $alokasi->petani }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $alokasi->jumlah_pupuk }}
+                                    {{ $alokasi->jumlah_pupuk }}kg
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $alokasi->jenis_pupuk->jenis }}

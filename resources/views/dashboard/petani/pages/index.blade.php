@@ -7,7 +7,7 @@
          <p>SIPUKTAN Solusi terdepan untuk meningkatkan kesejahteraan petani dan mendukung pertanian yang berkelanjutan! Dengan sistem ini, petani dapat dengan mudah mengakses subsidi pupuk yang dibutuhkan, memastikan produksi yang lebih baik dan keberlanjutan lingkungan dengan dukungan pemerintah yang efektif.</p>
       </div>
       <div class="w-full mt-4 md:grid md:grid-cols-4 md:gap-4 text-sm">
-         <div class="col-span-1 md:-full mb-4 md:mb-0">
+         <div class="h-full col-span-1 md:-full mb-4 md:mb-0">
             <div class="p-3 box-border rounded-md shadow-md mb-4">
                <h2 class="mb-3 text-lg font-bold">Pupuk Urea</h2>
                <p>Pupuk urea biasanya diterapkan secara langsung ke tanah atau dicampur dengan air untuk disemprotkan ke tanaman sebagai larutan pupuk. Ini memberikan akses yang cepat dan efisien bagi tanaman untuk menyerap nutrisi.</p>
@@ -40,12 +40,11 @@
                   </div>
                </div>
             </div>
-            <div class="p-3 box-border rounded-md shadow-md md:h-[60%]">
-               <div class="mb-4 w-full">
-                  <h2 class="mb-2 text-center text-md font-bold">Penyaluran Pupuk Subsidi Per 10 Tahun</h2>
-               </div>
-               <div class="w-full flex justify-center items-center">
-                  <img class="w-[70%]" src="../images/Subsidi 10 Tahun.png" alt="">
+            <div class="p-3 box-border rounded-md shadow-md">
+               <div class="w-full flex justify-center">
+                  <div class="w-[70%]">
+                     {!! $alokasi_chart->container() !!}
+                  </div>
                </div>
             </div>
          </div>

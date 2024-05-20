@@ -160,9 +160,8 @@ class TelegramBotServiceImpl implements TelegramBotService
                         'alokasis_2' => $data['alokasis_2'],
                         'alokasis_3' => $data['alokasis_3'],
                     ]);
-                    // $rendered_view = json_encode($alokasis[0]->musim_tanam);
                 } else {
-                    $rendered_view = json_encode($alokasis);
+                    $rendered_view = 'NIK atau kata sandi yang anda masukkan salah';
                 }
                 return [
                     'teks' => $rendered_view,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard\Pemerintah;
 
+use App\Charts\AlokasiPupukSubsidiPerTahunChart;
 use App\Http\Controllers\Controller;
 use App\Services\DashboardService;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class DashboardController extends Controller
     public function __construct(DashboardService $dashboard_service) {
         $this->dashboard_service = $dashboard_service;
     }
-    public function setDashboard(): View
+    public function setDashboard(AlokasiPupukSubsidiPerTahunChart $alokasi_chart): View
     {
         $id = Auth::guard('pemerintah')->user()->id;
         ['pemerintah' => $pemerintah,
@@ -25,7 +26,8 @@ class DashboardController extends Controller
             'title' => 'Pemerintah | Dashboard',
             'pemerintah' => $pemerintah,
             'notifikasis' => $notifikasis,
-            'initials' => $initials
+            'initials' => $initials,
+            'alokasi_chart' => $alokasi_chart->build()
         ]);
     }
 }
