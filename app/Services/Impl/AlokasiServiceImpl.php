@@ -36,14 +36,20 @@ class AlokasiServiceImpl implements AlokasiService
             ]);
         });
     }
-    public function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): Collection
+    public function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): array
     {
         $alokasis = Alokasi::select('alokasis.*', 'petanis.nama as petani', 'petanis.nomor_telepon as nomor_telepon', 'kelompok_tanis.nama as poktan')
         ->join('petanis','petanis.id','alokasis.id_petani')
         ->join('kelompok_tanis','kelompok_tanis.id','petanis.id_kelompok_tani')
         ->where('alokasis.id_kios_resmi',$id)->where('alokasis.tahun',$tahun)->where('alokasis.musim_tanam',$musim_tanam)->orderBy('petanis.nama')->get();
         
-        return $alokasis;
+        if(isset($alokasis)) {
+            $jumlah_tidak_tersedia = Alokasi::where('id_kios_resmi',$id)->where('tahun',$tahun)->where('musim_tanam',$musim_tanam)->where('status','Belum Tersedia')->count();
+            $tidak_tersedia = $jumlah_tidak_tersedia > 0;
+        } else {
+            $tidak_tersedia = false;
+        }
+        return ['alokasis' => $alokasis, 'tidak_tersedia' => $tidak_tersedia];
     }
     public function kiosResmiGetDistinctIdPetaniByTahunMusimTanam(string $tahun, string $musim_tanam): array
     {

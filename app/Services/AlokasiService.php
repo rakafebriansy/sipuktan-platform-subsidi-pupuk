@@ -10,7 +10,7 @@ use Illuminate\Http\UploadedFile;
 interface AlokasiService
 {
     function petaniSetAlokasi(int $id): Collection;
-    function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): Collection;
+    function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): array;
     function kiosResmiSetAlokasi(int $id): array;
     function kiosResmiAlokasi(array $id_alokasis): bool;
     function kiosResmiGetDistinctIdPetaniByTahunMusimTanam(string $tahun, string $musim_tanam): array;

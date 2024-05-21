@@ -11,7 +11,7 @@
                     <div class="flex justify-between items-center my-3">
                         <div class="flex items-center">
                             @if (count($alokasis))
-                                @if ($alokasis[0]->status == 'Belum Tersedia')
+                                @if ($tidak_tersedia)
                                     <button onclick="editStatusAlokasiPassId()" data-modal-target="konfirmasiKedatanganModal" data-modal-toggle="konfirmasiKedatanganModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Konfirmasi Kedatangan</button>
                                 @else
                                     <button type="button" disabled data-modal-target="konfirmasiKedatanganModal" data-modal-toggle="konfirmasiKedatanganModal" class="text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600 me-2 mb-2">Konfirmasi Kedatangan</button>
@@ -63,6 +63,7 @@
                             @php
                                 $isDibayar = $alokasi->status == "Dibayar";
                                 $isTidakDiambil = $alokasi->status == "Tidak Diambil";
+                                $isBelumTersedia = $alokasi->status == "Belum Tersedia";
                             @endphp
                             <tr @class([
                                 'bg-white' => !$isDibayar && !$isTidakDiambil,
@@ -74,10 +75,12 @@
                                 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'dark:hover:bg-gray-600'
                                 ])>
                                 <td class="w-4 p-4">
-                                    <div class="flex items-center">
-                                        <input value="{{ $alokasi->id }}" type="checkbox" class="alokasi-check w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label class="sr-only">checkbox</label>
-                                    </div>
+                                    @if ($isBelumTersedia)
+                                        <div class="flex items-center">
+                                            <input value="{{ $alokasi->id }}" type="checkbox" class="alokasi-check w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label class="sr-only">checkbox</label>
+                                        </div>
+                                    @endif
                                 </td>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $alokasi->petani }}

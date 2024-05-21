@@ -39,10 +39,12 @@ class AlokasiController extends Controller
         if(isset($request->tahun) && isset($request->musim_tanam)){
             $tahun = $request->tahun;
             $musim_tanam = $request->musim_tanam;
-            $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,$request->musim_tanam);
+            ['alokasis' => $alokasis,
+            'tidak_tersedia' => $tidak_tersedia] = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$tahun,$request->musim_tanam);
         } else {
             $musim_tanam = $saat_ini->musim_tanam;
-            $alokasis = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$saat_ini->tahun,$saat_ini->musim_tanam);
+            ['alokasis' => $alokasis,
+            'tidak_tersedia' => $tidak_tersedia] = $this->alokasi_service->kiosResmiSetAlokasiByTahun($id,$saat_ini->tahun,$saat_ini->musim_tanam);
         }
         return view('dashboard.kios-resmi.pages.alokasi', [
             'title' => 'Kios Resmi | Alokasi',
@@ -52,7 +54,8 @@ class AlokasiController extends Controller
             'notifikasis' => $notifikasis,
             'alokasis' => $alokasis,
             'tahun' => $tahun,
-            'musim_tanam' => $musim_tanam
+            'musim_tanam' => $musim_tanam,
+            'tidak_tersedia' => $tidak_tersedia
         ]);
     }
     public function alokasi(Request $request): RedirectResponse
