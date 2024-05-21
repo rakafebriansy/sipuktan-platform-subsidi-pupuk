@@ -30,8 +30,12 @@ class NotifikasiServiceImpl implements NotifikasiService
             ];
         }
         $detail_notifikasis = DB::transaction(function() use ($notifikasis){
-            $latest_notification_id = DB::table('notifikasis')->select('id')->orderBy('id','DESC')->first();
-            if($latest_notification_id == null) $latest_notification_id = 0;
+            $latest_notification = DB::table('notifikasis')->select('id')->orderBy('id','DESC')->first('id');
+            if($latest_notification == null) {
+                $latest_notification_id = 0;
+            } else {
+                $latest_notification_id = $latest_notification->id;
+            }
             Notifikasi::insert($notifikasis);
             return DB::table('notifikasis')->select('id','id_petani')->where('id','>',$latest_notification_id)->get()->toArray();
         });
