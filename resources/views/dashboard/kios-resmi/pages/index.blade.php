@@ -43,7 +43,10 @@
             <div class="p-3 box-border rounded-md shadow-md md:h-[60%]">
                <div class="w-full flex justify-center">
                   <div class=" w-fit">
-                     {!! $alokasi_chart->container() !!}
+                     <div class="md:h-[10%] w-full">
+                        <h2 class="mb-2 text-center text-md font-bold">Alokasi Pupuk Subsidi Tahun {{ now()->format('Y') }}</h2>
+                     </div>
+                     <canvas id="pie-chart"></canvas>
                   </div>
                </div>
             </div>

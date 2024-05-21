@@ -15,9 +15,10 @@ class DashboardController extends Controller
     public function __construct(DashboardService $dashboard_service) {
         $this->dashboard_service = $dashboard_service;
     }
-    public function setDashboard(AlokasiPupukSubsidiPerTahunChart $alokasi_chart): View
+    public function setDashboard(): View
     {
         $id = Auth::guard('petani')->user()->id;
+        $alokasis_chart = $this->dashboard_service->setPieChart();
         ['petani' => $petani, 
         'notifikasis' => $notifikasis, 
         'initials' =>$initials] = $this->dashboard_service->petaniSetSidebar($id);
@@ -26,7 +27,7 @@ class DashboardController extends Controller
             'petani' => $petani,
             'notifikasis' => $notifikasis,
             'initials' => $initials,
-            'alokasi_chart' => $alokasi_chart->build()
+            'alokasis_chart' => $alokasis_chart,
         ]);
     }
 }

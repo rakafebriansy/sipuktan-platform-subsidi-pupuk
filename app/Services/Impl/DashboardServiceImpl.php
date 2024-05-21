@@ -2,6 +2,7 @@
 
 namespace App\Services\Impl;
 
+use App\Models\Alokasi;
 use App\Models\KiosResmi;
 use App\Models\Notifikasi;
 use App\Models\Pemerintah;
@@ -61,5 +62,13 @@ class DashboardServiceImpl implements DashboardService
             $initials .= mb_substr($w, 0, 1);
         } 
         return ['pemerintah' => $pemerintah, 'notifikasis' => $notifikasis,'initials' =>$initials];
+    }
+    public function setPieChart(): array
+    {
+        $tahun = now()->format('Y');
+        $alokasis_mt1 = Alokasi::where('musim_tanam','MT1')->where('tahun',$tahun)->sum('jumlah_pupuk');
+        $alokasis_mt2 = Alokasi::where('musim_tanam','MT1')->where('tahun',$tahun)->sum('jumlah_pupuk');
+        $alokasis_mt3 = Alokasi::where('musim_tanam','MT1')->where('tahun',$tahun)->sum('jumlah_pupuk');
+        return [$alokasis_mt1,$alokasis_mt2,$alokasis_mt3];
     }
 }

@@ -60,8 +60,37 @@
   <body>
     @yield('main')
     @if (str_contains($_SERVER['REQUEST_URI'],'dashboard'))
-        <script src="{{ $alokasi_chart->cdn() }}"></script>
-        {{ $alokasi_chart->script() }}
+      <script>
+        const DATA_COUNT = 3;
+        document.addEventListener('DOMContentLoaded', () => {
+          const data = {
+              labels: ['Musim Tanam 1', 'Musim Tanam 2', 'Musim Tanam 3'],
+              datasets: [
+                {
+                  label: 'Alokasi',
+                  data: [100,200,300],
+                }
+              ]
+            };
+          const config = {
+              type: 'pie',
+              data: data,
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    position: 'top',
+                  },
+                  title: {
+                    display: false,
+                  }
+                }
+              },
+            };
+          const ctx = document.getElementById('pie-chart').getContext('2d');
+          new window.Chart(ctx, config);
+        });
+      </script>
     @endif
     @isset($total_harga)
       <script src="https://app.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
