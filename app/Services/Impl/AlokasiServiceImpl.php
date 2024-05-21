@@ -28,10 +28,10 @@ class AlokasiServiceImpl implements AlokasiService
         
         return ['saat_ini' => $saat_ini, 'tahuns' => $tahuns];
     }
-    public function kiosResmiAlokasi(string $tahun, string $musim_tanam): bool
+    public function kiosResmiAlokasi(array $id_alokasis): bool
     {
-        return DB::transaction(function () use ($tahun, $musim_tanam) {
-            return Alokasi::where('tahun',$tahun)->where('musim_tanam',$musim_tanam)->where('status','Belum Tersedia')->update([
+        return DB::transaction(function () use ($id_alokasis) {
+            return Alokasi::whereIn('id',$id_alokasis)->update([
                 'status' => 'Menunggu Pembayaran'
             ]);
         });

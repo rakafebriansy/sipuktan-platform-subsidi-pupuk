@@ -12,7 +12,7 @@ interface AlokasiService
     function petaniSetAlokasi(int $id): Collection;
     function kiosResmiSetAlokasiByTahun(int $id, string $tahun, string $musim_tanam): Collection;
     function kiosResmiSetAlokasi(int $id): array;
-    function kiosResmiAlokasi(string $tahun, string $musim_tanam): bool;
+    function kiosResmiAlokasi(array $id_alokasis): bool;
     function kiosResmiGetDistinctIdPetaniByTahunMusimTanam(string $tahun, string $musim_tanam): array;
     function pemerintahSetAlokasi(): array;
     function pemerintahSetAlokasiByTahun(string $tahun, string $musim_tanam): Collection;

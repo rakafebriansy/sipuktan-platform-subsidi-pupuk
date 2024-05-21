@@ -59,7 +59,11 @@ class AlokasiController extends Controller
     {
         $tahun = $request->tahun;
         $musim_tanam = $request->musim_tanam;
-        if ($this->alokasi_service->kiosResmiAlokasi($tahun, $musim_tanam)) {
+        if(!isset($request->id_alokasis)) {
+            return back()->withErrors(['error' => 'Tidak ada pupuk yang dipilih.']);
+        }
+        $ids = explode(',',$request->id_alokasis);
+        if ($this->alokasi_service->kiosResmiAlokasi($ids)) {
             $pesan = 'Pupuk anda telah datang!';
             $id_petanis = $this->alokasi_service->kiosResmiGetDistinctIdPetaniByTahunMusimTanam($tahun, $musim_tanam);
             $detail_notifikasis = $this->notifikasi_service->sendManyNotifikasi($pesan, 'petani', $id_petanis);
@@ -71,6 +75,6 @@ class AlokasiController extends Controller
                 return back()->with('success','Kedatangan pupuk berhasil dikonfirmasi.');
             }
         }
-        return back()->withErrors(['db' => 'Kedatangan pupuk sudah dikonfirmasi sebelumnya.']);
+        return back()->withErrors(['error' => 'Kedatangan pupuk sudah dikonfirmasi sebelumnya.']);
     }
 }

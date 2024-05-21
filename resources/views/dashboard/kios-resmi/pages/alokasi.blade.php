@@ -34,6 +34,12 @@
                 </caption>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
+                        <th scope="col" class="p-4">
+                            <div class="flex items-center">
+                                <input type="checkbox" onclick="checkAll()" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label class="sr-only">checkbox</label>
+                            </div>
+                        </th>
                         <th scope="col" class="px-6 py-3">
                             <p class="inline-block">Nama Petani</p>
                         </th>
@@ -67,6 +73,12 @@
                                 'hover:bg-[#F56262]' => $isTidakDiambil,
                                 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'dark:hover:bg-gray-600'
                                 ])>
+                                <td class="w-4 p-4">
+                                    <div class="flex items-center">
+                                        <input value="{{ $alokasi->id }}" type="checkbox" class="alokasi-check w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label class="sr-only">checkbox</label>
+                                    </div>
+                                </td>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $alokasi->petani }}
                                 </th>
@@ -178,7 +190,7 @@
         <form action="/kios-resmi/alokasi" method="post" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             @csrf
             @method('patch')
-            <input type="hidden" name="id" id="alokasiId">
+            <input type="hidden" name="id_alokasis" id="alokasiIds">
             <input type="hidden" name="tahun" id="alokasiTahun">
             <input type="hidden" name="musim_tanam" id="alokasiMusimTanam">
             <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="konfirmasiKedatanganModal">

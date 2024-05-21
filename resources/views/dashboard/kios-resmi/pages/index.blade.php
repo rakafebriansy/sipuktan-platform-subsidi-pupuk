@@ -42,7 +42,7 @@
             </div>
             <div class="p-3 box-border rounded-md shadow-md md:h-[60%]">
                <div class="w-full flex justify-center">
-                  <div class="w-[70%]">
+                  <div class=" w-fit">
                      {!! $alokasi_chart->container() !!}
                   </div>
                </div>

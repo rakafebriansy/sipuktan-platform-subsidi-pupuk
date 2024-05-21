@@ -282,6 +282,11 @@ function sumTotalCheck() {
     document.querySelector('#tampilan-total > span').innerText = total;
     document.getElementById('total-harga').value = total;
 }
+function sumAlokasiCheck() {
+    document.querySelectorAll('.alokasi-check:checked').forEach(e => {
+        total += parseInt(e.dataset.harga);
+    });
+}
 function getRiwayatFromMt(li, mode) {
     document.getElementById('dropdownMTButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/riwayat-transaksi?tahun=' + document.querySelector('#dropdownTahunButton').innerText  + '&&musim_tanam=' + li.querySelector('p').innerText );
@@ -323,9 +328,27 @@ function getPetaniFromAlokasi(btn) {
 function getPetaniFromAlokasiPemerintah(btn) {
     fetchPetaniFromAlokasiPemerintah(btn.parentElement.dataset.id);
 }
+function checkAll() {
+    document.querySelectorAll('.alokasi-check').forEach(e => {
+        console.log(e)
+        if (e.checked) {
+            e.checked = false;
+        } else {
+            e.checked = true;
+        }
+    });
+}
 function editStatusAlokasiPassId() {
+    let alokasis = [];
+    document.querySelectorAll('.alokasi-check:checked').forEach(e => {
+        alokasis.push(e.value);
+    });
+    
+    alokasis = alokasis.join(',');
+    
     document.getElementById('alokasiTahun').value = document.getElementById('dropdownTahunButton').innerText;
     document.getElementById('alokasiMusimTanam').value = document.getElementById('dropdownMTButton').innerText;
+    document.getElementById('alokasiIds').value = alokasis;
 }
 function dismissingDropdown(id){
     document.getElementById(id).click()
