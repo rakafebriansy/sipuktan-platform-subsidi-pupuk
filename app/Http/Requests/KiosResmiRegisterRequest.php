@@ -31,7 +31,7 @@ class KiosResmiRegisterRequest extends FormRequest
             'foto_ktp' => 'required|mimes:png,jpg|max:5120',
             'nik' => 'required|numeric|digits:16|unique:pemilik_kios,nik',
             'nama_pemilik' => 'required',
-            'nomor_telepon' => 'required|numeric|unique:petanis,nomor_telepon',
+            'nomor_telepon' => 'required|numeric|unique:pemilik_kios,nomor_telepon',
         ];
     }
         
