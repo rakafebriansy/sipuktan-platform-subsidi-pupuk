@@ -38,7 +38,6 @@ class KeluhanServiceImpl implements KeluhanService
     public function pemerintahSetKeluhan(int $id_pemerintah): Collection
     {
         $keluhans = Keluhan::all();
-        $petani = Petani::find($keluhans[0]->id_petani);
         return $keluhans;
     }
     public function pemerintahBalasKeluhan(array $balasan): bool
