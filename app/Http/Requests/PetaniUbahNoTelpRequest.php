@@ -23,7 +23,7 @@ class PetaniUbahNoTelpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nomor_telepon' => 'required|numeric|unique:petanis,nomor_telepon'
+            'nomor_telepon' => 'required|unique:petanis,nomor_telepon|string|min:10|max:13|regex:/^[0-9]{10,13}$/',
         ];
     }
     
@@ -37,6 +37,10 @@ class PetaniUbahNoTelpRequest extends FormRequest
         return [
             'nomor_telepon.required' => 'Nomor telepon tidak boleh kosong',
             'nomor_telepon.numeric' => 'Nomor telepon harus berupa angka',
+            'nomor_telepon.unique' => 'Nomor telepon telah terdaftar',
+            'nomor_telepon.min' => 'Nomor telepon harus berjumlah minimal 10 karakter',
+            'nomor_telepon.max' => 'Nomor telepon harus berjumlah maksimal 13 karakter',
+            'nomor_telepon.regex' => 'Nomor telepon harus berupa angka',
         ];
     }
 }

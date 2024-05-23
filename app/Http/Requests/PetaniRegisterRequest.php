@@ -27,7 +27,7 @@ class PetaniRegisterRequest extends FormRequest
             'nama' => 'required|max:60',
             'kata_sandi' => 'required|min:6',
             'foto_ktp' => 'required|mimes:png,jpg|max:5120',
-            'nomor_telepon' => 'required|numeric|unique:petanis,nomor_telepon',
+            'nomor_telepon' => 'required|unique:petanis,nomor_telepon|string|min:10|max:13|regex:/^[0-9]{10,13}$/',
             'id_kelompok_tani' => 'required'
         ];
     }
@@ -51,8 +51,10 @@ class PetaniRegisterRequest extends FormRequest
             'foto_ktp.mimes' => 'Foto KTP harus berekstensi .png atau .jpg',
             'foto_ktp.max' => 'Foto KTP harus memiliki ukuran kurang dari 5MB',
             'nomor_telepon.required' => 'Nomor telepon tidak boleh kosong',
-            'nomor_telepon.numeric' => 'Nomor telepon harus berupa angka',
+            'nomor_telepon.regex' => 'Nomor telepon harus berupa angka',
             'nomor_telepon.unique' => 'Nomor telepon telah terdaftar',
+            'nomor_telepon.min' => 'Nomor telepon harus berjumlah minimal 10 karakter',
+            'nomor_telepon.max' => 'Nomor telepon harus berjumlah maksimal 13 karakter',
             'id_kelompok_tani.required' => 'Kelompok tani tidak boleh kosong'
         ];
     }

@@ -32,7 +32,7 @@
                         <input type="text" name="nomor_telepon" value="{{ old('nomor_telepon','') }}" id="nomor_telepon" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"  />
                     </div>
                 </div>
-                <div class="flex flex-col">    
+                <div class="flex flex-col w-full justify-between">    
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto KTP</label>
                     <div class="flex items-center justify-center w-full mb-5">
                         <label for="dropzone-file" class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
