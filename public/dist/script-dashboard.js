@@ -7,12 +7,12 @@ function fetchRiwayatSearchBox(letters,list) {
       .then(res => viewRiwayatSearchBox(res,list))
       .catch(e => console.error('Error'+e));
 }
-function fetchKiosSearchBox(letters,list) {
+function fetchKiosSearchBox(letters,list,modal) {
     fetch('/pemerintah/ajax/get-kios', {
         method: 'POST',
         body: new URLSearchParams('letters='+letters)
     }).then(res => res.json())
-      .then(res => viewKiosSearchBox(res,list))
+      .then(res => viewKiosSearchBox(res,list,modal))
       .catch(e => console.error('Error'+e));
 }
 function fetchDetailLaporanFiles(id,modal) {
@@ -52,7 +52,7 @@ function fetchGetFaqDetail(id) {
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
-      .then(data => viewFaqDetail(data))
+      .then(res => viewFaqDetail(res))
       .catch(e => console.error('Error'+e));
 }
 function fetchGetKeluhanDetail(id,modal) {
@@ -60,7 +60,15 @@ function fetchGetKeluhanDetail(id,modal) {
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
-      .then(data => viewGetKeluhanDetail(data,modal))
+      .then(res => viewGetKeluhanDetail(res,modal))
+      .catch(e => console.error('Error'+e));
+}
+function fetchGetPoktan(id) {
+    fetch('/pemerintah/ajax/get-poktan', { 
+        method: 'POST',
+        body: new URLSearchParams('id='+id)
+    }).then(res => res.json())
+      .then(res => viewGetPoktan(res))
       .catch(e => console.error('Error'+e));
 }
 function fetchGetKeluhanBalas(id,modalbody) {
@@ -68,7 +76,7 @@ function fetchGetKeluhanBalas(id,modalbody) {
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
-      .then(data => viewGetKeluhanBalas(data,modalbody))
+      .then(res => viewGetKeluhanBalas(res,modalbody))
       .catch(e => console.error('Error'+e));
 }
 function fetchTableRowLaporanNotifikasi(id) {
@@ -76,7 +84,7 @@ function fetchTableRowLaporanNotifikasi(id) {
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
-      .then(data => viewTableRowNotifikasi(data))
+      .then(res => viewTableRowNotifikasi(res))
       .catch(e => console.error('Error'+e));
 }
 function fetchTableRowKeluhanNotifikasi(id) {
@@ -84,7 +92,7 @@ function fetchTableRowKeluhanNotifikasi(id) {
         method: 'POST',
         body: new URLSearchParams('id='+id)
     }).then(res => res.json())
-      .then(data => viewTableRowNotifikasi(data))
+      .then(res => viewTableRowNotifikasi(res))
       .catch(e => console.error('Error'+e));
 }
 
@@ -100,13 +108,13 @@ function viewRiwayatSearchBox(data,list) {
         list.appendChild(a);
     }
 }
-function viewKiosSearchBox(data,list) {
+function viewKiosSearchBox(data,list,modal) {
     list.innerHTML = '';
     for(let i = 0; i < data.length; i++) {
         const a = document.createElement('a');
         a.innerHTML = `<p class="inline">${data[i]['nama']}</p>`;
         a.dataset.id = data[i]['id'];
-        a.setAttribute('onclick','setKiosIdPoktan(this)');
+        a.setAttribute('onclick',`setKiosIdPoktan(this,'${modal}')`);
         a.classList.add('search-li');
         list.appendChild(a);
     }
@@ -243,6 +251,15 @@ function viewGetKeluhanDetail(data,modalbody) {
         detailKeluhanModalDivs[2].children[1].innerText = data['balasan'];
     }
 }
+function viewGetPoktan(data) {
+    console.log(data)
+    const modal = document.querySelectorAll('#editPoktanModal .inputs');
+    modal[0].value = data['id'];
+    modal[1].value = data['nama'];
+    modal[2].value = data['id_kios_resmi'];
+    modal[3].value = data['kios_resmi'];
+    console.log(modal)
+}
 function viewGetKeluhanBalas(data,modalbody) {
     const detailKeluhanModalDivs = document.querySelectorAll('#'+modalbody+' div');
     detailKeluhanModalDivs[0].children[1].innerText = data['subjek']
@@ -322,10 +339,10 @@ function getRiwayatLaporFromTh(li, mode) {
     document.getElementById('dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/laporan?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
 }
-function setKiosIdPoktan(btn) {
-    const box = document.getElementById('kiosSearchBox');
-    document.getElementById('idKiosResmi').value = btn.dataset.id;
-    document.getElementById('kiosSearch').value = btn.innerText;
+function setKiosIdPoktan(btn, modal) {
+    const box = document.querySelector('#' + modal + 'PoktanModal .kiosSearchBox');
+    document.querySelector('#' + modal + 'PoktanModal .idKiosResmi').value = btn.dataset.id;
+    document.querySelector('#' + modal + 'PoktanModal .kiosSearch').value = btn.innerText;
     box.innerHTML = '';
     box.classList.remove('border','border-gray-200')
     btn.value = '';
@@ -349,11 +366,11 @@ function searchRiwayat(input) {
         list.innerHTML = '';
     }
 }
-function searchKios(input) {
-    const list = document.getElementById('kiosSearchBox');
+function searchKios(input, modal) {
+    const list = document.querySelector('#' + modal + 'PoktanModal .kiosSearchBox');
     list.classList.add('border','border-gray-200')
     if(input.value.length > 0) {
-        fetchKiosSearchBox(input.value,list)
+        fetchKiosSearchBox(input.value,list,modal)
     } else {
         list.innerHTML = '';
     }
@@ -476,7 +493,14 @@ function closePassModalOri(mode,fitur) {
     document.getElementById('backdropModal').classList.replace('block','hidden');   
     document.getElementById(mode+fitur+'ModalOri').classList.replace('flex','hidden');
 }
-
+function editPoktanPassId(btn) {
+    let id = btn.parentElement.dataset.id;
+    fetchGetPoktan(id);
+    document.getElementById('editPoktanId').value = id;
+}
+function hapusPoktanPassId(btn) {
+    document.getElementById('hapusPoktanId').value = btn.parentElement.dataset.id;
+}
 
 (function(){
     if(document.URL.includes('/petani/') || document.URL.includes('/kios-resmi/') || document.URL.includes('/pemerintah/')){

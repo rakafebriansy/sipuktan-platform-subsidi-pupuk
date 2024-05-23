@@ -119,7 +119,7 @@
                 </button>
             </div>
             
-            <form  action="/pemerintah/faq" method="post" class="p-4 md:p-5">
+            <form action="/pemerintah/faq" method="post" class="p-4 md:p-5">
                 @csrf
                 @method('patch')
                 <input type="hidden" name="id">

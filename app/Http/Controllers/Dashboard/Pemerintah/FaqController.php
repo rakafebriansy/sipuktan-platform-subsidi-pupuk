@@ -51,7 +51,7 @@ class FaqController extends Controller
         if($this->faq_service->pemerintahEditFaq($validated)) {
             return back()->with('success','FAQ berhasil diperbarui');
         }
-        return back()->withInput()->withErrors(['error','FAQ gagal diperbarui']);
+        return back()->withInput()->withErrors(['error' => 'FAQ gagal diperbarui']);
     }
     public function hapusFaq(Request $request): RedirectResponse
     {

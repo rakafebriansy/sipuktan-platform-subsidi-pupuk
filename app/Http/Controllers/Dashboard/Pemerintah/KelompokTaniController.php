@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Dashboard\Pemerintah;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PemerintahBuatKelompokTaniRequest;
+use App\Http\Requests\PemerintahEditKelompokTaniRequest;
 use App\Services\CrudService;
 use App\Services\DashboardService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class KelompokTaniController extends Controller
@@ -31,7 +34,7 @@ class KelompokTaniController extends Controller
             'kelompok_tanis' => $kelompok_tanis
         ]);
     }
-    public function buatKelompokTani(PemerintahBuatKelompokTaniRequest $request)
+    public function buatKelompokTani(PemerintahBuatKelompokTaniRequest $request): RedirectResponse
     {
         $id = Auth::guard('pemerintah')->user()->id;
         $validated = $request->validated();
@@ -39,5 +42,20 @@ class KelompokTaniController extends Controller
             return back()->with('success', 'Kelompok tani berhasil ditambahkan');
         }
         return back()->withInput()->withErrors(['error' => 'Kelompok tani gagal ditambahkan']);
+    }
+    public function editKelompokTani(PemerintahEditKelompokTaniRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+        if($this->crud_service->pemerintahEditKelompokTani($validated)) {
+            return back()->with('success','Kelompok Tani berhasil diperbarui');
+        }
+        return back()->withInput()->withErrors(['error' => 'Kelompok Tani gagal diperbarui']);
+    }
+    public function hapusKelompokTani(Request $request): RedirectResponse
+    {
+        if($this->crud_service->pemerintahHapusKelompokTani($request->id)) {
+            return back()->with('success','Kelompok Tani berhasil dihapus');
+        }
+        return back()->withInput()->withErrors(['error' =>'Kelompok Tani gagal dihapus']);
     }
 }

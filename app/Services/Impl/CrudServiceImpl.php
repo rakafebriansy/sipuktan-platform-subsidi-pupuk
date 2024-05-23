@@ -15,6 +15,7 @@ class CrudServiceImpl implements CrudService
         $kelompok_tanis = KelompokTani::select('kelompok_tanis.*','kios_resmis.nama as kios_resmi','kecamatans.nama as kecamatan')
         ->join('kios_resmis','kelompok_tanis.id_kios_resmi','kios_resmis.id')
         ->join('kecamatans','kecamatans.id','kios_resmis.id_kecamatan')
+        ->orderBy('kelompok_tanis.nama')
         ->get();
         return $kelompok_tanis;
     }
@@ -43,6 +44,13 @@ class CrudServiceImpl implements CrudService
     {   
         $letters = strtolower($letters);
         $riwayat_transaksis = KiosResmi::where('nama','like',"%$letters%")->limit(5)->get()->toJson(JSON_PRETTY_PRINT);
+        return $riwayat_transaksis;
+    }
+    public function ajaxGetPoktan(int $id): string
+    {   
+        $riwayat_transaksis = KelompokTani::select('kelompok_tanis.*','kios_resmis.id as id_kios_resmi','kios_resmis.nama as kios_resmi')
+        ->join('kios_resmis','kelompok_tanis.id_kios_resmi','kios_resmis.id')
+        ->where('kelompok_tanis.id',$id)->first()->toJson(JSON_PRETTY_PRINT);
         return $riwayat_transaksis;
     }
 }

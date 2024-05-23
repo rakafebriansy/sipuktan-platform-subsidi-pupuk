@@ -106,4 +106,12 @@ class AjaxController extends Controller
         }
         return '';
     }
+    public function getPoktan(Request $request)
+    {
+        if(isset($request->id)) {
+            $result = $this->crud_service->ajaxGetPoktan($request->id);
+            return $result;
+        }
+        return '';
+    }
 }

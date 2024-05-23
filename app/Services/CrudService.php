@@ -10,4 +10,5 @@ interface CrudService
     function pemerintahEditKelompokTani(array $data): bool;
     function pemerintahHapusKelompokTani(int $id): bool;
     function ajaxGetKios(string $letters): string;
+    function ajaxGetPoktan(int $id): string;
 }

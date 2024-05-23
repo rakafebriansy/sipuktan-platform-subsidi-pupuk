@@ -111,6 +111,7 @@ Route::prefix('/pemerintah')->group(function(){
             Route::post('/get-laporan-blade',[AjaxController::class,'getLaporanBlade']);
             Route::post('/get-keluhan-blade',[AjaxController::class,'getKeluhanBlade']);
             Route::post('/get-kios',[AjaxController::class,'getKios']);
+            Route::post('/get-poktan',[AjaxController::class,'getPoktan']);
         });
     });
 });

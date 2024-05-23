@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PemerintahEditKelompokTaniRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class PemerintahEditKelompokTaniRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::guard('pemerintah')->check();
     }
 
     /**
@@ -22,7 +23,22 @@ class PemerintahEditKelompokTaniRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id' => 'required',
+            'nama' => 'required',
+            'id_kios_resmi' => 'required|exists:kios_resmis,id',
+        ];
+    }
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'nama.required' => 'Nama tidak boleh kosong',
+            'id_kios_resmi.required' => 'Kios resmi tidak boleh kosong',
+            'id_kios_resmi.exists' => 'Kios resmi tidak tersedia',
         ];
     }
 }
