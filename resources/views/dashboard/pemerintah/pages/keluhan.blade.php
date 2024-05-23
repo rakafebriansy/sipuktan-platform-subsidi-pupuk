@@ -165,11 +165,11 @@
                     </div>
                     <div class="mb-3">
                         <label class="block font-medium text-gray-900 dark:text-white">Keluhan:</label>
-                        <p></p>
+                        <p class="break-words"></p>
                     </div>
                     <div class="mb-3">
                         <label class="block font-medium text-gray-900 dark:text-white">Balasan:</label>
-                        <p></p>
+                        <p class="break-words"></p>
                     </div>
                 </div>                
             </div>
@@ -203,7 +203,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="block font-medium text-gray-900 dark:text-white">Keluhan:</label>
-                        <p></p>
+                        <p class="break-words"></p>
                     </div>
                     <div class="mb-2">
                         <label for="balasan" class="block mb-1 font-medium text-gray-900 dark:text-white">Balasan:</label>

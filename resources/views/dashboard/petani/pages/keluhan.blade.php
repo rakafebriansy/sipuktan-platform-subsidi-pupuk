@@ -121,11 +121,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="keluhan" class="block font-medium text-gray-900 dark:text-white">Keluhan:</label>
-                        <p></p>
+                        <p class="break-words"></p>
                     </div>
                     <div class="mb-3">
-                        <label for="keluhan" class="block font-medium text-gray-900 dark:text-white">Balasan:</label>
-                        <p></p>
+                        <label for="balasan" class="block font-medium text-gray-900 dark:text-white">Balasan:</label>
+                        <p class="break-words"></p>
                     </div>
                 </div>           
             </div>
