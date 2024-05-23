@@ -25,7 +25,7 @@ class PemerintahBuatAlokasiRequest extends FormRequest
     {
         return [
             'nik' => 'required|numeric|min:16',
-            'jumlah_pupuk' => 'required',
+            'jumlah_pupuk' => 'required|max_digits:4',
             'tahun' => 'required|numeric|digits:4',
             'id_jenis_pupuk' => 'required|exists:jenis_pupuks,id',
             'musim_tanam' => 'required|in:' . implode(',', $this->musim_tanam),
@@ -44,6 +44,7 @@ class PemerintahBuatAlokasiRequest extends FormRequest
             'nik.numeric' => 'NIK harus berupa angka',
             'nik.min' => 'NIK harus harus berjumlah minimal 16 karakter',
             'jumlah_pupuk.required' => 'Jumlah pupuk tidak boleh kosong',
+            'jumlah_pupuk.max_digits' => 'Jumlah pupuk tidak valid',
             'tahun.required' => 'Tahun tidak boleh kosong',
             'tahun.numeric' => 'Tahun harus berupa angka',
             'tahun.digits' => 'Tahun tidak valid',

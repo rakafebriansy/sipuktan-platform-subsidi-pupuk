@@ -117,7 +117,7 @@
                 <div id="detailKeluhanBody" class="text-sm">
                     <div class="mb-3">
                         <h3 class="mb-1 font-medium text-gray-900 dark:text-white inline">Subjek: </h3>
-                        <p class="inline"></p>
+                        <p class="inline break-words"></p>
                     </div>
                     <div class="mb-3">
                         <label for="keluhan" class="block font-medium text-gray-900 dark:text-white">Keluhan:</label>
