@@ -10,8 +10,8 @@ interface FaqService
     function getFaqPetani(): Collection;
     function getFaqKiosResmi(): Collection;
     function pemerintahSetFaq(int $id): Collection;
-    function pemerintahBuatFaq(array $validated, int $id): bool;
-    function pemerintahEditFaq(array $validated): bool;
+    function pemerintahBuatFaq(array $data, int $id): bool;
+    function pemerintahEditFaq(array $data): bool;
     function pemerintahHapusFaq(int $id): bool;
     function ajaxGetFaqDetail(int $id): string;
 }

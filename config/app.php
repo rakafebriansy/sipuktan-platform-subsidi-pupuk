@@ -168,6 +168,7 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\CrudServiceProvider::class,
         App\Providers\AkunServiceProvider::class,
         App\Providers\DashboardServiceProvider::class,
         App\Providers\VerifikasiServiceProvider::class,

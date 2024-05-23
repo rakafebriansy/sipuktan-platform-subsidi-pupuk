@@ -31,13 +31,13 @@ class FaqServiceImpl implements FaqService
             return Faq::insert($validated);
         });
     }
-    public function pemerintahEditFaq(array $validated): bool
+    public function pemerintahEditFaq(array $data): bool
     {
-        return DB::transaction(function() use($validated) {
-            return Faq::where('id',$validated['id'])->update([
-                'pertanyaan' => $validated['pertanyaan'],
-                'jawaban' => $validated['jawaban'],
-                'jenis_pengguna' => $validated['jenis_pengguna'],
+        return DB::transaction(function() use($data) {
+            return Faq::where('id',$data['id'])->update([
+                'pertanyaan' => $data['pertanyaan'],
+                'jawaban' => $data['jawaban'],
+                'jenis_pengguna' => $data['jenis_pengguna'],
             ]);
         });
     }

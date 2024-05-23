@@ -100,6 +100,8 @@ Route::prefix('/pemerintah')->group(function(){
         Route::delete('/faq',[App\Http\Controllers\Dashboard\Pemerintah\FaqController::class,'hapusFaq']);
         Route::get('/keluhan',[App\Http\Controllers\Dashboard\Pemerintah\KeluhanController::class,'setKeluhan']);
         Route::patch('/keluhan',[App\Http\Controllers\Dashboard\Pemerintah\KeluhanController::class,'balasKeluhan']);
+        Route::get('/kelompok-tani',[App\Http\Controllers\Dashboard\Pemerintah\KelompokTaniController::class,'setKelompokTani']);
+        Route::patch('/kelompok-tani',[App\Http\Controllers\Dashboard\Pemerintah\KelompokTaniController::class,'buatKelompokTani']);
         Route::get('/logout',[App\Http\Controllers\Dashboard\Pemerintah\AkunController::class,'logout']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/get-faq',[AjaxController::class,'getFaqDetail']);
