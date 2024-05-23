@@ -26,7 +26,7 @@ class PemerintahEditAlokasiRequest extends FormRequest
         return [
             'id' => 'required',
             'jumlah_pupuk' => 'required',
-            'tahun' => 'required|numeric',
+            'tahun' => 'required|numeric|digits:4',
             'musim_tanam' => 'required|in:' . implode(',', $this->musim_tanam),
             'id_jenis_pupuk' => 'required|exists:jenis_pupuks,id',
         ];
@@ -43,6 +43,7 @@ class PemerintahEditAlokasiRequest extends FormRequest
             'jumlah_pupuk.required' => 'Jumlah pupuk tidak boleh kosong',
             'tahun.required' => 'Tahun tidak boleh kosong',
             'tahun.numeric' => 'Tahun harus berupa angka',
+            'tahun.digits' => 'Tahun tidak valid',
             'musim_tanam.required' => 'Musim tanam tidak boleh kosong',
             'musim_tanam.in' => 'Musim tanam tersebut tidak tersedia',
             'id_jenis_pupuk.required' => 'Jenis pupuk tidak boleh kosong',

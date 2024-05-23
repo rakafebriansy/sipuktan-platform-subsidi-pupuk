@@ -26,7 +26,7 @@ class PemerintahBuatAlokasiRequest extends FormRequest
         return [
             'nik' => 'required|numeric|min:16',
             'jumlah_pupuk' => 'required',
-            'tahun' => 'required|numeric',
+            'tahun' => 'required|numeric|digits:4',
             'id_jenis_pupuk' => 'required|exists:jenis_pupuks,id',
             'musim_tanam' => 'required|in:' . implode(',', $this->musim_tanam),
         ];
@@ -46,6 +46,7 @@ class PemerintahBuatAlokasiRequest extends FormRequest
             'jumlah_pupuk.required' => 'Jumlah pupuk tidak boleh kosong',
             'tahun.required' => 'Tahun tidak boleh kosong',
             'tahun.numeric' => 'Tahun harus berupa angka',
+            'tahun.digits' => 'Tahun tidak valid',
             'id_jenis_pupuk.required' => 'Jenis pupuk tidak boleh kosong',
             'id_jenis_pupuk.exists' => 'Jenis pupuk tersebut tidak tersedia',
             'musim_tanam.required' => 'Musim tanam tidak boleh kosong',
