@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class KiosResmiLaporanRequest extends FormRequest
+class KiosResmiBuatLaporanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class KiosResmiLaporanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id_riwayat_transaksi' => 'required',
+            'id_riwayat_transaksi' => 'required|exists:riwayat_transaksis,id',
             'foto_bukti_pengambilan' => 'required|mimes:png,jpg|max:5120',
             'foto_ktp' => 'required|mimes:png,jpg|max:5120',
             'foto_surat_kuasa' => 'mimes:png,jpg|max:5120',
@@ -50,7 +50,8 @@ class KiosResmiLaporanRequest extends FormRequest
             'foto_tanda_tangan.max' => 'Foto tanda tangan harus memiliki ukuran kurang dari 5MB',
             'foto_surat_kuasa.mimes' => 'Foto surat kuasa harus berekstensi .png atau .jpg',
             'foto_surat_kuasa.max' => 'Foto surat kuasa harus memiliki ukuran kurang dari 5MB',
-            'id_riwayat_transaksi.required' => 'Transaksi tidak tersedia'
+            'id_riwayat_transaksi.required' => 'Transaksi tidak boleh kosong',
+            'id_riwayat_transaksi.exists' => 'Transaksi tidak tersedia'
         ];
     }
 }

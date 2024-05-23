@@ -127,6 +127,7 @@ class LaporanServiceImpl implements LaporanService
 
     public function ajaxGetPetaniFromRiwayat(string $letters): Collection
     {   
+        $letters = strtolower($letters);
         $riwayat_transaksis = RiwayatTransaksi::select('riwayat_transaksis.*','alokasis.tahun as tahun', 'alokasis.musim_tanam as musim_tanam','jenis_pupuks.jenis as jenis','petanis.nama as nama')
         ->leftJoin('laporans','laporans.id_riwayat_transaksi','riwayat_transaksis.id')
         ->join('alokasis','alokasis.id','riwayat_transaksis.id_alokasi')

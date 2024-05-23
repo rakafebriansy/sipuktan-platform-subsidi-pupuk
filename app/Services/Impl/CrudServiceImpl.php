@@ -3,6 +3,7 @@
 namespace App\Services\Impl;
 
 use App\Models\KelompokTani;
+use App\Models\KiosResmi;
 use App\Services\CrudService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +38,12 @@ class CrudServiceImpl implements CrudService
         return DB::transaction(function() use($id) {
             return KelompokTani::where('id',$id)->delete();
         });
+    }
+    public function ajaxGetKios(string $letters): string
+    {   
+        $letters = strtolower($letters);
+        $riwayat_transaksis = KiosResmi::where('nama','like',"%$letters%")->limit(5)->get()->toJson(JSON_PRETTY_PRINT);
+        return $riwayat_transaksis;
     }
 }
 

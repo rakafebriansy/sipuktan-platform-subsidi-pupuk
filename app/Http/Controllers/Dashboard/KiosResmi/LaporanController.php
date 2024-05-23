@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard\KiosResmi;
 
 use App\Events\LaporanDibuat;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\KiosResmiLaporanRequest;
+use App\Http\Requests\KiosResmiBuatLaporanRequest;
 use App\Http\Requests\KiosResmiUbahLaporanRequest;
 use App\Services\DashboardService;
 use App\Services\LaporanService;
@@ -54,7 +54,7 @@ class LaporanController extends Controller
             'musim_tanam' => $musim_tanam
         ]);
     }
-    public function laporan(KiosResmiLaporanRequest $request): RedirectResponse
+    public function laporan(KiosResmiBuatLaporanRequest $request): RedirectResponse
     {
         $nama = Auth::guard('kiosResmi')->user()->nama;
         $id_kios_resmi = Auth::guard('kiosResmi')->user()->id;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\Pemerintah;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PemerintahBuatKelompokTaniRequest;
 use App\Services\CrudService;
 use App\Services\DashboardService;
 use Illuminate\Support\Facades\Auth;
@@ -29,5 +30,14 @@ class KelompokTaniController extends Controller
             'initials' => $initials,
             'kelompok_tanis' => $kelompok_tanis
         ]);
+    }
+    public function buatKelompokTani(PemerintahBuatKelompokTaniRequest $request)
+    {
+        $id = Auth::guard('pemerintah')->user()->id;
+        $validated = $request->validated();
+        if($this->crud_service->pemerintahBuatKelompokTani($validated)) {
+            return back()->with('success', 'Kelompok tani berhasil ditambahkan');
+        }
+        return back()->withInput()->withErrors(['error' => 'Kelompok tani gagal ditambahkan']);
     }
 }

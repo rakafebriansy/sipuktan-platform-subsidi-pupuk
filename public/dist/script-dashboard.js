@@ -7,6 +7,14 @@ function fetchRiwayatSearchBox(letters,list) {
       .then(res => viewRiwayatSearchBox(res,list))
       .catch(e => console.error('Error'+e));
 }
+function fetchKiosSearchBox(letters,list) {
+    fetch('/pemerintah/ajax/get-kios', {
+        method: 'POST',
+        body: new URLSearchParams('letters='+letters)
+    }).then(res => res.json())
+      .then(res => viewKiosSearchBox(res,list))
+      .catch(e => console.error('Error'+e));
+}
 function fetchDetailLaporanFiles(id,modal) {
     fetch('/ajax/laporan-filenames', {  
         method: 'POST',
@@ -88,6 +96,17 @@ function viewRiwayatSearchBox(data,list) {
         a.innerHTML = `<p class="inline">${data[i]['nama']}</p> <p class="text-xs font-normal inline ms-2">${data[i]['jenis']} | ${data[i]['musim_tanam']} | ${data[i]['tahun']}</p>`;
         a.dataset.id = data[i]['id'];
         a.setAttribute('onclick','setRiwayatIdLaporan(this)');
+        a.classList.add('search-li');
+        list.appendChild(a);
+    }
+}
+function viewKiosSearchBox(data,list) {
+    list.innerHTML = '';
+    for(let i = 0; i < data.length; i++) {
+        const a = document.createElement('a');
+        a.innerHTML = `<p class="inline">${data[i]['nama']}</p>`;
+        a.dataset.id = data[i]['id'];
+        a.setAttribute('onclick','setKiosIdPoktan(this)');
         a.classList.add('search-li');
         list.appendChild(a);
     }
@@ -303,18 +322,38 @@ function getRiwayatLaporFromTh(li, mode) {
     document.getElementById('dropdownTahunButton').querySelector('p').innerText = li.querySelector('p').innerText;
     location.replace('/' + mode + '/laporan?tahun=' + li.querySelector('p').innerText + '&&musim_tanam=' + document.querySelector('#dropdownMTButton').innerText);
 }
+function setKiosIdPoktan(btn) {
+    const box = document.getElementById('kiosSearchBox');
+    document.getElementById('idKiosResmi').value = btn.dataset.id;
+    document.getElementById('kiosSearch').value = btn.innerText;
+    box.innerHTML = '';
+    box.classList.remove('border','border-gray-200')
+    btn.value = '';
+}
 function setRiwayatIdLaporan(btn) {
+    const box = document.getElementById('riwayatSearchBox');
     document.getElementById('musimTanamSaatIni').value = document.getElementById('dropdownMTButton').querySelector('p').innerText;
     document.getElementById('tahunSaatIni').value = document.getElementById('dropdownTahunButton').querySelector('p').innerText;
     document.getElementById('idRiwayatTransaksi').value = btn.dataset.id;
     document.getElementById('riwayatSearch').value = btn.innerText;
-    document.getElementById('riwayatSearchBox').innerHTML = '';
+    box.innerHTML = '';
+    box.classList.remove('border','border-gray-200')
     btn.value = '';
 }
 function searchRiwayat(input) {
     const list = document.getElementById('riwayatSearchBox');
-    if(input.value.length > 1) {
+    list.classList.add('border','border-gray-200')
+    if(input.value.length > 0) {
         fetchRiwayatSearchBox(input.value,list)
+    } else {
+        list.innerHTML = '';
+    }
+}
+function searchKios(input) {
+    const list = document.getElementById('kiosSearchBox');
+    list.classList.add('border','border-gray-200')
+    if(input.value.length > 0) {
+        fetchKiosSearchBox(input.value,list)
     } else {
         list.innerHTML = '';
     }

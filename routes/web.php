@@ -101,13 +101,16 @@ Route::prefix('/pemerintah')->group(function(){
         Route::get('/keluhan',[App\Http\Controllers\Dashboard\Pemerintah\KeluhanController::class,'setKeluhan']);
         Route::patch('/keluhan',[App\Http\Controllers\Dashboard\Pemerintah\KeluhanController::class,'balasKeluhan']);
         Route::get('/kelompok-tani',[App\Http\Controllers\Dashboard\Pemerintah\KelompokTaniController::class,'setKelompokTani']);
-        Route::patch('/kelompok-tani',[App\Http\Controllers\Dashboard\Pemerintah\KelompokTaniController::class,'buatKelompokTani']);
+        Route::post('/kelompok-tani',[App\Http\Controllers\Dashboard\Pemerintah\KelompokTaniController::class,'buatKelompokTani']);
+        Route::patch('/kelompok-tani',[App\Http\Controllers\Dashboard\Pemerintah\KelompokTaniController::class,'editKelompokTani']);
+        Route::delete('/kelompok-tani',[App\Http\Controllers\Dashboard\Pemerintah\KelompokTaniController::class,'hapusKelompokTani']);
         Route::get('/logout',[App\Http\Controllers\Dashboard\Pemerintah\AkunController::class,'logout']);
         Route::prefix('/ajax')->group(function(){
             Route::post('/get-faq',[AjaxController::class,'getFaqDetail']);
             Route::post('/petani-alokasi',[AjaxController::class,'getPetaniFromAlokasiPemerintah']);
             Route::post('/get-laporan-blade',[AjaxController::class,'getLaporanBlade']);
             Route::post('/get-keluhan-blade',[AjaxController::class,'getKeluhanBlade']);
+            Route::post('/get-kios',[AjaxController::class,'getKios']);
         });
     });
 });
