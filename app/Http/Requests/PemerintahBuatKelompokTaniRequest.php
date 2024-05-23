@@ -23,7 +23,7 @@ class PemerintahBuatKelompokTaniRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required',
+            'nama' => 'required|max:60',
             'id_kios_resmi' => 'required|exists:kios_resmis,id',
         ];
     }
@@ -37,6 +37,7 @@ class PemerintahBuatKelompokTaniRequest extends FormRequest
     {
         return [
             'nama.required' => 'Nama tidak boleh kosong',
+            'nama.max' => 'Nama berjumlah maksimal 60 karakter',
             'id_kios_resmi.required' => 'Kios resmi tidak boleh kosong',
             'id_kios_resmi.exists' => 'Kios resmi tidak tersedia',
         ];

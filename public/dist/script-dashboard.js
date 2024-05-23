@@ -498,7 +498,7 @@ function editPoktanPassId(btn) {
     fetchGetPoktan(id);
     document.getElementById('editPoktanId').value = id;
 }
-function hapusPoktanPassId(btn) {
+function deletePoktanPassId(btn) {
     document.getElementById('hapusPoktanId').value = btn.parentElement.dataset.id;
 }
 

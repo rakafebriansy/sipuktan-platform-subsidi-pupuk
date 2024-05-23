@@ -22,8 +22,8 @@ class PemerintahLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_pengguna' => ['required'],
-            'kata_sandi' => ['required','min:6'],
+            'nama_pengguna' => 'required',
+            'kata_sandi' => 'required|min:6',
         ];
     }
     
