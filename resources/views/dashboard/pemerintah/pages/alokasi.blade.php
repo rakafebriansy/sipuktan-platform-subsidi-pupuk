@@ -72,8 +72,10 @@
                                 </td>
                                 <td data-id="{{ $alokasi->id_alokasi }}" class="py-4 flex flex-row ">
                                     <button  data-modal-target="detailAlokasiModal" data-modal-toggle="detailAlokasiModal" onclick="getPetaniFromAlokasiPemerintah(this)" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">Detail</button>
-                                    <button data-modal-target="editAlokasiModal" data-modal-toggle="editAlokasiModal" onclick="editPassId(this)" class=" bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Ubah</button>
-                                    <button data-modal-target="deleteAlokasiModal" data-modal-toggle="deleteAlokasiModal" onclick="deletePassId(this)" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Hapus</button>
+                                    @if ($alokasi->status == 'Belum Tersedia' || $alokasi->status == 'Menunggu Pembayaran' )
+                                        <button data-modal-target="editAlokasiModal" data-modal-toggle="editAlokasiModal" onclick="editPassId(this)" class=" bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Ubah</button>
+                                        <button data-modal-target="deleteAlokasiModal" data-modal-toggle="deleteAlokasiModal" onclick="deletePassId(this)" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Hapus</button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
