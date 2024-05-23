@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('nama_pengguna',60)->nullable(false);
             $table->string('kata_sandi',255)->nullable(false);
             $table->integer('id_musim_tanam')->nullable(false);
-            
-            $table->foreign('id_musim_tanam')->on('musim_tanams')->references('id');
         });
     }
 
