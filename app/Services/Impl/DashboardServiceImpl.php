@@ -66,9 +66,9 @@ class DashboardServiceImpl implements DashboardService
     public function setPieChart(): array
     {
         $tahun = now()->format('Y');
-        $alokasis_mt1 = Alokasi::where('musim_tanam','MT1')->where('tahun',$tahun)->sum('jumlah_pupuk');
-        $alokasis_mt2 = Alokasi::where('musim_tanam','MT1')->where('tahun',$tahun)->sum('jumlah_pupuk');
-        $alokasis_mt3 = Alokasi::where('musim_tanam','MT1')->where('tahun',$tahun)->sum('jumlah_pupuk');
-        return [$alokasis_mt1,$alokasis_mt2,$alokasis_mt3];
+        $alokasis_mt1 = Alokasi::where('id_jenis_pupuk','urea')->where('tahun',$tahun)->sum('jumlah_pupuk');
+        $alokasis_mt2 = Alokasi::where('id_jenis_pupuk','ponskha')->where('tahun',$tahun)->sum('jumlah_pupuk');
+        $alokasis_mt3 = Alokasi::where('id_jenis_pupuk','sp36')->where('tahun',$tahun)->sum('jumlah_pupuk');
+        return ['urea' => $alokasis_mt1,'ponshka' => $alokasis_mt2, 'sp36' => $alokasis_mt3];
     }
 }

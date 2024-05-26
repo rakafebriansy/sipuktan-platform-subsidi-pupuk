@@ -62,13 +62,14 @@
     @if (str_contains($_SERVER['REQUEST_URI'],'dashboard'))
       <script>
         const DATA_COUNT = 3;
+        let pupuks =   {!! json_encode($alokasis_chart) !!};
         document.addEventListener('DOMContentLoaded', () => {
           const data = {
-              labels: ['Musim Tanam 1', 'Musim Tanam 2', 'Musim Tanam 3'],
+              labels: ['Urea', 'Ponshka', 'SP-36'],
               datasets: [
                 {
                   label: 'Alokasi',
-                  data: [100,200,300],
+                  data: [pupuks.urea,pupuks.ponskha,pupuks.sp36],
                 }
               ]
             };
