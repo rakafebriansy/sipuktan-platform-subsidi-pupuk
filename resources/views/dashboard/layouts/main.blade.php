@@ -20,7 +20,7 @@
         let id_petani = data['data']['detail_notifikasi']['id_petani'];
         let pesan = data['data']['pesan'];
         const petani = document.getElementById('petani');
-        if(petani !== null && id_kios_resmi == petani.dataset.id){
+        if(petani !== null && id_petani == petani.dataset.id){
           viewAlertNotifikasi(pesan, id_notifikasi);
         }
       });
