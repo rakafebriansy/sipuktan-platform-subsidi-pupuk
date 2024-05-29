@@ -157,7 +157,7 @@ function viewFaqDetail(data) {
         if(element.innerText == data['jenis_pengguna']) element.setAttribute('selected','');
     });
 }
-function xmlStringSetUp(message,id,mode='blue') {
+function xmlStringSetUp(message,id,mode) {
     let xmlString;
     switch(mode) {
         case 'yellow':
@@ -223,10 +223,10 @@ function viewAlertNotifikasi(message,id,mode='blue') {
 
     if(mode == 'yellow'){
         li.classList.add('flex','items-center','p-4','mb-4','text-yellow-800','rounded-lg','bg-yellow-50','dark:bg-gray-800','dark:text-yellow-300')
-    } else if (mode == 'blue') {
-        li.classList.add('flex','items-center','p-4','text-blue-800','bg-blue-50','dark:bg-gray-800','dark:text-blue-400')
-    } else {
+    } else if (mode == 'red') {
         li.classList.add('flex','items-center','p-4','mb-4','text-red-800','rounded-lg','bg-red-50','dark:bg-gray-800','dark:text-red-400')
+    } else {
+        li.classList.add('flex','items-center','p-4','text-blue-800','bg-blue-50','dark:bg-gray-800','dark:text-blue-400')
     }
 
     li.innerHTML = xmlStringSetUp(message,id,mode);
